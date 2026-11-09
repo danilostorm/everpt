@@ -2,9 +2,11 @@ import { dotnet } from './_framework/dotnet.js';
 import { imports, prepareGpu, requestScreenshot, runtimeStats, setUncapped } from './mgweb.js';
 import { audioStats } from './mgaudio.js';
 import { restoreSettings, startSettings } from './settings.js';
+import { currentLanguage, isPortuguese, t, useLanguage } from './i18n.js';
 import { startAdmin } from './admin.js';
 import { fileStats, loadLog, mountFiles, preloadInBackground, preloadStartup, readManifest } from './mgfiles.js';
 
+useLanguage(currentLanguage());
 const loadingEl = document.getElementById('loading');
 const titleEl = document.getElementById('title');
 const barEl = document.getElementById('bar');
@@ -19,12 +21,12 @@ const errors = [];
 function showProgress(title, fraction, detail = '', small = false) {
     loadingEl.hidden = false;
     loadingEl.classList.toggle('small', small && errors.length === 0);
-    titleEl.textContent = title;
+    titleEl.textContent = t(title);
     barEl.classList.toggle('busy', fraction === null);
     if (fraction !== null) {
         fillEl.style.width = `${Math.max(2, Math.min(100, fraction * 100))}%`;
     }
-    detailEl.textContent = detail;
+    detailEl.textContent = t(detail);
 }
 
 function hideProgress() {
@@ -72,9 +74,9 @@ window.addEventListener('unhandledrejection', event => fail(String(event.reason 
 const started = performance.now();
 showProgress('Checking your graphics card', null);
 const info = await prepareGpu(document.getElementById('game'), fail).catch(error => {
-    titleEl.textContent = 'This browser cannot run Etervale';
+    titleEl.textContent = t('This browser cannot run Etervale');
     barEl.hidden = true;
-    fail(`${error.message} Etervale needs WebGPU: try a current version of Chrome or Edge.`);
+    fail(`${error.message} ${t('Etervale needs WebGPU: try a current version of Chrome or Edge.')}`);
     throw error;
 });
 log(`[Web] GPU ${info.vendor} ${info.architecture}, fallback ${info.isFallbackAdapter}.`);
@@ -85,7 +87,7 @@ const runtime = await dotnet
     .withModuleConfig({
         print: text => log(text),
         printErr: text => log('[stderr] ' + text),
-        onDownloadResourceProgress: (loaded, total) => showProgress('Downloading the game', total ? loaded / total : null, `Program files: ${loaded} of ${total}`),
+        onDownloadResourceProgress: (loaded, total) => showProgress('Downloading the game', total ? loaded / total : null, `${t('Program files')}: ${loaded} ${t('of')} ${total}`),
     })
     .withApplicationArguments(`${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws.ashx`)
     .create();
@@ -96,7 +98,7 @@ const preloadStarted = performance.now();
 await preloadStartup(preload.startup, (bytes, total, done, count) => {
     const seconds = (performance.now() - preloadStarted) / 1000;
     const speed = seconds > 0.5 ? `, ${(bytes / 1e6 / seconds).toFixed(1)} MB/s` : '';
-    showProgress('Downloading game data', total ? bytes / total : null, `${megabytes(bytes)} of ${megabytes(total)}${speed} (${done} of ${count} files)`);
+    showProgress('Downloading game data', total ? bytes / total : null, `${megabytes(bytes)} ${t('of')} ${megabytes(total)}${speed} (${done} ${t('of')} ${count} ${t('files')})`);
 });
 log(`[Web] Start-up data in ${((performance.now() - preloadStarted) / 1000).toFixed(1)} s.`);
 showProgress('Starting the game', null, 'Preparing the world...');
@@ -123,7 +125,7 @@ const progressTimer = setInterval(() => {
         background = { fraction: 0, detail: '', done: false };
         preloadInBackground(preload.world, (bytes, total) => {
             background.fraction = total ? bytes / total : 1;
-            background.detail = `${megabytes(bytes)} of ${megabytes(total)}`;
+            background.detail = `${megabytes(bytes)} ${t('of')} ${megabytes(total)}`;
         }).catch(error => log('[Web] background download: ' + error.message)).finally(() => {
             background.done = true;
             log(`[Web] World data cached at ${(performance.now() / 1000).toFixed(0)} s.`);
