@@ -210,6 +210,9 @@ internal sealed partial class ClientSession : IMovementVerdictSink
                 case EtervaleOpcodes.Login:
                     await LoginAsync(LoginPacket.Read(memory.Span));
                     break;
+                case EtervaleOpcodes.LanguageChange:
+                    SetLanguage(LanguageChangePacket.Read(memory.Span));
+                    break;
                 case EtervaleOpcodes.CharacterCommand:
                     await ApplyCharacterCommandAsync(CharacterCommandPacket.Read(memory.Span));
                     break;
@@ -436,6 +439,14 @@ internal sealed partial class ClientSession : IMovementVerdictSink
         Volatile.Write(ref _token, outcome.SessionToken);
         _session = session;
         SendLoginResult(LoginFailure.None);
+    }
+
+    // Updates the existing session; NPC dialog selection reads session.Language
+    // on each interaction, so a player can switch Portuguese/English mid-map.
+    private void SetLanguage(LanguageChangePacket change)
+    {
+        if (_session is { } session && _token is not null)
+            session.Language = CatalogLanguages.Normalize(change.Language);
     }
 
     private void SendLoginResult(LoginFailure failure) =>
