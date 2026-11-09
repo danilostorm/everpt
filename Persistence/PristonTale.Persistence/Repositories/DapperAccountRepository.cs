@@ -26,6 +26,15 @@ public sealed class DapperAccountRepository(IDbConnectionFactory connectionFacto
             new { userId, passwordHash }, cancellationToken: ct));
     }
 
+    public async Task<bool> UpdatePasswordHashAsync(string userId, string passwordHash, CancellationToken ct = default)
+    {
+        await using var connection = await connectionFactory.OpenAsync(ct);
+        var changed = await connection.ExecuteAsync(new CommandDefinition(
+            "UPDATE accounts SET password_hash = @passwordHash WHERE user_id = @userId",
+            new { userId, passwordHash }, cancellationToken: ct));
+        return changed == 1;
+    }
+
     public async Task UpdateLastLoginAsync(long accountId, CancellationToken ct = default)
     {
         await using var connection = await connectionFactory.OpenAsync(ct);
