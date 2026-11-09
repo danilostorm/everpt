@@ -47,10 +47,23 @@ public sealed record ClientSettings
     public static string DetectSystemLanguage()
     {
         var locale = System.Globalization.CultureInfo.CurrentUICulture.Name;
+        // The desktop executable opts into invariant globalization for parsing.
+        // On Windows, the user locale API still returns the actual regional
+        // preference, even when .NET's CurrentUICulture is invariant.
+        if (OperatingSystem.IsWindows())
+        {
+            var buffer = new System.Text.StringBuilder(85);
+            if (GetUserDefaultLocaleName(buffer, buffer.Capacity) > 0)
+                locale = buffer.ToString();
+        }
+
         return locale.StartsWith("pt", StringComparison.OrdinalIgnoreCase)
             ? BrazilianPortugueseLanguage
             : EnglishLanguage;
     }
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
+    private static extern int GetUserDefaultLocaleName(System.Text.StringBuilder localeName, int length);
     public int Monitor { get; init; } = -1;
     public int WindowWidth { get; init; } = 1280;
     public int WindowHeight { get; init; } = 720;
