@@ -92,6 +92,8 @@ app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = new PhysicalFilePro
 var types = new FileExtensionContentTypeProvider();
 types.Mappings[".mgfxo"] = "application/octet-stream";
 types.Mappings[".xnb"] = "application/octet-stream";
+// Full .NET globalization may ship ICU data blobs with a .dat extension.
+types.Mappings[".dat"] = "application/octet-stream";
 app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(siteRoot), ContentTypeProvider = types });
 
 // Assets from the third-party game archive must be explicitly enabled, and only
