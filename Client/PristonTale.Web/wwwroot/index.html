@@ -65,6 +65,9 @@
   #detail { color: #a8a294; font-variant-numeric: tabular-nums; }
   #note { color: #807a6c; font-size: 12px; }
   #loading.small #note { display: none; }
+  #register-link { color: #e8cf8e; align-self: flex-start; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  #register-link:hover, #register-link:focus-visible { color: #fff0c9; }
+  #loading.small #register-link { display: none; }
   #error { color: #ff9c8a; white-space: pre-wrap; overflow-wrap: anywhere; }
   #error:empty { display: none; }
 </style>
@@ -76,6 +79,7 @@
   <div id="bar" class="busy"><div id="fill"></div></div>
   <div id="detail"></div>
   <div id="note">Use sua conta do EverPT para jogar aqui ou no desktop, com os mesmos personagens e progresso.</div>
+  <a id="register-link" href="/cadastro">Criar conta — sem esperar o jogo carregar</a>
   <div id="error"></div>
 </div>
 <script type="module" src="main.js"></script>
