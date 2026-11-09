@@ -62,7 +62,8 @@ function fail(message) {
 }
 
 // Automated runs report to the page's own host, or to the dev host named by ?report= when testing a deployed site.
-const reportBase = params.get('report') || '';
+const isLocalDevelopment = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+const reportBase = isLocalDevelopment ? (params.get('report') || '') : '';
 const report = name => fetch(`${reportBase}/report/${name}`, { method: 'POST', mode: reportBase ? 'no-cors' : 'cors', body: logLines.join('\n') });
 
 window.addEventListener('error', event => fail(String(event.message)));
@@ -138,7 +139,7 @@ const progressTimer = setInterval(() => {
 }, 250);
 
 // Automated runs (?auto=name&seconds=30): screenshots and the log go to the dev host.
-if (params.has('auto')) {
+if (isLocalDevelopment && params.has('auto')) {
     const beats = [];
     setInterval(() => {
         beats.push(`t=${(performance.now() / 1000).toFixed(0)} ${JSON.stringify(runtimeStats())} ${JSON.stringify(fileStats())} errors=${errors.length} ${errors.slice(0, 3).join(' / ')}`);
@@ -189,48 +190,9 @@ const clickAt = async (x, y) => {
     window.dispatchEvent(new MouseEvent('mouseup', init));
     await new Promise(resolve => setTimeout(resolve, 150));
 };
-if (params.has('login')) {
-    const [account, password] = params.get('login').split(':');
-    (async () => {
-        await new Promise(resolve => setTimeout(resolve, +(params.get('wait') || 20) * 1000));
-        window.etervale.loginMark = loadLog.length;
-        await pressKey('Space', ' ');
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        requestScreenshot('login-panel', log);
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        await typeText(account);
-        await pressKey('Tab', 'Tab');
-        await typeText(password);
-        await new Promise(resolve => setTimeout(resolve, 500));
-        requestScreenshot('login-typed', log);
-        await pressKey('Enter', 'Enter');
-        await new Promise(resolve => setTimeout(resolve, 8000));
-        requestScreenshot('login-after', log);
-        log('[Web] login script done');
-        if (params.has('world')) {
-            await clickAt(640, 420);
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            await clickAt(585, 695);
-            await new Promise(resolve => setTimeout(resolve, 25000));
-            requestScreenshot('world-1', log);
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            await clickAt(800, 300);
-            for (const [label, limit] of [['capped', false], ['uncapped', true]]) {
-                setUncapped(limit);
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                const before = runtimeStats();
-                const started = performance.now();
-                await new Promise(resolve => setTimeout(resolve, 12000));
-                const after = runtimeStats();
-                const seconds = (performance.now() - started) / 1000;
-                const frames = after.frames - before.frames;
-                log(`[Measure] ${label}: ${(frames / seconds).toFixed(1)} fps, ${((after.draws - before.draws) / frames).toFixed(0)} draws/frame, ${((after.dispatches - before.dispatches) / frames).toFixed(1)} dispatches/frame, replay ${((after.replayMs - before.replayMs) / frames).toFixed(2)} ms/frame, GPU wait ${((after.gpuWaitMs - before.gpuWaitMs) / frames).toFixed(2)} ms/frame, ${after.pipelines} pipelines`);
-            }
-            setUncapped(false);
-            requestScreenshot('world-2', log);
-        }
-    })();
-}
+// Never accept account passwords from URL parameters. Local automation uses
+// window.etervale.pressKey/typeText directly, without leaking credentials into
+// browser history, HTTP access logs, or referrer headers.
 
 window.etervale = { audioStats, requestScreenshot, runtimeStats, fileStats, logLines, pressKey, typeText, loadLog, loginMark: 0 };
 const programExports = (await runtime.getAssemblyExports(runtime.getConfig().mainAssemblyName)).Program;
