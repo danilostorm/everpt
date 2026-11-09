@@ -1,7 +1,8 @@
 // What the site's panels share: the tool buttons over the game, the dialog and the form controls.
 import { setInputEnabled } from './mgweb.js';
+import { t } from './i18n.js';
 
-let dialog, boxTitle, boxBody, tools, current = null;
+let dialog, boxTitle, boxBody, tools, current = null, currentTitle = '';
 
 function ensureDialog() {
     if (dialog) {
@@ -19,7 +20,15 @@ function ensureDialog() {
     document.body.appendChild(dialog);
     boxTitle = dialog.querySelector('h2');
     boxBody = dialog.querySelector('.mg-body');
+    dialog.querySelector('#panelClose').textContent = t('Close');
     dialog.querySelector('#panelClose').addEventListener('click', closePanel);
+    document.addEventListener('everpt-language-changed', () => {
+        dialog.querySelector('#panelClose').textContent = t('Close');
+        if (currentTitle) boxTitle.textContent = t(currentTitle);
+        for (const button of tools.querySelectorAll('button[data-original-label]')) {
+            button.textContent = t(button.dataset.originalLabel);
+        }
+    });
     dialog.addEventListener('mousedown', event => {
         if (event.target === dialog) {
             closePanel();
@@ -37,7 +46,8 @@ export function tool(label, run, hidden = false) {
     ensureDialog();
     const button = document.createElement('button');
     button.type = 'button';
-    button.textContent = label;
+    button.dataset.originalLabel = label;
+    button.textContent = t(label);
     button.hidden = hidden;
     button.addEventListener('click', run);
     tools.appendChild(button);
@@ -49,7 +59,8 @@ export function openPanel(title, body) {
     if (current) {
         current.remove();
     }
-    boxTitle.textContent = title;
+    currentTitle = title;
+    boxTitle.textContent = t(title);
     boxBody.appendChild(body);
     current = body;
     dialog.hidden = false;
