@@ -166,7 +166,7 @@ async function preloadCompactBundle(list, onProgress) {
         if (metadata.format !== 'EVPT1-gzip' || metadata.count !== list.length
             || !Number.isSafeInteger(metadata.compressedBytes)
             || metadata.compressedBytes <= 0
-            || !/^startup-[a-f0-9]{16}\\.pack$/.test(metadata.url)) {
+            || !/^startup-[a-f0-9]{16}\.pack$/.test(metadata.url)) {
             throw new Error('Incompatible startup pack manifest');
         }
         const response = await fetch(metadata.url);
