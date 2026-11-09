@@ -1,7 +1,7 @@
-"""Fingerprint public JS entrypoints so CDN cache cannot mix WebAssembly releases.
+"""Fingerprint the entire WebPT ES-module graph for every published revision.
 
 Usage: python version_web_release.py <published wwwroot> <git revision>
-Only modifies the generated published directory, never checked-in source files.
+Generated JavaScript files are release artifacts, not checked-in code.
 """
 from pathlib import Path
 import re
@@ -11,27 +11,33 @@ import sys
 root = Path(sys.argv[1]).resolve()
 revision = sys.argv[2].strip().lower()
 if not re.fullmatch(r"[0-9a-f]{7,40}", revision):
-    raise SystemExit("Expected a 7-40 character hexadecimal git revision.")
+    raise SystemExit("Expected a hexadecimal git revision of at least seven characters.")
 
 index = root / "index.html"
-main = root / "main.js"
 loader = root / "_framework" / "dotnet.js"
-if not all(p.is_file() for p in (index, main, loader)):
-    raise SystemExit("WebAssembly publish directory is incomplete.")
+modules = ("main", "mgweb", "mgfiles", "mgaudio", "settings", "admin", "panels")
+if not index.is_file() or not loader.is_file() or any(not (root / f"{name}.js").is_file() for name in modules):
+    raise SystemExit("Incomplete WebPT publish: cannot fingerprint all bootstrap modules.")
+
+shutil.copy2(loader, loader.with_name(f"dotnet.{revision}.js"))
+for name in modules:
+    source = (root / f"{name}.js").read_text(encoding="utf-8")
+    for other in modules:
+        source = source.replace(f"'./{other}.js'", f"'./{other}.{revision}.js'")
+        source = source.replace(f'"./{other}.js"', f'"./{other}.{revision}.js"')
+    source = source.replace(
+        "'./_framework/dotnet.js'",
+        f"'./_framework/dotnet.{revision}.js'",
+    )
+    (root / f"{name}.{revision}.js").write_text(source, encoding="utf-8")
 
 html = index.read_text(encoding="utf-8")
-entry = main.read_text(encoding="utf-8")
-old_script = 'src="main.js"'
-old_import = "from './_framework/dotnet.js'"
-if html.count(old_script) != 1 or entry.count(old_import) != 1:
-    raise SystemExit("Unexpected WebPT bootstrap tags: refusing partial fingerprinting.")
-
-new_main = f"main.{revision}.js"
-new_loader = f"dotnet.{revision}.js"
-shutil.copy2(loader, loader.with_name(new_loader))
-(root / new_main).write_text(
-    entry.replace(old_import, f"from './_framework/{new_loader}'"),
-    encoding="utf-8",
+html, count = re.subn(
+    r'src="main(?:\.[A-Za-z0-9_-]{7,40})?\.js"',
+    f'src="main.{revision}.js"',
+    html,
 )
-index.write_text(html.replace(old_script, f'src="{new_main}"'), encoding="utf-8")
-print(f"EVERPT_VERSIONED_WEB_BOOTSTRAP: {new_main} => _framework/{new_loader}")
+if count != 1:
+    raise SystemExit("Expected exactly one WebPT ES module entrypoint in index.html.")
+index.write_text(html, encoding="utf-8")
+print(f"EVERPT_VERSIONED_WEB_BOOTSTRAP {revision}: {len(modules)} modules + runtime loader")
