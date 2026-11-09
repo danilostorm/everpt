@@ -1,6 +1,7 @@
 // The Settings panel: the game's own options (ClientSettings, applied live and saved in this browser) and the site's.
 import { audioStats, setAudioLevels } from './mgaudio.js';
-import { closePanel, control, openPanel, tool } from './panels.js';
+import { closePanel, control, openPanel, panelIsOpen, tool } from './panels.js';
+import { browserLanguage, chooseLanguage, currentLanguage, resetLanguageChoice, startingLanguage, t, useLanguage } from './i18n.js';
 import { runtimeStats, takeScreenshot } from './mgweb.js';
 
 const SETTINGS_FILE = '/client-settings.json';
@@ -20,6 +21,9 @@ const size = values => values.map(value => [value, value]);
 
 // key: the ClientSettings field. render: part of a graphics preset, so changing it makes the preset Custom.
 const sections = [
+    ['General', [
+        { key: 'language', label: 'Language', type: 'select', options: [['pt-BR', 'Português (Brasil)'], ['en', 'English']] },
+    ]],
     ['Display', [
         { site: 'resolution', label: 'Resolution', type: 'select', options: [['window', 'Fit window'], ['window75', 'Fit window, 75%'], ['window50', 'Fit window, 50%'], ['1280x720', '1280 x 720'], ['1600x900', '1600 x 900'], ['1920x1080', '1920 x 1080'], ['2560x1440', '2560 x 1440']], help: 'Fewer pixels run faster on weaker graphics cards.' },
         { site: 'upscale', label: 'Scale up to fit', ...onOff, help: 'Stretch the picture to fill the window.' },
@@ -115,9 +119,11 @@ function readGameFile() {
 export function restoreSettings(fileSystem) {
     FS = fileSystem;
     const saved = readStored(STORE_GAME);
-    if (saved) {
-        FS.writeFile(SETTINGS_FILE, JSON.stringify(saved));
-    }
+    // Earlier builds wrote English as an implicit default even when the browser
+    // preferred Portuguese. Prefer navigator.languages for those old defaults,
+    // but preserve explicit language choices and existing pt-BR settings.
+    const language = useLanguage(startingLanguage(saved));
+    FS.writeFile(SETTINGS_FILE, JSON.stringify({ ...(saved || { version: 1 }), language }));
     site = { ...siteDefaults, ...readStored(STORE_SITE) };
     applySound();
 }
@@ -172,6 +178,11 @@ function changed(row, value) {
         return;
     }
     game[row.key] = value;
+    if (row.key === 'language') {
+        game.language = chooseLanguage(value);
+        sendGame();
+        return;
+    }
     if (row.render) {
         game.quality = 'Custom';
     }
@@ -239,13 +250,14 @@ function buildPanel() {
     const body = document.createElement('div');
     const presetRow = document.createElement('div');
     presetRow.className = 'mg-actions';
-    presetRow.innerHTML = '<span class="mg-label">Graphics preset</span>';
+    presetRow.innerHTML = '<span class="mg-label"></span>';
+    presetRow.querySelector('.mg-label').textContent = t('Graphics preset');
     const group = document.createElement('div');
     group.className = 'mg-seg';
     presetButtons = [...presets, 'Custom'].map(name => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.textContent = name;
+        button.textContent = t(name);
         button.dataset.preset = name;
         if (name === 'Custom') {
             button.disabled = true;
@@ -265,17 +277,23 @@ function buildPanel() {
 
     for (const [title, rows] of sections) {
         const heading = document.createElement('h3');
-        heading.textContent = title;
+        heading.textContent = t(title);
         body.appendChild(heading);
         for (const row of rows) {
-            const built = control(row, value => changed(row, value));
+            const translated = {
+                ...row,
+                label: t(row.label),
+                help: row.help ? t(row.help) : undefined,
+                options: row.options?.map(([key, label]) => [key, t(label)]),
+            };
+            const built = control(translated, value => changed(row, value));
             inputs.set(row, built);
             body.appendChild(built.element);
         }
     }
 
     const heading = document.createElement('h3');
-    heading.textContent = 'Tools';
+    heading.textContent = t('Tools');
     body.appendChild(heading);
     const actions = document.createElement('div');
     actions.className = 'mg-actions';
@@ -283,8 +301,8 @@ function buildPanel() {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'mg-button';
-        button.textContent = label;
-        button.title = title;
+        button.textContent = t(label);
+        button.title = title ? t(title) : '';
         button.addEventListener('click', run);
         actions.appendChild(button);
     };
@@ -306,20 +324,22 @@ function buildPanel() {
                 const imported = JSON.parse(await picker.files[0].text());
                 site = { ...siteDefaults, ...imported.site };
                 game = { ...game, ...imported.game, serverAddress: game.serverAddress };
+                if (imported.game?.language) game.language = chooseLanguage(imported.game.language);
                 saveSite();
                 applySound();
                 sendGame();
                 refreshControls();
             } catch (error) {
-                window.alert(`That file could not be read: ${error.message}`);
+                window.alert(`${t('That file could not be read:')} ${error.message}`);
             }
         });
         picker.click();
     });
     action('Reset to defaults', () => {
-        if (window.confirm('Put every setting back to its default?')) {
+        if (window.confirm(t('Put every setting back to its default?'))) {
             site = { ...siteDefaults };
-            game = { version: game.version, serverAddress: game.serverAddress };
+            const language = resetLanguageChoice();
+            game = { version: game.version, serverAddress: game.serverAddress, language };
             saveSite();
             applySound();
             sendGame();
@@ -330,7 +350,7 @@ function buildPanel() {
     });
     action('Sound check', () => {
         const stats = audioStats();
-        window.alert(`Sound is ${stats.state}. Sounds played: ${stats.played}. Decoded: ${stats.decoded}.`);
+        window.alert(`${t('Sound is')} ${stats.state}. ${t('Sounds played')}: ${stats.played}. ${t('Decoded')}: ${stats.decoded}.`);
     });
     body.appendChild(actions);
     return body;
@@ -340,7 +360,15 @@ function buildPanel() {
 export function startSettings(programExports) {
     exports_ = programExports;
     startFpsCounter();
-    const body = buildPanel();
+    let body = buildPanel();
+    document.addEventListener('everpt-language-changed', () => {
+        const opened = panelIsOpen(body);
+        inputs.clear();
+        presetButtons = [];
+        body = buildPanel();
+        refreshControls();
+        if (opened) openPanel('Settings', body);
+    });
     tool('Settings', () => {
         const current = readGameFile();
         if (current) {
@@ -354,6 +382,12 @@ export function startSettings(programExports) {
         const current = readGameFile();
         if (current) {
             game = current;
+            // Language can also be changed from the native in-game settings.
+            // Persist an explicit selection so the browser locale will not
+            // override the player's choice on the next visit.
+            if (current.language && current.language !== currentLanguage()) {
+                chooseLanguage(current.language);
+            }
             const text = JSON.stringify(current);
             if (text !== saved) {
                 saved = text;
