@@ -27,6 +27,14 @@ app.Use(async (context, next) =>
     context.Response.Headers["Cross-Origin-Embedder-Policy"] = "require-corp";
     context.Response.Headers["Cross-Origin-Resource-Policy"] = "same-origin";
     context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+    // The .NET boot loader and entrypoints are not fingerprinted. If the CDN
+    // caches one after a deployment it may request modules from an older build,
+    // whose integrity hashes and file names no longer match the active release.
+    var requestPath = context.Request.Path.Value ?? "";
+    if (requestPath is "/" || requestPath.EndsWith(".html", StringComparison.OrdinalIgnoreCase)
+        || requestPath.EndsWith(".js", StringComparison.OrdinalIgnoreCase)
+        || requestPath.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+        context.Response.Headers["Cache-Control"] = "private, no-store, max-age=0";
     await next();
 });
 app.UseWebSockets(new WebSocketOptions { KeepAliveInterval = TimeSpan.FromSeconds(30) });
