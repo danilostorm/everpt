@@ -84,7 +84,11 @@ internal sealed class OpeningCinematic : IDisposable
         _reader = new PristonSmdReader(_assetCache);
         _actorLoader = new PristonActorLoader(_assetCache);
         _effectLibrary = effects;
-        if (effects is not null)
+        // On the browser, compiling every opening cinematic effect synchronously on
+        // the game thread can block the first frame while the VFX worker prepares
+        // its catalog. The login screen must stay usable; full VFX still loads
+        // normally later, and the desktop cinematic remains unchanged.
+        if (effects is not null && !OperatingSystem.IsBrowser())
         {
             _effects = new VfxRenderer(graphicsDevice, content);
         }
@@ -103,7 +107,9 @@ internal sealed class OpeningCinematic : IDisposable
 
     public void Load()
     {
+        if (OperatingSystem.IsBrowser()) Console.WriteLine("[Web][Opening] Loading stage...");
         var stage = _reader.ReadStage(_assetPath(StagePath));
+        if (OperatingSystem.IsBrowser()) Console.WriteLine("[Web][Opening] Stage loaded.");
         if (_effects is not null)
         {
             var collision = new PristonCollisionWorld(stage);
@@ -112,9 +118,12 @@ internal sealed class OpeningCinematic : IDisposable
             _effectSystem = new VfxSystem(VfxNoAnchors.Instance, new TransientLightServices(_renderer.TransientLights), _effectLibrary.Vfx.Library);
             _terrainFire = new MeteorEffects(new SystemScriptEffects(_effectSystem, _effectLibrary.Vfx.Library), _renderer.TransientLights, collision);
         }
+        if (OperatingSystem.IsBrowser()) Console.WriteLine("[Web][Opening] Configuring lighting and scenery...");
         _renderer.ConfigureFieldLighting(intensity: 4f, rangeScale: 1f, overrideLights: null, glowIntensity: 1f, glowScale: 1f);
         _renderer.AddStage(stage, LoadScenery());
+        if (OperatingSystem.IsBrowser()) Console.WriteLine("[Web][Opening] Scenery ready; loading NPCs...");
         LoadOpeningNpcs();
+        if (OperatingSystem.IsBrowser()) Console.WriteLine("[Web][Opening] NPCs loaded.");
 
         _renderer.SetTimeOfDay(11f);
         _renderer.DayLengthSeconds = 0f;
@@ -132,6 +141,7 @@ internal sealed class OpeningCinematic : IDisposable
 
         _vertexCount = stage.Vertices.Count;
         _faceCount = stage.Faces.Count;
+        if (OperatingSystem.IsBrowser()) Console.WriteLine("[Web][Opening] Cinematic ready.");
     }
 
     public void Update(GameTime gameTime)
