@@ -83,6 +83,32 @@ public readonly record struct LoginPacket(uint Protocol, string Account, string 
     }
 }
 
+// Client -> server while authenticated: update the dialog language without
+// requiring a logout. This opcode is additive; older clients need not send it.
+public readonly record struct LanguageChangePacket(string Language) : IFramePacket
+{
+    public const int MaxSize = 8 + 4 + 2 + AccountWire.MaxLanguageBytes;
+
+    public int Write(Span<byte> destination)
+    {
+        var writer = new PacketWriter(destination, EtervaleOpcodes.LanguageChange);
+        WireHeader.Write(ref writer, AccountWire.CurrentVersion);
+        Utf8Text.Write(ref writer, Language, AccountWire.MaxLanguageBytes);
+        return writer.Finish();
+    }
+
+    public static LanguageChangePacket Read(ReadOnlySpan<byte> packet)
+    {
+        var reader = new PacketReader(packet, 8 + 4 + 2);
+        WireHeader.ReadVersion(ref reader, "Language change");
+        reader.Skip(2);
+        var language = Utf8Text.Read(ref reader, AccountWire.MaxLanguageBytes, "Language change");
+        if (reader.Remaining != 0)
+            throw new InvalidDataException("Language change has trailing bytes");
+        return new LanguageChangePacket(language);
+    }
+}
+
 // S->C {header, uint16 Version = 1, uint8 Status (LoginFailure, None for a login), uint8 0}; a successful login sends the
 // character list first.
 public readonly record struct LoginResultPacket(LoginFailure Status)
