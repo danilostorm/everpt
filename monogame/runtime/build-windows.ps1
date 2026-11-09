@@ -30,8 +30,8 @@ if (-not (Test-Path $vswhere))
     throw 'Visual Studio Installer (vswhere.exe) not found: install Visual Studio 2022 or 2026 with the C++ workload.'
 }
 
-$vs = & $vswhere -latest -prerelease -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-$vsVersion = & $vswhere -latest -prerelease -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property catalog_productLineVersion
+$vs = & $vswhere -latest -products '*' -prerelease -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+$vsVersion = & $vswhere -latest -products '*' -prerelease -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property catalog_productLineVersion
 if (-not $vs)
 {
     throw 'No Visual Studio with the MSVC x64 tools was found.'
