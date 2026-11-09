@@ -94,6 +94,9 @@ public sealed class PristonAudioLibrary : IDisposable
     ];
 
     private readonly Dictionary<string, SoundEffect> _fieldMusic = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, string> _deferredFieldMusic = new(StringComparer.Ordinal);
+    private readonly Dictionary<string, SoundEffect> _soundsByPath = new(StringComparer.OrdinalIgnoreCase);
+    private string _assetRoot;
     private readonly SoundEffect[] _ambients = new SoundEffect[AmbientFiles.Length];
     private readonly SoundEffect[] _fieldAmbients = new SoundEffect[FieldAmbientFiles.Length];
     private readonly Dictionary<(int SoundCode, MotionCode Motion), SoundEffect[]> _npcSounds = [];
@@ -137,10 +140,10 @@ public sealed class PristonAudioLibrary : IDisposable
         ArgumentException.ThrowIfNullOrWhiteSpace(assetRoot);
         ArgumentNullException.ThrowIfNull(log);
 
-        var library = new PristonAudioLibrary();
+        var library = new PristonAudioLibrary { _assetRoot = assetRoot };
         try
         {
-            var byPath = new Dictionary<string, SoundEffect>(StringComparer.OrdinalIgnoreCase);
+            var byPath = library._soundsByPath;
             library.OpeningMusic = library.Load(assetRoot, "StartImage/Opening/Intro.wav", byPath);
             library.CharacterSelectMusic = library.Load(assetRoot, "StartImage/login/CharacterSelect.wav", byPath);
             foreach (var (cue, path) in LoginAudio.CueFiles)
@@ -161,7 +164,12 @@ public sealed class PristonAudioLibrary : IDisposable
             library.ThunderSound = library.Load(assetRoot, "wav/thunder1.wav", byPath);
             foreach (var (code, path) in FieldMusicFiles)
             {
-                library._fieldMusic.Add(code, library.Load(assetRoot, path, byPath));
+                // Preserve the two starting-town tracks. Defer remote-field BGM
+                // only on WebPT; the desktop client keeps its existing behavior.
+                if (OperatingSystem.IsBrowser() && code is not "BGM_CODE_TOWN1" and not "BGM_CODE_TOWN2")
+                    library._deferredFieldMusic.Add(code, path);
+                else
+                    library._fieldMusic.Add(code, library.Load(assetRoot, path, byPath));
             }
 
             for (var index = 0; index < AmbientFiles.Length; index++)
@@ -188,7 +196,7 @@ public sealed class PristonAudioLibrary : IDisposable
             library.LoadTalkSounds(assetRoot, byPath, log);
 
             log.Info(
-                $"[Audio] prepared {library._fieldMusic.Count} field music codes, {library._fieldAmbients.Length} field ambience loops, "
+                $"[Audio] prepared {library._fieldMusic.Count + library._deferredFieldMusic.Count} field music codes, {library._fieldAmbients.Length} field ambience loops, "
                 + $"{library._ambients.Length} positional ambience sounds, {library._npcSoundCount} NPC motion sounds and "
                 + $"{library._talkSounds.Count} NPC talk sounds.");
             return library;
@@ -216,7 +224,17 @@ public sealed class PristonAudioLibrary : IDisposable
             return false;
         }
 
-        return _fieldMusic.TryGetValue(code, out music);
+        if (_fieldMusic.TryGetValue(code, out music))
+            return true;
+        if (!_deferredFieldMusic.TryGetValue(code, out var path))
+            return false;
+
+        // WebPT warms these assets in the background after its first frame.
+        // Load a track on demand if the player reaches another field sooner.
+        music = Load(_assetRoot, path, _soundsByPath);
+        _fieldMusic[code] = music;
+        _deferredFieldMusic.Remove(code);
+        return true;
     }
 
     public SoundEffect Ambient(int code)
@@ -394,6 +412,8 @@ public sealed class PristonAudioLibrary : IDisposable
 
         _owned.Clear();
         _fieldMusic.Clear();
+        _deferredFieldMusic.Clear();
+        _soundsByPath.Clear();
         _loginCues.Clear();
         _characterSelectLoops.Clear();
         _npcSounds.Clear();
