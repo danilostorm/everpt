@@ -85,6 +85,13 @@ internal static class AuthTests
             return Task.FromResult(Record);
         }
 
+        public Task<bool> UpdatePasswordHashAsync(string userId, string passwordHash, CancellationToken ct = default)
+        {
+            if (Record?.UserId != userId) return Task.FromResult(false);
+            Record = Record with { PasswordHash = passwordHash };
+            return Task.FromResult(true);
+        }
+
         public Task UpdateLastLoginAsync(long accountId, CancellationToken ct = default)
         {
             LoginUpdates++;
