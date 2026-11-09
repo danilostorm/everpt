@@ -38,4 +38,10 @@ if (Test-Path $siteContent) { Remove-Item $siteContent -Recurse -Force }
 Copy-Item $contentWeb $siteContent -Recurse
 python (Join-Path $PSScriptRoot 'make_files_manifest.py') $Assets $siteContent (Join-Path $site 'files.json')
 if ($LASTEXITCODE) { throw 'manifest failed' }
+# The compiled loader has embedded SHA-256 hashes of its WebAssembly modules.
+# Give the two unversioned bootstrap scripts unique URLs for every release.
+$revision = (& git -C $repo rev-parse --short=12 HEAD).Trim()
+if ($LASTEXITCODE -ne 0) { throw 'could not determine web release revision' }
+python (Join-Path $PSScriptRoot 'version_web_release.py') $site $revision
+if ($LASTEXITCODE -ne 0) { throw 'web bootstrap fingerprinting failed' }
 Write-Output "Built -> $site"
