@@ -134,6 +134,14 @@ public sealed class GameServerConnection : IGameBackend
         }
     }
 
+    public void SetLanguage(string language)
+    {
+        if (SessionToken is null || _connection is null || Volatile.Read(ref _terminalError) is not null
+            || !Fits(language, AccountWire.MaxLanguageBytes))
+            return;
+        Send(new LanguageChangePacket(language));
+    }
+
     public Task<IReadOnlyList<CharacterSummary>> ListCharactersAsync(CancellationToken ct = default)
     {
         ThrowIfDisconnected();
