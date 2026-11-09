@@ -15,7 +15,7 @@ if not re.fullmatch(r"[0-9a-f]{7,40}", revision):
 
 index = root / "index.html"
 loader = root / "_framework" / "dotnet.js"
-modules = ("main", "mgweb", "mgfiles", "mgaudio", "settings", "admin", "panels")
+modules = ("main", "mgweb", "mgfiles", "mgaudio", "settings", "admin", "panels", "i18n")
 if not index.is_file() or not loader.is_file() or any(not (root / f"{name}.js").is_file() for name in modules):
     raise SystemExit("Incomplete WebPT publish: cannot fingerprint all bootstrap modules.")
 
