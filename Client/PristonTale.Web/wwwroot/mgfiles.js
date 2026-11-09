@@ -210,11 +210,7 @@ async function preloadCompactBundle(list, onProgress) {
             || !/^startup-[a-f0-9]{16}\.pack$/.test(metadata.url)) {
             throw new Error('Incompatible startup pack manifest');
         }
-        const compressed = await downloadCompressedPack(metadata, onProgress, list.length);
-        const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', compressed)))
-            .map(b => b.toString(16).padStart(2, '0')).join('');
-        if (hash !== metadata.sha256)
-            throw new Error('Startup pack integrity check failed');
+        const compressed = await loadVerifiedStartupPack(metadata, onProgress, list.length);
         const uncompressed = new Uint8Array(await new Response(
             new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
         const view = new DataView(uncompressed.buffer);
@@ -348,4 +344,100 @@ async function downloadSinglePack(meta, onProgress, count) {
         offset += chunk.byteLength;
     }
     return packed;
+}
+
+
+// IndexedDB retains the public, immutable startup archive across browser
+// visits. HTTP 206 byte-range responses are not reliably cached by browsers;
+// storing the verified archive is what makes a second login fast. Never store
+// account credentials or game saves here; this contains public game assets.
+const StartupCacheDatabase = 'everpt-public-assets';
+const StartupCacheStore = 'startup-packs';
+const StartupCacheKey = 'latest';
+
+function openStartupDatabase() {
+    return new Promise(resolve => {
+        if (!('indexedDB' in globalThis)) return resolve(null);
+        let request;
+        try { request = indexedDB.open(StartupCacheDatabase, 1); }
+        catch { return resolve(null); }
+        request.onupgradeneeded = () => {
+            if (!request.result.objectStoreNames.contains(StartupCacheStore))
+                request.result.createObjectStore(StartupCacheStore);
+        };
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => resolve(null);
+        request.onblocked = () => resolve(null);
+    });
+}
+
+function sha256(data) {
+    return crypto.subtle.digest('SHA-256', data).then(bytes =>
+        Array.from(new Uint8Array(bytes)).map(b => b.toString(16).padStart(2,'0')).join(''));
+}
+
+async function readStartupFromDisk(meta) {
+    const db = await openStartupDatabase();
+    if (!db) return null;
+    try {
+        const entry = await new Promise((resolve,reject) => {
+            const request = db.transaction(StartupCacheStore,'readonly')
+                .objectStore(StartupCacheStore).get(StartupCacheKey);
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+        });
+        if (!entry || entry.sha256 !== meta.sha256 ||
+            entry.data?.size !== meta.compressedBytes) return null;
+        const bytes = new Uint8Array(await entry.data.arrayBuffer());
+        if (await sha256(bytes) !== meta.sha256) return null;
+        return bytes;
+    } catch {
+        return null;
+    } finally {
+        db.close();
+    }
+}
+
+function saveStartupToDisk(meta, compressed) {
+    // Defer disk writes until the game has had a chance to render its first
+    // frame. Quota and private browsing restrictions are optional fallbacks.
+    setTimeout(async () => {
+        try {
+            if (navigator.storage?.estimate) {
+                const {usage=0,quota=0}=await navigator.storage.estimate();
+                if (quota && quota - usage < meta.compressedBytes * 1.2) return;
+            }
+            const db=await openStartupDatabase();
+            if (!db) return;
+            try {
+                await new Promise((resolve,reject) => {
+                    const tx=db.transaction(StartupCacheStore,'readwrite');
+                    tx.objectStore(StartupCacheStore).put({
+                        sha256:meta.sha256,
+                        data:new Blob([compressed],{type:'application/octet-stream'}),
+                    },StartupCacheKey);
+                    tx.oncomplete=resolve;
+                    tx.onerror=()=>reject(tx.error);
+                    tx.onabort=()=>reject(tx.error);
+                });
+                console.info('[Web] Startup pack saved for future visits');
+            } finally {
+                db.close();
+            }
+        } catch { /* IDB is optional: browser or quota may deny it. */ }
+    }, 15000);
+}
+
+async function loadVerifiedStartupPack(meta,onProgress,count) {
+    const cached=await readStartupFromDisk(meta);
+    if (cached) {
+        onProgress(meta.uncompressedBytes,meta.uncompressedBytes,count,count);
+        console.info('[Web] Startup pack loaded from persistent browser cache');
+        return cached;
+    }
+    const downloaded=await downloadCompressedPack(meta,onProgress,count);
+    if (await sha256(downloaded)!==meta.sha256)
+        throw new Error('Startup pack integrity check failed');
+    saveStartupToDisk(meta,downloaded);
+    return downloaded;
 }
