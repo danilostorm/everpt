@@ -123,7 +123,7 @@ export async function readManifest() {
 }
 
 export function preloadStartup(list, onProgress) {
-    return fetchAll(list, true, PreloadConcurrency, onProgress);
+    return preloadCompactBundle(list, onProgress);
 }
 
 // Fills the browser's cache only, so the game's later reads return at once without holding the data here too.
@@ -144,4 +144,91 @@ export function mountFiles(FS, log) {
         mountFile(FS, path, folder, path.slice(cut + 1), file.size);
     }
     log(`[Web] ${stats.files} files mounted in ${(performance.now() - started).toFixed(0)} ms.`);
+}
+
+ 
+// Content-addressed startup packs reduce thousands of HTTP requests to one
+// compressed response. Never assume a pack exists: old deployments and browsers
+// without streaming gzip always use the original per-file fetch path.
+async function preloadCompactBundle(list, onProgress) {
+    const fallback = () => {
+        for (const path of list) prefetched.delete(path);
+        return fetchAll(list, true, PreloadConcurrency, onProgress);
+    };
+    if (!('DecompressionStream' in window) || !globalThis.crypto?.subtle
+        || (navigator.deviceMemory && navigator.deviceMemory < 4)) {
+        return fallback();
+    }
+    try {
+        const metadataResponse = await fetch('startup-pack.json');
+        if (!metadataResponse.ok) return fallback();
+        const metadata = await metadataResponse.json();
+        if (metadata.format !== 'EVPT1-gzip' || metadata.count !== list.length
+            || !Number.isSafeInteger(metadata.compressedBytes)
+            || metadata.compressedBytes <= 0
+            || !/^startup-[a-f0-9]{16}\\.pack$/.test(metadata.url)) {
+            throw new Error('Incompatible startup pack manifest');
+        }
+        const response = await fetch(metadata.url);
+        if (!response.ok || !response.body) throw new Error('Startup pack unavailable');
+        const reader = response.body.getReader();
+        const chunks = [];
+        let received = 0;
+        while (true) {
+            const {done, value} = await reader.read();
+            if (done) break;
+            chunks.push(value);
+            received += value.byteLength;
+            if (received > metadata.compressedBytes)
+                throw new Error('Oversized startup pack');
+            const fraction = received / metadata.compressedBytes;
+            onProgress(Math.floor(fraction * metadata.uncompressedBytes),
+                metadata.uncompressedBytes, Math.floor(fraction * list.length), list.length);
+        }
+        if (received !== metadata.compressedBytes)
+            throw new Error('Truncated startup pack');
+        const compressed = new Uint8Array(received);
+        let copied = 0;
+        for (const chunk of chunks) {
+            compressed.set(chunk, copied);
+            copied += chunk.byteLength;
+        }
+        const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', compressed)))
+            .map(b => b.toString(16).padStart(2, '0')).join('');
+        if (hash !== metadata.sha256)
+            throw new Error('Startup pack integrity check failed');
+        const uncompressed = new Uint8Array(await new Response(
+            new Blob([compressed]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());
+        const view = new DataView(uncompressed.buffer);
+        const decoder = new TextDecoder('utf-8');
+        if (decoder.decode(uncompressed.subarray(0, 5)) !== 'EVPT1')
+            throw new Error('Unrecognized startup pack');
+        let offset = 5;
+        const count = view.getUint32(offset, true); offset += 4;
+        if (count !== list.length) throw new Error('Wrong startup pack file count');
+        const required = new Set(list);
+        let totalBytes = 0;
+        for (let i = 0; i < count; i++) {
+            const nameLength = view.getUint16(offset, true); offset += 2;
+            const size = view.getUint32(offset, true); offset += 4;
+            const path = decoder.decode(uncompressed.subarray(offset, offset + nameLength));
+            offset += nameLength;
+            if (!required.delete(path) || files.get(path)?.size !== size
+                || offset + size > uncompressed.length) {
+                throw new Error('Startup pack asset mismatch: ' + path);
+            }
+            prefetched.set(path, uncompressed.subarray(offset, offset + size));
+            offset += size;
+            totalBytes += size;
+        }
+        if (required.size || totalBytes !== metadata.uncompressedBytes
+            || offset !== uncompressed.length) {
+            throw new Error('Incomplete startup pack');
+        }
+        onProgress(totalBytes, totalBytes, count, count);
+        console.info('[Web] Startup pack verified: ' + count + ' files');
+    } catch (error) {
+        console.warn('[Web] Startup pack unavailable, using original asset downloads: ' + error.message);
+        return fallback();
+    }
 }
