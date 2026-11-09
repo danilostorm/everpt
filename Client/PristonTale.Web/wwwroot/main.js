@@ -201,4 +201,17 @@ const programExports = (await runtime.getAssemblyExports(runtime.getConfig().mai
 window.etervale.exports = programExports;
 startSettings(programExports);
 startAdmin(programExports);
+// A native login button requests signup from the game thread. Navigate on
+// the browser's main thread, without exposing credentials in URL parameters.
+const registrationTimer = setInterval(async () => {
+    try {
+        if (await programExports.TakeRegistrationRequest()) {
+            clearInterval(registrationTimer);
+            location.assign('/cadastro');
+        }
+    } catch (error) {
+        clearInterval(registrationTimer);
+        log('[Web] Registration link unavailable: ' + error.message);
+    }
+}, 350);
 await runtime.runMain();
