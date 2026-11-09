@@ -6,7 +6,7 @@
         <OutputType>Exe</OutputType>
         <ImplicitUsings>disable</ImplicitUsings>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <InvariantGlobalization>true</InvariantGlobalization>
+        <InvariantGlobalization>false</InvariantGlobalization>
         <WasmEnableThreads>true</WasmEnableThreads>
         <RunAOTCompilation>true</RunAOTCompilation>
         <WasmBuildNative>true</WasmBuildNative>
