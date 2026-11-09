@@ -28,7 +28,9 @@ $release = Join-Path $OutputRoot $revision.Substring(0, 12)
 New-Item -ItemType Directory -Force -Path $release | Out-Null
 
 $desktopBuilder = Join-Path $repo 'tools\everpt-lab\build-windows-client.ps1'
-& powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $desktopBuilder -SkipNativeRuntime:$SkipNativeRuntime
+$desktopArgs = @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $desktopBuilder)
+if ($SkipNativeRuntime) { $desktopArgs += '-SkipNativeRuntime' }
+& powershell.exe @desktopArgs
 if ($LASTEXITCODE -ne 0) { throw 'Desktop build failed; web will not be published.' }
 
 $desktop = Join-Path $repo 'Client\PristonTale\bin\Release\net10.0\PristonTale.exe'
@@ -37,7 +39,9 @@ if (-not (Test-Path $desktop)) { throw 'Desktop executable was not generated.' }
 $webScript = Join-Path $repo 'Client\PristonTale.Web\build_web.ps1'
 $webOutput = Join-Path $release 'web'
 $webWork = Join-Path $OutputRoot 'web-build'
-& powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File $webScript -Output $webOutput -Work $webWork -Naga $Naga -Assets $Assets -SkipContent:$SkipWebContent
+$webArgs = @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', $webScript, '-Output', $webOutput, '-Work', $webWork, '-Naga', $Naga, '-Assets', $Assets)
+if ($SkipWebContent) { $webArgs += '-SkipContent' }
+& powershell.exe @webArgs
 if ($LASTEXITCODE -ne 0) { throw 'Web build failed; neither client should be published.' }
 
 $webRoot = Join-Path $webOutput 'wwwroot'
