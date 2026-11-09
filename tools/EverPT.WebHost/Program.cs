@@ -44,7 +44,10 @@ app.Map("/ws.ashx", async context =>
         context.Response.StatusCode = StatusCodes.Status400BadRequest;
         return;
     }
-    if (context.Request.Query["port"].ToString() != "10009"
+    // The browser client calls /ws.ashx without a port parameter. Allow that
+    // canonical URL, but reject any requested destination other than game port 10009.
+    var requestedPort = context.Request.Query["port"].ToString();
+    if ((!string.IsNullOrEmpty(requestedPort) && requestedPort != "10009")
         || !Uri.TryCreate(context.Request.Headers.Origin.ToString(), UriKind.Absolute, out var origin)
         || !string.Equals(origin.Host, context.Request.Host.Host, StringComparison.OrdinalIgnoreCase)
         || origin.Scheme != "https")
