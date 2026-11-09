@@ -42,6 +42,15 @@ public partial class GraphicsDeviceManager
         FillWindowCreateInfo(presentationParameters, requestedMultiSampleCount, ref windowCreateInfo);
 
         window.CreateWindow(windowCreateInfo);
+        // SDL starts at the 800x480 default. On Vulkan, creating the swapchain before
+        // resizing the native window leaves its surface at 800x480 even though the
+        // presentation parameters already request (for example) 1280x720. The rest
+        // of the frame then renders outside the small native swapchain as black.
+        // Apply the initial dimensions before GraphicsDevice.PlatformInitialize
+        // creates the first Vulkan swapchain.
+        if (PlatformInfo.GraphicsBackend != GraphicsBackend.OpenGL)
+            window.OnPresentationChanged(presentationParameters);
+
         presentationParameters.DeviceWindowHandle = window.Handle;
     }
 
