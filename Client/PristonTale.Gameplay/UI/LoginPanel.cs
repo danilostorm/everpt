@@ -9,7 +9,8 @@ namespace PristonTale.Gameplay.UI;
 public enum LoginIntent
 {
     None,
-    SubmitLogin
+    SubmitLogin,
+    Register
 }
 
 public sealed class LoginPanel
@@ -18,7 +19,8 @@ public sealed class LoginPanel
     {
         Account,
         Password,
-        Login
+        Login,
+        Register
     }
 
     private readonly HudCanvas _canvas;
@@ -59,7 +61,7 @@ public sealed class LoginPanel
             if (Pressed(keyboard, previousKeyboard, Keys.Tab))
             {
                 var direction = keyboard.IsKeyDown(Keys.LeftShift) || keyboard.IsKeyDown(Keys.RightShift) ? -1 : 1;
-                SetFocus((FocusTarget)(((int)_focus + direction + 3) % 3));
+                SetFocus((FocusTarget)(((int)_focus + direction + 4) % 4));
             }
 
             if (clicked)
@@ -77,6 +79,11 @@ public sealed class LoginPanel
                     SetFocus(FocusTarget.Login);
                     intent = LoginIntent.SubmitLogin;
                 }
+                else if (layout.Register.Contains(cursor))
+                {
+                    SetFocus(FocusTarget.Register);
+                    intent = LoginIntent.Register;
+                }
             }
 
             Account.Update(typed, dtSeconds);
@@ -84,7 +91,7 @@ public sealed class LoginPanel
             if (Pressed(keyboard, previousKeyboard, Keys.Enter)
                 || _focus >= FocusTarget.Login && Pressed(keyboard, previousKeyboard, Keys.Space))
             {
-                intent = LoginIntent.SubmitLogin;
+                intent = _focus == FocusTarget.Register ? LoginIntent.Register : LoginIntent.SubmitLogin;
             }
         }
 
@@ -110,6 +117,7 @@ public sealed class LoginPanel
         DrawField(ClientText.Get("Login.Account"), Account, layout.Account, tint);
         DrawField(ClientText.Get("Login.Password"), Password, layout.Password, tint);
         DrawButton(ClientText.Get("Login.LogIn"), layout.Login, _focus == FocusTarget.Login, layout, tint);
+        DrawButton(ClientText.Get("Login.Register"), layout.Register, _focus == FocusTarget.Register, layout, tint);
         _canvas.Text(Status, layout.Status, HudCanvas.Gold, 16f, centered: true);
         _canvas.Text(ClientText.Get("Login.Hint"), layout.Hint, HudCanvas.Muted, 13f, centered: true);
         _canvas.End();
