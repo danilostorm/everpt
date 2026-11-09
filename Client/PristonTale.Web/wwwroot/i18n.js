@@ -260,3 +260,9 @@ export function chooseLanguage(value) {
     catch { /* Browsers with disabled storage keep the choice for this visit. */ }
     return next;
 }
+
+export function resetLanguageChoice() {
+    try { localStorage.removeItem(STORAGE_CHOICE); }
+    catch { /* Keep using the current browser preference for this visit. */ }
+    return useLanguage(browserLanguage());
+}
