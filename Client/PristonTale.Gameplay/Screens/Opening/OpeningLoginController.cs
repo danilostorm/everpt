@@ -31,9 +31,13 @@ internal sealed class OpeningLoginController : IDisposable
     public LoginResult Update(in KeyboardState keyboard, in KeyboardState lastKeyboard, float dt)
     {
         var typed = _context.TypedText.Drain();
-        if (_phase == Phase.Login && _login.Update(keyboard, lastKeyboard, typed, dt, _context.GraphicsDevice.Viewport) == LoginIntent.SubmitLogin)
+        if (_phase == Phase.Login)
         {
-            BeginLogin();
+            var action = _login.Update(keyboard, lastKeyboard, typed, dt, _context.GraphicsDevice.Viewport);
+            if (action == LoginIntent.SubmitLogin)
+                BeginLogin();
+            else if (action == LoginIntent.Register)
+                RegistrationNavigation.Open();
         }
 
         return _phase == Phase.Authenticating ? PollLogin() : LoginResult.None;
@@ -43,12 +47,12 @@ internal sealed class OpeningLoginController : IDisposable
     {
         if (string.IsNullOrWhiteSpace(_login.Account.Text) || string.IsNullOrEmpty(_login.Password.Text))
         {
-            _login.Status = "Enter your account and password.";
+            _login.Status = ClientText.Get("Login.EnterCredentials");
             return;
         }
 
         _audio.Play(LoginCue.Login);
-        _login.Status = "Connecting…";
+        _login.Status = ClientText.Get("Login.Connecting");
         _login.InputEnabled = false;
         _phase = Phase.Authenticating;
         _loginCts = new CancellationTokenSource();
