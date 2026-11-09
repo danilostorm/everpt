@@ -80,7 +80,7 @@ log(`[Web] GPU ${info.vendor} ${info.architecture}, fallback ${info.isFallbackAd
 
 showProgress('Downloading the game', null);
 const runtime = await dotnet
-    .withConfig({ environmentVariables: { DOTNET_SYSTEM_GLOBALIZATION_INVARIANT: '1' } })
+    
     .withModuleConfig({
         print: text => log(text),
         printErr: text => log('[stderr] ' + text),
