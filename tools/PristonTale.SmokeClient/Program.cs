@@ -5,6 +5,7 @@ using PristonTale.Simulation.Characters;
 using PristonTale.Simulation.Quests;
 using PristonTale.Contracts.Skills;
 using PristonTale.Contracts.Characters;
+using PristonTale.Contracts.Texts;
 using PristonTale.Protocol.Transport;
 
 // smoke [address] [account] [password] [--character NAME] [--skill CODE] [--chat TEXT]
@@ -95,7 +96,8 @@ await using (var play = conn.OpenPlayChannel())
     }
 
     // A whisper to a player who is not online must be answered with a server line naming that player.
-    var whisper = await ChatAsync(play, "/:SmokeNobody hi", line => line.Text.StartsWith("SmokeNobody ", StringComparison.Ordinal));
+    var whisper = await ChatAsync(play, "/:SmokeNobody hi", line => line.Line.Id == GameTextId.PlayerNotFound
+        && line.Line.Args.Length == 1 && line.Line.Args[0] == "SmokeNobody");
     if (whisper is null)
     {
         return 1;
@@ -160,7 +162,7 @@ async Task<ChatLineInfo?> ChatAsync(IPlayChannel play, string text, Func<ChatLin
         {
             foreach (var line in update.Chat)
             {
-                Console.WriteLine($"Chat {line.Kind,-12}: {line.Text}");
+                Console.WriteLine($"Chat {line.Kind,-12}: {(line.Line.IsNone ? line.Text : line.Line.ToString())}");
                 answer ??= expected(line) ? line : null;
             }
         }
