@@ -5,6 +5,7 @@ using System.Net.WebSockets;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls(Environment.GetEnvironmentVariable("EVERPT_WEB_BIND") ?? "http://127.0.0.1:8088");
@@ -86,7 +87,12 @@ app.Map("/ws.ashx", async context =>
 });
 
 app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = new PhysicalFileProvider(siteRoot) });
-app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(siteRoot) });
+// MonoGame's compiled shaders and fonts are intentionally custom binary files.
+// StaticFileMiddleware otherwise returns 404 for these unknown extensions.
+var types = new FileExtensionContentTypeProvider();
+types.Mappings[".mgfxo"] = "application/octet-stream";
+types.Mappings[".xnb"] = "application/octet-stream";
+app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(siteRoot), ContentTypeProvider = types });
 
 // Assets from the third-party game archive must be explicitly enabled, and only
 // files listed in the public manifest may be served. The same archive also contains
