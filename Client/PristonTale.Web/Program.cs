@@ -10,6 +10,7 @@ using PristonTale;
 using PristonTale.Engine3D.IO;
 using PristonTale.Engine3D.Rendering;
 using PristonTale.Gameplay.Screens.Framework;
+using PristonTale.Gameplay.UI;
 using PristonTale.Protocol.Transport;
 
 [assembly: SupportedOSPlatform("browser")]
@@ -21,12 +22,15 @@ public static partial class Program
     // The game's blocking loop gets its own thread: .NET's main thread must stay free for the browser's networking.
     private const int GameThreadStackBytes = 16 * 1024 * 1024;
 
+    private static int _registrationRequested;
+
     internal static readonly ConcurrentQueue<string> PendingSettings = new();
     internal static readonly ConcurrentQueue<string> PendingCommands = new();
 
     public static void Main(string[] args)
     {
         WebSocketTransport.BridgeAddress = args[0];
+        RegistrationNavigation.BrowserRequest = () => Interlocked.Exchange(ref _registrationRequested, 1);
         WebRuntime.Start();
         new Thread(RunGame, GameThreadStackBytes) { Name = "Game" }.Start();
     }
@@ -46,6 +50,12 @@ public static partial class Program
             throw;
         }
     }
+
+    // The game thread requests the registration page; the JavaScript main
+    // thread performs navigation without blocking WebAssembly rendering.
+    [JSExport]
+    public static Task<bool> TakeRegistrationRequest()
+        => Task.FromResult(Interlocked.Exchange(ref _registrationRequested, 0) != 0);
 
     [JSExport]
     public static Task ApplySettings(string json)
