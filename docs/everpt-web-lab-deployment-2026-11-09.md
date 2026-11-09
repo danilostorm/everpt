@@ -71,3 +71,15 @@ Prior release backup is retained alongside it as `10-release.pre-pack`. To roll 
 - Nexus direct-public Chrome/WebGPU test with **no local request interception**: first rendering within about 30 seconds; 4 frames, 1,212 draw calls, 0 on-demand file fetches, 11 read-cache hits, 0 JavaScript page errors. The browser automatically stopped testing at the first successful drawing threshold, not after a full gameplay session.
 - CDN served the public bundle with `HIT`; public HTML, versioned JS, startup manifest and gateway health were all checked successfully.
 - Remaining acceptance tests: authenticate the disposable QA account, load/create/select a character, enter a map, move/interact and confirm persistence and desktop interoperability. No claim of authenticated end-to-end gameplay until these complete.
+
+## 2026-11-09 browser locale auto-selection
+
+- Web release `20261109-locale` / `422a6b575448` deployed to the **isolated LAB** web host `ever.hoststorm.cloud`. Backup before promotion: `/etc/systemd/system/everpt-web-host.service.d/10-release.pre-locale`; previous `20261109-lru` release is retained.
+- `i18n.js` auto-selects `pt-BR` for browser locales beginning with `pt`, and `en` for English browsers. It does **not** infer a person's language from their IP or physical country; players using an English browser can select Portuguese explicitly.
+- `settings.js` writes the selected `language` to the game's WebAssembly `/client-settings.json` **before .NET starts**. This drives the existing translated `ClientText.pt-BR.resx` (942/942 English keys also translated), so opening/login, character selection and gameplay text can use pt-BR.
+- New settings control: `Settings → General → Language` / `Configurações → Geral → Idioma`. Explicit choices survive reloads; older implicit `en` defaults migrate to the browser language. Reset restores browser auto-selection.
+- Browser chrome translations cover loading status, graphics/audio settings, generic panel controls and GM admin form labels. In-game UI translations remain sourced from the existing game resources. Item names in assets, user chat and text baked into images are not automatically translated.
+- Script fingerprinting now includes the new `i18n.js` module (8 modules total) to avoid CDN mixing.
+- Playwright regression (`Client/PristonTale.Web/tests/locale_smoke.py`): all six locale/manual override scenarios passed, including pt-BR, en-US, pt-PT and migration of the previous implicit-English setting; live language selection updates the panel.
+- Direct-public Chrome WebGPU pt-BR QA on Nexus, **no request interception**: at 30 s the game rendered 10 frames / 3,589 draw calls, no page JavaScript errors. `navigator.language`, document language, and the game's saved settings all confirmed `pt-BR`. Screenshot showed translated `Configurações` and `Preparando o mundo`.
+- Account sign-in is not needed for these language tests. The user's separate game-login/character-map testing is not independently repeated with their account.
