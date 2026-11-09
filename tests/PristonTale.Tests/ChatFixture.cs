@@ -290,6 +290,8 @@ internal sealed class MemoryAccounts : IAccountRepository
 
     public Task<AccountRecord> CreateAsync(string userId, string passwordHash, CancellationToken ct = default) => throw new NotSupportedException();
 
+    public Task<bool> UpdatePasswordHashAsync(string userId, string passwordHash, CancellationToken ct = default) => Task.FromResult(false);
+
     public Task UpdateLastLoginAsync(long accountId, CancellationToken ct = default) => Task.CompletedTask;
 }
 
