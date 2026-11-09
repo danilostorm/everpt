@@ -41,6 +41,9 @@ if ($LASTEXITCODE) { throw 'manifest failed' }
 # Include opening resources measured in the LAB browser trace before packing.
 python (Join-Path $PSScriptRoot 'extend_preload.py') $site (Join-Path $PSScriptRoot 'startup-extras.json')
 if ($LASTEXITCODE) { throw 'startup preload extension failed' }
+# Distant-field music is decoded on demand in WebPT; do not block the login screen on it.
+python (Join-Path $PSScriptRoot 'defer_world_audio.py') $site
+if ($LASTEXITCODE) { throw 'deferred audio manifest failed' }
 # The startup data is also published as a versioned, integrity-checked gzip
 # archive; clients without browser gzip streaming still use individual files.
 python (Join-Path $PSScriptRoot 'pack_startup.py') $site $Assets
