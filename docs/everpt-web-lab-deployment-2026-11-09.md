@@ -61,3 +61,13 @@ Prior release backup is retained alongside it as `10-release.pre-pack`. To roll 
 - Same browser/test account login, selection of characters and gameplay persistence remain separate acceptance steps.
 - Service config backup before this release: `10-release.pre-extras` in the WebHost systemd override directory. The `20261109-pack` release remains for rollback.
 - Internal VM IP after reboot: `192.168.122.129` (libvirt reservation tied to VM MAC). LAB autostart enabled; game production VMs untouched.
+
+## 2026-11-09 public browser and read-cache validation
+
+- Version `b96a74748b4d` deployed to the **isolated EverPT LAB web service** at `ever.hoststorm.cloud`. The prior `20261109-extras` release remains available for rollback; override backup is `10-release.pre-lru`.
+- Startup archive remains `startup-c3b8ce84119b8981.pack` (2,228 files, 146,440,196 compressed bytes, integrity checked).
+- Web loader now fetches **18 HTTP byte ranges with four concurrent workers** plus a one-byte range probe, validates Content-Range and final SHA-256, with single-request and original per-file fallbacks.
+- Added a bounded 384 MiB in-memory LRU for repeated file reads, preventing duplicate synchronous CDN downloads during opening. This is browser-only and does not change desktop or game server logic.
+- Nexus direct-public Chrome/WebGPU test with **no local request interception**: first rendering within about 30 seconds; 4 frames, 1,212 draw calls, 0 on-demand file fetches, 11 read-cache hits, 0 JavaScript page errors. The browser automatically stopped testing at the first successful drawing threshold, not after a full gameplay session.
+- CDN served the public bundle with `HIT`; public HTML, versioned JS, startup manifest and gateway health were all checked successfully.
+- Remaining acceptance tests: authenticate the disposable QA account, load/create/select a character, enter a map, move/interact and confirm persistence and desktop interoperability. No claim of authenticated end-to-end gameplay until these complete.
