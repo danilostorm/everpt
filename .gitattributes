@@ -2,3 +2,5 @@
 # the working tree too, so a clone made on Windows still runs them on Linux and macOS.
 * text=auto
 *.sh text eol=lf
+# git apply on Windows needs the tracked patch files in LF form.
+*.patch text eol=lf
