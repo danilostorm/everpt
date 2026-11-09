@@ -31,6 +31,8 @@ app.Use(async (context, next) =>
     // caches one after a deployment it may request modules from an older build,
     // whose integrity hashes and file names no longer match the active release.
     var requestPath = context.Request.Path.Value ?? "";
+    if (requestPath.EndsWith(".pack", StringComparison.OrdinalIgnoreCase))
+        context.Response.Headers["Cache-Control"] = "public, max-age=31536000, immutable";
     if (requestPath is "/" || requestPath.EndsWith(".html", StringComparison.OrdinalIgnoreCase)
         || requestPath.EndsWith(".js", StringComparison.OrdinalIgnoreCase)
         || requestPath.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
@@ -105,6 +107,7 @@ types.Mappings[".mgfxo"] = "application/octet-stream";
 types.Mappings[".xnb"] = "application/octet-stream";
 // Full .NET globalization may ship ICU data blobs with a .dat extension.
 types.Mappings[".dat"] = "application/octet-stream";
+types.Mappings[".pack"] = "application/octet-stream";
 app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(siteRoot), ContentTypeProvider = types });
 
 // Assets from the third-party game archive must be explicitly enabled, and only
