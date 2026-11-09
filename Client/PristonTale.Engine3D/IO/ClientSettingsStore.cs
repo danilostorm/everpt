@@ -48,7 +48,7 @@ public sealed class ClientSettingsStore
         {
             if (!File.Exists(_path))
             {
-                var defaults = new ClientSettings();
+                var defaults = new ClientSettings().Validate(_log);
                 QueueSave(defaults);
                 return defaults;
             }
@@ -59,7 +59,7 @@ public sealed class ClientSettingsStore
             {
                 _readOnly = true;
                 ReportError($"Unsupported settings version {settings.Version}; preserving {_path} and using defaults.");
-                return new ClientSettings();
+                return new ClientSettings().Validate(_log);
             }
 
             return settings.Validate(_log);
