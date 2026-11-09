@@ -48,3 +48,16 @@ Only the LAB web service release should change during promotions. The service ov
 `/etc/systemd/system/everpt-web-host.service.d/10-release.conf`
 
 Prior release backup is retained alongside it as `10-release.pre-pack`. To roll back after a failed health check, restore that file, run `systemctl daemon-reload`, restart `everpt-web-host.service`, and purge the HTML entrypoint from the CDN. Do not restore a different game server's data or alter production.
+
+## 2026-11-09 opening-asset extension
+
+- Added `Client/PristonTale.Web/startup-extras.json` with 206 verified assets captured from an initial WebGPU opening-scene trace on Nexus; about 7.94 MiB of additional unpacked assets.
+- Added `extend_preload.py` before `pack_startup.py` in `build_web.ps1`. It validates each extra path against the published file manifest and extends the startup list without changing world assets.
+- LAB web release `20261109-extras`, JS tag `dcfc09c6d372`.
+- Startup set is now **2,228 files**, 262,439,614 uncompressed bytes and 146,440,196 gzip bytes.
+- SHA-256 `c3b8ce84119b8981b75ec663b0a2d50c26e4794da28baf253ae009edd0249254`; package `startup-c3b8ce84119b8981.pack`.
+- Local Nexus Chrome/WebGPU canary: package verified, rendered 4 frames / 1,212 draws after 20 seconds, zero JavaScript page errors; observed world background loading after first render.
+- Remote public HTTPS: page, versioned scripts, `/healthz` and package manifest/headers all return 200. The first external browser cold-load remains bandwidth-bound; do not label the remote UI test complete until it renders.
+- Same browser/test account login, selection of characters and gameplay persistence remain separate acceptance steps.
+- Service config backup before this release: `10-release.pre-extras` in the WebHost systemd override directory. The `20261109-pack` release remains for rollback.
+- Internal VM IP after reboot: `192.168.122.129` (libvirt reservation tied to VM MAC). LAB autostart enabled; game production VMs untouched.
