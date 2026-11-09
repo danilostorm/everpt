@@ -21,6 +21,21 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <!-- Etervale fork: the browser build (monogame/web/README.md) replaces the native runtime's declarations with its own. -->
+  <PropertyGroup Condition="'$(EtervaleWeb)' == 'true'">
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>14.0</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <WarningsAsErrors></WarningsAsErrors>
+    <RunAnalyzers>false</RunAnalyzers>
+    <NoWarn>$(NoWarn);CS0472;CS1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(EtervaleWeb)' == 'true'">
+    <Compile Remove="Platform/Native/*.Interop*.cs" />
+    <Compile Include="../../web/**/*.cs" LinkBase="Web" />
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="../ThirdParty/StbImageSharp/src/**/*.cs" LinkBase="Utilities/StbImageSharp" />
     <Compile Include="../ThirdParty/StbImageWriteSharp/src/**/*.cs" LinkBase="Utilities/StbImageWriteSharp" />

@@ -65,6 +65,11 @@ public static class TlsTransport
     public static async Task<FrameConnection> ConnectAsync(string host, int port, ServerCertificatePolicy policy, CancellationToken cancellationToken,
         FrameConnectionOptions? options = null)
     {
+        if (OperatingSystem.IsBrowser())
+        {
+            return await WebSocketTransport.ConnectAsync(port, options, cancellationToken);
+        }
+
         var socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
         SslStream? tls = null;
         try

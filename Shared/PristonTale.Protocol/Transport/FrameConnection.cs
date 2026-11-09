@@ -20,7 +20,8 @@ public sealed class FrameConnection : IPacketSink, IAsyncDisposable
 {
     private const int ReceiveBufferSize = FrameCodec.MaxFrameSize * 2;
 
-    private readonly Socket _socket;
+    // None in the browser, where the stream is a WebSocket (WebSocketTransport).
+    private readonly Socket? _socket;
     private readonly Stream _stream;
     private readonly FrameConnectionOptions _options;
     private readonly object _sendGate = new();
@@ -45,15 +46,19 @@ public sealed class FrameConnection : IPacketSink, IAsyncDisposable
     private long _bytesReceived;
 
     // The stream is the socket's authenticated TLS stream; the connection owns both.
-    public FrameConnection(Socket socket, Stream stream, FrameConnectionOptions? options = null)
+    public FrameConnection(Socket? socket, Stream stream, FrameConnectionOptions? options = null)
     {
         _socket = socket;
-        _socket.NoDelay = true;
+        if (socket is not null)
+        {
+            socket.NoDelay = true;
+        }
+
         _stream = stream;
         _options = options ?? new FrameConnectionOptions();
         _pending = ArrayPool<byte>.Shared.Rent(FrameCodec.MaxFrameSize * 4);
-        RemoteEndPoint = socket.RemoteEndPoint;
-        LocalEndPoint = socket.LocalEndPoint;
+        RemoteEndPoint = socket?.RemoteEndPoint;
+        LocalEndPoint = socket?.LocalEndPoint;
     }
 
     // Captured at construction: Socket throws ObjectDisposedException for these after Close.
@@ -369,13 +374,21 @@ public sealed class FrameConnection : IPacketSink, IAsyncDisposable
         CloseReason = reason;
         try
         {
-            _socket.Shutdown(SocketShutdown.Both);
+            _socket?.Shutdown(SocketShutdown.Both);
         }
         catch (Exception ex) when (ex is SocketException or ObjectDisposedException)
         {
         }
 
-        _socket.Close();
+        if (_socket is null)
+        {
+            _stream.Dispose();
+        }
+        else
+        {
+            _socket.Close();
+        }
+
         _sendSignal.Writer.TryComplete();
         _lifetime.Cancel();
         TakeDrained()?.TrySetResult();

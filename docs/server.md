@@ -139,6 +139,8 @@ that limit; negative values stop startup. The game settings live in the database
 | `Database:MaxPoolSize` | 20 | `AddPristonPostgres` | PostgreSQL connections at most; keep it below the server's `max_connections`. |
 | `Database:SaveBatchSize` | 100 | `CharacterSaveQueue` | Characters stored per transaction; at least 1. |
 | `Database:SaveJournalPath` | `save-journal` | `CharacterSaveService` | Directory of the save journal, relative to the executable. |
+| `Accounts:CreateOnLogin` | `false` | `AccountPolicy` | The first login to a free account name creates the account with that password (3 to 20 ASCII letters, digits or underscores). For open servers such as the browser site. |
+| `Accounts:DefaultGameMasterLevel` | 0 | `AccountPolicy` | The least game master level of every session (0 to 4), above the account's stored level. At 4 every player may shut the server down, so it suits only a private server. |
 | `Assets:Root` | auto-detected `assets` | `FieldTerrainLoadService` | Directory holding the original asset tree with the field stages. |
 | `Assets:AllowMissingTerrain` | `false` | `FieldTerrainLoadService` | Start without an assets directory or with missing/unreadable stages. |
 | `World:MaxPendingCommandsPerPlayer` | 16 | `WorldServerOptions` | Commands one player may have waiting for the tick; at least 1. The queue holds 4096 players' default quota. |

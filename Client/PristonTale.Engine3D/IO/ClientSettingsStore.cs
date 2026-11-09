@@ -38,6 +38,10 @@ public sealed class ClientSettingsStore
 
     public string LastError => Volatile.Read(ref _lastError);
 
+    // A settings document from outside the file, such as the browser site's panel.
+    public static ClientSettings Parse(string json) =>
+        JsonSerializer.Deserialize<ClientSettings>(json, JsonOptions) ?? throw new JsonException("Settings document is null.");
+
     public ClientSettings Load()
     {
         try

@@ -158,6 +158,11 @@ git diff --check
 The regression runner is a console program; `dotnet test` does not discover it. Benchmarks, asset probes, the smoke
 client and the load test are described in [docs/testing.md](docs/testing.md) and [docs/tools.md](docs/tools.md).
 
+## Browser build
+
+`Client/PristonTale.Web` runs the same client in a browser with WebGPU, against the same server through a WebSocket bridge
+on the site. How it works, its limits and its build are in [monogame/web/README.md](monogame/web/README.md).
+
 ## Documentation
 
 - [docs/README.md](docs/README.md): index of the code documentation and which doc to read for each task.
