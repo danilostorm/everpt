@@ -12,7 +12,8 @@
         <WasmBuildNative>true</WasmBuildNative>
         <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
         <EmccInitialHeapSize>536870912</EmccInitialHeapSize>
-        <EmccMaximumHeapSize>4294901760</EmccMaximumHeapSize>
+        <!-- Keep JS/Jiterpreter imported memory within the 32768-page (2 GiB) WebAssembly module limit. -->
+        <EmccMaximumHeapSize>2147483648</EmccMaximumHeapSize>
         <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
         <UseSystemResourceKeys>false</UseSystemResourceKeys>
         <NoWarn>$(NoWarn);CA1416</NoWarn>
