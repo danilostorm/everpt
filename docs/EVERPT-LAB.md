@@ -46,7 +46,8 @@ Instalados para compilação: Git for Windows, .NET SDK 10, Visual Studio Build 
 - Executável: `E:\Etervale-Lab\everpt\Client\PristonTale\bin\Release\net10.0\PristonTale.exe`.
 - `client-settings.json` ao lado do executável: idioma `pt-BR`, janela 1280 × 720, limite de 60 FPS, servidor privado e certificado fixado (sem credenciais).
 - Teste GUI interativo: janela intitulada **Etervale** abriu e permaneceu ativa; backend Vulkan reconheceu a Radeon RX550; nenhuma exceção registrada durante o teste; processo encerrado pelo próprio teste.
-- Sonda de renderização `--check-look charselect`: **aprovada** para seleção de personagens e rostos das 11 classes.
+- Sondas de renderização: **`--check-look charselect`, `--check-look opening` e `--check-look scenery` aprovadas** na RX550, incluindo seleção de personagens, rostos das 11 classes, abertura e iluminação/material dos cenários.
+- Para acesso de teste foi criada a conta comum `nexuslab` (sem privilégios de GM), com personagem `NexusHero` (Knight nível 20). **Não** armazenar a senha aqui; entregá-la ao operador por canal privado.
 - Log `client.log` contém **34 avisos de texturas referenciadas, mas ausentes**, que recebem fallback branco. A aparência final precisa de inspeção visual; não confundir inicialização de renderização com teste de uma sessão completa de jogo.
 - Logs locais de build, transferência, extração, sonda e teste gráfico: `E:\Etervale-Lab\logs`.
 - Script reproduzível: `tools/everpt-lab/build-windows-client.ps1`.
