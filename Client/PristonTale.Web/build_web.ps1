@@ -38,6 +38,10 @@ if (Test-Path $siteContent) { Remove-Item $siteContent -Recurse -Force }
 Copy-Item $contentWeb $siteContent -Recurse
 python (Join-Path $PSScriptRoot 'make_files_manifest.py') $Assets $siteContent (Join-Path $site 'files.json')
 if ($LASTEXITCODE) { throw 'manifest failed' }
+# The startup data is also published as a versioned, integrity-checked gzip
+# archive; clients without browser gzip streaming still use individual files.
+python (Join-Path $PSScriptRoot 'pack_startup.py') $site $Assets
+if ($LASTEXITCODE) { throw 'startup pack failed' }
 # The compiled loader has embedded SHA-256 hashes of its WebAssembly modules.
 # Give the two unversioned bootstrap scripts unique URLs for every release.
 $revision = (& git -C $repo rev-parse --short=12 HEAD).Trim()
