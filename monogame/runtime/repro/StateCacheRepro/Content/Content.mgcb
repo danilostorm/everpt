@@ -1,0 +1,22 @@
+
+#----------------------------- Global Properties ----------------------------#
+# The repro's one effect (test 5: pixel-shader constants), compiled with DXC like the client's Vulkan shaders.
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopVK
+/config:
+/profile:HiDef
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin PixelConstants.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:PixelConstants.fx
+

@@ -1,0 +1,152 @@
+[
+  {
+    "name": "vfx.monster.revived.fx.crystal.firehit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7843,
+          0.3922
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireHIt1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.firecrystal.attack.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          136,
+          -16
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          12,
+          0
+        ],
+        "speed": 492.1875,
+        "reach": 5,
+        "lifetime": [
+          2.1429,
+          2.1429
+        ],
+        "carryEffect": "particle.FireShot1",
+        "endEffect": "vfx.monster.revived.fx.crystal.firehit"
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          136,
+          -16
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          12,
+          0
+        ],
+        "speed": 492.1875,
+        "reach": 5,
+        "lifetime": [
+          2.1429,
+          2.1429
+        ],
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/EnchantWeapon/fire-b3.bmp",
+        "blend": "InvShadow",
+        "color": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "width": [
+          5.86,
+          5.86
+        ],
+        "lineSeconds": 0.0635
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/FireBolt 1.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/FireBolt 2.wav",
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.firecrystal.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/MonsterFury/m_fury-jin.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "delay": 0.0286,
+        "modelStart": 1,
+        "modelFrames": 30,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4371,
+        "fadeOut": 0.4371
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FuryHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.FuryHit2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          9.77,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

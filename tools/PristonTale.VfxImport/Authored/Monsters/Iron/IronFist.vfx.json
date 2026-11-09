@@ -1,0 +1,74 @@
+[
+  {
+    "name": "vfx.monster.ironfist.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.ironfist.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          75
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Box05",
+        "boneWorld": true,
+        "bladeLength": 14,
+        "trailPoints": 16,
+        "trailFade": 15.9375,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "delay": 0.2143
+      },
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          75
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Box08",
+        "boneWorld": true,
+        "bladeLength": 14,
+        "trailPoints": 16,
+        "trailFade": 15.9375,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "delay": 0.2143
+      }
+    ]
+  }
+]

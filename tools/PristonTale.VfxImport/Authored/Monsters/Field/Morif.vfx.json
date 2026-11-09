@@ -1,0 +1,173 @@
+[
+  {
+    "name": "vfx.monster.morif.shellhit",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Event/sheltom_b.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.ShellTomHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.morif.attack.hit",
+    "duration": 10.0,
+    "children": [
+      {
+        "effect": "vfx.monster.morif.shot1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "vfx.monster.morif.shot2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "vfx.monster.morif.shot3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.morif.shot1",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Shelltom/stm01.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -25
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          12,
+          0
+        ],
+        "speed": 210.0,
+        "lift": 110,
+        "gravity": [
+          -500,
+          -500
+        ],
+        "reach": 25,
+        "tumble": [
+          0,
+          0,
+          3150
+        ],
+        "carryEffect": "particle.ShellTom",
+        "endEffect": "vfx.monster.morif.shellhit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.morif.shot2",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Shelltom/stm02.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -25
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          12,
+          0
+        ],
+        "speed": 210.0,
+        "lift": 110,
+        "gravity": [
+          -500,
+          -500
+        ],
+        "reach": 25,
+        "tumble": [
+          0,
+          0,
+          3150
+        ],
+        "carryEffect": "particle.ShellTom",
+        "endEffect": "vfx.monster.morif.shellhit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.morif.shot3",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Shelltom/stm03.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -25
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          12,
+          0
+        ],
+        "speed": 210.0,
+        "lift": 110,
+        "gravity": [
+          -500,
+          -500
+        ],
+        "reach": 25,
+        "tumble": [
+          0,
+          0,
+          3150
+        ],
+        "carryEffect": "particle.ShellTom",
+        "endEffect": "vfx.monster.morif.shellhit"
+      }
+    ]
+  }
+]

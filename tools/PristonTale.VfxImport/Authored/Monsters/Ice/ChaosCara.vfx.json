@@ -1,0 +1,249 @@
+[
+  {
+    "name": "vfx.monster.chaoscara.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.ChaosKaraStaff",
+        "bone": "Bip01 ob",
+        "follow": true,
+        "boneWorld": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.chaoscara.attack.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/ChaosKara/chao_glacial.smd",
+        "blend": "Additive",
+        "anchor": "Target",
+        "offset": [
+          0,
+          1.95,
+          0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "modelFrames": 25,
+        "modelSpeed": 35.0,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 0.1821,
+        "fadeOut": 0.1821,
+        "turn": false
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.ChaosKaraNormal1_1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          1.95,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.ChaosKaraNormal1_2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          5.86,
+          0
+        ],
+        "turn": true,
+        "delay": 0.3
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.chaoscara.skill.kJ",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Target",
+        "offset": [
+          0,
+          508.0,
+          234.4
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          0,
+          39.1
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.0,
+        "carryEffect": "particle.ChaosKaraMeteo",
+        "endEffect": "vfx.monster.chaoscara.meteor.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Target",
+        "offset": [
+          0,
+          508.0,
+          156.20000000000002
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          0,
+          -39.1
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.4286,
+        "carryEffect": "particle.ChaosKaraMeteo",
+        "endEffect": "vfx.monster.chaoscara.meteor.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Target",
+        "offset": [
+          39.1,
+          508.0,
+          195.3
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          39.1,
+          0,
+          0
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.8571,
+        "carryEffect": "particle.ChaosKaraMeteo",
+        "endEffect": "vfx.monster.chaoscara.meteor.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Target",
+        "offset": [
+          -39.1,
+          508.0,
+          195.3
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          -39.1,
+          0,
+          0
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 1.2857,
+        "carryEffect": "particle.ChaosKaraMeteo",
+        "endEffect": "vfx.monster.chaoscara.meteor.hit"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 1.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.chaoscara.meteor.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.7843,
+          1.0
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 2.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.ChaosKaraMeteoHit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.chaoscara.skill",
+    "duration": 2.5,
+    "children": [
+      {
+        "effect": "particle.ChaosKaraSkill",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          9.8,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.ChaosKaraSkillUser",
+        "anchor": "Target",
+        "offset": [
+          0,
+          9.8,
+          0
+        ],
+        "turn": true,
+        "delay": 0.1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.chaoscara.impact",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.ChaosKaraSkillUser",
+        "anchor": "Target",
+        "offset": [
+          0,
+          9.8,
+          0
+        ],
+        "turn": true,
+        "delay": 0.1
+      }
+    ]
+  }
+]

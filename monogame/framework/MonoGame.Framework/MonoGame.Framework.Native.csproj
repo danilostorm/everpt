@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    MonoGame.Framework for the Native platform (Vulkan through the runtime fork, monogame/runtime), built from the
+    source in this folder instead of the MonoGame.Framework.Native NuGet package. The files are exactly the ones
+    MonoGame v3.8.6's MonoGame.Framework.Native.csproj compiles (monogame/framework/README.md), so the default globbing
+    takes them all; StbImageSharp and StbImageWriteSharp come from ../ThirdParty as upstream links them.
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>12.0</LangVersion>
+    <DefineConstants>XNADESIGNPROVIDED;NATIVE;NETSTANDARD;STBSHARP_INTERNAL</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>MonoGame.Framework</AssemblyName>
+    <RootNamespace>Microsoft.Xna.Framework</RootNamespace>
+    <Description>The MonoGame Native platform (v3.8.6) with the fork's changes.</Description>
+    <Version>3.8.6</Version>
+    <InformationalVersion>3.8.6+etervale</InformationalVersion>
+    <Authors>MonoGame Team; Etervale</Authors>
+    <Product>MonoGame</Product>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../ThirdParty/StbImageSharp/src/**/*.cs" LinkBase="Utilities/StbImageSharp" />
+    <Compile Include="../ThirdParty/StbImageWriteSharp/src/**/*.cs" LinkBase="Utilities/StbImageWriteSharp" />
+  </ItemGroup>
+</Project>

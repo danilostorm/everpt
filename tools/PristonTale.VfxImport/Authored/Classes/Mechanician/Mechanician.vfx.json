@@ -1,0 +1,2286 @@
+[
+  {
+    "name": "vfx.buff.absorb",
+    "duration": 150,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "animation": "Shield1.ini",
+        "loop": true,
+        "sized": false,
+        "delay": 0.0,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          29.3,
+          0
+        ],
+        "orbitRadius": 13.67,
+        "orbitTilt": 45,
+        "orbitSpeed": 418.3594,
+        "width": [
+          1.5625,
+          1.5625
+        ],
+        "trailPoints": 15,
+        "trailFade": 16.6667,
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "animation": "Shield1.ini",
+        "loop": true,
+        "sized": false,
+        "delay": 0.1143,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          29.3,
+          0
+        ],
+        "orbitRadius": 11.72,
+        "orbitTilt": -45,
+        "orbitSpeed": 418.3594,
+        "width": [
+          1.5625,
+          1.5625
+        ],
+        "trailPoints": 15,
+        "trailFade": 16.6667,
+        "turn": false
+      },
+      {
+        "animation": "ShieldParticle1.ini",
+        "loop": true,
+        "sized": false,
+        "delay": 0.0,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          29.3,
+          0
+        ],
+        "orbitRadius": 13.67,
+        "orbitTilt": 45,
+        "orbitSpeed": 418.3594,
+        "turn": false,
+        "every": 0.3571,
+        "everyEffect": "vfx.mech.absorb.sparkle"
+      },
+      {
+        "animation": "ShieldParticle1.ini",
+        "loop": true,
+        "sized": false,
+        "delay": 0.1143,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          29.3,
+          0
+        ],
+        "orbitRadius": 11.72,
+        "orbitTilt": -45,
+        "orbitSpeed": 418.3594,
+        "turn": false,
+        "every": 0.3571,
+        "everyEffect": "vfx.mech.absorb.sparkle"
+      }
+    ]
+  },
+  {
+    "name": "vfx.cast.absorb",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 20,
+        "delayStep": 0.0143,
+        "size": [
+          10,
+          10
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "radial": [
+          32.8125,
+          32.8125
+        ],
+        "rise": [
+          109.375,
+          109.375
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.4286,
+          0.7
+        ],
+        "swirl": [
+          738.2812,
+          738.2812
+        ],
+        "sized": true
+      },
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 20,
+        "delay": 0.5714,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          15.63,
+          0
+        ],
+        "radial": [
+          60.1562,
+          60.1562
+        ],
+        "rise": [
+          54.6875,
+          54.6875
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "sized": true
+      },
+      {
+        "animation": "PhysicalAbsorbParticle1.ini",
+        "shape": "Streak",
+        "count": 30,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "shell": [
+          21.97,
+          9.77,
+          21.97
+        ],
+        "burst": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          0.5078,
+          1.6758
+        ],
+        "lifetime": [
+          0.4025,
+          0.4525
+        ],
+        "fade": "Fall",
+        "sized": false
+      },
+      {
+        "animation": "Pung1.ini",
+        "delay": 0.6429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/PhysicalAbsorb/test.smd",
+        "blend": "Additive",
+        "delay": 0.6429,
+        "anchor": "Caster",
+        "follow": true,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "color": [
+          205,
+          205,
+          205,
+          255
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 35,
+        "lifetime": [
+          0.5429,
+          0.5429
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.7059,
+          0.7059,
+          0.9804
+        ],
+        "power": 200,
+        "decay": 1
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.7843,
+          0.7843,
+          1.0
+        ],
+        "power": 200,
+        "decay": 2,
+        "delay": 0.6429
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Physical_Absorption 02.wav",
+        "delay": 0.6429
+      }
+    ]
+  },
+  {
+    "name": "vfx.impact.bomb",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "ParticleMeteo1.ini",
+        "shape": "Line",
+        "count": 23,
+        "radial": [
+          41.0156,
+          81.7578
+        ],
+        "rise": [
+          41.0156,
+          109.1016
+        ],
+        "gravity": [
+          -191.4062,
+          -114.8438
+        ],
+        "lifetime": [
+          0.7857,
+          1.0571
+        ],
+        "lineSeconds": 0.1143,
+        "width": [
+          0.54,
+          0.54
+        ],
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "ParticleMeteo2.ini",
+        "shape": "Streak",
+        "count": 28,
+        "shell": [
+          28.2,
+          16.5,
+          28.2
+        ],
+        "burst": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          0.3906,
+          1.5586
+        ],
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "lifetime": [
+          0.3,
+          0.4
+        ],
+        "fade": "Fall",
+        "sized": false
+      },
+      {
+        "animation": "MechanicBomb1.ini",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "MechanicBomb2.ini",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "color": [
+          1.0,
+          0.1961,
+          0.1961
+        ],
+        "power": 250,
+        "decay": 1
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/bow_skill_hit 01.wav"
+      },
+      {
+        "path": "wav/Effects/Skill/bow_skill_hit 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.common.critflash",
+        "anchor": "Point",
+        "offset": [
+          0,
+          -20,
+          0
+        ],
+        "turn": true,
+        "delay": 0.0429
+      }
+    ]
+  },
+  {
+    "name": "vfx.projectile.bomb",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/MechanicBomb/Bomb.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "follow": true,
+        "offset": [
+          0,
+          12,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 8.74,
+        "modelSpeed": 17.5,
+        "loopFrom": 1,
+        "loop": true,
+        "tumble": [
+          787.5,
+          0,
+          0
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.mech.bomb.dust"
+      }
+    ]
+  },
+  {
+    "name": "vfx.buff.shield",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "weapons/Test8.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 L Hand",
+        "boneWorld": true,
+        "pulse": [
+          0.898,
+          1.398
+        ],
+        "pulsePeriod": 2.048
+      }
+    ]
+  },
+  {
+    "name": "vfx.cast.shield",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 L Forearm",
+        "follow": true,
+        "sized": true
+      },
+      {
+        "animation": "SkillExtremeShieldBig.ini",
+        "count": 2,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "bone": "Bip01 L Forearm",
+        "follow": true,
+        "sized": false
+      },
+      {
+        "animation": "ReturnParticle1.ini",
+        "count": 15,
+        "delay": 0.0286,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "bone": "Bip01 L Forearm",
+        "offset": [
+          0,
+          -15.63,
+          0
+        ],
+        "radial": [
+          60.1562,
+          60.1562
+        ],
+        "rise": [
+          54.6875,
+          54.6875
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "sized": true
+      },
+      {
+        "animation": "SkillExtremeShieldSmall.ini",
+        "count": 2,
+        "delay": 0.2143,
+        "delayStep": 0.0714,
+        "anchor": "Caster",
+        "bone": "Bip01 L Forearm",
+        "follow": true,
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "color": [
+          0.902,
+          0.5882,
+          0.5882
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.greatsmash.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.common.roundimpact",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.maximize.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 20,
+        "delayStep": 0.0143,
+        "size": [
+          10,
+          10
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "radial": [
+          32.8125,
+          32.8125
+        ],
+        "rise": [
+          109.375,
+          109.375
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.4286,
+          0.7
+        ],
+        "swirl": [
+          738.2812,
+          738.2812
+        ],
+        "sized": true
+      },
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 20,
+        "delay": 0.5714,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          15.63,
+          0
+        ],
+        "radial": [
+          60.1562,
+          60.1562
+        ],
+        "rise": [
+          54.6875,
+          54.6875
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "sized": true
+      },
+      {
+        "animation": "PhysicalAbsorbParticle1.ini",
+        "shape": "Streak",
+        "count": 30,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "shell": [
+          28.2,
+          19.14,
+          28.2
+        ],
+        "burst": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          0.5078,
+          1.6758
+        ],
+        "lifetime": [
+          0.3645,
+          0.4145
+        ],
+        "fade": "Fall",
+        "sized": false
+      },
+      {
+        "animation": "Pung1.ini",
+        "delay": 0.6429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "MaximizeLeft.ini",
+        "count": 6,
+        "delay": 0.6429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "follow": true,
+        "sized": false
+      },
+      {
+        "animation": "MaximizeRight.ini",
+        "count": 6,
+        "delay": 0.6429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "follow": true,
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.7843,
+          0.7843,
+          1.0
+        ],
+        "power": 100,
+        "decay": 1
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          0.7843
+        ],
+        "power": 300,
+        "decay": 2,
+        "delay": 0.6429
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.maximize.aura",
+    "duration": 150,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "follow": true,
+        "every": 0.1429,
+        "everyEffect": "vfx.mech.maximize.streak"
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.automation.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 20,
+        "delayStep": 0.0143,
+        "size": [
+          10,
+          10
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "radial": [
+          32.8125,
+          32.8125
+        ],
+        "rise": [
+          109.375,
+          109.375
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.4286,
+          0.7
+        ],
+        "swirl": [
+          738.2812,
+          738.2812
+        ],
+        "sized": true
+      },
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 20,
+        "delay": 0.5714,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          15.63,
+          0
+        ],
+        "radial": [
+          60.1562,
+          60.1562
+        ],
+        "rise": [
+          54.6875,
+          54.6875
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "sized": true
+      },
+      {
+        "animation": "PhysicalAbsorbParticle1.ini",
+        "shape": "Streak",
+        "count": 30,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "shell": [
+          28.2,
+          19.14,
+          28.2
+        ],
+        "burst": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          0.5078,
+          1.6758
+        ],
+        "lifetime": [
+          0.3645,
+          0.4145
+        ],
+        "fade": "Fall",
+        "sized": false
+      },
+      {
+        "animation": "Pung1.ini",
+        "delay": 0.6429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "AutomationLeft.ini",
+        "count": 6,
+        "delay": 0.6429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "follow": true,
+        "sized": false
+      },
+      {
+        "animation": "AutomationRight.ini",
+        "count": 6,
+        "delay": 0.6429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "follow": true,
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.7843,
+          0.7843,
+          1.0
+        ],
+        "power": 100,
+        "decay": 1
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          0.7843
+        ],
+        "power": 300,
+        "decay": 2,
+        "delay": 0.6429
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.automation.aura",
+    "duration": 150,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "follow": true,
+        "every": 0.1429,
+        "everyEffect": "vfx.mech.maximize.streak"
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.spark.cast",
+    "duration": 0.5,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Spark 02.wav",
+        "delay": 0.3
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.spark.bolt",
+    "duration": 10,
+    "parts": [
+      {
+        "anchor": "Point",
+        "follow": true,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "delay": 0.0571,
+        "every": 0.0429,
+        "everyEffect": "vfx.mech.spark.cluster"
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.spark.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillSpark3.ini",
+        "count": 2,
+        "delayStep": 0.0571,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "SkillSpark1.ini",
+        "shape": "Streak",
+        "count": 45,
+        "delayStep": 0.0071,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "burst": [
+          136.7188,
+          245.8203
+        ],
+        "width": [
+          3.125,
+          3.7
+        ],
+        "lifetime": [
+          0.25,
+          0.35
+        ],
+        "fade": "Fall",
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.1961,
+          1.0
+        ],
+        "power": 300,
+        "decay": 2
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.metalarmor.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 20,
+        "delayStep": 0.0143,
+        "size": [
+          10,
+          10
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "radial": [
+          32.8125,
+          32.8125
+        ],
+        "rise": [
+          109.375,
+          109.375
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.4286,
+          0.7
+        ],
+        "swirl": [
+          738.2812,
+          738.2812
+        ],
+        "sized": true
+      },
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 20,
+        "delay": 0.5714,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          15.63,
+          0
+        ],
+        "radial": [
+          60.1562,
+          60.1562
+        ],
+        "rise": [
+          54.6875,
+          54.6875
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "sized": true
+      },
+      {
+        "animation": "PhysicalAbsorbParticle1.ini",
+        "shape": "Streak",
+        "count": 30,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "shell": [
+          28.2,
+          19.14,
+          28.2
+        ],
+        "burst": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          0.5078,
+          1.6758
+        ],
+        "lifetime": [
+          0.3645,
+          0.4145
+        ],
+        "fade": "Fall",
+        "sized": false
+      },
+      {
+        "animation": "Pung1.ini",
+        "delay": 0.6429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.7843,
+          0.7843,
+          1.0
+        ],
+        "power": 100,
+        "decay": 1
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          0.7843
+        ],
+        "power": 300,
+        "decay": 2,
+        "delay": 0.6429
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.metalarmor.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/Mc3_MetalA60.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "delay": 1.0,
+        "modelFrames": 59,
+        "modelSpeed": 52.5,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 0.7286,
+        "offset": [
+          0,
+          27.34,
+          0
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MechanicianMetalArmor",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.grandsmash.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillRoundImpactParticle.ini",
+        "shape": "Streak",
+        "count": 20,
+        "delayStep": 0.0143,
+        "burst": [
+          218.75,
+          218.75
+        ],
+        "width": [
+          0.3906,
+          1.168
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 250,
+        "decay": 5
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          35.72,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.sparkshield.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          9.765,
+          9.765
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          -10
+        ],
+        "lifetime": [
+          1.2857,
+          1.2857
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "beamTo": [
+          117.2,
+          312.5,
+          117.2
+        ]
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          9.765,
+          9.765
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          -10
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "beamTo": [
+          85.9,
+          293,
+          85.9
+        ]
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          9.765,
+          9.765
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          -10
+        ],
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "beamTo": [
+          -117.2,
+          312.5,
+          -117.2
+        ]
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          9.765,
+          9.765
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          -10
+        ],
+        "lifetime": [
+          1.2143,
+          1.2143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "beamTo": [
+          -85.9,
+          293,
+          -85.9
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.5882,
+          1.0,
+          0.5882
+        ],
+        "power": 150,
+        "decay": 3
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Spark 03.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MechanicianSparkShield",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          -10
+        ],
+        "turn": true,
+        "delay": 0.2
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.sparkshield.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill3MechanicianSparkShield1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 L Hand",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.sparkshield.counter",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          9.765,
+          9.765
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "follow": true
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          9.765,
+          9.765
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          30,
+          0
+        ],
+        "follow": true
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Spark 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.LightStart1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.LightHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.impulsion.cast",
+    "duration": 3.5,
+    "children": [
+      {
+        "effect": "particle.EnchantWeaponLight",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip weapon01",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.impulsion.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillRoundImpactParticle.ini",
+        "shape": "Streak",
+        "count": 20,
+        "delayStep": 0.0143,
+        "burst": [
+          218.75,
+          218.75
+        ],
+        "width": [
+          0.3906,
+          1.168
+        ],
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          15,
+          15
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "lifetime": [
+          0.5,
+          0.5
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2,
+        "fadeOut": 0.2
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 250,
+        "decay": 5
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill4ImpulsionHit1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.Skill4ImpulsionLight",
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.compulsion.cast",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "script.SkillMetalionCompulsion1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.compulsion.aura",
+    "duration": 30,
+    "emitters": [
+      {
+        "texture": "builtin:ring",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          2,
+          0
+        ],
+        "burst": 1,
+        "maxParticles": 4,
+        "lifetime": [
+          1.4,
+          1.4
+        ],
+        "align": "Ground",
+        "softness": 0,
+        "intensity": 1.2,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              30
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              42
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              0.4,
+              0.6,
+              1.0,
+              0.9
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.2,
+              0.3,
+              0.5,
+              0
+            ]
+          }
+        ],
+        "rate": 1.0,
+        "local": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.magneticsphere.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/NewEffect/Res/Object/MC_4-3.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          39.06,
+          0
+        ],
+        "modelFrames": 58,
+        "loop": true,
+        "modelSpeed": 30
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.magneticlight",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.06,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.magneticsphere.shot",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          6.0,
+          6.0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.06,
+          0
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "follow": true
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          6.0,
+          6.0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          8,
+          45,
+          0
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          18,
+          0
+        ],
+        "follow": true
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "color": [
+          150,
+          255,
+          150,
+          255
+        ],
+        "width": [
+          6.0,
+          6.0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          -8,
+          45,
+          0
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15,
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          30,
+          0
+        ],
+        "follow": true
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 100,
+        "decay": 3
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.magneticShot",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.06,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.magneticShot",
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.metalgolem.cast",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "script.SkillMetalionMetalGolem",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.06,
+          -30
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.bomb.dust",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "SkillMechanicBombDust1.ini",
+        "jitterMin": [
+          -3.9,
+          -3.9,
+          -3.9
+        ],
+        "jitterMax": [
+          3.9,
+          0,
+          3.9
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.absorb.sparkle",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "size": [
+          8,
+          8
+        ],
+        "offset": [
+          0,
+          -19.53,
+          0
+        ],
+        "sized": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.maximize.streak",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "Shield2.ini",
+        "shape": "Streak",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          11.72,
+          0
+        ],
+        "ring": [
+          7.8,
+          7.8
+        ],
+        "ringRandom": true,
+        "rise": [
+          81.9,
+          81.9
+        ],
+        "width": [
+          1.76,
+          1.76
+        ],
+        "turn": false,
+        "sized": false
+      },
+      {
+        "animation": "Shield2.ini",
+        "shape": "Streak",
+        "anchor": "Point",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "ring": [
+          7.8,
+          7.8
+        ],
+        "ringRandom": true,
+        "rise": [
+          81.9,
+          81.9
+        ],
+        "width": [
+          1.76,
+          1.76
+        ],
+        "turn": false,
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.spark.cluster",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "SkillSpark2.ini",
+        "sized": false
+      },
+      {
+        "animation": "SkillSpark1.ini",
+        "count": 3,
+        "jitterMin": [
+          -6,
+          -6,
+          -6
+        ],
+        "jitterMax": [
+          6,
+          6,
+          6
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.landmining.cast",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "particle.Skill5_Mecanician_LandMining",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.hypersonic.cast",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "script.Skill5_Mecanician_HyperSonic",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.rollingsmash.hit",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "particle.Skill5_Meca_RollingSmash_Hit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.rollingsmash.tornado",
+    "duration": 1.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/RollingSmash/Tornado.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "turn": false,
+        "offset": [
+          0,
+          -70,
+          0
+        ],
+        "rise": [
+          54.6875,
+          54.6875
+        ],
+        "tumble": [
+          0,
+          -1230.47,
+          0
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2186,
+        "fadeOut": 0.2186
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill5_Meca_RollingSmash_Hit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.rollingsmash.final",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "particle.Skill5_Meca_RollingSmash_Hit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill5_Meca_RollingSmash_Down",
+        "anchor": "Point",
+        "offset": [
+          0,
+          7.8125,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.mech.powerenhance.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill5_Meca_PowerEnhance_Start",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill5_Mecanician_PowerEnhance1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip weapon01",
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill5_Mecanician_PowerEnhance2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip weapon01",
+        "follow": true
+      }
+    ]
+  }
+]

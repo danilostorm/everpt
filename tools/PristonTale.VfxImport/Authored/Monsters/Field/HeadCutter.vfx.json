@@ -1,0 +1,80 @@
+[
+  {
+    "name": "vfx.monster.headcutter.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/MonsterHeadCutter/HeadCutter1.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -60
+        ],
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 17,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/MonsterHeadCutter/HeadCutter2.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -60
+        ],
+        "delay": 0.0857,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 17,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -60
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          1.0
+        ],
+        "power": 230,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.HeadCutterHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -60
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

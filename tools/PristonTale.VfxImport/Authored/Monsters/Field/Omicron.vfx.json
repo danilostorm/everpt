@@ -1,0 +1,57 @@
+[
+  {
+    "name": "vfx.monster.omicron.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.hulk.hit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          22,
+          -68
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.omicron.skill.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/OmiCron/omicron1.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          16.1,
+          -20
+        ],
+        "delay": 0.1429,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 55,
+        "modelSpeed": 35,
+        "fade": "Fall"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.OmiCronHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          20,
+          -20
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

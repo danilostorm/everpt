@@ -1,0 +1,24 @@
+
+#----------------------------- Global Properties ----------------------------#
+# DepthSurfaceRepro's effect, compiled by the effect processor of Etervale's MonoGame fork (monogame/pipeline) with the
+# DXC of the dotnet-mgcb tool.
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopVK
+/config:
+/profile:HiDef
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+# Built before the content by the project reference in DepthSurfaceRepro.csproj.
+/reference:../../../../pipeline/bin/MonoGame.Effect.Processor.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Depth.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Depth.fx

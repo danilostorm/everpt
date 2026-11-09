@@ -1,0 +1,34 @@
+[
+  {
+    "name": "vfx.monster.morgon.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.morgon.skill.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.IronMonsterMorgon",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -30
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,233 @@
+[
+  {
+    "name": "vfx.monster.ratoo.skill.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "bone": "Bip-skill-02",
+        "boneWorld": true,
+        "follow": true,
+        "offset": [
+          0,
+          -20,
+          0
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "carryEffect": "particle.Ratoo"
+      },
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "bone": "Bip-skill-02",
+        "boneWorld": true,
+        "follow": true,
+        "offset": [
+          0,
+          -45,
+          0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "carryEffect": "particle.Ratoo"
+      },
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "bone": "Bip-skill-02",
+        "boneWorld": true,
+        "follow": true,
+        "offset": [
+          0,
+          -70,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.5714
+        ],
+        "carryEffect": "particle.Ratoo"
+      },
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "anchor": "Caster",
+        "bone": "Bip-skill-01",
+        "bladeLength": 70,
+        "delay": 0.0286,
+        "lifetime": [
+          0.2857,
+          0.2857
+        ],
+        "trailPoints": 16,
+        "fade": "Fall"
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Ratoo/m_ratoo.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -150
+        ],
+        "delay": 0.0571,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 0,
+        "modelFrames": 20,
+        "modelSpeed": 14,
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.2
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -150
+        ],
+        "color": [
+          0.3922,
+          0.5882,
+          0.7843
+        ],
+        "power": 350,
+        "decay": 5
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.RatooHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          20,
+          -150
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.ratoo.auraring",
+    "duration": 5.0,
+    "parts": [
+      {
+        "texture": "Effect/AssaEffect/Ratoo/m_ratoo2.bmp",
+        "color": [
+          255,
+          255,
+          255,
+          200
+        ],
+        "size": [
+          93.75,
+          93.75
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.53,
+          0
+        ],
+        "follow": true,
+        "lifetime": [
+          4.2857,
+          4.2857
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.5
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          50,
+          100,
+          50,
+          255
+        ],
+        "size": [
+          93.75,
+          93.75
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          15,
+          0
+        ],
+        "follow": true,
+        "lifetime": [
+          4.2857,
+          4.2857
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.5,
+        "fadeOut": 0.5
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.ratoo.aura",
+    "duration": 600.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "every": 1.0,
+        "everyEffect": "vfx.monster.ratoo.auraring"
+      }
+    ]
+  }
+]

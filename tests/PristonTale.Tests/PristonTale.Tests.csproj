@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Fixtures/class-skill-source.json" />
+    <EmbeddedResource Include="Fixtures/job-head-source.json" />
+    <ProjectReference Include="../../Client/PristonTale.Gameplay/PristonTale.Gameplay.csproj" />
+    <ProjectReference Include="../../tools/PristonTale.GltfExport/PristonTale.GltfExport.csproj" />
+    <ProjectReference Include="../../tools/PristonTale.WorldImport/PristonTale.WorldImport.csproj" />
+    <ProjectReference Include="../../tools/PristonTale.VfxImport/PristonTale.VfxImport.csproj" />
+    <ProjectReference Include="../../Shared/PristonTale.Protocol/PristonTale.Protocol.csproj" />
+    <ProjectReference Include="../../Server/PristonTale.Server/PristonTale.Server.csproj" />
+  </ItemGroup>
+  <!-- GPU probes create a Vulkan device: the native MonoGame runtime goes next to the runner. -->
+  <Import Project="../../Client/MonoGameRuntime.targets" />
+</Project>

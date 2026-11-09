@@ -1,0 +1,44 @@
+[
+  {
+    "name": "vfx.monster.mountain.attack.hit",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.IronMonsterMountainHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          7.8125,
+          -100
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mountain.skill.hit",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.IronMonsterMountainHit1",
+        "anchor": "Caster",
+        "offset": [
+          -33.65,
+          3.9062,
+          -125.57
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.IronMonsterMountainHit1",
+        "anchor": "Caster",
+        "offset": [
+          33.65,
+          3.9062,
+          -125.57
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

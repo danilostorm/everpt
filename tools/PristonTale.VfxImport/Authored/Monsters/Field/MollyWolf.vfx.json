@@ -1,0 +1,18 @@
+[
+  {
+    "name": "vfx.monster.mollywolf.attack.hit",
+    "duration": 10.0,
+    "children": [
+      {
+        "effect": "vfx.monster.morif.shot2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

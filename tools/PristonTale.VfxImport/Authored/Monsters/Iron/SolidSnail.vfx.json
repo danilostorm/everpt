@@ -1,0 +1,31 @@
+[
+  {
+    "name": "vfx.monster.solidsnail.skill.hit",
+    "duration": 1.5,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          4,
+          15,
+          -26.5
+        ],
+        "lifetime": [
+          0.27,
+          0.27
+        ],
+        "carryEffect": "particle.Snail",
+        "velocityMin": [
+          0,
+          0,
+          -93
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -93
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "name": "vfx.monster.revivedpriestess.skill",
+    "duration": 2.3,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.castcircle",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedpriestess.skill.hit.kO",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.multispark",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedpriestess.skill.hit.kH",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.53,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 420.0,
+        "reach": 15,
+        "carryEffect": "particle.Skill3PriestessVigorBall1",
+        "endEffect": "particle.Skill3PriestessVigorBallHit1"
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.53,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 420.0,
+        "reach": 15,
+        "carryEffect": "particle.Skill3PriestessVigorBall2"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/VigorBall 1.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/VigorBall 2.wav",
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedpriestess.skill.hit.kZ",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.glacialspike",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+<Project>
+  <!-- The MonoGame packages of the repro programs, at the tag of the fork (monogame/README.md, Version). -->
+  <ItemGroup>
+    <PackageVersion Include="MonoGame.Content.Builder.Task" Version="3.8.6" />
+    <PackageVersion Include="MonoGame.Framework.Native" Version="3.8.6" />
+    <PackageVersion Include="MonoGame.Runtime.Linux.Vulkan" Version="3.8.6" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- ptworld: standalone importer that parses the original CP949 server config files
+       (OpenItem .txt, monster .inf, npc .npc, field .spm/.spp/.spc) and idempotently loads them into the
+       baseline world-data tables. NOT part of PristonTale.sln (keeps the main build clean); run via
+       dotnet run. Reuses the real persistence stack (connection factory + migrator + DI) exactly like
+       ptdevaccounts, but owns its WRITE SQL (the production IWorldDataRepository is read-only by design). -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AssemblyName>ptworld</AssemblyName>
+    <RootNamespace>PristonTale.WorldImport</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.13" />
+    <!-- Dapper for the tool-owned idempotent write SQL (mirrors DapperCharacterRepository style). -->
+    <PackageReference Include="Dapper" Version="2.1.89" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The monster, NPC and named unique registries (IdentityRegistry, NamedUniqueRegistry), read as PristonTale.WorldImport.Identities.<file>. -->
+    <EmbeddedResource Include="Identities\*.json" LogicalName="PristonTale.WorldImport.Identities.%(Filename)%(Extension)" />
+    <!-- The catalog texts in other languages (Importer.Translations), read as PristonTale.WorldImport.Translations.<language>.json. -->
+    <EmbeddedResource Include="Translations\*.json" LogicalName="PristonTale.WorldImport.Translations.%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Persistence\PristonTale.Persistence.Postgres\PristonTale.Persistence.Postgres.csproj" />
+    <ProjectReference Include="..\..\Persistence\PristonTale.Persistence.Sqlite\PristonTale.Persistence.Sqlite.csproj" />
+    <ProjectReference Include="..\..\Persistence\PristonTale.Persistence\PristonTale.Persistence.csproj" />
+    <ProjectReference Include="..\..\Persistence\PristonTale.Persistence.Abstractions\PristonTale.Persistence.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Shared\PristonTale.Simulation\PristonTale.Simulation.csproj" />
+    <ProjectReference Include="..\..\Shared\PristonTale.Assets\PristonTale.Assets.csproj" />
+    <!-- Engine3D for the INX motion-table pass (PristonInxReader + PristonFileResolver); precedent:
+         PristonTale.GltfExport takes the same dependency. A tool never initializes graphics. -->
+    <ProjectReference Include="..\..\Client\PristonTale.Engine3D\PristonTale.Engine3D.csproj" />
+  </ItemGroup>
+
+</Project>

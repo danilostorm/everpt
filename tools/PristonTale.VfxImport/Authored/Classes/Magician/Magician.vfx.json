@@ -1,0 +1,2266 @@
+[
+  {
+    "name": "vfx.magician.castcircle",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/StartMagic/MAAM2.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.8594,
+          0
+        ],
+        "turn": false,
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2857,
+        "fadeOut": 0.2857
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/StartMagic/P/maam2.tga",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.8594,
+          0
+        ],
+        "turn": false,
+        "size": [
+          56.25,
+          56.25
+        ],
+        "lifetime": [
+          2.2857,
+          2.2857
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/StartMagic/P/star05Q_03.bmp",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.8594,
+          0
+        ],
+        "turn": false,
+        "size": [
+          72.6562,
+          72.6562
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          120
+        ],
+        "lifetime": [
+          2.2857,
+          2.2857
+        ],
+        "fade": "Rise"
+      }
+    ]
+  },
+  {
+    "name": "vfx.agony",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 24,
+        "orbitSpeed": 615.2344,
+        "orbitPhase": 270,
+        "orbitRise": 21.875,
+        "lifetime": [
+          1,
+          1
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.magician.agony.particle"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1,
+          1,
+          1
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.agony.particle",
+    "duration": 2.0,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Agony/Agony8.tga",
+        "size": [
+          1.9531,
+          5.8555
+        ],
+        "rise": [
+          1.3672,
+          14.7656
+        ],
+        "lifetime": [
+          0.5714,
+          0.5714
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Agony/Agony7.tga",
+        "delay": 0.5714,
+        "offset": [
+          0,
+          4.6875,
+          0
+        ],
+        "size": [
+          1.9531,
+          5.8555
+        ],
+        "rise": [
+          4.1016,
+          44.2969
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.7143
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.agony.cast",
+    "duration": 3.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Agony 1.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.magician.castcircle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "vfx.agony",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.firebolt.shot",
+    "duration": 10.0,
+    "emitters": [
+      {
+        "texture": "Effect/ImageData/Particle/Red.tga",
+        "anchor": "Point",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "rate": 700,
+        "maxParticles": 160,
+        "lifetime": [
+          0.1,
+          0.1
+        ],
+        "speed": [
+          27.3438,
+          27.3438
+        ],
+        "spread": 180,
+        "shape": "Sphere",
+        "radius": [
+          0,
+          3
+        ],
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              3
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              1.25
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              0.7913,
+              0.956,
+              0.956,
+              0.7843
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "parts": [
+      {
+        "anchor": "Point",
+        "follow": true,
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "every": 0.0571,
+        "everyEffect": "vfx.magician.firebolt.smoke"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Firebolt 1.wav",
+        "variants": [
+          "wav/Effects/Skill/Morion/Firebolt 2.wav"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.firebolt.smoke",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "FireParticle1.ini",
+        "size": [
+          25,
+          25
+        ],
+        "loop": true,
+        "radial": [
+          23.2422,
+          23.2422
+        ],
+        "rise": [
+          19.1406,
+          19.1406
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.2143,
+          0.2714
+        ],
+        "swirl": [
+          148.2091,
+          148.2091
+        ],
+        "sized": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.firebolt.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "Power1.ini",
+        "size": [
+          100,
+          100
+        ],
+        "offset": [
+          0,
+          20,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "MonsterImp1.ini",
+        "count": 3,
+        "delayStep": 0.0143,
+        "size": [
+          20,
+          20
+        ],
+        "loop": true,
+        "offset": [
+          0,
+          20,
+          0
+        ],
+        "radial": [
+          23.2422,
+          23.2422
+        ],
+        "rise": [
+          19.1406,
+          19.1406
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.1429,
+          0.2
+        ],
+        "swirl": [
+          210.035,
+          210.035
+        ],
+        "sized": true
+      },
+      {
+        "animation": "ParticleMeteo1_blue.ini",
+        "shape": "Line",
+        "count": 10,
+        "delayStep": 0.0036,
+        "loop": true,
+        "offset": [
+          0,
+          20,
+          0
+        ],
+        "radial": [
+          46.4844,
+          59.8828
+        ],
+        "rise": [
+          27.3438,
+          95.4297
+        ],
+        "gravity": [
+          -287.1094,
+          -153.125
+        ],
+        "lifetime": [
+          0.4286,
+          0.7
+        ],
+        "lineSeconds": 0.2,
+        "width": [
+          0.3125,
+          0.3125
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.zenith.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Zenith/1os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 337.5
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Zenith/2os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 45
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Zenith/3os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 112.5
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Zenith/4os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 180
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Zenith/5os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 247.5
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.zenith.cast",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1,
+          1,
+          1
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Casting_M.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.magician.castcircle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.fireball.shot",
+    "duration": 10.0,
+    "emitters": [
+      {
+        "texture": "Effect/ImageData/Particle/bubble.tga",
+        "anchor": "Point",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "rate": 700,
+        "maxParticles": 160,
+        "lifetime": [
+          0.1,
+          0.1
+        ],
+        "speed": [
+          54.6875,
+          54.6875
+        ],
+        "spread": 180,
+        "shape": "Sphere",
+        "radius": [
+          0,
+          3
+        ],
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              6
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.5
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              1,
+              0.1274,
+              0.0319,
+              0.7843
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              1,
+              0.0319,
+              0.0319,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/FireBall 1.wav",
+        "variants": [
+          "wav/Effects/Skill/Morion/FireBall 2.wav"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.fireball.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "ParticleMeteo1.ini",
+        "shape": "Line",
+        "count": 20,
+        "delayStep": 0.0036,
+        "loop": true,
+        "offset": [
+          0,
+          20,
+          0
+        ],
+        "radial": [
+          41.0156,
+          81.7578
+        ],
+        "rise": [
+          65.625,
+          133.7109
+        ],
+        "gravity": [
+          -191.4062,
+          -114.8438
+        ],
+        "lifetime": [
+          0.7857,
+          1.0571
+        ],
+        "lineSeconds": 0.1429,
+        "width": [
+          0.2734,
+          0.2734
+        ],
+        "sized": false
+      },
+      {
+        "animation": "ParticleMeteo2.ini",
+        "shape": "Streak",
+        "count": 20,
+        "delayRandom": 0.2714,
+        "offset": [
+          0,
+          20,
+          0
+        ],
+        "ring": [
+          0,
+          25
+        ],
+        "ringRandom": true,
+        "radial": [
+          68.3594,
+          177.7344
+        ],
+        "rise": [
+          46.4844,
+          46.4844
+        ],
+        "width": [
+          0.3906,
+          1.5586
+        ],
+        "lifetime": [
+          0.4,
+          0.6
+        ],
+        "fade": "Fall",
+        "sized": false
+      },
+      {
+        "animation": "Meteo1.ini",
+        "count": 3,
+        "delayRandom": 0.0857,
+        "offset": [
+          0,
+          35.625,
+          0
+        ],
+        "jitterMin": [
+          0,
+          0,
+          -21.875
+        ],
+        "jitterMax": [
+          21.875,
+          0,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          20,
+          0
+        ],
+        "color": [
+          1,
+          0.1961,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.watornado.column",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/ColumnOfWater/ColumnOfWaterLV_456.smd",
+        "blend": "Additive",
+        "reach": 4,
+        "end": "Hold",
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 17.5,
+        "loop": true,
+        "loopFrom": 1,
+        "tumble": [
+          0,
+          -307.6172,
+          0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2857,
+        "fadeOut": 0.4286,
+        "carryEffect": "particle.ColumnOfWater1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          -1.9531,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          -1.9531,
+          0
+        ],
+        "speed": 246.0938
+      },
+      {
+        "reach": 40,
+        "endEffect": "vfx.magician.watornado.hit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          -1.9531,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          -1.9531,
+          0
+        ],
+        "speed": 246.0938
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.watornado.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/ColumnOfWater/ColumnOfWaterHit.smd",
+        "blend": "Additive",
+        "anchor": "Target",
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2857,
+        "fadeOut": 0.2857
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.ColumnOfWater2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.cast",
+    "duration": 3.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Casting_M.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.magician.castcircle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.EnchantWeaponJang",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          7.8125,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.member",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.EnchantWeaponMember",
+        "anchor": "Target",
+        "offset": [
+          0,
+          3.9062,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          36,
+          0
+        ],
+        "carryEffect": "particle.EnchantWeaponFire1"
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.aura.fire",
+    "duration": 600,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          36,
+          0
+        ],
+        "carryEffect": "particle.EnchantWeaponFire1"
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.aura.ice",
+    "duration": 600,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          36,
+          0
+        ],
+        "carryEffect": "particle.EnchantWeaponIce"
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.aura.lighting",
+    "duration": 600,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          36,
+          0
+        ],
+        "carryEffect": "particle.EnchantWeaponLight"
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.hit.lighting",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "color": [
+          0,
+          0,
+          0.3922
+        ],
+        "power": 400,
+        "decay": 10
+      },
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "color": [
+          1,
+          1,
+          1
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_add_L 1.wav",
+        "variants": [
+          "wav/Effects/Skill/Morion/EnchantWpn_add_L 2.wav"
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.LightHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.hit.fire",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "color": [
+          0.3922,
+          0,
+          0
+        ],
+        "power": 400,
+        "decay": 10
+      },
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "color": [
+          1,
+          0.7843,
+          0.3922
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_add_F 1.wav",
+        "variants": [
+          "wav/Effects/Skill/Morion/EnchantWpn_add_F 2.wav"
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.enchant.hit.ice",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/EnchantWeapon/Ase/EW-ice.smd",
+        "blend": "Additive",
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 70,
+        "lifetime": [
+          0.2857,
+          0.2857
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.0714,
+        "fadeOut": 0.0714
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "color": [
+          0,
+          0,
+          0.3922
+        ],
+        "power": 400,
+        "decay": 10
+      },
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "color": [
+          0.5882,
+          0.5882,
+          1
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_add_C 1.wav",
+        "variants": [
+          "wav/Effects/Skill/Morion/EnchantWpn_add_C 2.wav"
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.deadray.beam",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/DeadLay/Ray01.bmp",
+        "color": [
+          200,
+          200,
+          200,
+          255
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "beamTo": [
+          0,
+          0,
+          -585.9375
+        ],
+        "width": [
+          5.8594,
+          5.8594
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.6429
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/DeadLay/Ray01.bmp",
+        "color": [
+          200,
+          200,
+          200,
+          255
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "beamTo": [
+          0,
+          0,
+          -585.9375
+        ],
+        "width": [
+          3.125,
+          3.125
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ]
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/DeathRay 1.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.DeadLayStart1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.DeadLayHit1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          32,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.energyshield.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/Mg3_EnergyS20.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          25.3906,
+          0
+        ],
+        "modelFrames": 20,
+        "modelSpeed": 8.75,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 1.4286
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MagicianEngrgyShield",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          1.9531,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.energyshield.absorb",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.Skill3MagicianEngrgyShield1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          1.9531,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.energyshield.cast",
+    "duration": 3.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnergyShield 1.wav",
+        "delay": 1.188
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.magician.castcircle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.diastrophism.quake",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/Mg3_Diastrophism24.smd",
+        "blend": "Additive",
+        "modelStart": 1,
+        "modelFrames": 24,
+        "modelSpeed": 23.3333,
+        "lifetime": [
+          1.0286,
+          1.0286
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2571,
+        "fadeOut": 0.2571
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MagicianDiastrophism1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.spiritelemental.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/SpiritElemental/b_Mg3_spiritE60.smd",
+        "skeleton": "Effect/AssaEffect/SpiritElemental/b_Mg3_spiritE60.smb",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          58.5938,
+          0
+        ],
+        "modelFrames": 60,
+        "modelSpeed": 17.5,
+        "loop": true
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MagicianSpiritElemental",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          58.5938,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3MagicianSpiritElementalExt1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          58.5938,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.spiritelemental.cast",
+    "duration": 3.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/SpiritElemental 1.wav",
+        "delay": 1.188
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.magician.castcircle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.dancingsword.blade",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/mg3_danceSd40_110_125.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "modelFrames": 40,
+        "modelSpeed": 30.625,
+        "loop": true
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MagicianDancingSwordFire1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          53.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3MagicianDancingSwordFire1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          63.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3MagicianDancingSwordFire1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          73.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.dancingsword.blade.fire",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/mg3_danceSd40_110_125.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "modelFrames": 40,
+        "modelSpeed": 30.625,
+        "loop": true
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MagicianDancingSwordFire1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          53.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3MagicianDancingSwordFire1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          63.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3MagicianDancingSwordFire1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          73.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.dancingsword.blade.ice",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/mg3_danceSd40_110_125.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "modelFrames": 40,
+        "modelSpeed": 30.625,
+        "loop": true
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MagicianDancingSwordIce1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          53.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3MagicianDancingSwordIce1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          63.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3MagicianDancingSwordIce1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          73.5312,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.dancingsword.strike",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "color": [
+          1,
+          0.7843,
+          0.3922
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.dancingsword.strike.fire",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "color": [
+          1,
+          0.7843,
+          0.3922
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.dancingsword.strike.ice",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/EnchantWeapon/Ase/EW-ice.smd",
+        "blend": "Additive",
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 70,
+        "lifetime": [
+          0.2857,
+          0.2857
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.0714,
+        "fadeOut": 0.0714
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "color": [
+          0.5882,
+          0.5882,
+          1
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.dancingsword.cast",
+    "duration": 3.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/DancingSword 1.wav",
+        "delay": 0.858
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.magician.castcircle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.flamewave.wave",
+    "duration": 3.0,
+    "parts": [
+      {
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          -175,
+          0,
+          -303.1089
+        ],
+        "velocityMax": [
+          -175,
+          0,
+          -303.1089
+        ],
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          -119.7071,
+          0,
+          -328.8924
+        ],
+        "velocityMax": [
+          -119.7071,
+          0,
+          -328.8924
+        ],
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -350
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -350
+        ],
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          119.7071,
+          0,
+          -328.8924
+        ],
+        "velocityMax": [
+          119.7071,
+          0,
+          -328.8924
+        ],
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          175,
+          0,
+          -303.1089
+        ],
+        "velocityMax": [
+          175,
+          0,
+          -303.1089
+        ],
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.meteo.fall",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "turn": false,
+        "delay": 0,
+        "offset": [
+          0,
+          507.8125,
+          -234.375
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          0,
+          0,
+          -39.0625
+        ],
+        "speed": 560,
+        "reach": 6,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.magician.meteo.hit"
+      },
+      {
+        "anchor": "Point",
+        "turn": false,
+        "delay": 0.4286,
+        "offset": [
+          0,
+          507.8125,
+          -156.25
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          0,
+          0,
+          39.0625
+        ],
+        "speed": 560,
+        "reach": 6,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.magician.meteo.hit"
+      },
+      {
+        "anchor": "Point",
+        "turn": false,
+        "delay": 0.8571,
+        "offset": [
+          39.0625,
+          507.8125,
+          -195.3125
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          39.0625,
+          0,
+          0
+        ],
+        "speed": 560,
+        "reach": 6,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.magician.meteo.hit"
+      },
+      {
+        "anchor": "Point",
+        "turn": false,
+        "delay": 1.2857,
+        "offset": [
+          -39.0625,
+          507.8125,
+          -195.3125
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          -39.0625,
+          0,
+          0
+        ],
+        "speed": 560,
+        "reach": 6,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.magician.meteo.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.meteo.hit",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1,
+          0.7843,
+          0.3922
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 2.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireBigHIt1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.impact.fire",
+    "duration": 0.1,
+    "emitters": [
+      {
+        "texture": "builtin:flame",
+        "anchor": "Target",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "burst": 20,
+        "maxParticles": 20,
+        "lifetime": [
+          0.3,
+          0.6
+        ],
+        "speed": [
+          60,
+          160
+        ],
+        "spread": 180,
+        "drag": 2,
+        "gravity": [
+          0,
+          60,
+          0
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "intensity": 2.2,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              10
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              4
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              1,
+              0.75,
+              0.35,
+              1
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.5,
+              0.1,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "color": [
+          1,
+          0.55,
+          0.2
+        ],
+        "power": 180,
+        "decay": 6
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireHIt2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.silraphim.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillSilraphim1.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.vistenus.beam",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillVisTenus1.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.primaignis.shot",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "size": [
+          1,
+          1
+        ],
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -350
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -350
+        ],
+        "lifetime": [
+          1.2,
+          1.2
+        ],
+        "carryEffect": "particle.Skill5MagicianPrimaIgnisShot"
+      }
+    ]
+  },
+  {
+    "name": "vfx.magician.thirdanima.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/ThirdAnima/1os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 337.5
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/ThirdAnima/2os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 45
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/ThirdAnima/3os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 112.5
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/ThirdAnima/4os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 180
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/ThirdAnima/5os.tga",
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "color": [
+          208,
+          208,
+          208,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "orbitRadius": 16,
+        "orbitSpeed": 153.8086,
+        "orbitPhase": 247.5
+      }
+    ]
+  }
+]

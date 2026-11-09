@@ -1,0 +1,22 @@
+[
+  {
+    "name": "vfx.monster.mushroom.attack.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "Gas1.ini",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "size": [
+          120,
+          120
+        ],
+        "sized": true
+      }
+    ]
+  }
+]

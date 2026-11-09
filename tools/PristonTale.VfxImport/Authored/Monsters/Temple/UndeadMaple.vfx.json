@@ -1,0 +1,42 @@
+[
+  {
+    "name": "vfx.monster.undeadmaple.skill.hit.kJ",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/EvilMaple/m_evilplant.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "angles": [
+          90,
+          0,
+          0
+        ],
+        "modelFrames": 30,
+        "modelSpeed": 23.3333,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.EvilPlant",
+        "anchor": "Point",
+        "offset": [
+          0,
+          31.25,
+          -25
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

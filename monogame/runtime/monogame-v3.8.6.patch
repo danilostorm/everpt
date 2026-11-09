@@ -1,0 +1,3161 @@
+--- a/native/monogame/premake5.lua
++++ b/native/monogame/premake5.lua
+@@ -1,4 +1,5 @@
+ -- MonoGame - Copyright (C) MonoGame Foundation, Inc
++-- Etervale fork (native/mgruntime): the Vulkan runtime only (desktopvk), vendored stb, output in ../build.
+ -- This file is subject to the terms and conditions defined in
+ -- file 'LICENSE.txt', which is part of this source code package.
+ 
+@@ -26,14 +27,14 @@
+         filter "platforms:arm64"
+         architecture "ARM64"
+         filter {}
+-        platform_target_path = "../../Artifacts/native/mgruntime/" .. project_name .. "/%{cfg.system}/%{cfg.platform}/%{cfg.buildcfg}"
++        platform_target_path = "../build/" .. project_name .. "/%{cfg.system}/%{cfg.platform}/%{cfg.buildcfg}"
+     else
+         local target_arch = _OPTIONS["mg-arch"] or "x64"
+         architecture(target_arch == "arm64" and "ARM64" or "x64")
+         if os.target() == "macosx" then
+-            platform_target_path = "../../Artifacts/native/mgruntime/" .. project_name .. "/%{cfg.system}/%{cfg.buildcfg}"
++            platform_target_path = "../build/" .. project_name .. "/%{cfg.system}/%{cfg.buildcfg}"
+         else
+-            platform_target_path = "../../Artifacts/native/mgruntime/" .. project_name .. "/%{cfg.system}/" .. target_arch .. "/%{cfg.buildcfg}"
++            platform_target_path = "../build/" .. project_name .. "/%{cfg.system}/" .. target_arch .. "/%{cfg.buildcfg}"
+         end
+     end
+     kind "SharedLib"
+@@ -47,7 +48,7 @@
+     cppdialect "C++17"
+ 
+     files {"include/**.h", "common/**.h", "common/**.cpp"}
+-    includedirs {"include", "../../external/stb"}
++    includedirs {"include", "external/stb"}
+ end
+ 
+ -- SDL is supported on all desktop platforms.
+@@ -90,31 +91,7 @@
+     filter {}
+ end
+ 
+--- OpenGL is supported on desktop platforms through SDL.
+-function opengl()
+-    defines {"MG_OPENGL"}
+ 
+-    files {"opengl/**.h", "opengl/**.cpp"}
+-
+-    filter {"system:windows"}
+-    links {"opengl32"}
+-    filter {"system:macosx"}
+-    links {"OpenGL.framework"}
+-    filter {"system:linux"}
+-    links {"GL"}
+-    filter {}
+-end
+-
+--- DirectX12 is supported on Xbox and Windows.
+-function directx12()
+-    defines {"MG_DIRECTX12"}
+-
+-    files {"directx12/**.h", "directx12/**.cpp"}
+-
+-    filter {"system:windows"}
+-    links {"dxguid", "dxgi", "d3d12"}
+-    filter {}
+-end
+ 
+ -- FAudio is supported for all desktop platforms.
+ function faudio()
+@@ -140,12 +117,6 @@
+     filter {}
+ end
+ 
+--- Xaudio is supported on Windows and Xbox.
+-function xaudio()
+-    defines {"MG_XAUDIO"}
+-
+-    files {"xaudio/**.h", "xaudio/**.cpp"}
+-end
+ 
+ function configs()
+     filter "configurations:Debug"
+@@ -182,18 +153,3 @@
+ faudio()
+ configs()
+ 
+-project "desktopgl4"
+-common("desktopgl4")
+-sdl2()
+-opengl()
+-faudio()
+-configs()
+-
+-if os.target() == "windows" then
+-    project "windowsdx"
+-    common("windowsdx")
+-    sdl2()
+-    directx12()
+-    xaudio()
+-    configs()
+-end
+--- a/native/monogame/vulkan/MGG_Vulkan.cpp
++++ b/native/monogame/vulkan/MGG_Vulkan.cpp
+@@ -14,6 +14,22 @@
+ #include "SpriteEffect.vk.mgfxo.h"
+ #include "mg_effect.h"
+ 
++// Etervale fork: the enum conversions return in every case and assert in the default; the compiler must also know the default
++// cannot fall off the end of the function (MSVC C4715, GCC/Clang -Wreturn-type), which would be undefined behaviour.
++#if defined(_MSC_VER)
++#define MGVK_UNREACHABLE() do { assert(0); __assume(0); } while (0)
++#else
++#define MGVK_UNREACHABLE() do { assert(0); __builtin_unreachable(); } while (0)
++#endif
++
++#include <unordered_map>
++#include <algorithm>
++#include <map>
++#include <deque>
++#include <vector>
++#include <thread>
++#include <string>
++
+ #define VULKAN_HPP_DISPATCH_LOADER_DYNAMIC 1
+ #define VULKAN_HPP_NO_EXCEPTIONS
+ #define VULKAN_HPP_TYPESAFE_CONVERSION 1
+@@ -139,12 +155,14 @@
+ struct MGVK_TargetSetCache
+ {
+ 	MGVK_TargetSet set;
++	uint64_t uid = 0;	// Etervale fork: never reused, unlike the address (pipeline keys)
+ 
+ 	int width = 0;
+ 	int height = 0;
+ 	VkFramebuffer framebuffer = VK_NULL_HANDLE;
+ 	VkRenderPass renderPass = VK_NULL_HANDLE;
+     std::optional<VkImageView> arraySlicesViews[MGVK_NUM_TARGETS];
++	int colorAttachments = 0;	// Etervale fork: 0 for a depth surface (issue 016); the pipelines' blend attachment count
+ };
+ 
+ struct MGVK_PipelineState
+@@ -167,8 +185,34 @@
+ 	VkPipeline cache = VK_NULL_HANDLE;
+ };
+ 
++// Etervale fork: the identity of a pipeline. The objects' ids are never reused, so a pipeline built for a destroyed
++// object can never be returned for a new one allocated at the same address, and the key is compared in full: a 32-bit
++// hash alone returned the wrong pipeline on a collision.
++struct MGVK_PipelineKey
++{
++	uint64_t program = 0;
++	uint64_t layout = 0;
++	uint64_t targets = 0;
++	uint64_t blend = 0;
++	uint64_t rasterizer = 0;
++	uint64_t depthStencil = 0;
++	uint32_t topology = 0;
++	uint32_t padding = 0;
++
++	bool operator==(const MGVK_PipelineKey& other) const
++	{
++		return memcmp(this, &other, sizeof(MGVK_PipelineKey)) == 0;
++	}
++};
++
++struct MGVK_PipelineKeyHash
++{
++	size_t operator()(const MGVK_PipelineKey& key) const;
++};
++
+ struct MGVK_Program
+ {
++	uint64_t uid;		// Etervale fork: the program id (vertex and pixel shader ids)
+ 	MGG_Shader* vertex;
+ 	MGG_Shader* pixel;
+ 	VkPipelineLayout layout;
+@@ -184,6 +228,9 @@
+ 	VkCommandBuffer commandBuffer = VK_NULL_HANDLE;
+ 	VkSemaphore imageAcquiredSemaphore = VK_NULL_HANDLE;
+ 	VkFence completedFence = VK_NULL_HANDLE;
++	// Etervale fork: a submission of this frame's commands before Present (MGVK_FlushCommands) already waited for the
++	// image acquisition; Present must not wait for the semaphore again.
++	bool acquireWaited = false;
+ };
+ 
+ struct MGVK_Swapchain
+@@ -223,6 +270,12 @@
+ 	VmaAllocation allocation = VK_NULL_HANDLE;
+ 
+ 	uint8_t* mapped = nullptr;
++
++	// Etervale fork: set once a draw has read the buffer; `frame` is then the last frame that did.
++	bool used = false;
++
++	// Etervale fork: the id of a storage buffer (MGBufferType::Storage), never reused, for the descriptor-set keys.
++	uint64_t id = 0;
+ };
+ 
+ struct MGVK_Transfer
+@@ -236,6 +289,47 @@
+ 
+ const int MAX_TEXTURE_SLOTS = 16;
+ 
++// Etervale fork: shader storage resources (monogame/issues/005, 006). The effect compiler shifts the HLSL registers into
++// one descriptor set per stage: b0 → binding 0, t/s → 32 + slot (textures, samplers and the read-only buffers,
++// StructuredBuffer and ByteAddressBuffer), u → 64 + slot (RWTexture2D, RWStructuredBuffer, RWByteAddressBuffer).
++const uint32_t MGVK_TEXTURE_BINDING = 32;
++const uint32_t MGVK_UAV_BINDING = 64;
++const int MGVK_MAX_UAV_SLOTS = 8;
++
++// What a u-register holds: a storage buffer, or one mip of a storage image.
++struct MGVK_UavBinding
++{
++	MGG_Buffer* buffer = nullptr;
++	MGG_Texture* texture = nullptr;
++	mgint mip = 0;
++};
++
++// Etervale fork: asynchronous frame capture (MGG_FrameCapture_*). Each swapchain frame slot copies its presented image
++// (downscaled by a blit) into its own host buffer inside the frame's command buffer; the copy is read when the slot's
++// fence has already been waited for reuse, so capturing adds no synchronisation of its own.
++struct MGVK_CaptureSlot
++{
++	VkImage image = VK_NULL_HANDLE;
++	VmaAllocation imageAllocation = VK_NULL_HANDLE;
++	VkBuffer buffer = VK_NULL_HANDLE;
++	VmaAllocation bufferAllocation = VK_NULL_HANDLE;
++	void* mapped = nullptr;
++	uint32_t width = 0;
++	uint32_t height = 0;
++	bool pending = false;
++	bool drawn = false;
++	uint64_t frame = 0;
++};
++
++struct MGVK_CapturedFrame
++{
++	uint64_t frame = 0;
++	uint32_t width = 0;
++	uint32_t height = 0;
++	bool drawn = false;
++	std::vector<uint8_t> rgba;
++};
++
+ struct MGG_GraphicsDevice
+ {
+ 	VkInstance instance = VK_NULL_HANDLE;
+@@ -246,6 +340,13 @@
+ 	VkPhysicalDeviceMemoryProperties deviceMemoryProperties;
+ 	bool customBorderColorSupported = false;
+ 
++	// Etervale fork (issue 012): VK_KHR_pipeline_executable_properties, enabled when MG_PIPELINE_STATISTICS=1 at device
++	// creation and the driver has it: pipelines are then created with their statistics captured, and the last bound
++	// graphics and compute pipelines are kept for MGG_GraphicsDevice_GetPipelineStatistics.
++	bool pipelineStatistics = false;
++	VkPipeline lastGraphicsPipeline = VK_NULL_HANDLE;
++	VkPipeline lastComputePipeline = VK_NULL_HANDLE;
++
+ 	VkDevice device = VK_NULL_HANDLE;
+ 
+ 	std::recursive_mutex queueMutex;
+@@ -280,6 +381,11 @@
+ 	VkRect2D scissor = { 0 };
+ 	bool scissorDirty = false;
+ 
++	// Etervale fork: set when the application chose the viewport / scissor rectangle after the last SetRenderTargets. The
++	// render pass begins lazily at the next draw, and its full-target defaults must not replace what was chosen.
++	bool viewportSet = false;
++	bool scissorSet = false;
++
+ #if defined(MG_SDL2)
+ 	SDL_Window* window = nullptr;
+ #else
+@@ -313,23 +419,35 @@
+ 	std::vector<MGG_Shader*> all_shaders;
+ 
+ 	VkPipelineCache pipelineCache = VK_NULL_HANDLE;
+-	std::map<uint32_t, MGVK_PipelineCache> pipelines;
++	// Etervale fork: exact-match caches (change 6). The hash only picks the bucket; entries are compared in full.
++	std::unordered_map<MGVK_PipelineKey, MGVK_PipelineCache, MGVK_PipelineKeyHash> pipelines;
+ 
+-	std::map<uint32_t, MGG_BlendState*> blendStates;
+-	std::map<uint32_t, MGG_RasterizerState*> rasterizerStates;
+-	std::map<uint32_t, MGG_DepthStencilState*> depthStencilStates;
++	std::unordered_multimap<uint32_t, MGG_BlendState*> blendStates;
++	std::unordered_multimap<uint32_t, MGG_RasterizerState*> rasterizerStates;
++	std::unordered_multimap<uint32_t, MGG_DepthStencilState*> depthStencilStates;
+ 
+ 	MGVK_TargetSet targets;
+-	std::map<uint32_t, MGVK_TargetSetCache*> targetCache;
++	std::unordered_multimap<uint32_t, MGVK_TargetSetCache*> targetCache;
++
++	// Etervale fork: ids of cached objects, never reused.
++	uint64_t nextUid = 1;
+ 
+ 
+ 	//
+ 	bool pipelineStateDirty = false;
+ 	MGVK_PipelineState pipelineState;
+ 
+-	MGG_Buffer* uniforms[2] = { nullptr, nullptr };
++	MGG_Buffer* uniforms[(mgint)MGShaderStage::Count] = { nullptr };	// Etervale fork: one per stage, compute included
+ 	uint32_t uniformsDirty = 0;
+ 
++	// Etervale fork: storage resources per stage (issues 005, 006): read-only buffers by t-slot, UAVs by u-slot, and per
++	// stage the slots changed since the shader's descriptor set was last chosen (bits 0-15 t-slots, 16-23 u-slots).
++	MGG_Buffer* readBuffers[(mgint)MGShaderStage::Count][MAX_TEXTURE_SLOTS] = { };
++	MGVK_UavBinding uavs[(mgint)MGShaderStage::Count][MGVK_MAX_UAV_SLOTS] = { };
++	uint32_t storageDirty[(mgint)MGShaderStage::Count] = { };
++	// Bound where a read-only buffer slot is empty, so a descriptor is never left unwritten (16 zero bytes).
++	MGG_Buffer* nullStorageBuffer = nullptr;
++
+ 	VkDescriptorSet descriptorSets[2] = { 0 };
+ 	uint32_t dynamicOffsets[2] = { 0 };
+ 
+@@ -351,12 +469,26 @@
+ 	std::vector<MGG_Texture*> all_textures;
+ 
+ 	std::vector<MGG_OcclusionQuery*> deferredOcclusionQueries;
++
++	// Etervale fork: staging buffers of texture uploads recorded in a frame's command buffer, freed once that frame is done.
++	std::vector<std::pair<FrameCounter, MGG_Buffer>> frameStaging;
++	std::thread::id renderThread;
++
++	// Etervale fork: asynchronous frame capture.
++	bool captureEnabled = false;
++	int captureDownscale = 1;
++	size_t captureMaxQueued = 0;
++	uint64_t captureDropped = 0;
++	std::vector<MGVK_CaptureSlot> captureSlots;
++	std::deque<MGVK_CapturedFrame> captureReady;
+ };
+ 
+ struct MGG_Texture
+ {
+ 	FrameCounter writeFrame = -1;
+ 	FrameCounter frame = 0;
++	// Etervale fork: the frame whose command buffer holds an upload into this texture (MGG_Texture_SetData), -1 if none.
++	FrameCounter uploadFrame = -1;
+ 
+ 	MGTextureType type = MGTextureType::_2D;
+ 	MGSurfaceFormat format = MGSurfaceFormat::Color;
+@@ -391,10 +523,16 @@
+ 
+ 	MGDepthFormat depthFormat = MGDepthFormat::None;
+ 	MGG_Texture* depthTexture = nullptr;
++
++	// Etervale fork: a storage image (MGG_Texture_CreateStorage, issue 005): shaders write it through a view of one mip,
++	// created when first bound.
++	bool isStorage = false;
++	VkImageView storage_views[MGVK_MAX_MIPS] = { };
+ };
+ 
+ struct MGG_InputLayout
+ {
++	uint64_t uid = 0;	// Etervale fork: never reused, unlike the address (pipeline keys)
+ 	std::vector<VkVertexInputAttributeDescription> attributes;
+ 	std::vector<VkVertexInputBindingDescription> bindings;
+ };
+@@ -403,15 +541,29 @@
+ {
+ 	FrameCounter frame;
+ 	VkDescriptorSet set;
++	// Etervale fork: what the set was written for (frame index, slot masks, texture and sampler ids per used slot), so a
++	// lookup compares the full key and a 32-bit hash collision cannot hand back a set with another draw's textures.
++	std::vector<uint64_t> key;
+ };
+ 
+ 
++// The location of a vertex shader input, by semantic (see MGVK_ReflectInputLocations).
++struct MGVK_InputLocation
++{
++	MGVertexElementUsage usage;
++	mguint index;		// semantic index of the input's first location
++	uint32_t location;
++};
++
+ struct MGG_Shader
+ {
+ 	uint32_t id;
+ 
+ 	MGShaderStage stage;
+ 
++	// Vertex shaders: the SPIR-V location of each input, matched to the vertex elements by semantic.
++	std::vector<MGVK_InputLocation> inputLocations;
++
+ 	VkShaderModule module;
+ 	VkDescriptorSetLayout setLayout;
+ 
+@@ -426,11 +578,19 @@
+ 	mguint textureSlots;
+ 	mguint samplerSlots;
+ 
++	// Etervale fork (issues 005, 006), derived from the bindings: t-slots holding a read-only storage buffer, u-slots, and
++	// the u-slots holding a storage image. A compute shader also has its pipeline (it depends on nothing else).
++	uint32_t bufferSlots;
++	uint32_t uavSlots;
++	uint32_t uavImageSlots;
++	VkPipelineLayout computeLayout;
++	VkPipeline computePipeline;
++
+ 	VkDescriptorPoolCreateInfo* poolInfo;
+ 	VkDescriptorPool pool;
+ 
+ 	std::queue<MGVK_DescriptorInfo*> freeSets;
+-	std::map<uint32_t, MGVK_DescriptorInfo*> usedSets;
++	std::multimap<uint32_t, MGVK_DescriptorInfo*> usedSets;   // Etervale fork: hash → sets, key compared in full
+ };
+ 
+ struct MGVK_BindingInfo
+@@ -446,6 +606,8 @@
+ 	FrameCounter frame;
+ 	mguint hash;
+ 	mgint refs;
++	uint64_t uid;					// Etervale fork: never reused (pipeline keys)
++	MGG_BlendState_Info source[4];	// Etervale fork: what it was created from (exact cache match)
+ 	VkPipelineColorBlendStateCreateInfo info;
+ 	VkPipelineColorBlendAttachmentState attachments[4];
+ };
+@@ -455,6 +617,8 @@
+ 	FrameCounter frame;
+ 	mguint hash;
+ 	mgint refs;
++	uint64_t uid;
++	MGG_DepthStencilState_Info source;
+ 	VkPipelineDepthStencilStateCreateInfo info;
+ };
+ 
+@@ -463,6 +627,8 @@
+ 	FrameCounter frame;
+ 	mguint hash;
+ 	mgint refs;
++	uint64_t uid;
++	MGG_RasterizerState_Info source;
+ 	VkPipelineRasterizationStateCreateInfo info;
+ 	mgbool scissorTestEnable;
+ 	mgbool multiSampleAntiAlias;
+@@ -515,6 +681,10 @@
+ static void MGVK_PrepareFrame(MGG_GraphicsDevice* device);
+ static void MGVK_CleanupPendingTransfers(MGG_GraphicsDevice* device);
+ static void MGVK_WaitPendingTransfers(MGG_GraphicsDevice* device, MGG_Texture* texture);
++static void MGVK_RecordFrameCapture(MGG_GraphicsDevice* device, MGVK_Frame& frame, size_t slot);
++static void MGVK_RecycleDiscardedBuffers(MGG_GraphicsDevice* device);
++static void MGVK_CollectFrameCapture(MGG_GraphicsDevice* device, size_t slot);
++static void MGVK_ReleaseCaptureSlot(MGG_GraphicsDevice* device, MGVK_CaptureSlot& slot);
+ 
+ 
+ static VkSampleCountFlagBits ToVkSampleCount(mgint multiSampleCount)
+@@ -604,11 +774,20 @@
+ 		return VK_FORMAT_BC3_SRGB_BLOCK;
+ 	case MGSurfaceFormat::Dxt1a:
+ 		return VK_FORMAT_BC1_RGBA_UNORM_BLOCK;
++	case MGSurfaceFormat::Depth32Float:
++		return VK_FORMAT_D32_SFLOAT;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
++// Etervale fork: a render target whose image is its depth buffer (issue 016): bound as the depth attachment of a pass
++// without colour, sampled through a depth view.
++static bool MGVK_IsDepthSurface(const MGG_Texture* texture)
++{
++	return texture->format == MGSurfaceFormat::Depth32Float;
++}
++
+ static VkFormat ToVkFormat(MGDepthFormat format)
+ {
+ 	switch (format)
+@@ -622,6 +801,8 @@
+ #else
+ 		return VkFormat::VK_FORMAT_D24_UNORM_S8_UINT;
+ #endif
++	case MGDepthFormat::Depth32Float:
++		return VkFormat::VK_FORMAT_D32_SFLOAT;
+ 	default:
+ 		return VkFormat::VK_FORMAT_UNDEFINED;
+ 	}
+@@ -656,7 +837,7 @@
+ 	case MGVertexElementFormat::HalfVector4:
+ 		return VK_FORMAT_R16G16B16A16_SFLOAT;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -675,7 +856,7 @@
+ 	case MGPrimitiveType::PointList:
+ 		return VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -690,7 +871,7 @@
+ 	case MGTextureType::Cube:
+ 		return VK_IMAGE_VIEW_TYPE_CUBE;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -705,7 +886,7 @@
+ 	case MGTextureType::Cube:
+ 		return VK_IMAGE_TYPE_2D; // Cube maps are treated as 2D images with cube view.
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -1198,6 +1379,17 @@
+ 	submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+ 	submitInfo.commandBufferCount = 1;
+ 	submitInfo.pCommandBuffers = &frame.commandBuffer;
++	// Etervale fork: these commands may already draw into the frame's swapchain image (the UI before a read-back), which
++	// is only usable once its acquisition has signalled: the first submission of the frame waits for it, and Present then
++	// does not wait again. Upstream submitted without the wait, drawing into an image the presentation engine still owned.
++	VkPipelineStageFlags acquireStage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_TRANSFER_BIT;
++	if (frame.image_index != (uint32_t)-1 && !frame.acquireWaited)
++	{
++		submitInfo.waitSemaphoreCount = 1;
++		submitInfo.pWaitSemaphores = &frame.imageAcquiredSemaphore;
++		submitInfo.pWaitDstStageMask = &acquireStage;
++		frame.acquireWaited = true;
++	}
+ 	{
+ 		std::lock_guard lock(device->queueMutex);
+ 		vkQueueSubmit(device->queue, 1, &submitInfo, renderFence);
+@@ -1221,6 +1413,21 @@
+ 	VK_SET_OBJECT_NAME(device->device, buffer->buffer, VK_OBJECT_TYPE_BUFFER, "MGG_Buffer.buffer");
+ }
+ 
++// Etervale fork (issue 006): a storage buffer is read and written by shaders, holds dispatch arguments, and is filled and
++// read back by copies.
++static const VkBufferUsageFlags MGVK_StorageBufferUsage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT |
++	VK_BUFFER_USAGE_TRANSFER_SRC_BIT | VK_BUFFER_USAGE_TRANSFER_DST_BIT;
++
++// Etervale fork (issues 005, 006): every stage and access that can touch a storage resource (or anything a dispatch
++// wrote) after a copy or a dispatch: the barriers around them use these as the far side, so whichever pass comes next
++// sees the writes.
++static const VkPipelineStageFlags MGVK_StorageStages = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT | VK_PIPELINE_STAGE_VERTEX_INPUT_BIT |
++	VK_PIPELINE_STAGE_VERTEX_SHADER_BIT | VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT |
++	VK_PIPELINE_STAGE_TRANSFER_BIT;
++static const VkAccessFlags MGVK_StorageReadAccess = VK_ACCESS_INDIRECT_COMMAND_READ_BIT | VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT |
++	VK_ACCESS_UNIFORM_READ_BIT | VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT | VK_ACCESS_TRANSFER_READ_BIT |
++	VK_ACCESS_TRANSFER_WRITE_BIT;
++
+ static VkBufferUsageFlags ToUsage(MGBufferType type)
+ {
+ 	VkBufferUsageFlags usage;
+@@ -1235,8 +1442,10 @@
+ 	case MGBufferType::Constant:
+ 		return VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
+ 		break;
++	case MGBufferType::Storage:
++		return MGVK_StorageBufferUsage;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -1298,6 +1507,7 @@
+ 	assert(adapter != nullptr);
+ 
+ 	auto device = new MGG_GraphicsDevice();
++	device->renderThread = std::this_thread::get_id(); // Etervale fork: in-frame texture uploads (MGG_Texture_SetData)
+ 
+ 	device->instance = system->instance;
+ 	device->physicalDevice = adapter->device;
+@@ -1352,6 +1562,7 @@
+ 	bool scalarBlockLayoutSupported = false;
+ 	bool hlslFunctionalitySupported = false;
+ 	bool userTypeSupported = false;
++	bool pipelineExecutableSupported = false;
+ 
+ 	for (const auto& extension : deviceExtensions)
+ 	{
+@@ -1365,6 +1576,8 @@
+ 			hlslFunctionalitySupported = true;
+ 		if (strcmp(extension.extensionName, VK_GOOGLE_USER_TYPE_EXTENSION_NAME) == 0)
+ 			userTypeSupported = true;
++		if (strcmp(extension.extensionName, VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME) == 0)
++			pipelineExecutableSupported = true;
+ 	}
+ 
+ 	if (!swapChainSupported)
+@@ -1403,6 +1616,11 @@
+ 	{
+ 		enabledFeatures.samplerAnisotropy = VK_TRUE;
+ 	}
++	// Per-target blend states on MRT (BlendState.IndependentBlendEnable) need this feature.
++	if (device->deviceFeatures.independentBlend)
++	{
++		enabledFeatures.independentBlend = VK_TRUE;
++	}
+ 
+ 	VkDeviceCreateInfo deviceCreateInfo = { VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO };
+ 	deviceCreateInfo.queueCreateInfoCount = 1;
+@@ -1438,6 +1656,24 @@
+ 	if (userTypeSupported)
+ 		extensions.push_back(VK_GOOGLE_USER_TYPE_EXTENSION_NAME);
+ 
++	// Etervale fork (issue 012): the drivers' per-pipeline statistics (registers, instructions, spills...), on request:
++	// capturing them may slow pipeline creation, so a game turns them on for a measurement run only.
++	VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR executableFeatures = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR };
++	const char* statisticsRequest = getenv("MG_PIPELINE_STATISTICS");
++	if (statisticsRequest != nullptr && strcmp(statisticsRequest, "1") == 0)
++	{
++		if (pipelineExecutableSupported)
++		{
++			extensions.push_back(VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME);
++			executableFeatures.pipelineExecutableInfo = VK_TRUE;
++			executableFeatures.pNext = lastFeature;
++			lastFeature = &executableFeatures;
++			device->pipelineStatistics = true;
++		}
++		else
++			printf("%s is not supported by this driver: no pipeline statistics.\n", VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME);
++	}
++
+ 	VkPhysicalDeviceFeatures2 deviceFeatures2 = { VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2 };
+ 	if (lastFeature != nullptr)
+ 	{
+@@ -1533,6 +1769,9 @@
+ 		device->nullTexture[(int)MGTextureType::Cube] = tex;
+ 	}
+ 
++	// Etervale fork: what an empty read-only storage buffer slot reads (issue 006).
++	device->nullStorageBuffer = MGVK_Buffer_Create(device, MGBufferType::Storage, 16, true);
++
+ 	return device;
+ }
+ 
+@@ -1645,6 +1884,14 @@
+ 
+ 	MGVK_CleanupPendingTransfers(device);
+ 
++	// Etervale fork: staging buffers of in-frame uploads and the frame capture's copies.
++	for (auto& staged : device->frameStaging)
++		vmaDestroyBuffer(device->allocator, staged.second.buffer, staged.second.allocation);
++	device->frameStaging.clear();
++	for (auto& slot : device->captureSlots)
++		MGVK_ReleaseCaptureSlot(device, slot);
++	device->captureSlots.clear();
++
+ 	MGVK_CleanupSwapChain(device);
+ 
+ 	for (auto pair : device->shader_programs)
+@@ -1959,6 +2206,7 @@
+ 	uint32_t swapchainCount = 0;
+ 	res = vkGetSwapchainImagesKHR(device->device, device->swapchain, &swapchainCount, NULL);
+ 	VK_CHECK_RESULT(res);
++	printf("Swapchain: %u images of %ux%u, present mode %d\n", swapchainCount, extent.width, extent.height, (int)selectedPresentMode);
+ 
+ 	// Do we need to change the number of swapchain images?  This can happen for various reasons
+ 	// including display changes and refresh rates.
+@@ -2181,6 +2429,41 @@
+ 	bool isSwapchainBound = device->targets.targets[0] != nullptr &&
+ 		device->targets.targets[0]->isSwapchain;
+ 
++	// Etervale fork: the window manager resizes the window in the middle of a frame (a window taller than the work area).
++	// The frame's command buffer was then begun again by MGVK_PrepareFrame while a render pass was open in it and the
++	// current target set had been destroyed with the swapchain: the next Clear found no render pass to begin
++	// (inRenderPass still set) and dereferenced a null target set (crash in vkCmdClearAttachments). The commands recorded
++	// so far are submitted first (waiting on the swapchain image they may draw to), and the next draw begins a new render
++	// pass for the targets still bound.
++	if (device->swapchain != VK_NULL_HANDLE && device->frameIndex < device->frames.size() && device->frames[device->frameIndex].is_recording)
++	{
++		auto& frame = device->frames[device->frameIndex];
++		MGVK_EndRenderPass(device, frame.commandBuffer);
++		VkResult res = vkEndCommandBuffer(frame.commandBuffer);
++		VK_CHECK_RESULT(res);
++
++		VkFence fence;
++		VkFenceCreateInfo fenceInfo = { VK_STRUCTURE_TYPE_FENCE_CREATE_INFO };
++		vkCreateFence(device->device, &fenceInfo, nullptr, &fence);
++		VkPipelineStageFlags waitStage = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
++		VkSubmitInfo submitInfo = { VK_STRUCTURE_TYPE_SUBMIT_INFO };
++		submitInfo.waitSemaphoreCount = frame.image_index != (uint32_t)-1 && !frame.acquireWaited ? 1 : 0;
++		frame.acquireWaited = frame.acquireWaited || frame.image_index != (uint32_t)-1;
++		submitInfo.pWaitSemaphores = &frame.imageAcquiredSemaphore;
++		submitInfo.pWaitDstStageMask = &waitStage;
++		submitInfo.commandBufferCount = 1;
++		submitInfo.pCommandBuffers = &frame.commandBuffer;
++		{
++			std::lock_guard lock(device->queueMutex);
++			vkQueueSubmit(device->queue, 1, &submitInfo, fence);
++		}
++		vkWaitForFences(device->device, 1, &fence, VK_TRUE, UINT64_MAX);
++		vkDestroyFence(device->device, fence, nullptr);
++		frame.is_recording = false;
++	}
++	device->renderTargetDirty = true;
++	device->pipelineStateDirty = true;
++
+ 	MGVK_RecreateSwapChain(device, nativeWindowHandle, width, height, vkColor, vkDepth, multiSampleCount, syncInterval);
+ 
+ 	MGVK_PrepareFrame(device);
+@@ -2254,6 +2537,7 @@
+ 		res = vkWaitForFences(device->device, 1, &frame.completedFence, VK_TRUE, UINT64_MAX);
+ 		VK_CHECK_RESULT(res);
+ 		frame.is_rendering = false;
++		MGVK_CollectFrameCapture(device, device->frameIndex);
+ 	}
+ 
+ 	// Do we need to get the next swapchain image?
+@@ -2262,6 +2546,7 @@
+ 		res = vkAcquireNextImageKHR(device->device, device->swapchain, UINT64_MAX,
+ 			frame.imageAcquiredSemaphore, VK_NULL_HANDLE, &frame.image_index);
+ 		VK_CHECK_RESULT(res);
++		frame.acquireWaited = false;
+ 	}
+ 
+ 	// This should be cleared by now.
+@@ -2279,6 +2564,21 @@
+ 
+ 	// Cleanup resources from the last time this frame was rendered.
+ 	MGVK_ProcessDescriptorCaches(device, device->frame);
++	MGVK_RecycleDiscardedBuffers(device);
++
++	// Etervale fork: staging buffers of in-frame texture uploads, once their frame is complete.
++	for (size_t i = 0; i < device->frameStaging.size();)
++	{
++		auto& staged = device->frameStaging[i];
++		if (staged.first + device->swapchainCount > device->frame)
++		{
++			i++;
++			continue;
++		}
++		vmaDestroyBuffer(device->allocator, staged.second.buffer, staged.second.allocation);
++		staged = device->frameStaging.back();
++		device->frameStaging.pop_back();
++	}
+ 
+ 	// MGVK_DestroyFrameResources uses currentFrame and device->freeFrames to calculate age.
+ 	// We should pass the device->frame rather than swapchain_image_index.
+@@ -2328,7 +2628,9 @@
+ 
+ 	auto targets = device->pipelineState.targets;
+ 
+-	if (((int)options & (int)MGClearOptions::Target) != 0)
++	// Etervale fork: a depth surface (issue 016) has no colour to clear; its depth is the target's own image.
++	const bool depthSurface = MGVK_IsDepthSurface(targets->set.targets[0]);
++	if (((int)options & (int)MGClearOptions::Target) != 0 && !depthSurface)
+ 	{
+ 		for (int i = 0; i < targets->set.numTargets; i++)
+ 		{
+@@ -2354,7 +2656,7 @@
+ 		if (clearStencil)
+ 			attachment->aspectMask |= VK_IMAGE_ASPECT_STENCIL_BIT;
+ 
+-		auto depthTexture = targets->set.targets[0]->depthTexture;
++		auto depthTexture = depthSurface ? targets->set.targets[0] : targets->set.targets[0]->depthTexture;
+ 		if (depthTexture) {
+ 			attachment->aspectMask &= DetermineAspectMask(depthTexture->info.format);
+ 		}
+@@ -2370,6 +2672,9 @@
+ 		}
+ 	}
+ 
++	if (num_attachments == 0)
++		return;
++
+ 	VkClearRect rect;
+ 	rect.rect.offset.x = 0;
+ 	rect.rect.offset.y = 0;
+@@ -2410,6 +2715,75 @@
+ 	device->pipelineState.targets = nullptr;
+ }
+ 
++size_t MGVK_PipelineKeyHash::operator()(const MGVK_PipelineKey& key) const
++{
++	return MG_ComputeHash((const mgbyte*)&key, sizeof(MGVK_PipelineKey));
++}
++
++static MGVK_PipelineKey MGVK_MakePipelineKey(const MGVK_PipelineState& state)
++{
++	MGVK_PipelineKey key;
++	key.program = state.program ? state.program->uid : 0;
++	key.layout = state.layout ? state.layout->uid : 0;
++	key.targets = state.targets ? state.targets->uid : 0;
++	key.blend = state.blendState ? state.blendState->uid : 0;
++	key.rasterizer = state.rasterizerState ? state.rasterizerState->uid : 0;
++	key.depthStencil = state.depthStencilState ? state.depthStencilState->uid : 0;
++	key.topology = (uint32_t)state.topology;
++	return key;
++}
++
++// The cached state created from exactly these bytes, or null (Etervale fork: the hash alone returned a different state
++// on a collision; two everyday blend states collide, e.g. DestinationColor/Zero against Zero/InverseSourceAlpha).
++template <typename State>
++static State* MGVK_FindState(std::unordered_multimap<uint32_t, State*>& cache, uint32_t hash, const void* source, size_t size)
++{
++	auto range = cache.equal_range(hash);
++	for (auto itr = range.first; itr != range.second; ++itr)
++	{
++		if (memcmp(&itr->second->source, source, size) == 0)
++			return itr->second;
++	}
++	return nullptr;
++}
++
++template <typename State>
++static void MGVK_ForgetState(std::unordered_multimap<uint32_t, State*>& cache, State* state)
++{
++	auto range = cache.equal_range(state->hash);
++	for (auto itr = range.first; itr != range.second; ++itr)
++	{
++		if (itr->second == state)
++		{
++			cache.erase(itr);
++			return;
++		}
++	}
++}
++
++// Target sets compare by their defined content: an unengaged std::optional's storage is indeterminate.
++static bool MGVK_SameTargetSet(const MGVK_TargetSet& a, const MGVK_TargetSet& b)
++{
++	if (a.numTargets != b.numTargets)
++		return false;
++	for (int i = 0; i < MGVK_NUM_TARGETS; i++)
++	{
++		if (a.targets[i] != b.targets[i] || a.firstUse[i] != b.firstUse[i] || a.arraySlices[i] != b.arraySlices[i])
++			return false;
++	}
++	return true;
++}
++
++static uint32_t MGVK_HashTargetSet(const MGVK_TargetSet& set)
++{
++	uint32_t hash = MG_ComputeHash((const mgbyte*)set.targets, sizeof(set.targets));
++	hash = MG_ComputeHash((const mgbyte*)set.firstUse, sizeof(set.firstUse), hash);
++	hash = MG_ComputeHash((mguint)set.numTargets, hash);
++	for (int i = 0; i < MGVK_NUM_TARGETS; i++)
++		hash = MG_ComputeHash((mguint)set.arraySlices[i].value_or(-1), hash);
++	return hash;
++}
++
+ static void MGVK_DestroyPipelines(MGG_GraphicsDevice* device, std::function<bool(const MGVK_PipelineState&)> compare)
+ {
+ 	auto& pipelines = device->pipelines;
+@@ -2489,6 +2863,11 @@
+ 				vkDestroyImageView(device->device, texture->target_view, nullptr);
+ 			if (texture->view != VK_NULL_HANDLE)
+ 				vkDestroyImageView(device->device, texture->view, nullptr);
++			for (auto view : texture->storage_views)	// Etervale fork: the views of a storage image's mips
++			{
++				if (view != VK_NULL_HANDLE)
++					vkDestroyImageView(device->device, view, nullptr);
++			}
+ 
+ 			if (texture->msImage != VK_NULL_HANDLE)
+ 			{
+@@ -2514,6 +2893,13 @@
+ 			device->destroyBlendStates.pop();
+ 
+ 			MGVK_DestroyPipelines(device, [state](const MGVK_PipelineState& s) { return s.blendState == state; });
++			// Etervale fork: the device must not keep pointing at freed memory (the next state can be allocated at the
++			// same address). MonoGame applies a state again before the next draw of a frame.
++			if (device->pipelineState.blendState == state)
++			{
++				device->pipelineState.blendState = nullptr;
++				device->pipelineStateDirty = true;
++			}
+ 			delete state;
+ 		}
+ 
+@@ -2527,6 +2913,13 @@
+ 			device->destroyRasterizerStates.pop();
+ 
+ 			MGVK_DestroyPipelines(device, [state](const MGVK_PipelineState& s) { return s.rasterizerState == state; });
++			// Etervale fork: the device must not keep pointing at freed memory (the next state can be allocated at the
++			// same address). MonoGame applies a state again before the next draw of a frame.
++			if (device->pipelineState.rasterizerState == state)
++			{
++				device->pipelineState.rasterizerState = nullptr;
++				device->pipelineStateDirty = true;
++			}
+ 			delete state;
+ 		}
+ 
+@@ -2540,6 +2933,13 @@
+ 			device->destroyDepthStencilStates.pop();
+ 
+ 			MGVK_DestroyPipelines(device, [state](const MGVK_PipelineState& s) { return s.depthStencilState == state; });
++			// Etervale fork: the device must not keep pointing at freed memory (the next state can be allocated at the
++			// same address). MonoGame applies a state again before the next draw of a frame.
++			if (device->pipelineState.depthStencilState == state)
++			{
++				device->pipelineState.depthStencilState = nullptr;
++				device->pipelineStateDirty = true;
++			}
+ 			delete state;
+ 		}
+ 
+@@ -2622,6 +3022,7 @@
+ 	auto& swap = device->swapchains[frame.image_index];
+ 
+ 	MGVK_EndRenderPass(device, frame.commandBuffer);
++	MGVK_RecordFrameCapture(device, frame, device->frameIndex);
+ 
+ 	VkResult res;
+ 
+@@ -2633,11 +3034,11 @@
+ 		frame.is_recording = false;
+ 
+ 		VkSemaphore waits[] = { frame.imageAcquiredSemaphore };
+-		VkPipelineStageFlags waitFlags[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
++		VkPipelineStageFlags waitFlags[] = { VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_TRANSFER_BIT };
+ 
+ 		VkSubmitInfo submitInfo = { VK_STRUCTURE_TYPE_SUBMIT_INFO };
+ 		submitInfo.pNext = nullptr;
+-		submitInfo.waitSemaphoreCount = 1;
++		submitInfo.waitSemaphoreCount = frame.acquireWaited ? 0 : 1;
+ 		submitInfo.pWaitSemaphores = waits;
+ 		submitInfo.pWaitDstStageMask = waitFlags;
+ 		submitInfo.commandBufferCount = 1;
+@@ -2686,28 +3087,18 @@
+ 	frame.image_index = -1;
+ 	frame.is_rendering = true;
+ 
+-	// Move the pending buffers to the free list
+-	// for reuse on the next frame.
+-	if (device->pending != nullptr)
+-	{
+-		auto last = device->pending;
+-		while (true)
+-		{
+-			if (last->next == nullptr)
+-				break;
+-			last = last->next;
+-		}
+-
+-		last->next = device->free;
+-		device->free = device->pending;
+-		device->pending = nullptr;
++	// Etervale fork: buffers discarded this frame wait in the pending list until no frame in flight can read them
++	// (MGVK_RecycleDiscardedBuffers). Upstream moved them to the free list one Present later, while with three or more
++	// swapchain images the frame that discarded them could still be on the GPU: a later frame's SetData overwrote vertices
++	// it was drawing (UI quads and light sprites missing or misplaced for a frame).
++	while (device->discarded != nullptr)
++	{
++		auto buffer = device->discarded;
++		device->discarded = buffer->next;
++		buffer->next = device->pending;
++		device->pending = buffer;
+ 	}
+ 
+-	// Buffers discarded this frame can be moved
+-	// into the pending list for a future frame.
+-	device->pending = device->discarded;
+-	device->discarded = nullptr;
+-
+ 	{
+ 		std::lock_guard lock(device->queueMutex);
+ 
+@@ -2787,6 +3178,7 @@
+ 	viewport.height = height;
+ 	viewport.minDepth = minDepth;
+ 	viewport.maxDepth = maxDepth;
++	device->viewportSet = true;
+ 
+ 	auto& frame = device->frames[device->frameIndex];
+ 	assert(frame.is_recording);
+@@ -2804,6 +3196,7 @@
+ 	scissor.extent.width = width;
+ 	scissor.extent.height = height;
+ 	device->scissorDirty = true;
++	device->scissorSet = true;
+ }
+ 
+ void MGG_GraphicsDevice_SetRenderTargets(MGG_GraphicsDevice* device, MGG_Texture** targets, mgint* arraySlices, mgint count)
+@@ -2846,6 +3239,8 @@
+ 
+ 	device->pipelineStateDirty = true;
+ 	device->renderTargetDirty = true;
++	device->viewportSet = false;
++	device->scissorSet = false;
+ }
+ 
+ void MGG_GraphicsDevice_SetConstantBuffer(MGG_GraphicsDevice* device, MGShaderStage stage, mgint slot, MGG_Buffer* buffer)
+@@ -2917,7 +3312,9 @@
+ 	assert(shader->stage == stage);
+ 
+ 	device->shaders[(mgint)stage] = shader;
+-	device->shaderDirty = true;
++	// Etervale fork: a compute shader is not part of the graphics program (MGG_GraphicsDevice_Dispatch binds it).
++	if (stage != MGShaderStage::Compute)
++		device->shaderDirty = true;
+ }
+ 
+ void MGG_GraphicsDevice_SetInputLayout(MGG_GraphicsDevice* device, MGG_InputLayout* layout)
+@@ -2955,10 +3352,11 @@
+ 	}
+ 	else if (oldLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL && newLayout == VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL)
+ 	{
++		// Etervale fork: vertex shaders read uploaded textures too (terrain heights); upstream waited for the fragment stage only.
+ 		srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+ 		dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+ 		sourceStage |= VK_PIPELINE_STAGE_TRANSFER_BIT;
+-		destinationStage |= VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
++		destinationStage |= VK_PIPELINE_STAGE_VERTEX_SHADER_BIT | VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+ 	}
+ 	else if (oldLayout == VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL)
+ 	{
+@@ -3145,20 +3543,31 @@
+ 			continue;
+ 		}
+ 
+-		device->targets.firstUse[i] = target->writeFrame != currentFrame;
++		// A target keeps its content from earlier frames (OpenGL semantics: the TAA, cloud and IBL histories and the
++		// banded shadow maps are drawn over across frames). Only a target never written starts undefined.
++		device->targets.firstUse[i] = target->writeFrame == (FrameCounter)-1;
+ 
+ 		// Mark the targets as being written to this frame.
+ 		target->writeFrame = currentFrame;
+ 	}
+ 
+ 	// Lookup the texture set in the cache.
+-	const uint32_t hash = MG_ComputeHash((mgbyte*)&device->targets, sizeof(MGVK_TargetSet));
+-	MGVK_TargetSetCache* cached = device->targetCache[hash];
++	const uint32_t hash = MGVK_HashTargetSet(device->targets);
++	MGVK_TargetSetCache* cached = nullptr;
++	{
++		auto range = device->targetCache.equal_range(hash);
++		for (auto itr = range.first; itr != range.second && !cached; ++itr)
++		{
++			if (MGVK_SameTargetSet(itr->second->set, device->targets))
++				cached = itr->second;
++		}
++	}
+ 
+ 	if (!cached)
+ 	{
+ 		cached = new MGVK_TargetSetCache();
+ 		cached->set = device->targets;
++		cached->uid = device->nextUid++;
+ 
+ 		auto first = cached->set.targets[0];
+ 		assert(first);
+@@ -3175,7 +3584,10 @@
+ 		int num_attachments = 0;
+ 		int num_color_attachments = 0;
+ 
+-		for (int i = 0; i < cached->set.numTargets; i++)
++		// Etervale fork: a depth surface (issue 016) is the pass's depth attachment and it has no colour attachment.
++		const bool depthSurface = MGVK_IsDepthSurface(first);
++		assert(!depthSurface || cached->set.numTargets == 1);
++		for (int i = 0; i < cached->set.numTargets && !depthSurface; i++)
+ 		{
+ 			auto target = cached->set.targets[i];
+ 			auto firstUse = cached->set.firstUse[i];
+@@ -3217,11 +3629,13 @@
+ 
+             if (isMsaa)
+             {
+-				desc.loadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+-				desc.storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
++				// The multisampled image keeps its samples across render passes like any other target: a pass that
++				// binds it again (after a compute dispatch, a copy or another target) draws over what is there.
++				desc.loadOp = firstUse ? VK_ATTACHMENT_LOAD_OP_DONT_CARE : VK_ATTACHMENT_LOAD_OP_LOAD;
++				desc.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+ 				desc.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+ 				desc.stencilStoreOp = VK_ATTACHMENT_STORE_OP_STORE;
+-                desc.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
++                desc.initialLayout = firstUse ? VK_IMAGE_LAYOUT_UNDEFINED : VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+ 				desc.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+             }
+             else
+@@ -3249,6 +3663,26 @@
+ 			num_color_attachments++;
+ 		}
+ 
++		if (depthSurface)
++		{
++			bool firstUse = cached->set.firstUse[0];
++			depth_stencil_attachment.attachment = num_attachments;
++			depth_stencil_attachment.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
++			attachments[num_attachments] = first->target_view;
++			cached->arraySlicesViews[0] = std::nullopt;
++
++			auto& desc = attachment_descs[num_attachments];
++			desc.format = first->info.format;
++			desc.samples = VK_SAMPLE_COUNT_1_BIT;
++			desc.loadOp = firstUse ? VK_ATTACHMENT_LOAD_OP_DONT_CARE : VK_ATTACHMENT_LOAD_OP_LOAD;
++			desc.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
++			desc.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
++			desc.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
++			desc.initialLayout = firstUse ? VK_IMAGE_LAYOUT_UNDEFINED : first->optimal_layout;
++			desc.finalLayout = first->optimal_layout;
++			num_attachments++;
++		}
++
+ 		auto depth = cached->set.targets[0]->depthTexture;
+ 		if (depth)
+ 		{
+@@ -3304,8 +3738,9 @@
+             if (isMsaa)
+                 subpass_desc.pResolveAttachments = &resolve_attachment_ref;
+ 
+-			if (depth)
++			if (depth || depthSurface)
+ 				subpass_desc.pDepthStencilAttachment = &depth_stencil_attachment;
++			cached->colorAttachments = num_color_attachments;
+ 
+ 			// Add subpass dependencies for proper synchronization
+ 			VkSubpassDependency dependencies[2];
+@@ -3360,8 +3795,9 @@
+ 
+ 				dependencies[1].srcSubpass = 0;
+ 				dependencies[1].dstSubpass = VK_SUBPASS_EXTERNAL;
+-				dependencies[1].srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+-				dependencies[1].srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
++				// Etervale fork: a depth surface (issue 016) is read by later shaders too, so its depth writes are made visible.
++				dependencies[1].srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
++				dependencies[1].srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
+ 				dependencies[1].dstStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_VERTEX_SHADER_BIT;
+ 				dependencies[1].dstAccessMask = VK_ACCESS_SHADER_READ_BIT;
+ 				dependencies[1].dependencyFlags = 0;
+@@ -3386,7 +3822,7 @@
+ 			VK_SET_OBJECT_NAME(device->device, cached->framebuffer, VK_OBJECT_TYPE_FRAMEBUFFER, "MGVK_TargetSetCache.framebuffer (hash: %u)", hash);
+ 		}
+ 
+-		device->targetCache[hash] = cached;
++		device->targetCache.emplace(hash, cached);
+ 	}
+ 
+ 	// Track our layout changes.
+@@ -3402,9 +3838,19 @@
+ 	// Set the cache for the changed pipeline state.
+ 	device->pipelineState.targets = cached;
+ 
+-	// Set default viewport and scissor.
+-	MGG_GraphicsDevice_SetViewport(device, 0, 0, cached->width, cached->height, 0, 1);
+-	MGG_GraphicsDevice_SetScissorRectangle(device, 0, 0, cached->width, cached->height);
++	// Default viewport and scissor: the full target, unless the application set them after binding the targets (a
++	// band of a shadow map, a tile of an atlas). Those stay; the flags keep them for later render passes on the same
++	// targets.
++	if (!device->viewportSet)
++	{
++		MGG_GraphicsDevice_SetViewport(device, 0, 0, cached->width, cached->height, 0, 1);
++		device->viewportSet = false;
++	}
++	if (!device->scissorSet)
++	{
++		MGG_GraphicsDevice_SetScissorRectangle(device, 0, 0, cached->width, cached->height);
++		device->scissorSet = false;
++	}
+ 
+ 	// Setup the render pass and pipeline.
+ 	VkRect2D render_area;
+@@ -3466,16 +3912,57 @@
+ 	}
+ }
+ 
++// Etervale fork (issues 005, 006): the view of one mip of a storage image, made the first time it is bound.
++static VkImageView MGVK_StorageView(MGG_GraphicsDevice* device, MGG_Texture* texture, mgint mip)
++{
++	assert(texture->isStorage);
++	assert(mip >= 0 && mip < (mgint)texture->info.mipLevels);
++	auto& view = texture->storage_views[mip];
++	if (view != VK_NULL_HANDLE)
++		return view;
++
++	VkImageViewCreateInfo info = { VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO };
++	info.image = texture->image;
++	info.viewType = ToVkImageViewType(texture->type, texture->info.arrayLayers);
++	info.format = texture->info.format;
++	info.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
++	info.subresourceRange.baseMipLevel = mip;
++	info.subresourceRange.levelCount = 1;
++	info.subresourceRange.baseArrayLayer = 0;
++	info.subresourceRange.layerCount = texture->info.arrayLayers;
++	VkResult res = vkCreateImageView(device->device, &info, nullptr, &view);
++	VK_CHECK_RESULT(res);
++	VK_SET_OBJECT_NAME(device->device, view, VK_OBJECT_TYPE_IMAGE_VIEW, "MGG_Texture.storage_views[%d] (id: %llu)", mip, texture->id);
++	return view;
++}
++
++static void MGVK_BindShaderResources(MGG_GraphicsDevice* device, FrameCounter currentFrame, MGG_Shader* shader, VkDescriptorSet* current, uint32_t* dynamicOffset);
++
+ static void MGVK_UpdateDescriptors(MGG_GraphicsDevice* device, FrameCounter currentFrame, MGG_Shader* shader, VkDescriptorSet* current, uint32_t* dynamicOffset)
+ {
+-	// If nothing is dirty then skip the update.
+-	if ((device->uniformsDirty & shader->uniformSlots) == 0 &&
++	// If nothing is dirty then skip the update. (Etervale fork: uniformsDirty has one bit per shader stage, set by
++	// MGG_GraphicsDevice_SetConstantBuffer, while uniformSlots is the shader's mask of constant-buffer slots. Masking one
++	// with the other matched only the vertex stage (bit 0, slot 0): a pixel shader's new constants were ignored whenever
++	// no texture or vertex-shader constant changed too, and the draw read the previous draw's values.)
++	bool uniformsChanged = shader->uniformSlots != 0 && (device->uniformsDirty & (1u << (int)shader->stage)) != 0;
++	uint32_t storageSlots = shader->bufferSlots | (shader->uavSlots << 16);
++	if (!uniformsChanged &&
+ 		(device->textureSamplerDirty & shader->textureSlots) == 0 &&
+-		(device->textureSamplerDirty & shader->samplerSlots) == 0)
++		(device->textureSamplerDirty & shader->samplerSlots) == 0 &&
++		(device->storageDirty[(int)shader->stage] & storageSlots) == 0)
+ 		return;
+ 
++	MGVK_BindShaderResources(device, currentFrame, shader, current, dynamicOffset);
++}
++
++// The descriptor set of a shader for the resources bound now, found in the cache or written, and the shader's constants
++// appended to the frame's uniform buffer. (Etervale fork: split from MGVK_UpdateDescriptors, which calls it only when
++// something the shader reads changed, so a dispatch can call it every time; storage buffers and images included.)
++static void MGVK_BindShaderResources(MGG_GraphicsDevice* device, FrameCounter currentFrame, MGG_Shader* shader, VkDescriptorSet* current, uint32_t* dynamicOffset)
++{
+ 	// If we got here we must have some sort of bindings!
+ 	assert(!shader->bindings.empty());
++	const int stage = (int)shader->stage;
+ 
+ 	// Apply the bindings to the new descriptor set.
+ 	auto& frame = device->frames[device->frameIndex];
+@@ -3488,7 +3975,12 @@
+ 
+ 	MGVK_DescriptorInfo* info;
+ 
+-	// First generate a hash of the new state.
++	// First generate a hash of the new state, and the full key it stands for (Etervale fork).
++	uint64_t key[4 + 2 * MAX_TEXTURE_SLOTS + MAX_TEXTURE_SLOTS + MGVK_MAX_UAV_SLOTS];
++	int keyLength = 0;
++	key[keyLength++] = (uint64_t)device->frameIndex;
++	key[keyLength++] = shader->uniformSlots;
++	key[keyLength++] = shader->textureSlots;
+ 	uint32_t hash = MG_ComputeHash(shader->uniformSlots);
+ 	hash = MG_ComputeHash(shader->textureSlots, hash);
+ 	uint32_t dirty = shader->textureSlots;
+@@ -3506,10 +3998,12 @@
+ 			tex->frame = currentFrame;
+ 			hash = MG_ComputeHash(tex->id, hash);
+ 		}
++		key[keyLength++] = tex ? (uint64_t)tex->id : 0;
+ 
+ 		auto sampler = device->samplers[(mgint)shader->stage][i];
+ 		if (sampler)
+ 			hash = MG_ComputeHash(sampler->id, hash);
++		key[keyLength++] = sampler ? (uint64_t)sampler->id : 0;
+ 
+ 		// Early out if there are no more used slots.
+ 		dirty &= ~mask;
+@@ -3517,6 +4011,44 @@
+ 			break;
+ 	}
+ 
++	// Etervale fork: the storage buffers and images by slot (issues 005, 006). Every resource the shader reads or writes
++	// is stamped with this frame, so it is neither recycled nor destroyed while a frame in flight uses it.
++	key[keyLength++] = (uint64_t)shader->bufferSlots | ((uint64_t)shader->uavSlots << 32);
++	for (int i = 0; i < MAX_TEXTURE_SLOTS; i++)
++	{
++		if ((shader->bufferSlots & (1u << i)) == 0)
++			continue;
++		auto buffer = device->readBuffers[stage][i];
++		if (buffer)
++		{
++			buffer->frame = currentFrame;
++			buffer->used = true;
++		}
++		key[keyLength++] = buffer ? buffer->id : 0;
++		hash = MG_ComputeHash((mguint)(key[keyLength - 1] & 0xFFFFFFFF), hash);
++	}
++	for (int i = 0; i < MGVK_MAX_UAV_SLOTS; i++)
++	{
++		if ((shader->uavSlots & (1u << i)) == 0)
++			continue;
++		auto& uav = device->uavs[stage][i];
++		uint64_t id = 0;
++		if (uav.texture)
++		{
++			uav.texture->frame = currentFrame;
++			id = uav.texture->id | ((uint64_t)uav.mip << 48);
++		}
++		else if (uav.buffer)
++		{
++			uav.buffer->frame = currentFrame;
++			uav.buffer->used = true;
++			id = uav.buffer->id | (1ull << 63);
++		}
++		key[keyLength++] = id;
++		hash = MG_ComputeHash((mguint)(id & 0xFFFFFFFF), hash);
++		hash = MG_ComputeHash((mguint)(id >> 32), hash);
++	}
++
+ 	// We hash the frameIndex because each frame in the swap chain has its
+ 	// own uniforms buffer (device->frames[frameIndex].uniforms) that gets
+ 	// bound to the descriptor set. If we don't, some frame will use the
+@@ -3527,8 +4059,18 @@
+ 	// that we don't create twice as much descriptor due to this.
+ 	hash = MG_ComputeHash(device->frameIndex, hash);
+ 
+-	// Do we have this same descriptor cached?
+-	info = shader->usedSets[hash];
++	// Do we have this same descriptor cached? (Etervale fork: the hash only narrows the search; the key decides.)
++	info = nullptr;
++	auto range = shader->usedSets.equal_range(hash);
++	for (auto it = range.first; it != range.second; ++it)
++	{
++		auto& k = it->second->key;
++		if ((int)k.size() == keyLength && std::equal(k.begin(), k.end(), key))
++		{
++			info = it->second;
++			break;
++		}
++	}
+ 	if (!info)
+ 	{
+ 		// The descriptor wasn't cached... so we need to
+@@ -3545,7 +4087,8 @@
+ 		shader->freeSets.pop();
+ 
+ 		// Cache the new or recycled set for later use.
+-		shader->usedSets[hash] = info;
++		info->key.assign(key, key + keyLength);
++		shader->usedSets.emplace(hash, info);
+ 
+ 		for (int i = 0; i < shader->bindings.size(); i++)
+ 		{
+@@ -3579,6 +4122,25 @@
+ 				else
+ 					((VkDescriptorImageInfo*)w.pImageInfo)->imageView = device->nullTexture[(int)shader->textureTypes[slot]]->view;
+ 			}
++			else if (w.descriptorType == VK_DESCRIPTOR_TYPE_STORAGE_BUFFER)
++			{
++				// Etervale fork: a read-only buffer (t-slot) or a RW buffer (u-slot); an empty read slot reads zeros.
++				MGG_Buffer* buffer = w.dstBinding >= MGVK_UAV_BINDING
++					? device->uavs[stage][w.dstBinding - MGVK_UAV_BINDING].buffer
++					: device->readBuffers[stage][w.dstBinding - MGVK_TEXTURE_BINDING];
++				if (!buffer)
++					buffer = device->nullStorageBuffer;
++				((VkDescriptorBufferInfo*)w.pBufferInfo)->buffer = buffer->buffer;
++				((VkDescriptorBufferInfo*)w.pBufferInfo)->offset = 0;
++				((VkDescriptorBufferInfo*)w.pBufferInfo)->range = VK_WHOLE_SIZE;
++			}
++			else if (w.descriptorType == VK_DESCRIPTOR_TYPE_STORAGE_IMAGE)
++			{
++				// Etervale fork: one mip of a storage image; a dispatch with an empty image slot is refused before here.
++				auto& uav = device->uavs[stage][w.dstBinding - MGVK_UAV_BINDING];
++				assert(uav.texture != nullptr);
++				((VkDescriptorImageInfo*)w.pImageInfo)->imageView = MGVK_StorageView(device, uav.texture, uav.mip);
++			}
+ 			else
+ 			{
+ 				// This should never happen!
+@@ -3634,6 +4196,7 @@
+ 		return program;
+ 
+ 	program = new MGVK_Program();
++	program->uid = programId;
+ 	program->vertex = vertexShaderData;
+ 	program->pixel = pixelShaderData;
+ 
+@@ -3661,19 +4224,19 @@
+ 
+ static VkPipeline MGVK_CreatePipeline(MGG_GraphicsDevice* device)
+ {
+-	// TODO: We could hit hash collisions here, so we
+-	// eventually need to implement some fast hash
+-	// collision detection and resolution.
+-
+-	// First see if we've cached this state before.
+-	uint32_t hash = MG_ComputeHash((mgbyte*)&device->pipelineState, sizeof(MGVK_PipelineState));
+-	auto itr = device->pipelines.find(hash);
++	// First see if we've cached this state before (Etervale fork: by the full key of object ids, see MGVK_PipelineKey).
++	assert(device->pipelineState.blendState && device->pipelineState.rasterizerState && device->pipelineState.depthStencilState);
++	const MGVK_PipelineKey key = MGVK_MakePipelineKey(device->pipelineState);
++	const uint32_t hash = (uint32_t)MGVK_PipelineKeyHash()(key);
++	auto itr = device->pipelines.find(key);
+ 	if (itr != device->pipelines.end())
+ 		return itr->second.cache;
+ 
+ 	VkGraphicsPipelineCreateInfo pipelineInfo;
+ 	memset(&pipelineInfo, 0, sizeof(pipelineInfo));
+ 	pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
++	if (device->pipelineStatistics)
++		pipelineInfo.flags |= VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR;   // Etervale fork, issue 012
+ 
+ 	// We set the viewport and scissor dynamically.
+ 	static const VkDynamicState dynamicStates[] = {
+@@ -3734,7 +4297,7 @@
+ 
+ 	// Setup the blend, rasterizer, and depth/stencil states.
+ 	VkPipelineColorBlendStateCreateInfo colorBlending = pstate.blendState->info;
+-	colorBlending.attachmentCount = pstate.targets->set.numTargets;
++	colorBlending.attachmentCount = pstate.targets->colorAttachments;
+ 	pipelineInfo.pColorBlendState = &colorBlending;
+ 	pipelineInfo.pRasterizationState = &pstate.rasterizerState->info;
+ 	pipelineInfo.pDepthStencilState = &pstate.depthStencilState->info;
+@@ -3784,7 +4347,7 @@
+ 	VK_CHECK_RESULT(res);
+ 	VK_SET_OBJECT_NAME(device->device, pipeline.cache, VK_OBJECT_TYPE_PIPELINE, "MGVK_PipelineCache.cache (hash: %u)", hash);
+ 
+-	device->pipelines[hash] = pipeline;
++	device->pipelines.emplace(key, pipeline);
+ 
+ 	return pipeline.cache;
+ }
+@@ -3793,10 +4356,15 @@
+ {
+ 	assert(device);
+ 
+-	// Make sure we know when we last used these states.
+-	device->pipelineState.blendState->frame = currentFrame;
+-	device->pipelineState.depthStencilState->frame = currentFrame;
+-	device->pipelineState.rasterizerState->frame = currentFrame;
++	// Make sure we know when we last used these states. (Etervale fork: a state destroyed while current is cleared to
++	// null; MonoGame sets one again before the next draw.)
++	assert(device->pipelineState.blendState && device->pipelineState.depthStencilState && device->pipelineState.rasterizerState);
++	if (device->pipelineState.blendState)
++		device->pipelineState.blendState->frame = currentFrame;
++	if (device->pipelineState.depthStencilState)
++		device->pipelineState.depthStencilState->frame = currentFrame;
++	if (device->pipelineState.rasterizerState)
++		device->pipelineState.rasterizerState->frame = currentFrame;
+ 
+ 	// Update the shader program.
+ 	if (device->shaderDirty)
+@@ -3824,11 +4392,14 @@
+ 
+ 		auto pipeline = MGVK_CreatePipeline(device);
+ 		vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline);
++		device->lastGraphicsPipeline = pipeline;   // Etervale fork, issue 012
+ 
+ 		// Since the pipeline changed we need to update other states.
+ 		device->scissorDirty = true;
+ 		device->uniformsDirty = 0xFFFFFFFF;
+ 		device->textureSamplerDirty = 0xFFFFFFFF;
++		device->storageDirty[(int)MGShaderStage::Vertex] = 0xFFFFFFFF;	// Etervale fork: a shader whose only resources
++		device->storageDirty[(int)MGShaderStage::Pixel] = 0xFFFFFFFF;	// are storage buffers still gets its set
+ 		device->descriptorSets[0] = nullptr;
+ 		device->descriptorSets[1] = nullptr;
+ 		device->dynamicOffsets[0] = 0;
+@@ -3870,8 +4441,10 @@
+ 		device->blendFactorDirty = false;
+ 	}
+ 
+-	// Do we need to update the descriptors?
+-	if (device->uniformsDirty || device->textureSamplerDirty)
++	// Do we need to update the descriptors? (Etervale fork: also when a storage buffer of the vertex or pixel stage
++	// changed.)
++	if (device->uniformsDirty || device->textureSamplerDirty ||
++		device->storageDirty[(int)MGShaderStage::Vertex] || device->storageDirty[(int)MGShaderStage::Pixel])
+ 	{
+ 		auto program = device->pipelineState.program;
+ 
+@@ -3906,6 +4479,8 @@
+ 		// Clear all the dirty flags.
+ 		device->uniformsDirty = 0;
+ 		device->textureSamplerDirty = 0;
++		device->storageDirty[(int)MGShaderStage::Vertex] = 0;
++		device->storageDirty[(int)MGShaderStage::Pixel] = 0;
+ 	}
+ 
+ 	if (device->vertexBuffersDirty)
+@@ -3953,6 +4528,50 @@
+ 	}
+ }
+ 
++// Etervale fork: every draw appends its constants to the frame's uniform buffer (32 MB), which only starts over at Present.
++// Rendering several frames' worth of draws before one Present (a capture that renders the scene repeatedly into an
++// off-screen target) ran past its end: the constants were not written and the dynamic offsets pointed beyond the buffer
++// (VUID-vkCmdBindDescriptorSets-pDescriptorSets-01979). When less than a draw's worth is left, the commands recorded so
++// far are submitted and waited for, and the buffer starts over; the next draw rebinds everything.
++static void MGVK_EnsureUniformSpace(MGG_GraphicsDevice* device, MGVK_Frame& frame)
++{
++	const mgint reserve = 1024 * 1024;
++	if (frame.uniforms == nullptr || (mgint)frame.uniformOffset + reserve <= frame.uniforms->dataSize)
++		return;
++
++	static int reported = 0;
++	if (reported < 5)
++	{
++		reported++;
++		printf("Uniform buffer full in frame %llu: the commands so far are submitted early\n", (unsigned long long)device->frame);
++	}
++	MGVK_FlushCommands(device, frame);
++	MGVK_BeginCommandBuffer(frame.commandBuffer);
++	frame.uniformOffset = 0;
++	device->renderTargetDirty = true;
++	device->pipelineStateDirty = true;
++}
++
++// Etervale fork: every buffer a draw reads carries the frame number, so a later SetData can tell whether a frame still on
++// the GPU reads it (MGG_Buffer_SetData) and a discarded or destroyed buffer is reused or freed only after that frame.
++// Upstream stamped vertex buffers only when they were rebound and index buffers never.
++static void MGVK_StampDrawBuffers(MGG_GraphicsDevice* device, bool indexed)
++{
++	for (int i = 0; i < 8; i++)
++	{
++		if (auto buffer = device->vertexBuffers[i])
++		{
++			buffer->frame = device->frame;
++			buffer->used = true;
++		}
++	}
++	if (indexed && device->indexBuffer != nullptr)
++	{
++		device->indexBuffer->frame = device->frame;
++		device->indexBuffer->used = true;
++	}
++}
++
+ void MGG_GraphicsDevice_Draw(MGG_GraphicsDevice* device, MGPrimitiveType primitiveType, mgint vertexStart, mgint vertexCount)
+ {
+ 	assert(device != nullptr);
+@@ -3964,6 +4583,7 @@
+ 	auto& frame = device->frames[device->frameIndex];
+ 	assert(frame.is_recording);
+ 
++	MGVK_EnsureUniformSpace(device, frame);
+ 	MGVK_UpdateRenderPass(device, device->frame, frame.commandBuffer);
+ 
+ 	auto topology = ToVkPrimitiveTopology(primitiveType);
+@@ -3974,6 +4594,7 @@
+ 	}
+ 
+ 	MGVK_UpdatePipeline(device, frame.commandBuffer, device->frame);
++	MGVK_StampDrawBuffers(device, false);
+ 
+ 	vkCmdDraw(frame.commandBuffer, vertexCount, 1, vertexStart, 0);
+ }
+@@ -3991,6 +4612,7 @@
+ 	auto& frame = device->frames[device->frameIndex];
+ 	assert(frame.is_recording);
+ 
++	MGVK_EnsureUniformSpace(device, frame);
+ 	MGVK_UpdateRenderPass(device, device->frame, frame.commandBuffer);
+ 
+ 	auto topology = ToVkPrimitiveTopology(primitiveType);
+@@ -4001,6 +4623,7 @@
+ 	}
+ 
+ 	MGVK_UpdatePipeline(device, frame.commandBuffer, device->frame);
++	MGVK_StampDrawBuffers(device, true);
+ 
+ 	auto indexBuffer = device->indexBuffer;
+ 	assert(indexBuffer != nullptr);
+@@ -4034,6 +4657,7 @@
+ 	auto& frame = device->frames[device->frameIndex];
+ 	assert(frame.is_recording);
+ 
++	MGVK_EnsureUniformSpace(device, frame);
+ 	MGVK_UpdateRenderPass(device, device->frame, frame.commandBuffer);
+ 
+ 	auto topology = ToVkPrimitiveTopology(primitiveType);
+@@ -4044,6 +4668,7 @@
+ 	}
+ 
+ 	MGVK_UpdatePipeline(device, frame.commandBuffer, device->frame);
++	MGVK_StampDrawBuffers(device, true);
+ 
+ 	auto indexBuffer = device->indexBuffer;
+ 	assert(indexBuffer != nullptr);
+@@ -4419,7 +5044,7 @@
+ 	case MGBlend::SourceAlphaSaturation:
+ 		return VK_BLEND_FACTOR_SRC_ALPHA_SATURATE;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -4438,7 +5063,7 @@
+ 	case MGBlendFunction::Max:
+ 		return VK_BLEND_OP_MAX;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -4473,7 +5098,7 @@
+ 
+ 	// First check the cache.
+ 	uint32_t hash = MG_ComputeHash((mgbyte*)infos, sizeof(MGG_BlendState_Info) * 4);
+-	MGG_BlendState* cached = device->blendStates[hash];
++	MGG_BlendState* cached = MGVK_FindState(device->blendStates, hash, infos, sizeof(MGG_BlendState_Info) * 4);
+ 	if (cached)
+ 	{
+ 		cached->refs++;
+@@ -4499,8 +5124,10 @@
+ 
+ 	state->refs = 1;
+ 	state->hash = hash;
++	state->uid = device->nextUid++;
++	memcpy(state->source, infos, sizeof(MGG_BlendState_Info) * 4);
+ 
+-	device->blendStates[hash] = state;
++	device->blendStates.emplace(hash, state);
+ 
+ 	return state;
+ 
+@@ -4521,7 +5148,7 @@
+ 
+ 	// Queue the state for later destruction.
+ 	device->destroyBlendStates.push(state);
+-	device->blendStates.erase(state->hash);
++	MGVK_ForgetState(device->blendStates, state);
+ }
+ 
+ static VkCompareOp ToVkCompareOp(MGCompareFunction func)
+@@ -4545,7 +5172,7 @@
+ 	case MGCompareFunction::NotEqual:
+ 		return VK_COMPARE_OP_NOT_EQUAL;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -4570,7 +5197,7 @@
+ 	case MGStencilOperation::Invert:
+ 		return VK_STENCIL_OP_INVERT;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -4581,7 +5208,7 @@
+ 
+ 	// First check the cache.
+ 	uint32_t hash = MG_ComputeHash((mgbyte*)info, sizeof(MGG_DepthStencilState_Info));
+-	MGG_DepthStencilState* cached = device->depthStencilStates[hash];
++	MGG_DepthStencilState* cached = MGVK_FindState(device->depthStencilStates, hash, info, sizeof(MGG_DepthStencilState_Info));
+ 	if (cached)
+ 	{
+ 		cached->refs++;
+@@ -4626,7 +5253,9 @@
+ 
+ 	state->refs = 1;
+ 	state->hash = hash;
+-	device->depthStencilStates[hash] = state;
++	state->uid = device->nextUid++;
++	state->source = *info;
++	device->depthStencilStates.emplace(hash, state);
+ 
+ 	return state;
+ }
+@@ -4646,7 +5275,7 @@
+ 
+ 	// Queue the state for later destruction.
+ 	device->destroyDepthStencilStates.push(state);
+-	device->depthStencilStates.erase(state->hash);
++	MGVK_ForgetState(device->depthStencilStates, state);
+ }
+ 
+ static VkPolygonMode ToVkPolygonMode(MGFillMode mode)
+@@ -4658,7 +5287,7 @@
+ 	case MGFillMode::WireFrame:
+ 		return VK_POLYGON_MODE_LINE;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -4673,7 +5302,7 @@
+ 	case MGCullMode::CullCounterClockwiseFace:
+ 		return VK_CULL_MODE_BACK_BIT;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -4685,7 +5314,7 @@
+ 
+ 	// First check the cache.
+ 	uint32_t hash = MG_ComputeHash((mgbyte*)info, sizeof(MGG_RasterizerState_Info));
+-	MGG_RasterizerState* cached = device->rasterizerStates[hash];
++	MGG_RasterizerState* cached = MGVK_FindState(device->rasterizerStates, hash, info, sizeof(MGG_RasterizerState_Info));
+ 	if (cached)
+ 	{
+ 		cached->refs++;
+@@ -4716,7 +5345,9 @@
+ 
+ 	state->refs = 1;
+ 	state->hash = hash;
+-	device->rasterizerStates[hash] = state;
++	state->uid = device->nextUid++;
++	state->source = *info;
++	device->rasterizerStates.emplace(hash, state);
+ 
+ 	return state;
+ }
+@@ -4736,7 +5367,7 @@
+ 
+ 	// Queue the state for later destruction.
+ 	device->destroyRasterizerStates.push(state);
+-	device->rasterizerStates.erase(state->hash);
++	MGVK_ForgetState(device->rasterizerStates, state);
+ }
+ 
+ static VkSamplerAddressMode ToVkSamplerAddressMode(MGTextureAddressMode mode)
+@@ -4752,7 +5383,7 @@
+ 	case MGTextureAddressMode::Border:
+ 		return VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER;
+ 	default:
+-		assert(0);
++		MGVK_UNREACHABLE();
+ 	}
+ }
+ 
+@@ -4880,6 +5511,26 @@
+ 	device->destroySamplers.push(state);
+ }
+ 
++// Etervale fork: moves the discarded buffers that no frame in flight reads any more to the free list. Called when a frame
++// slot is about to record again, after its fence was waited: frame F's work is complete once frame F + swapchainCount
++// begins (in-order submission on one queue).
++static void MGVK_RecycleDiscardedBuffers(MGG_GraphicsDevice* device)
++{
++	MGG_Buffer** link = &device->pending;
++	while (*link != nullptr)
++	{
++		auto buffer = *link;
++		if (buffer->used && buffer->frame + device->swapchainCount > device->frame)
++		{
++			link = &buffer->next;
++			continue;
++		}
++		*link = buffer->next;
++		buffer->next = device->free;
++		device->free = buffer;
++	}
++}
++
+ static MGG_Buffer* MGVK_BufferDiscard(MGG_GraphicsDevice* device, MGG_Buffer* buffer)
+ {
+ 	// Get the info we need to find/allocate a new buffer.
+@@ -4922,6 +5573,7 @@
+ 		*best = buffer->next;
+ 		buffer->next = nullptr;
+ 		buffer->dataSize = dataSize;
++		buffer->used = false;
+ 		//buffer->dirtyMin = 0;
+ 		//buffer->dirtyMax = 0;
+ 		return buffer;
+@@ -4944,6 +5596,30 @@
+ 	buffer->actualSize = buffer->dataSize = sizeInBytes;
+ 	buffer->type = type;
+ 
++	if (type == MGBufferType::Storage)
++	{
++		// Etervale fork (issue 006): device-local, never mapped; filled through staging copies
++		// (MGG_Buffer_SetStorageData) and cleared to zero once here, so a buffer read before its first write reads zeros.
++		MGVK_BufferCreate(device, sizeInBytes, MGVK_StorageBufferUsage, VMA_MEMORY_USAGE_GPU_ONLY, buffer);
++		buffer->id = device->nextUid++;
++		{
++			std::lock_guard lock(device->transferMutex);
++			VkCommandBuffer cmd = MGVK_BeginNewCommandBuffer(device, device->transferPool);
++			vkCmdFillBuffer(cmd, buffer->buffer, 0, VK_WHOLE_SIZE, 0);
++			VkBufferMemoryBarrier barrier = { VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER };
++			barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
++			barrier.dstAccessMask = MGVK_StorageReadAccess;
++			barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++			barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++			barrier.buffer = buffer->buffer;
++			barrier.size = VK_WHOLE_SIZE;
++			vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TRANSFER_BIT, MGVK_StorageStages, 0, 0, nullptr, 1, &barrier, 0, nullptr);
++			MGVK_ExecuteAndFreeCommandBuffer(device, cmd, device->transferPool);
++		}
++		device->all_buffers.push_back(buffer);
++		return buffer;
++	}
++
+ 	if (type == MGBufferType::Constant && !no_push)
+ 	{
+ 		// Uniform buffers never use real buffers.  We just
+@@ -5091,14 +5767,25 @@
+ 		return;
+ 	}
+ 
+-	// TODO: Force discard here if we find we're
+-	// copying over data still in use.  See NX.
++	// Etervale fork: a buffer that a frame still in flight (or a draw already recorded in this one) reads is not written in
++	// place: those draws must keep the old content, as in OpenGL, where SetData is ordered with the draws. The update goes
++	// to a renamed buffer that starts as a copy of the old one (a partial update keeps the rest). Upstream wrote the
++	// persistently mapped memory the GPU was reading.
++	bool inFlight = buffer->used && buffer->frame + device->swapchainCount > device->frame;
++	mgbyte* previous = nullptr;
++	if (!discard && inFlight)
++	{
++		previous = buffer->mapped;
++		discard = true;
++	}
+ 
+ 	if (discard)
+ 	{
+ 		auto last = buffer;
+ 
+ 		buffer = MGVK_BufferDiscard(device, buffer);
++		if (previous != nullptr && buffer->mapped != nullptr)
++			memcpy(buffer->mapped, previous, std::min(last->dataSize, buffer->dataSize));
+ 
+ 		// Fix any active mapping of the buffer that
+ 		// was just discarded for another.
+@@ -5138,6 +5825,32 @@
+ 	MGVK_BufferCopyAndFlush(device, buffer, offset, data, elementCount, elementSizeInBytes, vertexStride);
+ }
+ 
++// Etervale fork (issue 013): SetDataOptions.NoOverwrite. The caller promises the range it writes is not read by any
++// recorded or in-flight draw (the framework's ring of user vertices and indices for DrawUser*Primitives appends this
++// way), so the data goes into the buffer in place: no rename, no copy of the old content. MGG_Buffer_SetData without
++// discard renames a buffer a frame still reads and copies its whole content back from mapped memory first, which made
++// every user-primitive draw after the first in a frame cost about 0.8 ms (SpriteBatch with many textures).
++MG_EXPORT void MGG_Buffer_SetDataNoOverwrite(MGG_GraphicsDevice* device, MGG_Buffer* buffer, mgint offset, mgbyte* data, mgint elementCount, mgint vertexStride, mgint elementSizeInBytes)
++{
++	assert(device != nullptr);
++	assert(buffer != nullptr);
++	assert(data != nullptr);
++	assert(offset >= 0);
++	assert(elementCount > 0);
++	assert(vertexStride > 0);
++	assert(elementSizeInBytes > 0);
++
++	buffer->dirty = true;
++	if (buffer->push)
++	{
++		for (mgint i = 0; i < elementCount; ++i)
++			memcpy(buffer->push + offset + i * vertexStride, data + i * elementSizeInBytes, elementSizeInBytes);
++		return;
++	}
++
++	MGVK_BufferCopyAndFlush(device, buffer, offset, data, elementCount, elementSizeInBytes, vertexStride);
++}
++
+ void MGG_Buffer_GetData(MGG_GraphicsDevice* device, MGG_Buffer* buffer, mgint offset, mgbyte* data, mgint dataCount, mgint dataBytes, mgint dataStride)
+ {
+     assert(device != nullptr);
+@@ -5170,6 +5883,17 @@
+     }
+ }
+ 
++static MGG_Texture* MGVK_Texture_Create(
++	MGG_GraphicsDevice* device,
++	MGTextureType type,
++	MGSurfaceFormat format,
++	mgint width,
++	mgint height,
++	mgint depth,
++	mgint mipmaps,
++	mgint slices,
++	bool storage);
++
+ MGG_Texture* MGG_Texture_Create(
+ 	MGG_GraphicsDevice* device,
+ 	MGTextureType type,
+@@ -5180,6 +5904,40 @@
+ 	mgint mipmaps,
+ 	mgint slices)
+ {
++	return MGVK_Texture_Create(device, type, format, width, height, depth, mipmaps, slices, false);
++}
++
++// Etervale fork (issue 005): a texture shaders can also write (RWTexture2D): the image gets the storage usage. Null when
++// the device cannot use the format as a storage image (vkGetPhysicalDeviceFormatProperties).
++MG_EXPORT MGG_Texture* MGG_Texture_CreateStorage(
++	MGG_GraphicsDevice* device,
++	MGTextureType type,
++	MGSurfaceFormat format,
++	mgint width,
++	mgint height,
++	mgint depth,
++	mgint mipmaps,
++	mgint slices)
++{
++	assert(device != nullptr);
++	VkFormatProperties props = {};
++	vkGetPhysicalDeviceFormatProperties(device->physicalDevice, ToVkFormat(format), &props);
++	if ((props.optimalTilingFeatures & VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT) == 0)
++		return nullptr;
++	return MGVK_Texture_Create(device, type, format, width, height, depth, mipmaps, slices, true);
++}
++
++static MGG_Texture* MGVK_Texture_Create(
++	MGG_GraphicsDevice* device,
++	MGTextureType type,
++	MGSurfaceFormat format,
++	mgint width,
++	mgint height,
++	mgint depth,
++	mgint mipmaps,
++	mgint slices,
++	bool storage)
++{
+ 	assert(device != nullptr);
+ 
+ 	assert(width > 0);
+@@ -5193,6 +5951,7 @@
+ 	texture->type = type;
+ 	texture->format = format;
+ 	texture->id = ++device->currentTextureId;
++	texture->isStorage = storage;
+ 
+ 	VkImageCreateInfo& create_info = texture->info;
+ 	create_info.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+@@ -5208,6 +5967,8 @@
+ 	create_info.samples = VK_SAMPLE_COUNT_1_BIT;
+ 	create_info.tiling = VK_IMAGE_TILING_OPTIMAL;
+ 	create_info.usage = VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
++	if (storage)
++		create_info.usage |= VK_IMAGE_USAGE_STORAGE_BIT;
+ 	create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+ 	create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+ 
+@@ -5288,10 +6049,20 @@
+                         VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT |
+                         VK_IMAGE_USAGE_TRANSFER_SRC_BIT |
+                         VK_IMAGE_USAGE_TRANSFER_DST_BIT;
++		// Etervale fork: a depth surface (issue 016) is its own depth attachment: one level, one sample, no separate depth
++		// buffer. Between passes it rests sampled, in the read-only layout its descriptors expect.
++		if (MGVK_IsDepthSurface(texture))
++		{
++			assert(type == MGTextureType::_2D && mipmaps == 1 && multiSampleCount <= 1 && depthFormat == MGDepthFormat::None);
++			create_info.usage = VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
++		}
+ 		create_info.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+ 		create_info.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+ 
+-		VkImageLayout startLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
++		// Start where a render target rests between passes (its optimal layout), so one sampled before it is first drawn
++		// (a history on its first frame) is in the layout its descriptor expects. Its first render pass starts from
++		// UNDEFINED anyway.
++		VkImageLayout startLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+ 		mggCreateImage(device, &create_info, texture);
+ 		VK_SET_OBJECT_NAME(device->device, texture->image, VK_OBJECT_TYPE_IMAGE, "MGG_Texture.image (RenderTarget id: %llu)", texture->id);
+ 
+@@ -5496,6 +6267,27 @@
+ 	memcpy(dest, data, dataBytes);
+ 	vmaUnmapMemory(device->allocator, buffer.allocation);
+ 
++	// Etervale fork: on the render thread, while a frame records, the upload goes into the frame's own command buffer, so
++	// it is ordered with the draws as in OpenGL: draws recorded before SetData read the old texels, draws after it the new
++	// ones. Upstream submitted it at once on its own, ahead of the whole frame being recorded: every draw of that frame
++	// read the last upload, so a texture updated twice in a frame (once per view) showed only the second content, and the
++	// image depended on how far the previous frames had got on the GPU. Other threads keep the immediate submission.
++	if (std::this_thread::get_id() == device->renderThread && device->frameIndex < device->frames.size()
++		&& device->frames[device->frameIndex].is_recording)
++	{
++		auto& frame = device->frames[device->frameIndex];
++		auto cmd = frame.commandBuffer;
++		MGVK_EndRenderPass(device, cmd);
++		device->renderTargetDirty = true;
++		MGVK_CmdTransitionImageLayout(cmd, texture->image, texture->layouts[level], VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_ASPECT_COLOR_BIT, level, 1, slice, 1);
++		MGVK_CmdCopyBufferToImage(cmd, buffer.buffer, texture->image, x, y, z, level, slice, width, height, depth);
++		MGVK_CmdTransitionImageLayout(cmd, texture->image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, texture->optimal_layout, VK_IMAGE_ASPECT_COLOR_BIT, level, 1, slice, 1);
++		texture->layouts[level] = texture->optimal_layout;
++		texture->uploadFrame = device->frame;
++		device->frameStaging.push_back({ device->frame, buffer });
++		return;
++	}
++
+ 	// Get a command buffer and fill it... only one thread at a time
+ 	// can do this.  Eventually we could have multiple transfer pools.
+ 	MGVK_Transfer transfer;
+@@ -5556,12 +6348,22 @@
+ 
+ 	if (texture->isTarget)
+ 	{
+-		if (frame.is_recording && texture->frame == device->frame)
++		// Etervale fork: also when the target was only written this frame (writeFrame). texture->frame marks sampling;
++		// a target drawn into and read back without being sampled was copied before its commands were submitted,
++		// and GetData returned the previous frame's pixels.
++		if (frame.is_recording && (texture->frame == device->frame || texture->writeFrame == device->frame))
+ 		{
+ 			MGVK_FlushCommands(device, frame);
+ 			restart_frame = true;
+ 		}
+ 	}
++	else if (frame.is_recording && (texture->uploadFrame == device->frame || (texture->isStorage && texture->writeFrame == device->frame)))
++	{
++		// Etervale fork: its upload, or a dispatch that wrote it (a storage image), is in the frame's command buffer, not
++		// submitted yet.
++		MGVK_FlushCommands(device, frame);
++		restart_frame = true;
++	}
+ 
+ 	MGG_Buffer buffer;
+ 	MGVK_BufferCreate(device, dataBytes, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VMA_MEMORY_USAGE_CPU_ONLY, &buffer);
+@@ -5587,6 +6389,127 @@
+ 		MGVK_BeginCommandBuffer(frame.commandBuffer);
+ }
+ 
++static bool MGVK_SemanticUsage(std::string name, MGVertexElementUsage& usage)
++{
++	for (auto& c : name)
++		c = (char)toupper((unsigned char)c);
++
++	// The names mgfxc maps (ShaderProfile.Vulkan.cs); anything else is a texture coordinate there too.
++	static const std::pair<const char*, MGVertexElementUsage> table[] =
++	{
++		{ "POSITION", MGVertexElementUsage::Position },
++		{ "SV_POSITION", MGVertexElementUsage::Position },
++		{ "COLOR", MGVertexElementUsage::Color },
++		{ "TEXCOORD", MGVertexElementUsage::TextureCoordinate },
++		{ "NORMAL", MGVertexElementUsage::Normal },
++		{ "BINORMAL", MGVertexElementUsage::Binormal },
++		{ "TANGENT", MGVertexElementUsage::Tangent },
++		{ "BLENDINDICES", MGVertexElementUsage::BlendIndices },
++		{ "BLENDWEIGHT", MGVertexElementUsage::BlendWeight },
++		{ "DEPTH", MGVertexElementUsage::Depth },
++		{ "FOG", MGVertexElementUsage::Fog },
++		{ "POINTSIZE", MGVertexElementUsage::PointSize },
++		{ "TESSELLATEFACTOR", MGVertexElementUsage::TessellateFactor },
++	};
++	for (auto& entry : table)
++	{
++		if (name == entry.first)
++		{
++			usage = entry.second;
++			return true;
++		}
++	}
++	usage = MGVertexElementUsage::TextureCoordinate;
++	return false;
++}
++
++// Reads the Location of every vertex input from the SPIR-V, keyed by its HLSL semantic (the UserSemantic decoration,
++// else DXC's "in.var.<SEMANTIC>" name).
++//
++// The C# side builds the input elements in the order of the inputs mgfxc reflected, and those are only the inputs the
++// shader reads. DXC drops an unread input from the entry point but keeps the locations of the others, so the i-th
++// reflected input is not always at location i (an unread NORMAL0 between POSITION0 and TEXCOORD0 leaves TEXCOORD0 at
++// location 2 as the second element). Matching by semantic gives each element its real location.
++static void MGVK_ReflectInputLocations(const uint32_t* code, size_t words, std::vector<MGVK_InputLocation>& result)
++{
++	if (words < 5 || code[0] != 0x07230203)
++		return;
++
++	std::map<uint32_t, std::string> names, semantics;
++	std::map<uint32_t, uint32_t> locations;
++	std::vector<uint32_t> inputs;
++
++	for (size_t i = 5; i < words;)
++	{
++		const uint32_t count = code[i] >> 16;
++		const uint32_t op = code[i] & 0xFFFF;
++		if (count == 0 || i + count > words)
++			break;
++		const uint32_t* ops = code + i + 1;
++		auto literal = [&](uint32_t first)
++		{
++			const char* text = (const char*)(ops + first);
++			return std::string(text, strnlen(text, (count - 1 - first) * 4));
++		};
++
++		if (op == 54)	// OpFunction: the declarations are over
++			break;
++		if (op == 5 && count > 2)	// OpName
++			names[ops[0]] = literal(1);
++		else if (op == 71 && count > 3 && ops[1] == 30)	// OpDecorate Location
++			locations[ops[0]] = ops[2];
++		else if (op == 5633 && count > 3 && ops[1] == 5635)	// OpDecorateString UserSemantic
++			semantics[ops[0]] = literal(2);
++		else if (op == 59 && count > 3 && ops[2] == 1)	// OpVariable Input
++			inputs.push_back(ops[1]);
++
++		i += count;
++	}
++
++	for (auto id : inputs)
++	{
++		auto location = locations.find(id);
++		if (location == locations.end())
++			continue;	// a built-in
++
++		std::string semantic;
++		auto user = semantics.find(id);
++		auto name = names.find(id);
++		if (user != semantics.end())
++			semantic = user->second;
++		else if (name != names.end() && name->second.rfind("in.var.", 0) == 0)
++			semantic = name->second.substr(7);
++		else
++			continue;
++
++		size_t digits = semantic.size();
++		while (digits > 0 && isdigit((unsigned char)semantic[digits - 1]))
++			digits--;
++
++		MGVK_InputLocation input;
++		input.index = digits < semantic.size() ? (mguint)strtoul(semantic.c_str() + digits, nullptr, 10) : 0;
++		MGVK_SemanticUsage(semantic.substr(0, digits), input.usage);
++		input.location = location->second;
++		result.push_back(input);
++	}
++}
++
++// The location of the vertex element (usage, index): the input with that usage whose first semantic index is the
++// nearest at or below it (a matrix or array input spans consecutive locations).
++static bool MGVK_FindInputLocation(const MGG_Shader* shader, MGVertexElementUsage usage, mguint index, uint32_t& location)
++{
++	const MGVK_InputLocation* best = nullptr;
++	for (auto& input : shader->inputLocations)
++	{
++		if (input.usage == usage && input.index <= index && (best == nullptr || input.index > best->index))
++			best = &input;
++	}
++	if (best == nullptr)
++		return false;
++	location = best->location + (index - best->index);
++	return true;
++}
++
+ MGG_InputLayout* MGG_InputLayout_Create(
+ 	MGG_GraphicsDevice* device,
+ 	MGG_Shader* vertexShader,
+@@ -5603,6 +6526,7 @@
+ 	assert(elementCount >= 0);
+ 
+ 	auto layout = new MGG_InputLayout();
++	layout->uid = device->nextUid++;
+ 
+ 	layout->bindings.resize(streamCount);
+ 	for (int i = 0; i < streamCount; i++)
+@@ -5619,7 +6543,11 @@
+ 		const auto element = elements[i];
+ 		auto& attrib = layout->attributes[i];
+ 
+-		attrib.location = i;
++		// By semantic: the element order follows the reflected inputs, not their locations (MGVK_ReflectInputLocations).
++		uint32_t location;
++		if (vertexShader == nullptr || !MGVK_FindInputLocation(vertexShader, element.SemanticUsage, element.SemanticIndex, location))
++			location = i;
++		attrib.location = location;
+ 		attrib.binding = element.VertexBufferSlot;
+ 		attrib.format = ToVkFormat(element.Format);
+ 		attrib.offset = element.AlignedByteOffset;
+@@ -5642,9 +6570,42 @@
+ 	if (layout == nullptr)
+ 		return;
+ 
++	// Etervale fork: not the current layout any more (its pipelines stay keyed by its id, which is never reused).
++	if (device->pipelineState.layout == layout)
++	{
++		device->pipelineState.layout = nullptr;
++		device->pipelineStateDirty = true;
++	}
+ 	delete layout;
+ }
+ 
++// Etervale fork (issue 005): a compute shader's pipeline and its layout (one descriptor set, the shader's own). Unlike a
++// graphics pipeline it depends on no other state, so it is built once with the shader.
++static void MGVK_CreateComputePipeline(MGG_GraphicsDevice* device, MGG_Shader* shader)
++{
++	if (shader->stage != MGShaderStage::Compute)
++		return;
++
++	VkPipelineLayoutCreateInfo layoutInfo = { VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO };
++	layoutInfo.setLayoutCount = 1;
++	layoutInfo.pSetLayouts = &shader->setLayout;
++	VkResult res = vkCreatePipelineLayout(device->device, &layoutInfo, nullptr, &shader->computeLayout);
++	VK_CHECK_RESULT(res);
++	VK_SET_OBJECT_NAME(device->device, shader->computeLayout, VK_OBJECT_TYPE_PIPELINE_LAYOUT, "MGG_Shader.computeLayout (id: %u)", shader->id);
++
++	VkComputePipelineCreateInfo pipelineInfo = { VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO };
++	pipelineInfo.stage.sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
++	pipelineInfo.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
++	pipelineInfo.stage.module = shader->module;
++	pipelineInfo.stage.pName = "main";
++	pipelineInfo.layout = shader->computeLayout;
++	if (device->pipelineStatistics)
++		pipelineInfo.flags |= VK_PIPELINE_CREATE_CAPTURE_STATISTICS_BIT_KHR;   // Etervale fork, issue 012
++	res = vkCreateComputePipelines(device->device, device->pipelineCache, 1, &pipelineInfo, nullptr, &shader->computePipeline);
++	VK_CHECK_RESULT(res);
++	VK_SET_OBJECT_NAME(device->device, shader->computePipeline, VK_OBJECT_TYPE_PIPELINE, "MGG_Shader.computePipeline (id: %u)", shader->id);
++}
++
+ MGG_Shader* MGG_Shader_Create(MGG_GraphicsDevice* device, MGShaderStage stage, mgbyte* bytecode, mgint sizeInBytes)
+ {
+ 	assert(device != nullptr);
+@@ -5676,6 +6637,22 @@
+ 		sizeInBytes -= sizeof(VkDescriptorSetLayoutBinding) * count;
+ 	}
+ 
++	if (stage == MGShaderStage::Vertex)
++		MGVK_ReflectInputLocations((const uint32_t*)bytecode, sizeInBytes / 4, shader->inputLocations);
++
++	// Etervale fork: the storage resources of the shader, by register (issues 005, 006).
++	for (auto& b : layoutBindings)
++	{
++		if (b.descriptorType == VK_DESCRIPTOR_TYPE_STORAGE_BUFFER && b.binding >= MGVK_TEXTURE_BINDING && b.binding < MGVK_TEXTURE_BINDING + MAX_TEXTURE_SLOTS)
++			shader->bufferSlots |= 1u << (b.binding - MGVK_TEXTURE_BINDING);
++		else if (b.binding >= MGVK_UAV_BINDING && b.binding < MGVK_UAV_BINDING + MGVK_MAX_UAV_SLOTS)
++		{
++			shader->uavSlots |= 1u << (b.binding - MGVK_UAV_BINDING);
++			if (b.descriptorType == VK_DESCRIPTOR_TYPE_STORAGE_IMAGE)
++				shader->uavImageSlots |= 1u << (b.binding - MGVK_UAV_BINDING);
++		}
++	}
++
+ 	VkShaderModuleCreateInfo create_info = { VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO };
+ 	create_info.codeSize = sizeInBytes;
+ 	create_info.pCode = (uint32_t*)bytecode;
+@@ -5703,9 +6680,18 @@
+ 		shader->poolInfo = nullptr;
+ 		shader->pool = nullptr;
+ 		shader->writes = nullptr;
++		MGVK_CreateComputePipeline(device, shader);
+ 		return shader;
+ 	}
+ 
++	// Etervale fork: two resources of one shader on the same register give a layout with a duplicated binding
++	// (VUID-VkDescriptorSetLayoutCreateInfo-binding-00279): only one of them is bound. Said once per shader.
++	for (size_t a = 0; a < layoutBindings.size(); a++)
++		for (size_t b = a + 1; b < layoutBindings.size(); b++)
++			if (layoutBindings[a].binding == layoutBindings[b].binding)
++				printf("Shader %u (stage %d): two resources share binding %u; give them separate registers\n",
++					shader->id, (int)stage, layoutBindings[a].binding);
++
+ 	VkDescriptorSetLayoutCreateInfo layoutInfo;
+ 	memset(&layoutInfo, 0, sizeof(layoutInfo));
+ 	layoutInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+@@ -5743,15 +6729,61 @@
+ 	// Pre-fill the free descriptor sets now.
+ 	MGVK_FillDescriptorSetCache(device, shader);
+ 
+-	// Prepare the write descriptor set for updates at runtime.
++	// Prepare the write descriptor set for updates at runtime. (Etervale fork: storage buffers take a buffer info too.)
++	size_t bufferBindings = 0;
++	for (auto& b : layoutBindings)
++	{
++		if (b.descriptorType == VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC || b.descriptorType == VK_DESCRIPTOR_TYPE_STORAGE_BUFFER)
++			bufferBindings++;
++	}
+ 	VkWriteDescriptorSet* write = shader->writes = new VkWriteDescriptorSet[layoutBindings.size()];
+-	VkDescriptorBufferInfo* bufferInfo = shader->bufferInfo = new VkDescriptorBufferInfo[uniformCount];
+-	VkDescriptorImageInfo* imageInfo = shader->imageInfo =  new VkDescriptorImageInfo[layoutBindings.size() - uniformCount];
++	VkDescriptorBufferInfo* bufferInfo = shader->bufferInfo = new VkDescriptorBufferInfo[bufferBindings];
++	VkDescriptorImageInfo* imageInfo = shader->imageInfo =  new VkDescriptorImageInfo[layoutBindings.size() - bufferBindings];
+ 	for (int i = 0; i < layoutBindings.size(); i++)
+ 	{
+ 		auto& b = layoutBindings[i];
+ 
+-		if (b.descriptorType == VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC)
++		if (b.descriptorType == VK_DESCRIPTOR_TYPE_STORAGE_BUFFER)
++		{
++			// Etervale fork: a StructuredBuffer/ByteAddressBuffer (t) or their RW forms (u); the buffer is set per draw.
++			bufferInfo->buffer = VK_NULL_HANDLE;
++			bufferInfo->offset = 0;
++			bufferInfo->range = VK_WHOLE_SIZE;
++
++			write->sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
++			write->pNext = nullptr;
++			write->dstSet = nullptr;
++			write->dstBinding = b.binding;
++			write->dstArrayElement = 0;
++			write->descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
++			write->descriptorCount = 1;
++			write->pImageInfo = nullptr;
++			write->pBufferInfo = bufferInfo++;
++			write->pTexelBufferView = nullptr;
++
++			write++;
++		}
++		else if (b.descriptorType == VK_DESCRIPTOR_TYPE_STORAGE_IMAGE)
++		{
++			// Etervale fork: a RWTexture2D, written in the GENERAL layout during the dispatch.
++			imageInfo->imageLayout = VK_IMAGE_LAYOUT_GENERAL;
++			imageInfo->imageView = nullptr;
++			imageInfo->sampler = nullptr;
++
++			write->sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
++			write->pNext = nullptr;
++			write->dstSet = nullptr;
++			write->dstBinding = b.binding;
++			write->dstArrayElement = 0;
++			write->descriptorType = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
++			write->descriptorCount = 1;
++			write->pImageInfo = imageInfo++;
++			write->pBufferInfo = nullptr;
++			write->pTexelBufferView = nullptr;
++
++			write++;
++		}
++		else if (b.descriptorType == VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC)
+ 		{
+ 			bufferInfo->buffer = NULL;
+ 			bufferInfo->offset = 0;
+@@ -5814,6 +6846,7 @@
+ 		}
+ 	}
+ 
++	MGVK_CreateComputePipeline(device, shader);
+ 	return shader;
+ }
+ 
+@@ -5825,6 +6858,17 @@
+ 	if (!shader)
+ 		return;
+ 
++	// Etervale fork: a compute shader's pipeline may still run in a frame in flight; effects are disposed rarely, so the
++	// device is waited once rather than the pipeline queued for later destruction.
++	if (shader->computePipeline != VK_NULL_HANDLE)
++	{
++		vkDeviceWaitIdle(device->device);
++		vkDestroyPipeline(device->device, shader->computePipeline, nullptr);
++		vkDestroyPipelineLayout(device->device, shader->computeLayout, nullptr);
++		if (device->shaders[(mgint)MGShaderStage::Compute] == shader)
++			device->shaders[(mgint)MGShaderStage::Compute] = nullptr;
++	}
++
+ 	delete [] shader->bufferInfo;
+ 	delete [] shader->imageInfo;
+ 	delete [] shader->writes;
+@@ -6107,3 +7151,744 @@
+ 	handles->QueueFamilyIndex = static_cast<mgint>(device->graphicsQueueFamily);
+ 	handles->QueueIndex       = 0;
+ }
++
++
++// Etervale fork: the version of the runtime's exported interface, which the fork's framework (monogame/framework,
++// MGG.EnsureRuntimeVersion) checks before anything else: a library built from other sources (the official package, or
++// a stale build of the fork) would fail later at the first missing export, or worse, call an export whose arguments
++// changed. Bumped with every change of an exported function (monogame/issues/002-runtime-version.md).
++#define MGVK_ETERVALE_RUNTIME_VERSION 7
++
++MG_EXPORT mgint MGG_Etervale_RuntimeVersion()
++{
++	return MGVK_ETERVALE_RUNTIME_VERSION;
++}
++
++
++// Etervale fork (issue 012): the driver's statistics of the last bound graphics (compute = 0) or compute (compute = 1)
++// pipeline (VK_KHR_pipeline_executable_properties), as UTF-8 text, one line per statistic of each executable (a stage
++// of the pipeline): "executable<TAB>statistic<TAB>value<LF>". Written into `buffer` (at most `capacity` bytes, NUL
++// terminated); returns the length written, 0 when no pipeline has been bound yet, or -1 when the statistics are off
++// (MG_PIPELINE_STATISTICS=1 was not set at device creation, or the driver lacks the extension).
++MG_EXPORT mgint MGG_GraphicsDevice_GetPipelineStatistics(MGG_GraphicsDevice* device, mgint compute, char* buffer, mgint capacity)
++{
++	assert(device != nullptr);
++	if (!device->pipelineStatistics)
++		return -1;
++	VkPipeline pipeline = compute ? device->lastComputePipeline : device->lastGraphicsPipeline;
++	if (pipeline == VK_NULL_HANDLE || buffer == nullptr || capacity <= 0)
++		return 0;
++
++	VkPipelineInfoKHR info = { VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR };
++	info.pipeline = pipeline;
++	uint32_t executables = 0;
++	vkGetPipelineExecutablePropertiesKHR(device->device, &info, &executables, nullptr);
++	std::vector<VkPipelineExecutablePropertiesKHR> properties(executables, { VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR });
++	vkGetPipelineExecutablePropertiesKHR(device->device, &info, &executables, properties.data());
++
++	std::string text;
++	for (uint32_t e = 0; e < executables; e++)
++	{
++		VkPipelineExecutableInfoKHR executable = { VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR };
++		executable.pipeline = pipeline;
++		executable.executableIndex = e;
++		uint32_t count = 0;
++		vkGetPipelineExecutableStatisticsKHR(device->device, &executable, &count, nullptr);
++		std::vector<VkPipelineExecutableStatisticKHR> statistics(count, { VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR });
++		vkGetPipelineExecutableStatisticsKHR(device->device, &executable, &count, statistics.data());
++		for (const auto& statistic : statistics)
++		{
++			char value[64];
++			switch (statistic.format)
++			{
++			case VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_BOOL32_KHR:
++				snprintf(value, sizeof(value), "%s", statistic.value.b32 ? "true" : "false");
++				break;
++			case VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_INT64_KHR:
++				snprintf(value, sizeof(value), "%lld", (long long)statistic.value.i64);
++				break;
++			case VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_UINT64_KHR:
++				snprintf(value, sizeof(value), "%llu", (unsigned long long)statistic.value.u64);
++				break;
++			case VK_PIPELINE_EXECUTABLE_STATISTIC_FORMAT_FLOAT64_KHR:
++				snprintf(value, sizeof(value), "%g", statistic.value.f64);
++				break;
++			default:
++				snprintf(value, sizeof(value), "?");
++				break;
++			}
++			text += properties[e].name;
++			text += '\t';
++			text += statistic.name;
++			text += '\t';
++			text += value;
++			text += '\n';
++		}
++	}
++
++	mgint length = (mgint)std::min<size_t>(text.size(), (size_t)(capacity - 1));
++	memcpy(buffer, text.data(), (size_t)length);
++	buffer[length] = 0;
++	return length;
++}
++
++
++// GPU timestamp queries recorded in the frame's command buffer, for per-pass GPU timing.
++// A pool holds `count` 64-bit timestamps. Reset a range at the start of a frame (outside any render pass), write
++// timestamps between draws, and read them back a few frames later without waiting.
++
++MG_EXPORT void* MGG_TimestampPool_Create(MGG_GraphicsDevice* device, mguint count)
++{
++	assert(device != nullptr);
++	VkQueryPoolCreateInfo info = { VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO };
++	info.queryType = VK_QUERY_TYPE_TIMESTAMP;
++	info.queryCount = count;
++	VkQueryPool pool = VK_NULL_HANDLE;
++	if (vkCreateQueryPool(device->device, &info, nullptr, &pool) != VK_SUCCESS)
++		return nullptr;
++	return (void*)pool;
++}
++
++MG_EXPORT void MGG_TimestampPool_Destroy(MGG_GraphicsDevice* device, void* pool)
++{
++	assert(device != nullptr);
++	if (pool == nullptr)
++		return;
++	vkDeviceWaitIdle(device->device);
++	vkDestroyQueryPool(device->device, (VkQueryPool)pool, nullptr);
++}
++
++MG_EXPORT mgbool MGG_TimestampPool_Reset(MGG_GraphicsDevice* device, void* pool, mguint first, mguint count)
++{
++	assert(device != nullptr);
++	auto& frame = device->frames[device->frameIndex];
++	// vkCmdResetQueryPool is not allowed inside a render pass, and ending one here would change its load/store.
++	if (!frame.is_recording || device->inRenderPass)
++		return false;
++	vkCmdResetQueryPool(frame.commandBuffer, (VkQueryPool)pool, first, count);
++	return true;
++}
++
++MG_EXPORT void MGG_TimestampPool_Write(MGG_GraphicsDevice* device, void* pool, mguint index)
++{
++	assert(device != nullptr);
++	auto& frame = device->frames[device->frameIndex];
++	if (!frame.is_recording)
++		return;
++	vkCmdWriteTimestamp(frame.commandBuffer, VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT, (VkQueryPool)pool, index);
++}
++
++MG_EXPORT mgbool MGG_TimestampPool_Read(MGG_GraphicsDevice* device, void* pool, mguint first, mguint count, mgulong* ticks)
++{
++	assert(device != nullptr);
++	VkResult result = vkGetQueryPoolResults(device->device, (VkQueryPool)pool, first, count,
++		count * sizeof(mgulong), ticks, sizeof(mgulong), VK_QUERY_RESULT_64_BIT);
++	return result == VK_SUCCESS;
++}
++
++MG_EXPORT mgfloat MGG_TimestampPool_GetPeriod(MGG_GraphicsDevice* device)
++{
++	assert(device != nullptr);
++	return device->deviceProperties.limits.timestampPeriod;
++}
++
++
++// Etervale fork: asynchronous frame capture. MGG_FrameCapture_Start makes every Present copy the image it presents,
++// downscaled by an integer factor, into a host buffer of its frame slot (commands recorded in the frame's own command
++// buffer). When the slot's fence is waited before the slot is reused (MGVK_TryAcquireSwap), the copy is moved to a
++// queue that MGG_FrameCapture_Pop drains. Nothing waits for the GPU beyond what the runtime already waits for, so the
++// frames in flight overlap exactly as without capturing: synchronisation hazards and races stay visible.
++
++static void MGVK_ReleaseCaptureSlot(MGG_GraphicsDevice* device, MGVK_CaptureSlot& slot)
++{
++	if (slot.buffer != VK_NULL_HANDLE)
++		vmaDestroyBuffer(device->allocator, slot.buffer, slot.bufferAllocation);
++	if (slot.image != VK_NULL_HANDLE)
++		vmaDestroyImage(device->allocator, slot.image, slot.imageAllocation);
++	slot = MGVK_CaptureSlot();
++}
++
++static bool MGVK_EnsureCaptureSlot(MGG_GraphicsDevice* device, MGVK_CaptureSlot& slot, uint32_t width, uint32_t height)
++{
++	if (slot.image != VK_NULL_HANDLE && slot.width == width && slot.height == height)
++		return true;
++	// The slot's previous copy belongs to a frame whose fence has been waited: nothing on the GPU uses it any more.
++	MGVK_ReleaseCaptureSlot(device, slot);
++
++	VkImageCreateInfo imageInfo = { VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO };
++	imageInfo.imageType = VK_IMAGE_TYPE_2D;
++	imageInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
++	imageInfo.extent = { width, height, 1 };
++	imageInfo.mipLevels = 1;
++	imageInfo.arrayLayers = 1;
++	imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
++	imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
++	imageInfo.usage = VK_IMAGE_USAGE_TRANSFER_DST_BIT | VK_IMAGE_USAGE_TRANSFER_SRC_BIT;
++	imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
++	VmaAllocationCreateInfo imageAlloc = {};
++	imageAlloc.usage = VMA_MEMORY_USAGE_GPU_ONLY;
++	if (vmaCreateImage(device->allocator, &imageInfo, &imageAlloc, &slot.image, &slot.imageAllocation, nullptr) != VK_SUCCESS)
++		return false;
++
++	VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
++	bufferInfo.size = (VkDeviceSize)width * height * 4;
++	bufferInfo.usage = VK_BUFFER_USAGE_TRANSFER_DST_BIT;
++	VmaAllocationCreateInfo bufferAlloc = {};
++	bufferAlloc.usage = VMA_MEMORY_USAGE_GPU_TO_CPU;
++	bufferAlloc.flags = VMA_ALLOCATION_CREATE_MAPPED_BIT;
++	VmaAllocationInfo info = {};
++	if (vmaCreateBuffer(device->allocator, &bufferInfo, &bufferAlloc, &slot.buffer, &slot.bufferAllocation, &info) != VK_SUCCESS)
++	{
++		MGVK_ReleaseCaptureSlot(device, slot);
++		return false;
++	}
++	slot.mapped = info.pMappedData;
++	slot.width = width;
++	slot.height = height;
++	return true;
++}
++
++static void MGVK_RecordFrameCapture(MGG_GraphicsDevice* device, MGVK_Frame& frame, size_t slotIndex)
++{
++	if (!device->captureEnabled || frame.image_index == (uint32_t)-1 || device->swapchains.empty())
++		return;
++	if (device->captureSlots.size() < device->frames.size())
++		device->captureSlots.resize(device->frames.size());
++	auto& slot = device->captureSlots[slotIndex];
++	auto texture = device->swapchains[frame.image_index].texture;
++	uint32_t width = std::max(1u, device->swapchainWidth / (uint32_t)device->captureDownscale);
++	uint32_t height = std::max(1u, device->swapchainHeight / (uint32_t)device->captureDownscale);
++	if (!MGVK_EnsureCaptureSlot(device, slot, width, height))
++		return;
++
++	auto cmd = frame.commandBuffer;
++	slot.pending = true;
++	slot.frame = device->frame;
++	// Whether a render pass drew into the presented image this frame (an image presented without being drawn is black
++	// or stale: a defect in itself, reported as such).
++	slot.drawn = texture->writeFrame == device->frame && texture->layouts[0] == VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
++
++	VkBufferMemoryBarrier hostBarrier = { VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER };
++	hostBarrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
++	hostBarrier.dstAccessMask = VK_ACCESS_HOST_READ_BIT;
++	hostBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++	hostBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++	hostBarrier.buffer = slot.buffer;
++	hostBarrier.offset = 0;
++	hostBarrier.size = VK_WHOLE_SIZE;
++
++	if (!slot.drawn)
++	{
++		vkCmdFillBuffer(cmd, slot.buffer, 0, VK_WHOLE_SIZE, 0);
++		vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_HOST_BIT, 0, 0, nullptr, 1, &hostBarrier, 0, nullptr);
++		return;
++	}
++
++	auto srcImage = texture->image;
++	MGVK_CmdTransitionImageLayout(cmd, srcImage, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, VK_IMAGE_ASPECT_COLOR_BIT);
++	MGVK_CmdTransitionImageLayout(cmd, slot.image, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_ASPECT_COLOR_BIT);
++
++	VkImageBlit blit = {};
++	blit.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
++	blit.srcSubresource.layerCount = 1;
++	blit.srcOffsets[0] = { 0, 0, 0 };
++	blit.srcOffsets[1] = { (int32_t)(width * device->captureDownscale), (int32_t)(height * device->captureDownscale), 1 };
++	blit.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
++	blit.dstSubresource.layerCount = 1;
++	blit.dstOffsets[0] = { 0, 0, 0 };
++	blit.dstOffsets[1] = { (int32_t)width, (int32_t)height, 1 };
++	vkCmdBlitImage(cmd, srcImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, slot.image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &blit,
++		device->captureDownscale > 1 ? VK_FILTER_LINEAR : VK_FILTER_NEAREST);
++
++	MGVK_CmdTransitionImageLayout(cmd, slot.image, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, VK_IMAGE_ASPECT_COLOR_BIT);
++	MGVK_CmdTransitionImageLayout(cmd, srcImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, VK_IMAGE_LAYOUT_PRESENT_SRC_KHR, VK_IMAGE_ASPECT_COLOR_BIT);
++	MGVK_CmdCopyImageToBuffer(cmd, slot.image, slot.buffer, 0, 0, 0, 0, 0, width, height, 1, VK_IMAGE_ASPECT_COLOR_BIT);
++	vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_HOST_BIT, 0, 0, nullptr, 1, &hostBarrier, 0, nullptr);
++}
++
++static void MGVK_CollectFrameCapture(MGG_GraphicsDevice* device, size_t slotIndex)
++{
++	if (slotIndex >= device->captureSlots.size())
++		return;
++	auto& slot = device->captureSlots[slotIndex];
++	if (!slot.pending)
++		return;
++	slot.pending = false;
++	if (!device->captureEnabled)
++		return;
++	if (device->captureReady.size() >= device->captureMaxQueued)
++	{
++		device->captureDropped++;
++		return;
++	}
++	vmaInvalidateAllocation(device->allocator, slot.bufferAllocation, 0, VK_WHOLE_SIZE);
++	MGVK_CapturedFrame captured;
++	captured.frame = slot.frame;
++	captured.width = slot.width;
++	captured.height = slot.height;
++	captured.drawn = slot.drawn;
++	size_t bytes = (size_t)slot.width * slot.height * 4;
++	captured.rgba.resize(bytes);
++	memcpy(captured.rgba.data(), slot.mapped, bytes);
++	device->captureReady.push_back(std::move(captured));
++}
++
++MG_EXPORT mgbool MGG_FrameCapture_Start(MGG_GraphicsDevice* device, mgint downscale, mgint maxQueued)
++{
++	assert(device != nullptr);
++	if (device->swapchain == VK_NULL_HANDLE || downscale < 1 || maxQueued < 1)
++		return false;
++	// The presented image is read with a blit: the swapchain format must support it.
++	VkFormatProperties props = {};
++	vkGetPhysicalDeviceFormatProperties(device->physicalDevice, device->colorFormat, &props);
++	if ((props.optimalTilingFeatures & VK_FORMAT_FEATURE_BLIT_SRC_BIT) == 0)
++		return false;
++	device->captureDownscale = downscale;
++	device->captureMaxQueued = (size_t)maxQueued;
++	device->captureDropped = 0;
++	device->captureReady.clear();
++	device->captureEnabled = true;
++	return true;
++}
++
++MG_EXPORT void MGG_FrameCapture_Stop(MGG_GraphicsDevice* device)
++{
++	assert(device != nullptr);
++	device->captureEnabled = false;
++	vkDeviceWaitIdle(device->device);
++	for (auto& slot : device->captureSlots)
++		MGVK_ReleaseCaptureSlot(device, slot);
++	device->captureSlots.clear();
++	device->captureReady.clear();
++}
++
++// Copies the oldest captured frame (RGBA8, width × height × 4 bytes) into data and removes it. False when no frame is
++// ready, or when data is too small (then nothing is removed; width and height give the size needed).
++MG_EXPORT mgbool MGG_FrameCapture_Pop(MGG_GraphicsDevice* device, mgbyte* data, mgint dataBytes, mgint* width, mgint* height, mgulong* frame, mgbool* drawn)
++{
++	assert(device != nullptr);
++	if (device->captureReady.empty())
++		return false;
++	auto& front = device->captureReady.front();
++	*width = (mgint)front.width;
++	*height = (mgint)front.height;
++	*frame = (mgulong)front.frame;
++	*drawn = front.drawn;
++	if (data == nullptr || (size_t)dataBytes < front.rgba.size())
++		return false;
++	memcpy(data, front.rgba.data(), front.rgba.size());
++	device->captureReady.pop_front();
++	return true;
++}
++
++MG_EXPORT mgulong MGG_FrameCapture_Dropped(MGG_GraphicsDevice* device)
++{
++	assert(device != nullptr);
++	return (mgulong)device->captureDropped;
++}
++
++
++// Etervale fork: compute dispatches, storage images and storage buffers in the frame's own command buffer
++// (monogame/issues/005-compute-and-uav.md, 006-structured-buffers.md).
++//
++// A dispatch ends the render pass (vkCmdDispatch is not allowed inside one; the next draw begins a new pass, which keeps
++// the targets' content) and is wrapped in two barriers: before it, everything the frame wrote so far (attachments,
++// copies, shader writes) is made visible to the compute shader and its storage images move to the GENERAL layout;
++// after it, what the shader wrote is made visible to every later stage (vertex input, shaders, indirect arguments,
++// copies) and the images return to the layout their sampled descriptors expect. Global memory barriers cover the
++// buffers, so no resource has to be tracked by hand between passes.
++
++MG_EXPORT void MGG_GraphicsDevice_SetShaderBuffer(MGG_GraphicsDevice* device, MGShaderStage stage, mgint slot, MGG_Buffer* buffer, mgbool writable)
++{
++	assert(device != nullptr);
++	assert(buffer == nullptr || buffer->type == MGBufferType::Storage);
++	if (writable)
++	{
++		assert(slot >= 0 && slot < MGVK_MAX_UAV_SLOTS);
++		device->uavs[(mgint)stage][slot] = { buffer, nullptr, 0 };
++		device->storageDirty[(mgint)stage] |= 1u << (16 + slot);
++	}
++	else
++	{
++		assert(slot >= 0 && slot < MAX_TEXTURE_SLOTS);
++		device->readBuffers[(mgint)stage][slot] = buffer;
++		device->storageDirty[(mgint)stage] |= 1u << slot;
++	}
++}
++
++MG_EXPORT void MGG_GraphicsDevice_SetShaderImage(MGG_GraphicsDevice* device, MGShaderStage stage, mgint slot, MGG_Texture* texture, mgint mip)
++{
++	assert(device != nullptr);
++	assert(slot >= 0 && slot < MGVK_MAX_UAV_SLOTS);
++	assert(texture == nullptr || (texture->isStorage && mip >= 0 && mip < (mgint)texture->info.mipLevels));
++	device->uavs[(mgint)stage][slot] = { nullptr, texture, mip };
++	device->storageDirty[(mgint)stage] |= 1u << (16 + slot);
++}
++
++// Everything a dispatch reads may have been written earlier in the frame by a render pass, a copy or another dispatch.
++static void MGVK_BarrierBeforeDispatch(MGG_GraphicsDevice* device, VkCommandBuffer cmd, MGG_Shader* shader)
++{
++	VkMemoryBarrier memory = { VK_STRUCTURE_TYPE_MEMORY_BARRIER };
++	memory.srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT |
++		VK_ACCESS_TRANSFER_WRITE_BIT | VK_ACCESS_SHADER_WRITE_BIT;
++	memory.dstAccessMask = VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT | VK_ACCESS_UNIFORM_READ_BIT |
++		VK_ACCESS_INDIRECT_COMMAND_READ_BIT;
++
++	VkImageMemoryBarrier images[MGVK_MAX_UAV_SLOTS];
++	uint32_t imageCount = 0;
++	const int stage = (int)MGShaderStage::Compute;
++	for (int i = 0; i < MGVK_MAX_UAV_SLOTS; i++)
++	{
++		if ((shader->uavImageSlots & (1u << i)) == 0)
++			continue;
++		auto& uav = device->uavs[stage][i];
++		auto& layout = uav.texture->layouts[uav.mip];
++		if (layout == VK_IMAGE_LAYOUT_GENERAL)
++			continue;	// the same image and mip in two slots
++		auto& b = images[imageCount++];
++		b = { VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER };
++		b.srcAccessMask = VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT | VK_ACCESS_TRANSFER_WRITE_BIT;
++		b.dstAccessMask = VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT;
++		b.oldLayout = layout;
++		b.newLayout = VK_IMAGE_LAYOUT_GENERAL;
++		b.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++		b.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++		b.image = uav.texture->image;
++		b.subresourceRange = { VK_IMAGE_ASPECT_COLOR_BIT, (uint32_t)uav.mip, 1, 0, uav.texture->info.arrayLayers };
++		layout = VK_IMAGE_LAYOUT_GENERAL;
++	}
++
++	vkCmdPipelineBarrier(cmd,
++		VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT |
++		VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT | VK_PIPELINE_STAGE_TRANSFER_BIT | VK_PIPELINE_STAGE_VERTEX_SHADER_BIT |
++		VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
++		VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT | VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
++		0, 1, &memory, 0, nullptr, imageCount, images);
++}
++
++// What the dispatch wrote, visible to whatever comes next; storage images back in the layout of sampled descriptors.
++static void MGVK_BarrierAfterDispatch(MGG_GraphicsDevice* device, VkCommandBuffer cmd, MGG_Shader* shader)
++{
++	VkMemoryBarrier memory = { VK_STRUCTURE_TYPE_MEMORY_BARRIER };
++	memory.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
++	memory.dstAccessMask = MGVK_StorageReadAccess | VK_ACCESS_INDEX_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_READ_BIT |
++		VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
++
++	VkImageMemoryBarrier images[MGVK_MAX_UAV_SLOTS];
++	uint32_t imageCount = 0;
++	const int stage = (int)MGShaderStage::Compute;
++	for (int i = 0; i < MGVK_MAX_UAV_SLOTS; i++)
++	{
++		if ((shader->uavImageSlots & (1u << i)) == 0)
++			continue;
++		auto& uav = device->uavs[stage][i];
++		auto& layout = uav.texture->layouts[uav.mip];
++		uav.texture->writeFrame = device->frame;	// read-backs flush the frame first (MGG_Texture_GetData)
++		uav.texture->frame = device->frame;
++		if (layout != VK_IMAGE_LAYOUT_GENERAL)
++			continue;	// the same image and mip in two slots
++		auto& b = images[imageCount++];
++		b = { VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER };
++		b.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT;
++		b.dstAccessMask = VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT | VK_ACCESS_TRANSFER_READ_BIT |
++			VK_ACCESS_TRANSFER_WRITE_BIT | VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
++		b.oldLayout = VK_IMAGE_LAYOUT_GENERAL;
++		b.newLayout = uav.texture->optimal_layout;
++		b.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++		b.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++		b.image = uav.texture->image;
++		b.subresourceRange = { VK_IMAGE_ASPECT_COLOR_BIT, (uint32_t)uav.mip, 1, 0, uav.texture->info.arrayLayers };
++		layout = uav.texture->optimal_layout;
++	}
++
++	vkCmdPipelineBarrier(cmd,
++		VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
++		MGVK_StorageStages | VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,
++		0, 1, &memory, 0, nullptr, imageCount, images);
++}
++
++// The common part of the two dispatches: checks, render pass end, barrier, pipeline and resources. False when the
++// dispatch cannot run (no compute shader set, or a storage image slot of the shader left empty); it is then skipped
++// with a message instead of recording invalid commands.
++static bool MGVK_BeginDispatch(MGG_GraphicsDevice* device, MGVK_Frame*& frameOut, MGG_Shader*& shaderOut)
++{
++	auto shader = device->shaders[(mgint)MGShaderStage::Compute];
++	if (shader == nullptr || shader->computePipeline == VK_NULL_HANDLE)
++	{
++		fprintf(stderr, "Dispatch without a compute shader: skipped\n");
++		return false;
++	}
++	for (int i = 0; i < MGVK_MAX_UAV_SLOTS; i++)
++	{
++		if ((shader->uavImageSlots & (1u << i)) != 0 && device->uavs[(int)MGShaderStage::Compute][i].texture == nullptr)
++		{
++			fprintf(stderr, "Dispatch of compute shader %u with storage image slot u%d empty: skipped\n", shader->id, i);
++			return false;
++		}
++	}
++
++	auto& frame = device->frames[device->frameIndex];
++	assert(frame.is_recording);
++
++	// The constants are appended to the frame's uniform buffer as for a draw (and it may be submitted early when full).
++	MGVK_EnsureUniformSpace(device, frame);
++
++	auto cmd = frame.commandBuffer;
++	MGVK_EndRenderPass(device, cmd);
++	device->renderTargetDirty = true;
++
++	MGVK_BarrierBeforeDispatch(device, cmd, shader);
++
++	vkCmdBindPipeline(cmd, VK_PIPELINE_BIND_POINT_COMPUTE, shader->computePipeline);
++	device->lastComputePipeline = shader->computePipeline;   // Etervale fork, issue 012
++	if (!shader->bindings.empty())
++	{
++		VkDescriptorSet set = VK_NULL_HANDLE;
++		uint32_t dynamicOffset = 0;
++		MGVK_BindShaderResources(device, device->frame, shader, &set, shader->uniformSlots ? &dynamicOffset : nullptr);
++		vkCmdBindDescriptorSets(cmd, VK_PIPELINE_BIND_POINT_COMPUTE, shader->computeLayout, 0, 1, &set,
++			shader->uniformSlots ? 1 : 0, &dynamicOffset);
++	}
++	device->storageDirty[(int)MGShaderStage::Compute] = 0;
++
++	frameOut = &frame;
++	shaderOut = shader;
++	return true;
++}
++
++MG_EXPORT void MGG_GraphicsDevice_Dispatch(MGG_GraphicsDevice* device, mgint groupsX, mgint groupsY, mgint groupsZ)
++{
++	assert(device != nullptr);
++	if (groupsX <= 0 || groupsY <= 0 || groupsZ <= 0)
++		return;
++
++	MGVK_Frame* frame;
++	MGG_Shader* shader;
++	if (!MGVK_BeginDispatch(device, frame, shader))
++		return;
++	vkCmdDispatch(frame->commandBuffer, (uint32_t)groupsX, (uint32_t)groupsY, (uint32_t)groupsZ);
++	MGVK_BarrierAfterDispatch(device, frame->commandBuffer, shader);
++}
++
++// The group counts are three uints at byteOffset in a storage buffer (VkDispatchIndirectCommand), typically written by
++// an earlier dispatch: the barrier after that dispatch makes them visible to the indirect-argument read.
++MG_EXPORT void MGG_GraphicsDevice_DispatchIndirect(MGG_GraphicsDevice* device, MGG_Buffer* arguments, mgint byteOffset)
++{
++	assert(device != nullptr);
++	assert(arguments != nullptr && arguments->type == MGBufferType::Storage);
++	assert(byteOffset >= 0 && (byteOffset % 4) == 0 && byteOffset + 12 <= arguments->dataSize);
++
++	MGVK_Frame* frame;
++	MGG_Shader* shader;
++	if (!MGVK_BeginDispatch(device, frame, shader))
++		return;
++	arguments->frame = device->frame;
++	arguments->used = true;
++	vkCmdDispatchIndirect(frame->commandBuffer, arguments->buffer, (VkDeviceSize)byteOffset);
++	MGVK_BarrierAfterDispatch(device, frame->commandBuffer, shader);
++}
++
++// The barriers around a copy into a storage buffer: earlier reads and writes of the range finish first (frames in
++// flight included: a pipeline barrier's first scope reaches back through earlier submissions on the queue), and later
++// reads see the new bytes.
++static void MGVK_RecordStorageUpload(VkCommandBuffer cmd, MGG_Buffer* buffer, VkBuffer staging, mgint offset, mgint bytes)
++{
++	VkBufferMemoryBarrier barrier = { VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER };
++	barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++	barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++	barrier.buffer = buffer->buffer;
++	barrier.offset = (VkDeviceSize)offset;
++	barrier.size = (VkDeviceSize)bytes;
++	barrier.srcAccessMask = MGVK_StorageReadAccess;
++	barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
++	vkCmdPipelineBarrier(cmd, MGVK_StorageStages, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 1, &barrier, 0, nullptr);
++
++	VkBufferCopy region = { 0, (VkDeviceSize)offset, (VkDeviceSize)bytes };
++	vkCmdCopyBuffer(cmd, staging, buffer->buffer, 1, &region);
++
++	barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
++	barrier.dstAccessMask = MGVK_StorageReadAccess;
++	vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TRANSFER_BIT, MGVK_StorageStages, 0, 0, nullptr, 1, &barrier, 0, nullptr);
++}
++
++// Fills bytes [offset, offset + dataBytes) of a storage buffer. The bytes go to a staging buffer at once (the caller
++// may reuse its memory on return); the copy into the buffer is:
++// - on the render thread while a frame records: recorded in the frame's command buffer, ordered with the draws and
++//   dispatches as in OpenGL (earlier commands read the old bytes, later ones the new), the staging buffer freed once the
++//   frame is complete (the same staging scheme as MGG_Texture_SetData);
++// - on the render thread between frames: submitted at once on its own command buffer, without waiting; frames submitted
++//   after the call see the new bytes, and the staging buffer is freed once the copy is done (MGVK_CleanupPendingTransfers);
++// - on any other thread: the asynchronous upload of large data (a BVH, monogame/issues/006-structured-buffers.md). The
++//   caller's thread does everything: the staging allocation, the copy into it, the submission of the copy on a command
++//   pool of its own, the wait for it and the release, so the call returns with the bytes in the buffer and every frame
++//   submitted afterwards sees them, while the render thread never waits. The staging memory is a dedicated allocation:
++//   a pooled one of 64 MB made VMA create a new memory block (vkAllocateMemory, 35 ms on the GTX 1050 Ti) under the lock
++//   of the memory type's block list, which the render thread takes for its own staging buffers, and the frame being
++//   presented waited for it (--check-compute: one 45 ms frame; none with the dedicated allocation).
++static void MGVK_UploadStorageOffThread(MGG_GraphicsDevice* device, MGG_Buffer* buffer, mgint offset, mgbyte* data, mgint dataBytes)
++{
++	VkBufferCreateInfo bufferInfo = { VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO };
++	bufferInfo.size = (VkDeviceSize)dataBytes;
++	bufferInfo.usage = VK_BUFFER_USAGE_TRANSFER_SRC_BIT;
++	bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
++	VmaAllocationCreateInfo allocInfo = {};
++	allocInfo.usage = VMA_MEMORY_USAGE_CPU_ONLY;
++	allocInfo.flags = VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT;
++	MGG_Buffer staging;
++	VkResult res = vmaCreateBuffer(device->allocator, &bufferInfo, &allocInfo, &staging.buffer, &staging.allocation, nullptr);
++	VK_CHECK_RESULT(res);
++	VK_SET_OBJECT_NAME(device->device, staging.buffer, VK_OBJECT_TYPE_BUFFER, "MGG_Buffer_SetStorageData::dedicatedStaging");
++	void* dest;
++	vmaMapMemory(device->allocator, staging.allocation, &dest);
++	memcpy(dest, data, dataBytes);
++	vmaUnmapMemory(device->allocator, staging.allocation);
++
++	VkCommandPoolCreateInfo poolInfo = { VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO };
++	poolInfo.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
++	poolInfo.queueFamilyIndex = device->graphicsQueueFamily;
++	VkCommandPool pool;
++	res = vkCreateCommandPool(device->device, &poolInfo, nullptr, &pool);
++	VK_CHECK_RESULT(res);
++	VkCommandBufferAllocateInfo cmdInfo = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO };
++	cmdInfo.commandPool = pool;
++	cmdInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
++	cmdInfo.commandBufferCount = 1;
++	VkCommandBuffer cmd;
++	res = vkAllocateCommandBuffers(device->device, &cmdInfo, &cmd);
++	VK_CHECK_RESULT(res);
++	VkCommandBufferBeginInfo beginInfo = { VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO };
++	beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
++	vkBeginCommandBuffer(cmd, &beginInfo);
++	MGVK_RecordStorageUpload(cmd, buffer, staging.buffer, offset, dataBytes);
++	vkEndCommandBuffer(cmd);
++
++	VkFenceCreateInfo fenceInfo = { VK_STRUCTURE_TYPE_FENCE_CREATE_INFO };
++	VkFence done;
++	vkCreateFence(device->device, &fenceInfo, nullptr, &done);
++	VK_SET_OBJECT_NAME(device->device, done, VK_OBJECT_TYPE_FENCE, "MGG_Buffer_SetStorageData.offThreadDone");
++	{
++		std::lock_guard lock(device->queueMutex);
++		VkSubmitInfo submit = { VK_STRUCTURE_TYPE_SUBMIT_INFO };
++		submit.commandBufferCount = 1;
++		submit.pCommandBuffers = &cmd;
++		res = vkQueueSubmit(device->queue, 1, &submit, done);
++		VK_CHECK_RESULT(res);
++	}
++	vkWaitForFences(device->device, 1, &done, VK_TRUE, UINT64_MAX);
++
++	vkDestroyFence(device->device, done, nullptr);
++	vkDestroyCommandPool(device->device, pool, nullptr);
++	vmaDestroyBuffer(device->allocator, staging.buffer, staging.allocation);
++}
++
++MG_EXPORT void MGG_Buffer_SetStorageData(MGG_GraphicsDevice* device, MGG_Buffer* buffer, mgint offset, mgbyte* data, mgint dataBytes)
++{
++	assert(device != nullptr);
++	assert(buffer != nullptr && buffer->type == MGBufferType::Storage);
++	assert(data != nullptr && dataBytes > 0);
++	assert(offset >= 0 && offset + dataBytes <= buffer->dataSize);
++
++	if (std::this_thread::get_id() != device->renderThread)
++	{
++		MGVK_UploadStorageOffThread(device, buffer, offset, data, dataBytes);
++		return;
++	}
++
++	MGG_Buffer staging;
++	MGVK_BufferCreate(device, dataBytes, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VMA_MEMORY_USAGE_CPU_ONLY, &staging);
++	VK_SET_OBJECT_NAME(device->device, staging.buffer, VK_OBJECT_TYPE_BUFFER, "MGG_Buffer_SetStorageData::stagingBuffer");
++	void* dest;
++	vmaMapMemory(device->allocator, staging.allocation, &dest);
++	memcpy(dest, data, dataBytes);
++	vmaUnmapMemory(device->allocator, staging.allocation);
++
++	if (device->frameIndex < device->frames.size() && device->frames[device->frameIndex].is_recording)
++	{
++		auto& frame = device->frames[device->frameIndex];
++		MGVK_EndRenderPass(device, frame.commandBuffer);
++		device->renderTargetDirty = true;
++		MGVK_RecordStorageUpload(frame.commandBuffer, buffer, staging.buffer, offset, dataBytes);
++		device->frameStaging.push_back({ device->frame, staging });
++		buffer->frame = device->frame;
++		buffer->used = true;
++		return;
++	}
++
++	std::lock_guard lock(device->transferMutex);
++	MGVK_Transfer transfer;
++	transfer.owner = nullptr;
++	transfer.cmd = MGVK_BeginNewCommandBuffer(device, device->transferPool);
++	transfer.staging = staging;
++	MGVK_RecordStorageUpload(transfer.cmd, buffer, staging.buffer, offset, dataBytes);
++	vkEndCommandBuffer(transfer.cmd);
++
++	VkFenceCreateInfo fenceInfo = { VK_STRUCTURE_TYPE_FENCE_CREATE_INFO };
++	vkCreateFence(device->device, &fenceInfo, nullptr, &transfer.done);
++	VK_SET_OBJECT_NAME(device->device, transfer.done, VK_OBJECT_TYPE_FENCE, "MGG_Buffer_SetStorageData.done");
++	{
++		std::lock_guard lock2(device->queueMutex);
++		VkSubmitInfo submit = { VK_STRUCTURE_TYPE_SUBMIT_INFO };
++		submit.commandBufferCount = 1;
++		submit.pCommandBuffers = &transfer.cmd;
++		vkQueueSubmit(device->queue, 1, &submit, transfer.done);
++	}
++	device->pendingTransfers.push_back(transfer);
++}
++
++// Reads bytes [offset, offset + dataBytes) of a storage buffer back to the CPU, waiting for the GPU: a frame that used
++// the buffer and is still recording is submitted first (as MGG_Texture_GetData does for a render target). For tests and
++// tools, not for every frame.
++MG_EXPORT void MGG_Buffer_GetStorageData(MGG_GraphicsDevice* device, MGG_Buffer* buffer, mgint offset, mgbyte* data, mgint dataBytes)
++{
++	assert(device != nullptr);
++	assert(buffer != nullptr && buffer->type == MGBufferType::Storage);
++	assert(data != nullptr && dataBytes > 0);
++	assert(offset >= 0 && offset + dataBytes <= buffer->dataSize);
++
++	std::lock_guard lock(device->transferMutex);
++	std::lock_guard lock2(device->queueMutex);
++
++	auto& frame = device->frames[device->frameIndex];
++	bool restart = false;
++	if (frame.is_recording && buffer->used && buffer->frame == device->frame)
++	{
++		MGVK_FlushCommands(device, frame);
++		restart = true;
++	}
++
++	MGG_Buffer readback;
++	MGVK_BufferCreate(device, dataBytes, VK_BUFFER_USAGE_TRANSFER_DST_BIT, VMA_MEMORY_USAGE_GPU_TO_CPU, &readback);
++	VK_SET_OBJECT_NAME(device->device, readback.buffer, VK_OBJECT_TYPE_BUFFER, "MGG_Buffer_GetStorageData::readback");
++
++	VkCommandBuffer cmd = MGVK_BeginNewCommandBuffer(device, device->transferPool);
++	VkBufferMemoryBarrier barrier = { VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER };
++	barrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++	barrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++	barrier.buffer = buffer->buffer;
++	barrier.offset = (VkDeviceSize)offset;
++	barrier.size = (VkDeviceSize)dataBytes;
++	barrier.srcAccessMask = VK_ACCESS_SHADER_WRITE_BIT | VK_ACCESS_TRANSFER_WRITE_BIT;
++	barrier.dstAccessMask = VK_ACCESS_TRANSFER_READ_BIT;
++	vkCmdPipelineBarrier(cmd, MGVK_StorageStages, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 1, &barrier, 0, nullptr);
++	VkBufferCopy region = { (VkDeviceSize)offset, 0, (VkDeviceSize)dataBytes };
++	vkCmdCopyBuffer(cmd, buffer->buffer, readback.buffer, 1, &region);
++	VkBufferMemoryBarrier host = { VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER };
++	host.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++	host.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
++	host.buffer = readback.buffer;
++	host.size = VK_WHOLE_SIZE;
++	host.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
++	host.dstAccessMask = VK_ACCESS_HOST_READ_BIT;
++	vkCmdPipelineBarrier(cmd, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_HOST_BIT, 0, 0, nullptr, 1, &host, 0, nullptr);
++	MGVK_ExecuteAndFreeCommandBuffer(device, cmd, device->transferPool);
++
++	void* src;
++	vmaMapMemory(device->allocator, readback.allocation, &src);
++	vmaInvalidateAllocation(device->allocator, readback.allocation, 0, VK_WHOLE_SIZE);
++	memcpy(data, src, dataBytes);
++	vmaUnmapMemory(device->allocator, readback.allocation);
++	vmaDestroyBuffer(device->allocator, readback.buffer, readback.allocation);
++
++	if (restart)
++		MGVK_BeginCommandBuffer(frame.commandBuffer);
++}
+--- a/native/monogame/sdl/MGP_sdl.cpp
++++ b/native/monogame/sdl/MGP_sdl.cpp
+@@ -7,6 +7,7 @@
+ #include "mg_common.h"
+ 
+ #include <SDL.h>
++#include <cstdlib>
+ 
+ #if _WIN32
+ #include <combaseapi.h>
+@@ -1066,6 +1067,21 @@
+ 	SDL_SetWindowBordered(window->window, borderless ? SDL_FALSE : SDL_TRUE);
+ }
+ 
++// Etervale fork: the maximized state of a window (monogame/issues/017-window-maximize.md).
++MG_EXPORT mgbyte MGP_Window_GetIsMaximized(MGP_Window* window)
++{
++	assert(window != nullptr);
++
++	return (SDL_GetWindowFlags(window->window) & SDL_WINDOW_MAXIMIZED) != 0;
++}
++
++MG_EXPORT void MGP_Window_Maximize(MGP_Window* window)
++{
++	assert(window != nullptr);
++
++	SDL_MaximizeWindow(window->window);
++}
++
+ void MGP_Window_SetTitle(MGP_Window* window, const char* title)
+ {
+     assert(window != nullptr);
+@@ -1078,6 +1094,15 @@
+ {
+ 	assert(window != nullptr);
+ 
++	// Etervale fork: automation runs (captures, checks, benchmarks) keep their window hidden with MG_HIDDEN_WINDOW=1, so
++	// they never open over the user's desktop; they render to off-screen targets and present to the hidden window.
++	const char* hidden = getenv("MG_HIDDEN_WINDOW");
++	if (show && hidden != nullptr && hidden[0] == '1')
++	{
++		printf("Window kept hidden (MG_HIDDEN_WINDOW=1)\n");
++		return;
++	}
++
+ 	if (show)
+ 		SDL_ShowWindow(window->window);
+ 	else
+--- a/native/monogame/include/api_enums.h
++++ b/native/monogame/include/api_enums.h
+@@ -73,6 +73,9 @@
+     Astc8X8Rgba = 99,
+     Astc10X10Rgba = 100,
+     Astc12X12Rgba = 101,
++    // Etervale fork: a render target that is a 32-bit float depth buffer, sampled as a float texture
++    // (monogame/issues/016-depth-surface-targets.md).
++    Depth32Float = 120,
+ };
+ 
+ enum class MGDepthFormat : mgint
+@@ -81,6 +84,7 @@
+     Depth16 = 1,
+     Depth24 = 2,
+     Depth24Stencil8 = 3,
++    Depth32Float = 4,
+ };
+ 
+ enum class MGClearOptions : mgint
+@@ -90,11 +94,13 @@
+     Stencil = 4,
+ };
+ 
++// Etervale fork: Compute (monogame/issues/005-compute-and-uav.md).
+ enum class MGShaderStage : mgint
+ {
+     Vertex = 0,
+     Pixel = 1,
+-    Count = 2,
++    Compute = 2,
++    Count = 3,
+ };
+ 
+ enum class MGIndexElementSize : mgint
+@@ -212,11 +218,13 @@
+     Comparison = 1,
+ };
+ 
++// Etervale fork: Storage, the buffers shaders read and write (monogame/issues/006-structured-buffers.md).
+ enum class MGBufferType : mgint
+ {
+     Index = 0,
+     Vertex = 1,
+     Constant = 2,
++    Storage = 3,
+ };
+ 
+ enum class MGTextureType : mgint
+--- a/native/monogame/faudio/MGA_faudio.cpp
++++ b/native/monogame/faudio/MGA_faudio.cpp
+@@ -613,6 +613,7 @@
+ 
+ 			raw = r;
+ 			freeRawBuffers.erase(freeRawBuffers.begin() + i);
++			break; // Etervale fork (issue 009): take one buffer; continuing lost every earlier match
+ 		}
+ 	}
+ 

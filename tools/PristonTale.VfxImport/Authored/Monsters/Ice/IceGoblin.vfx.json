@@ -1,0 +1,37 @@
+[
+  {
+    "name": "vfx.monster.icegoblin.skill",
+    "duration": 1.8571,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          1.8571,
+          1.8571
+        ],
+        "carryEffect": "particle.IceGoblin",
+        "bone": "Bip-hammer",
+        "follow": true,
+        "boneWorld": true
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceGoblinHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          10,
+          -100
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

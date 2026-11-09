@@ -1,0 +1,170 @@
+[
+  {
+    "name": "vfx.monster.stygianlord.pillar",
+    "duration": 2.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "rise": [
+          560.0,
+          700.0
+        ],
+        "moveTime": [
+          0.1143,
+          0.1143
+        ],
+        "lifetime": [
+          0.6,
+          0.6
+        ],
+        "follow": false,
+        "carryEffect": "particle.StygianlordParticle1"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.StygianlordParticle3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.stygianlord.skill.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "count": 10,
+        "delayStep": 0.1,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          -3.9,
+          0
+        ],
+        "ring": [
+          46.9,
+          70.3
+        ],
+        "ringStart": 0,
+        "ringStep": -36,
+        "lifetime": [
+          0.0143,
+          0.0143
+        ],
+        "endEffect": "vfx.monster.stygianlord.pillar"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.8627,
+          0.3922,
+          0.1961
+        ],
+        "power": 220,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.stygianlord.shothit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.StygianlordHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.stygianlord.attack.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Stygianlord/StygianlordShot1.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 52.5,
+        "fade": "InOut",
+        "fadeOut": 0.3
+      },
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 450,
+        "carryEffect": "particle.StygianlordParticle2",
+        "endEffect": "vfx.monster.stygianlord.shothit"
+      }
+    ]
+  }
+]

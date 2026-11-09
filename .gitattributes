@@ -1,0 +1,4 @@
+# Text is stored with LF line endings whatever the checkout settings (AGENTS.md, Platforms); shell scripts keep LF in
+# the working tree too, so a clone made on Windows still runs them on Linux and macOS.
+* text=auto
+*.sh text eol=lf

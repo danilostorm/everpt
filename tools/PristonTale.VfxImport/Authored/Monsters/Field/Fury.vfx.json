@@ -1,0 +1,84 @@
+[
+  {
+    "name": "vfx.monster.fury.skill",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/MonsterFury/m_furyhead.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "delay": 0.0286,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 0,
+        "modelFrames": 30,
+        "modelSpeed": 23.3333,
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.2
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/MonsterFury/m_furyhead.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "delay": 0.1143,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 0,
+        "modelFrames": 30,
+        "modelSpeed": 17.5,
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.2
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/MonsterFury/m_fury-jin.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "delay": 0.0286,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 0,
+        "modelFrames": 30,
+        "modelSpeed": 17.5,
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FuryHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.FuryHit2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          9.77,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

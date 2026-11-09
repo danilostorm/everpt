@@ -1,0 +1,46 @@
+[
+  {
+    "name": "vfx.monster.hobogolem.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.hobogolem.skill.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          27.3438,
+          30,
+          -50
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 900,
+        "reach": 8.0,
+        "carryEffect": "particle.DMachineParticle1",
+        "endEffect": "vfx.monster.hypermachine.explosion",
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Missile/Mis.smd",
+        "faceGoal": true,
+        "blend": "Alpha"
+      }
+    ]
+  }
+]

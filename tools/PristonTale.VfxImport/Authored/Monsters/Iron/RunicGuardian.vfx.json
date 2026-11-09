@@ -1,0 +1,185 @@
+[
+  {
+    "name": "vfx.monster.runicguardian.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.IronMonsterRunicGuardianHand",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 L Hand",
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.IronMonsterRunicGuardianHand",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.runicguardian.attack.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 377.3438,
+        "reach": 25,
+        "carryEffect": "particle.IronMonsterRunicGuardianShot1",
+        "endEffect": "vfx.monster.runicguardian.impact",
+        "lifetime": [
+          0.8571,
+          0.8571
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.runicguardian.impact",
+    "duration": 1.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 2
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.runicguardian.skill.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/Skill3Texture/spark04_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          156.25,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          19.5312,
+          0
+        ],
+        "width": [
+          15.6,
+          15.6
+        ],
+        "delay": 1.0,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.2
+      },
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/Skill3Texture/light2_0.bmp",
+        "frames": 6,
+        "frameTime": 0.0429,
+        "loop": true,
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          156.25,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          19.5312,
+          0
+        ],
+        "width": [
+          15.6,
+          15.6
+        ],
+        "delay": 1.0,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IronMonsterRunicGuardian",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          156.25,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.IronMonsterRunicGuardianLight1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          156.25,
+          0
+        ],
+        "turn": true,
+        "delay": 1.0
+      },
+      {
+        "effect": "particle.IronMonsterRunicGuardianLight2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "turn": true,
+        "delay": 1.0
+      }
+    ]
+  }
+]

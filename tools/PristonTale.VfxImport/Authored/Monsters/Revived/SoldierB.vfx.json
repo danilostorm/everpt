@@ -1,0 +1,99 @@
+[
+  {
+    "name": "vfx.monster.soldierb.skill",
+    "duration": 1.1429,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 waraxe",
+        "boneWorld": true,
+        "bladeLength": 30.0,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.soldierb.skill.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 300,
+        "decay": 10
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.tripleimpact",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.soldierb.attack.hit",
+    "duration": 1.5,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.1569,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.critflash",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,136 @@
+[
+  {
+    "name": "vfx.monster.coldeye.attack.hit",
+    "duration": 1.6,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/DeadLay/Ray02.bmp",
+        "color": [
+          200,
+          200,
+          200,
+          255
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          64,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          64,
+          0
+        ],
+        "width": [
+          11.7,
+          11.7
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "Fall"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceColdEyeStart1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          64,
+          -24
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.IceColdEyeHit1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          64,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.coldeye.skill",
+    "duration": 3.5,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "count": 20,
+        "delayStep": 0.1,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "ring": [
+          39,
+          53
+        ],
+        "ringStart": 90,
+        "ringStep": -22.5,
+        "radial": [
+          350,
+          350
+        ],
+        "moveTime": [
+          0.3,
+          0.3
+        ],
+        "lifetime": [
+          0.3,
+          0.3
+        ],
+        "carryEffect": "particle.IceColdEyeSkill1"
+      },
+      {
+        "shape": "Billboard",
+        "count": 20,
+        "delayStep": 0.1,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "ring": [
+          39,
+          53
+        ],
+        "ringStart": 90,
+        "ringStep": -22.5,
+        "lifetime": [
+          0.02,
+          0.02
+        ],
+        "endEffect": "particle.StygianlordParticle3"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.3922,
+          1.0
+        ],
+        "power": 220,
+        "decay": 1
+      }
+    ]
+  }
+]

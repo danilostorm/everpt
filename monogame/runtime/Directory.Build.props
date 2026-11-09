@@ -1,0 +1,7 @@
+<Project>
+  <!--
+    Stops MSBuild from importing the repository's Directory.Build.props (C# settings: TreatWarningsAsErrors,
+    WarningLevel 9999, analyzers) into the C++ project premake generates here for the Windows build of the runtime fork
+    (build-windows.ps1). The C++ warning settings come from src/premake5.lua.
+  -->
+</Project>

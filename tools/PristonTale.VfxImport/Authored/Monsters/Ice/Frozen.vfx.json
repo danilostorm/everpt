@@ -1,0 +1,299 @@
+[
+  {
+    "name": "vfx.monster.frozen.attack.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "texture": "Effect/Particle/flare.tga",
+        "color": [
+          50,
+          70,
+          255,
+          200
+        ],
+        "size": [
+          30,
+          30
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 410,
+        "reach": 3.2,
+        "everyEffect": "vfx.monster.frozen.bolt.trail",
+        "every": 0.0143,
+        "endEffect": "vfx.monster.frozen.bolthit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.frozen.bolt.trail",
+    "duration": 0.2,
+    "parts": [
+      {
+        "texture": "Effect/Particle/flare.tga",
+        "color": [
+          50,
+          70,
+          255,
+          200
+        ],
+        "anchor": "Point",
+        "size": [
+          30,
+          30
+        ],
+        "burst": [
+          40,
+          70
+        ],
+        "count": 3,
+        "lifetime": [
+          0.1,
+          0.1
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.frozen.bolthit",
+    "duration": 1.6,
+    "parts": [
+      {
+        "animation": "ParticleMeteo1_blue.ini",
+        "shape": "Line",
+        "lineSeconds": 0.1143,
+        "count": 11,
+        "delayStep": 0.0036,
+        "sized": false,
+        "anchor": "Point",
+        "radial": [
+          41,
+          82
+        ],
+        "rise": [
+          41,
+          109
+        ],
+        "gravity": [
+          -191.4,
+          -114.8
+        ],
+        "width": [
+          0.54,
+          0.54
+        ],
+        "lifetime": [
+          0.786,
+          1.057
+        ]
+      },
+      {
+        "animation": "ParticleMeteo1_blue.ini",
+        "shape": "Streak",
+        "count": 12,
+        "delayRandom": 0.2,
+        "sized": false,
+        "anchor": "Point",
+        "shell": [
+          28.2,
+          16.5,
+          28.2
+        ],
+        "burst": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          0.39,
+          1.56
+        ],
+        "lifetime": [
+          0.3,
+          0.4
+        ],
+        "fade": "Fall"
+      },
+      {
+        "animation": "ParticleMeteo1_blue.ini",
+        "count": 2,
+        "anchor": "Point"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.7843,
+          0.7843
+        ],
+        "power": 170,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.frozen.skill.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "texture": "Effect/Particle/flare.tga",
+        "color": [
+          50,
+          70,
+          255,
+          200
+        ],
+        "size": [
+          80,
+          80
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 410,
+        "reach": 3.2,
+        "everyEffect": "vfx.monster.frozen.ball.trail",
+        "every": 0.0143,
+        "endEffect": "vfx.monster.frozen.ballhit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.frozen.ball.trail",
+    "duration": 0.35,
+    "parts": [
+      {
+        "texture": "Effect/Particle/flare.tga",
+        "color": [
+          50,
+          60,
+          255,
+          200
+        ],
+        "anchor": "Point",
+        "size": [
+          50,
+          80
+        ],
+        "growth": -80,
+        "count": 2,
+        "lifetime": [
+          0.3,
+          0.3
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.frozen.ballhit",
+    "duration": 1.6,
+    "parts": [
+      {
+        "animation": "ParticleMeteo1_blue.ini",
+        "shape": "Line",
+        "lineSeconds": 0.1143,
+        "count": 11,
+        "delayStep": 0.0036,
+        "sized": false,
+        "anchor": "Point",
+        "radial": [
+          41,
+          82
+        ],
+        "rise": [
+          41,
+          109
+        ],
+        "gravity": [
+          -191.4,
+          -114.8
+        ],
+        "width": [
+          0.54,
+          0.54
+        ],
+        "lifetime": [
+          0.786,
+          1.057
+        ]
+      },
+      {
+        "animation": "ParticleMeteo1_blue.ini",
+        "shape": "Streak",
+        "count": 12,
+        "delayRandom": 0.2,
+        "sized": false,
+        "anchor": "Point",
+        "shell": [
+          28.2,
+          16.5,
+          28.2
+        ],
+        "burst": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          0.39,
+          1.56
+        ],
+        "lifetime": [
+          0.3,
+          0.4
+        ],
+        "fade": "Fall"
+      },
+      {
+        "animation": "ParticleMeteo1_blue.ini",
+        "count": 2,
+        "anchor": "Point"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.7843,
+          0.7843
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ]
+  }
+]

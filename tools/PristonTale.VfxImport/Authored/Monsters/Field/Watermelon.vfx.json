@@ -1,0 +1,96 @@
+[
+  {
+    "name": "vfx.monster.watermelon.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.watermelon.icehit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/EnchantWeapon/Ase/EW-ice.smd",
+        "blend": "Additive",
+        "modelStart": 0,
+        "modelFrames": 20,
+        "modelSpeed": 70,
+        "fade": "Fall"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.5882,
+          0.5882,
+          1.0
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.watermelon.skill.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 492.1875,
+        "reach": 4,
+        "carryEffect": "particle.IceShot1",
+        "endEffect": "vfx.monster.watermelon.icehit"
+      }
+    ]
+  }
+]

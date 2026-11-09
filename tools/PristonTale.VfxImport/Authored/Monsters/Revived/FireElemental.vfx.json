@@ -1,0 +1,26 @@
+[
+  {
+    "name": "vfx.monster.fireelemental.attack.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -25
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          12,
+          0
+        ],
+        "speed": 630.0,
+        "reach": 10,
+        "carryEffect": "particle.Skill4PhoenixShot",
+        "endEffect": "particle.FireElementalHit"
+      }
+    ]
+  }
+]

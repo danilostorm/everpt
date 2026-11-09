@@ -1,0 +1,130 @@
+[
+  {
+    "name": "vfx.monster.lightningcrystal.attack.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/DeadLay/spark01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          136,
+          -16
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          12,
+          0
+        ],
+        "count": 2,
+        "width": [
+          9.77,
+          9.77
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "Rise"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          12,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_magic_L 1.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_magic_L 2.wav",
+        "pick": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.LightStart1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          136,
+          -16
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.LightHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          12,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.lightningcrystal.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/MonsterFury/m_fury-jin_g.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "delay": 0.0286,
+        "modelStart": 1,
+        "modelFrames": 30,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4371,
+        "fadeOut": 0.4371
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FuryHit1_g",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.FuryHit2_g",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          9.77,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

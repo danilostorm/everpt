@@ -1,0 +1,44 @@
+[
+  {
+    "name": "vfx.monster.stonegolem.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/StoneGolem/m_StoneGolem.smd",
+        "blend": "Alpha",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          30
+        ],
+        "angles": [
+          0,
+          0,
+          0
+        ],
+        "modelStart": 1.0,
+        "modelFrames": 30,
+        "modelSpeed": 35.0,
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "Fall"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.StoneGolemHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.8594,
+          -90
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

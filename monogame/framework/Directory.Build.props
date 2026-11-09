@@ -1,0 +1,14 @@
+<Project>
+  <!--
+    MonoGame.Framework v3.8.6 (MS-PL), Native platform: MonoGame's code with the fork's changes, not Etervale's own code.
+    It does not import a repository-level Directory.Build.props (analyzers at latest-recommended, nullable
+    reference types, implicit usings), which upstream code was never written against; it builds with MonoGame's own
+    compiler settings (MonoGame.Framework.Native.csproj). Every compiler warning is still an error (AGENTS.md), and the
+    upstream warnings were fixed at their cause (monogame/framework/README.md).
+  -->
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <MSBuildTreatWarningsAsErrors>true</MSBuildTreatWarningsAsErrors>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+</Project>

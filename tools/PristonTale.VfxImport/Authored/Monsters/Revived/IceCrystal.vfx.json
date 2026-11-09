@@ -1,0 +1,135 @@
+[
+  {
+    "name": "vfx.monster.revived.fx.crystal.icehit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/EnchantWeapon/Ase/EW-ice.smd",
+        "blend": "Additive",
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 70,
+        "lifetime": [
+          0.2857,
+          0.2857
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.0714,
+        "fadeOut": 0.0714
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.5882,
+          0.5882,
+          1.0
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceHIt1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.icecrystal.attack.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          136,
+          -16
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          12,
+          0
+        ],
+        "speed": 492.1875,
+        "reach": 5,
+        "lifetime": [
+          2.1429,
+          2.1429
+        ],
+        "carryEffect": "particle.IceShot1",
+        "endEffect": "vfx.monster.revived.fx.crystal.icehit"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_magic_C 1.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_magic_C 2.wav",
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.icecrystal.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/MonsterFury/m_fury-jin_b.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "delay": 0.0286,
+        "modelStart": 1,
+        "modelFrames": 30,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4371,
+        "fadeOut": 0.4371
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FuryHit1_b",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.FuryHit2_b",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          9.77,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

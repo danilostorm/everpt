@@ -1,0 +1,2215 @@
+[
+  {
+    "name": "Extreme Shield",
+    "description": "Temporarily increases block rating of the current shield",
+    "level": 10,
+    "stamina": 34,
+    "step": 2,
+    "weapons": [
+      "DS1"
+    ],
+    "code": 16842753,
+    "use": "Right",
+    "mana": [
+      12,
+      14,
+      17,
+      20,
+      23,
+      26,
+      30,
+      34,
+      39,
+      44
+    ],
+    "icon": "TM10 Ex_shield"
+  },
+  {
+    "name": "Mechanic Bomb",
+    "description": "Throws a bomb to enemies within explosive blast radius",
+    "level": 12,
+    "stamina": 28,
+    "step": 2,
+    "weapons": [],
+    "code": 16842754,
+    "use": "Right",
+    "mana": [
+      8,
+      10,
+      12,
+      14,
+      17,
+      20,
+      23,
+      26,
+      29,
+      33
+    ],
+    "icon": "TM12 M_bomb"
+  },
+  {
+    "name": "Poison Attribute",
+    "description": "Permanently raises resistance to poison",
+    "level": 14,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [],
+    "code": 16842756,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TM14 P_attribute"
+  },
+  {
+    "name": "Physical Absorption",
+    "description": "Temporarily increases the body's ability to absorb damage",
+    "level": 17,
+    "stamina": 30,
+    "step": 2,
+    "weapons": [],
+    "code": 16842755,
+    "use": "Right",
+    "mana": [
+      20,
+      24,
+      28,
+      32,
+      36,
+      40,
+      44,
+      48,
+      52,
+      56
+    ],
+    "icon": "TM17 Ph_absorb"
+  },
+  {
+    "name": "Melee Mastery",
+    "description": "Increases efficiency in melee weapons, increasing Attack Power permanently",
+    "level": 10,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [
+      "WA1",
+      "WC1",
+      "WH1",
+      "WS2"
+    ],
+    "code": 33619969,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TF10 M_mastery"
+  },
+  {
+    "name": "Fire Attribute",
+    "description": "Permanently raises resistance to fire",
+    "level": 12,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [],
+    "code": 33619970,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TF12 F_attribute"
+  },
+  {
+    "name": "Raving",
+    "description": "Goes berserk for a short period of time, but loses HP with each attack",
+    "level": 14,
+    "stamina": 35,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WC1",
+      "WH1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 33619971,
+    "use": "Both",
+    "mana": [
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      29,
+      32,
+      35
+    ],
+    "icon": "TF14 raving"
+  },
+  {
+    "name": "Impact",
+    "description": "Raises attack rating to accurately strike the enemy",
+    "level": 17,
+    "stamina": 37,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WC1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 33619972,
+    "use": "Both",
+    "mana": [
+      18,
+      20,
+      22,
+      24,
+      26,
+      29,
+      33,
+      37,
+      41,
+      45
+    ],
+    "icon": "TF17 impact"
+  },
+  {
+    "name": "Pike Wind",
+    "description": "Creates a whirlwind to push back and damage enemies",
+    "level": 10,
+    "stamina": 27,
+    "step": 2,
+    "weapons": [
+      "WP1"
+    ],
+    "code": 50397185,
+    "use": "Right",
+    "mana": [
+      14,
+      16,
+      18,
+      20,
+      23,
+      26,
+      29,
+      32,
+      35,
+      39
+    ],
+    "icon": "TP10 P_wind"
+  },
+  {
+    "name": "Ice Attribute",
+    "description": "Permanently raises resistance to frost",
+    "level": 12,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [],
+    "code": 50397186,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TP12 I_attribute"
+  },
+  {
+    "name": "Critical Hit",
+    "description": "Aims for enemies' weak spots to raise probability of a critical strike",
+    "level": 14,
+    "stamina": 31,
+    "step": 2,
+    "weapons": [
+      "WP1",
+      "WC1",
+      "WH1",
+      "WS2"
+    ],
+    "code": 50397187,
+    "use": "Both",
+    "mana": [
+      14,
+      16,
+      18,
+      20,
+      23,
+      26,
+      29,
+      33,
+      37,
+      41
+    ],
+    "icon": "TP14 Cri_hit"
+  },
+  {
+    "name": "Jumping Crash",
+    "description": "Leaps up into the air to strikedown with a powerful blow",
+    "level": 17,
+    "stamina": 34,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 50397188,
+    "use": "Both",
+    "mana": [
+      16,
+      18,
+      20,
+      23,
+      26,
+      29,
+      32,
+      35,
+      39,
+      43
+    ],
+    "icon": "TP17 J_Crash"
+  },
+  {
+    "name": "Scout Hawk",
+    "description": "Summons a hawk to scout the surrounding area, raising attack rating",
+    "level": 10,
+    "stamina": 25,
+    "step": 2,
+    "weapons": [],
+    "code": 67174401,
+    "use": "Right",
+    "mana": [
+      14,
+      16,
+      18,
+      20,
+      23,
+      26,
+      30,
+      34,
+      39,
+      44
+    ],
+    "icon": "TA10 S_hawk"
+  },
+  {
+    "name": "Shooting Mastery",
+    "description": "Permanently raises attack power with bows and crossbows",
+    "level": 12,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67174402,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TA12 S_mastery"
+  },
+  {
+    "name": "Wind Arrow",
+    "description": "Imbues an arrow with wind properties to increase attack power",
+    "level": 14,
+    "stamina": 25,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67174403,
+    "use": "Both",
+    "mana": [
+      12,
+      14,
+      16,
+      18,
+      20,
+      23,
+      26,
+      29,
+      32,
+      35
+    ],
+    "icon": "TA14 W_arrow"
+  },
+  {
+    "name": "Perfect Aim",
+    "description": "Makes an aimed shot with increased Attack Rating and Power",
+    "level": 17,
+    "stamina": 29,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67174404,
+    "use": "Both",
+    "mana": [
+      14,
+      16,
+      18,
+      20,
+      22,
+      25,
+      28,
+      31,
+      35,
+      39
+    ],
+    "icon": "TA17 P_aim"
+  },
+  {
+    "name": "Sword Blast",
+    "description": "throws a devastating sword to attack enemies",
+    "level": 10,
+    "stamina": 22,
+    "step": 2,
+    "weapons": [
+      "WS2"
+    ],
+    "code": 83951617,
+    "use": "Both",
+    "mana": [
+      8,
+      10,
+      12,
+      15,
+      18,
+      21,
+      25,
+      29,
+      33,
+      38
+    ],
+    "icon": "MN10 S_Blast"
+  },
+  {
+    "name": "Holy Body",
+    "description": "become holy to increase absorption against undead units.",
+    "level": 12,
+    "stamina": 28,
+    "step": 2,
+    "weapons": [],
+    "code": 83951618,
+    "use": "Right",
+    "mana": [
+      18,
+      21,
+      24,
+      27,
+      30,
+      34,
+      38,
+      42,
+      46,
+      50
+    ],
+    "icon": "MN12 H_Body"
+  },
+  {
+    "name": "Physical Training",
+    "description": "physical training increases stamina permanently",
+    "level": 14,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [],
+    "code": 83951619,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "MN14 P_Traning"
+  },
+  {
+    "name": "Double Crash",
+    "description": "makes 2 consecutive attacks to enemies.",
+    "level": 17,
+    "stamina": 35,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WC1",
+      "WS2"
+    ],
+    "code": 83951620,
+    "use": "Right",
+    "mana": [
+      18,
+      20,
+      22,
+      24,
+      27,
+      30,
+      33,
+      36,
+      39,
+      42
+    ],
+    "icon": "MN17 D_Crash"
+  },
+  {
+    "name": "Shield Strike",
+    "description": "hurls a shield to attack enemies.",
+    "level": 10,
+    "stamina": 23,
+    "step": 2,
+    "weapons": [
+      "DS1"
+    ],
+    "code": 100728833,
+    "use": "Right",
+    "mana": [
+      16,
+      18,
+      20,
+      22,
+      24,
+      27,
+      30,
+      33,
+      36,
+      40
+    ],
+    "icon": "MA10 S_Strike"
+  },
+  {
+    "name": "Farina",
+    "description": "throws a spear that creates illusions",
+    "level": 12,
+    "stamina": 26,
+    "step": 2,
+    "weapons": [
+      "WT1"
+    ],
+    "code": 100728834,
+    "use": "Both",
+    "mana": [
+      17,
+      19,
+      21,
+      23,
+      26,
+      29,
+      32,
+      35,
+      38,
+      41
+    ],
+    "icon": "MA12 Farina"
+  },
+  {
+    "name": "Throwing Mastery",
+    "description": "train javelin attacks to increase damage permanently.",
+    "level": 14,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [
+      "WT1"
+    ],
+    "code": 100728835,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "MA14 T_Mastery"
+  },
+  {
+    "name": "Bigger Spear",
+    "description": "attack an enemy with holy javelin.",
+    "level": 17,
+    "stamina": 32,
+    "step": 2,
+    "weapons": [
+      "WP1",
+      "WT1"
+    ],
+    "code": 100728836,
+    "use": "Both",
+    "mana": [
+      19,
+      21,
+      23,
+      25,
+      28,
+      31,
+      34,
+      37,
+      40,
+      43
+    ],
+    "icon": "MA17 V_Spear"
+  },
+  {
+    "name": "Healing",
+    "description": "heals life with its holy magic.",
+    "level": 10,
+    "stamina": 15,
+    "step": 1,
+    "weapons": [
+      "WM1"
+    ],
+    "code": 117506049,
+    "use": "Right",
+    "mana": [
+      11,
+      14,
+      17,
+      20,
+      24,
+      28,
+      32,
+      37,
+      42,
+      47
+    ],
+    "icon": "MP10 Healing"
+  },
+  {
+    "name": "Holy Bolt",
+    "description": "hurls a holy bolt to enemies.",
+    "level": 12,
+    "stamina": 11,
+    "step": 1,
+    "weapons": [
+      "WM1"
+    ],
+    "code": 117506050,
+    "use": "Both",
+    "mana": [
+      14,
+      17,
+      20,
+      23,
+      27,
+      31,
+      35,
+      40,
+      45,
+      50
+    ],
+    "icon": "MP12 HolyBolt"
+  },
+  {
+    "name": "Multi Spark",
+    "description": "Releases magical sparks to attack enemies.",
+    "level": 14,
+    "stamina": 14,
+    "step": 1,
+    "weapons": [
+      "WM1"
+    ],
+    "code": 117506051,
+    "use": "Right",
+    "mana": [
+      16,
+      19,
+      22,
+      25,
+      29,
+      33,
+      37,
+      42,
+      47,
+      52
+    ],
+    "icon": "MP14 M_Spark"
+  },
+  {
+    "name": "Holy Mind",
+    "description": "It weakens enemy's attack in a given time.",
+    "level": 17,
+    "stamina": 19,
+    "step": 1,
+    "weapons": [
+      "WM1"
+    ],
+    "code": 117506052,
+    "use": "Right",
+    "mana": [
+      22,
+      25,
+      28,
+      32,
+      36,
+      40,
+      45,
+      50,
+      55,
+      60
+    ],
+    "icon": "MP17 HolyMind"
+  },
+  {
+    "name": "Agony",
+    "description": "sacrifice oneself to increase spirit.",
+    "level": 10,
+    "stamina": 12,
+    "step": 1,
+    "weapons": [
+      "WM1"
+    ],
+    "code": 134283265,
+    "use": "Right",
+    "mana": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "icon": "MM10 Agony"
+  },
+  {
+    "name": "Fire Bolt",
+    "description": "calls down small fireballs to attack enemies",
+    "level": 12,
+    "stamina": 11,
+    "step": 1,
+    "weapons": [
+      "WM1"
+    ],
+    "code": 134283266,
+    "use": "Both",
+    "mana": [
+      16,
+      18,
+      20,
+      22,
+      25,
+      28,
+      31,
+      34,
+      38,
+      42
+    ],
+    "icon": "MM12 FireBolt"
+  },
+  {
+    "name": "Zenith",
+    "description": "Increase element features with strong spirit for a given time.",
+    "level": 14,
+    "stamina": 15,
+    "step": 1,
+    "weapons": [
+      "WM1"
+    ],
+    "code": 134283267,
+    "use": "Right",
+    "mana": [
+      18,
+      20,
+      22,
+      25,
+      28,
+      31,
+      35,
+      39,
+      43,
+      48
+    ],
+    "icon": "MM14 Zenith"
+  },
+  {
+    "name": "Fire Ball",
+    "description": "calls down huge fireballs to attack enemies",
+    "level": 17,
+    "stamina": 19,
+    "step": 1,
+    "weapons": [
+      "WM1"
+    ],
+    "code": 134283268,
+    "use": "Right",
+    "mana": [
+      22,
+      24,
+      26,
+      28,
+      31,
+      34,
+      38,
+      42,
+      46,
+      50
+    ],
+    "icon": "MM17 FireBall"
+  },
+  {
+    "name": "Stinger",
+    "description": "Dash straight into the enemy and deal damage.",
+    "level": 10,
+    "stamina": 22,
+    "step": 2,
+    "weapons": [
+      "WD1"
+    ],
+    "code": 268500993,
+    "use": "Both",
+    "mana": [
+      8,
+      10,
+      12,
+      15,
+      18,
+      21,
+      25,
+      29,
+      33,
+      38
+    ],
+    "icon": "TA10 Stingger"
+  },
+  {
+    "name": "Running Hit",
+    "description": "Deals continuous damage to the enemy while spinning",
+    "level": 12,
+    "stamina": 27,
+    "step": 2,
+    "weapons": [
+      "WD1"
+    ],
+    "code": 268500994,
+    "use": "Both",
+    "mana": [
+      14,
+      16,
+      18,
+      20,
+      23,
+      26,
+      29,
+      32,
+      35,
+      39
+    ],
+    "icon": "TA12 R_Hit"
+  },
+  {
+    "name": "Dual Wield Mastery",
+    "description": "Permanently raises the base attack power of dagger-type weapons",
+    "level": 14,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [
+      "WD1"
+    ],
+    "code": 268500995,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TA14 D_Mastery"
+  },
+  {
+    "name": "Wisp",
+    "description": "Reduces targeted enemy damage for a period of time",
+    "level": 17,
+    "stamina": 37,
+    "step": 2,
+    "weapons": [
+      "WD1"
+    ],
+    "code": 268500996,
+    "use": "Both",
+    "mana": [
+      18,
+      20,
+      22,
+      24,
+      26,
+      29,
+      33,
+      37,
+      41,
+      45
+    ],
+    "icon": "TA17 Wisp"
+  },
+  {
+    "name": "Dark Bolt",
+    "description": "Hits the enemy with an almighty bolt of dark magic created with sorcery",
+    "level": 10,
+    "stamina": 8,
+    "step": 1,
+    "weapons": [
+      "WN1"
+    ],
+    "code": 1342242817,
+    "use": "Both",
+    "mana": [
+      14,
+      16,
+      18,
+      20,
+      22,
+      24,
+      26,
+      28,
+      30,
+      32
+    ],
+    "icon": "MS10 Darkbolt"
+  },
+  {
+    "name": "Dark Wave",
+    "description": "Performs a consecutive area attack with almighty bolts of dark magic",
+    "level": 12,
+    "stamina": 19,
+    "step": 1,
+    "weapons": [
+      "WN1"
+    ],
+    "code": 1342242818,
+    "use": "Both",
+    "mana": [
+      22,
+      24,
+      26,
+      28,
+      31,
+      34,
+      38,
+      42,
+      46,
+      50
+    ],
+    "icon": "MS12 Darkwave"
+  },
+  {
+    "name": "Inertia",
+    "description": "Throws a curse onto the enemies, slowing them down temporarily",
+    "level": 14,
+    "stamina": 20,
+    "step": 1,
+    "weapons": [
+      "WN1"
+    ],
+    "code": 1342242819,
+    "use": "Right",
+    "mana": [
+      25,
+      28,
+      32,
+      36,
+      40,
+      45,
+      50,
+      55,
+      60,
+      65
+    ],
+    "icon": "MS14 Curselazy"
+  },
+  {
+    "name": "Inner Peace",
+    "description": "Through mental training, increases MP potion recovery and mana capacity permanently",
+    "level": 17,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [],
+    "code": 1342242820,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "MS17 I_peace"
+  },
+  {
+    "name": "Great Smash",
+    "description": "Channels strength into one powerful blow",
+    "level": 20,
+    "stamina": 38,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WC1",
+      "WH1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 16908289,
+    "use": "Both",
+    "mana": [
+      22,
+      25,
+      28,
+      31,
+      34,
+      38,
+      42,
+      46,
+      50,
+      54
+    ],
+    "icon": "TM20 G_Smash"
+  },
+  {
+    "name": "Maximize",
+    "description": "Optimizes weapons to raise their attack power permanently",
+    "level": 23,
+    "stamina": 41,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WC1",
+      "WH1",
+      "WP1",
+      "WS2",
+      "WS1",
+      "WT1"
+    ],
+    "code": 16908290,
+    "use": "Right",
+    "mana": [
+      26,
+      28,
+      30,
+      33,
+      36,
+      39,
+      43,
+      47,
+      51,
+      56
+    ],
+    "icon": "TM23 Maximize"
+  },
+  {
+    "name": "Automation",
+    "description": "Automates projectile weapons to raise their attack speed and power temporarily",
+    "level": 26,
+    "stamina": 42,
+    "step": 2,
+    "weapons": [
+      "WS1",
+      "WT1"
+    ],
+    "code": 16908291,
+    "use": "Right",
+    "mana": [
+      24,
+      27,
+      30,
+      33,
+      36,
+      39,
+      42,
+      45,
+      48,
+      51
+    ],
+    "icon": "TM26 Automation"
+  },
+  {
+    "name": "Spark",
+    "description": "Attacks nearby enemies with powerful lightning bolts",
+    "level": 30,
+    "stamina": 40,
+    "step": 2,
+    "weapons": [],
+    "code": 16908292,
+    "use": "Right",
+    "mana": [
+      26,
+      28,
+      31,
+      34,
+      37,
+      40,
+      44,
+      46,
+      50,
+      55
+    ],
+    "icon": "TM30 Spark"
+  },
+  {
+    "name": "Metal Armor",
+    "description": "Raises the defense of the mechanician's armor in a limited time.",
+    "level": 40,
+    "stamina": 48,
+    "step": 2,
+    "weapons": [],
+    "code": 17039361,
+    "use": "Right",
+    "mana": [
+      32,
+      35,
+      38,
+      41,
+      44,
+      48,
+      52,
+      56,
+      60,
+      64
+    ],
+    "icon": "TM40 M_Armor"
+  },
+  {
+    "name": "Grand Smash",
+    "description": "Accurate and continous attack to opponents. Raises attack rating",
+    "level": 43,
+    "stamina": 44,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WC1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 17039362,
+    "use": "Right",
+    "mana": [
+      26,
+      29,
+      32,
+      35,
+      38,
+      41,
+      44,
+      47,
+      50,
+      53
+    ],
+    "icon": "TM43 Grand_Smash"
+  },
+  {
+    "name": "Mechanic Weapon Mastery",
+    "description": "Optimizes the mechanic spec. items.",
+    "level": 46,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [],
+    "code": 17039363,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TM44 M_Weapon"
+  },
+  {
+    "name": "Spark Shield",
+    "description": "Forms invisible electric guard.",
+    "level": 50,
+    "stamina": 52,
+    "step": 2,
+    "weapons": [
+      "DS1"
+    ],
+    "code": 17039364,
+    "use": "Right",
+    "mana": [
+      34,
+      36,
+      38,
+      41,
+      44,
+      47,
+      51,
+      55,
+      59,
+      64
+    ],
+    "icon": "TM50 S_Shield"
+  },
+  {
+    "name": "Impulsion",
+    "description": "It attacks closed monsters by an electricity of powerful blow.",
+    "level": 60,
+    "stamina": 55,
+    "step": 2,
+    "weapons": [
+      "WC1",
+      "WH1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 17301505,
+    "use": "Right",
+    "mana": [
+      35,
+      38,
+      40,
+      43,
+      46,
+      49,
+      53,
+      57,
+      61,
+      65
+    ],
+    "icon": "TM60 Impulsion"
+  },
+  {
+    "name": "Completion",
+    "description": "It gathers closed monsters by a powerful shout.",
+    "level": 63,
+    "stamina": 65,
+    "step": 2,
+    "weapons": [],
+    "code": 17301506,
+    "use": "Right",
+    "mana": [
+      50,
+      54,
+      58,
+      62,
+      66,
+      70,
+      74,
+      78,
+      82,
+      86
+    ],
+    "icon": "TM63 Compulsion"
+  },
+  {
+    "name": "Magnetic Sphere",
+    "description": "It creates powerful magnetism Sphere to selected user.",
+    "level": 66,
+    "stamina": 71,
+    "step": 2,
+    "weapons": [],
+    "code": 17301507,
+    "use": "Right",
+    "mana": [
+      60,
+      65,
+      70,
+      75,
+      80,
+      85,
+      90,
+      95,
+      100,
+      105
+    ],
+    "icon": "TM66 M_Sphere"
+  },
+  {
+    "name": "Metal Golem",
+    "description": "It increases your defense and ATK Rating by strong iron of Golem's cloth.",
+    "level": 70,
+    "stamina": 71,
+    "step": 2,
+    "weapons": [],
+    "code": 17301508,
+    "use": "Right",
+    "mana": [
+      60,
+      64,
+      68,
+      72,
+      76,
+      80,
+      84,
+      88,
+      92,
+      96
+    ],
+    "icon": "TM70 M_Golem"
+  },
+  {
+    "name": "Triple Impact",
+    "description": "A more powerful version of Impact",
+    "level": 20,
+    "stamina": 39,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WC1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 33685505,
+    "use": "Both",
+    "mana": [
+      22,
+      24,
+      26,
+      29,
+      32,
+      35,
+      38,
+      41,
+      44,
+      47
+    ],
+    "icon": "TF20 T_Impact"
+  },
+  {
+    "name": "Brutal Swing",
+    "description": "Delivers a powerful and fatal blow to the enemy",
+    "level": 23,
+    "stamina": 41,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WS2"
+    ],
+    "code": 33685506,
+    "use": "Both",
+    "mana": [
+      24,
+      26,
+      28,
+      31,
+      34,
+      38,
+      42,
+      47,
+      52,
+      58
+    ],
+    "icon": "TF23 B_Swing"
+  },
+  {
+    "name": "Roar",
+    "description": "Shouting out a deafening roar to momentarily stun and confuse enemies",
+    "level": 26,
+    "stamina": 39,
+    "step": 2,
+    "weapons": [],
+    "code": 33685507,
+    "use": "Right",
+    "mana": [
+      26,
+      28,
+      30,
+      33,
+      36,
+      39,
+      42,
+      45,
+      49,
+      53
+    ],
+    "icon": "TF26 Roar"
+  },
+  {
+    "name": "Rage of Zechram",
+    "description": "Borrows the skills of the legendary hero Zechram",
+    "level": 30,
+    "stamina": 45,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WH1",
+      "WS2"
+    ],
+    "code": 33685508,
+    "use": "Right",
+    "mana": [
+      29,
+      31,
+      33,
+      36,
+      39,
+      42,
+      45,
+      49,
+      53,
+      58
+    ],
+    "icon": "TF30 R_Zecram"
+  },
+  {
+    "name": "Concentration",
+    "description": "Increases attack rating for a while.",
+    "level": 40,
+    "stamina": 53,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WS2"
+    ],
+    "code": 33816577,
+    "use": "Right",
+    "mana": [
+      35,
+      38,
+      41,
+      44,
+      47,
+      50,
+      53,
+      56,
+      59,
+      62
+    ],
+    "icon": "TF40 Concentration"
+  },
+  {
+    "name": "Avenging Crash",
+    "description": "Powerful crashing attacks to opponents.",
+    "level": 43,
+    "stamina": 48,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 33816578,
+    "use": "Right",
+    "mana": [
+      32,
+      34,
+      36,
+      38,
+      41,
+      44,
+      47,
+      50,
+      53,
+      56
+    ],
+    "icon": "TF43 A_Crash"
+  },
+  {
+    "name": "Swift Axe",
+    "description": "Raises attack speed of axe in a limited time.",
+    "level": 46,
+    "stamina": 53,
+    "step": 2,
+    "weapons": [
+      "WA1"
+    ],
+    "code": 33816579,
+    "use": "Right",
+    "mana": [
+      40,
+      44,
+      48,
+      52,
+      56,
+      60,
+      64,
+      68,
+      72,
+      76
+    ],
+    "icon": "TF46 S_Axe"
+  },
+  {
+    "name": "Bone crash",
+    "description": "Used to defeat demons by ancestors. Powerful attack that hits opponent twice.",
+    "level": 50,
+    "stamina": 54,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 33816580,
+    "use": "Right",
+    "mana": [
+      34,
+      36,
+      38,
+      41,
+      44,
+      47,
+      50,
+      53,
+      56,
+      59
+    ],
+    "icon": "TF50 B_Crash"
+  },
+  {
+    "name": "Destroyer",
+    "description": "Strongest Double-hit to a monster.",
+    "level": 60,
+    "stamina": 45,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WH1"
+    ],
+    "code": 34078721,
+    "use": "Both",
+    "mana": [
+      46,
+      48,
+      50,
+      52,
+      54,
+      56,
+      58,
+      60,
+      62,
+      64
+    ],
+    "icon": "TF60 Destoryer"
+  },
+  {
+    "name": "Berserker",
+    "description": "Change like uncontrol condition, but it decrease the absorb dramatically",
+    "level": 63,
+    "stamina": 60,
+    "step": 2,
+    "weapons": [],
+    "code": 34078722,
+    "use": "Right",
+    "mana": [
+      52,
+      55,
+      58,
+      61,
+      64,
+      67,
+      70,
+      73,
+      76,
+      79
+    ],
+    "icon": "TF63 Berserker"
+  },
+  {
+    "name": "Cyclone Strike",
+    "description": "It attacks Monsters by strong spin ATK.",
+    "level": 66,
+    "stamina": 55,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WH1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 34078723,
+    "use": "Right",
+    "mana": [
+      50,
+      53,
+      56,
+      59,
+      62,
+      65,
+      68,
+      71,
+      74,
+      77
+    ],
+    "icon": "TF66 C_Strike"
+  },
+  {
+    "name": "Boost Health",
+    "description": "It increases HP permanently.",
+    "level": 70,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [],
+    "code": 34078724,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TF70 B_Health"
+  },
+  {
+    "name": "Ground Pike",
+    "description": "Imbues weapon with frost properties to deliver a powerful attack",
+    "level": 20,
+    "stamina": 36,
+    "step": 2,
+    "weapons": [
+      "WP1"
+    ],
+    "code": 50462721,
+    "use": "Right",
+    "mana": [
+      19,
+      21,
+      23,
+      25,
+      28,
+      31,
+      34,
+      38,
+      42,
+      46
+    ],
+    "icon": "TP20 G_Pike"
+  },
+  {
+    "name": "Tornado",
+    "description": "Summons a tornado to attack nearby enemies",
+    "level": 23,
+    "stamina": 38,
+    "step": 2,
+    "weapons": [
+      "WP1"
+    ],
+    "code": 50462722,
+    "use": "Right",
+    "mana": [
+      23,
+      25,
+      27,
+      29,
+      32,
+      35,
+      38,
+      42,
+      46,
+      51
+    ],
+    "icon": "TP23 Tornado"
+  },
+  {
+    "name": "Weapon DEF Mastery",
+    "description": "Permanently raises defense rating with polearms",
+    "level": 26,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [
+      "WA1",
+      "WH1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 50462723,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TP26 W_D_Mastery"
+  },
+  {
+    "name": "Expansion",
+    "description": "Imbues weapon with Vigor to unleash a devastating attack",
+    "level": 30,
+    "stamina": 42,
+    "step": 2,
+    "weapons": [
+      "WA1",
+      "WH1",
+      "WP1"
+    ],
+    "code": 50462724,
+    "use": "Both",
+    "mana": [
+      26,
+      28,
+      30,
+      33,
+      36,
+      39,
+      43,
+      47,
+      50,
+      53
+    ],
+    "icon": "TP30 Expasion"
+  },
+  {
+    "name": "Venom sphere",
+    "description": "Thrust a sphere to the ground to attack opponents.",
+    "level": 40,
+    "stamina": 50,
+    "step": 2,
+    "weapons": [
+      "WP1"
+    ],
+    "code": 50593793,
+    "use": "Right",
+    "mana": [
+      30,
+      33,
+      36,
+      39,
+      42,
+      45,
+      48,
+      51,
+      54,
+      57
+    ],
+    "icon": "TP40 V_Spear"
+  },
+  {
+    "name": "Vanish",
+    "description": "It makes you an invisible man in a limited time.",
+    "level": 43,
+    "stamina": 53,
+    "step": 2,
+    "weapons": [],
+    "code": 50593794,
+    "use": "Right",
+    "mana": [
+      40,
+      43,
+      46,
+      49,
+      52,
+      55,
+      58,
+      62,
+      66,
+      70
+    ],
+    "icon": "TP43 Vanish"
+  },
+  {
+    "name": "Critical Mastery",
+    "description": "The skill makes to increase Critical ATK (%) permanently",
+    "level": 46,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [
+      "WP1"
+    ],
+    "code": 50593795,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TP46 C_Mastery"
+  },
+  {
+    "name": "Chain Lancer",
+    "description": "Critical Spinning 3 Hits ATK",
+    "level": 50,
+    "stamina": 51,
+    "step": 2,
+    "weapons": [
+      "WC1",
+      "WP1",
+      "WS2"
+    ],
+    "code": 50593796,
+    "use": "Right",
+    "mana": [
+      32,
+      35,
+      38,
+      41,
+      44,
+      47,
+      50,
+      53,
+      56,
+      59
+    ],
+    "icon": "TP50 C_Lance"
+  },
+  {
+    "name": "Assassin Eye",
+    "description": "Find a monster's weak point, increase concentration.",
+    "level": 60,
+    "stamina": 61,
+    "step": 2,
+    "weapons": [
+      "WP1"
+    ],
+    "code": 50855937,
+    "use": "Right",
+    "mana": [
+      47,
+      49,
+      51,
+      53,
+      55,
+      57,
+      59,
+      61,
+      63,
+      65
+    ],
+    "icon": "TP60 A_Eye"
+  },
+  {
+    "name": "Charging Strike",
+    "description": "Gathers a power and Continuous ATK.",
+    "level": 63,
+    "stamina": 75,
+    "step": 2,
+    "weapons": [
+      "WP1",
+      "WS2"
+    ],
+    "code": 50855938,
+    "use": "Right",
+    "mana": [
+      48,
+      51,
+      54,
+      57,
+      60,
+      63,
+      66,
+      69,
+      72,
+      75
+    ],
+    "icon": "TP63 C_Strike"
+  },
+  {
+    "name": "Vague",
+    "description": "It does not make your body clearly.",
+    "level": 66,
+    "stamina": 71,
+    "step": 2,
+    "weapons": [
+      "WP1"
+    ],
+    "code": 50855939,
+    "use": "Right",
+    "mana": [
+      55,
+      58,
+      61,
+      64,
+      67,
+      70,
+      73,
+      76,
+      79,
+      82
+    ],
+    "icon": "TP66 Vague"
+  },
+  {
+    "name": "Shadow Master",
+    "description": "Some afterimages make a powerful damage to a monster in turn.",
+    "level": 70,
+    "stamina": 51,
+    "step": 2,
+    "weapons": [
+      "WP1",
+      "WS2"
+    ],
+    "code": 50855940,
+    "use": "Right",
+    "mana": [
+      52,
+      55,
+      58,
+      61,
+      64,
+      67,
+      70,
+      73,
+      76,
+      79
+    ],
+    "icon": "TP70 S_Master"
+  },
+  {
+    "name": "Dion's Eye",
+    "description": "Trains eyesight like the legendary archer Dion to permanently increase attack rating",
+    "level": 20,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67239937,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TA20 D_Eye"
+  },
+  {
+    "name": "Falcon",
+    "description": "Summons a fierce falcon to attack nearby enemies",
+    "level": 23,
+    "stamina": 36,
+    "step": 2,
+    "weapons": [],
+    "code": 67239938,
+    "use": "Right",
+    "mana": [
+      24,
+      26,
+      28,
+      30,
+      33,
+      36,
+      39,
+      43,
+      47,
+      52
+    ],
+    "icon": "TA23 Falcon"
+  },
+  {
+    "name": "Arrow of Rage",
+    "description": "Shoots an arrow over a desired area which explodes and rains down fire on enemies",
+    "level": 26,
+    "stamina": 38,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67239939,
+    "use": "Right",
+    "mana": [
+      24,
+      26,
+      28,
+      31,
+      34,
+      37,
+      40,
+      44,
+      48,
+      53
+    ],
+    "icon": "TA26 A_Rage"
+  },
+  {
+    "name": "Avalanche",
+    "description": "Unleashes a barrage of piercing arrows on a single target",
+    "level": 30,
+    "stamina": 41,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67239940,
+    "use": "Right",
+    "mana": [
+      25,
+      28,
+      31,
+      34,
+      38,
+      42,
+      46,
+      51,
+      56,
+      61
+    ],
+    "icon": "TA30 Avalanchie"
+  },
+  {
+    "name": "Elemental Shot",
+    "description": "Continuous elememtal attack to opponents",
+    "level": 40,
+    "stamina": 43,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67371009,
+    "use": "Right",
+    "mana": [
+      27,
+      29,
+      31,
+      33,
+      36,
+      39,
+      42,
+      45,
+      48,
+      51
+    ],
+    "icon": "TA40 E_Shot"
+  },
+  {
+    "name": "Golden Falcon",
+    "description": "Summons a falcon to attack opponents",
+    "level": 43,
+    "stamina": 52,
+    "step": 2,
+    "weapons": [],
+    "code": 67371010,
+    "use": "Right",
+    "mana": [
+      33,
+      36,
+      39,
+      42,
+      46,
+      50,
+      54,
+      59,
+      64,
+      70
+    ],
+    "icon": "TA43 G_Falcon"
+  },
+  {
+    "name": "Bum shot",
+    "description": "Fires explosive arrows twice. Splash damages opponents.",
+    "level": 46,
+    "stamina": 46,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67371011,
+    "use": "Right",
+    "mana": [
+      28,
+      31,
+      34,
+      37,
+      40,
+      43,
+      46,
+      49,
+      52,
+      53
+    ],
+    "icon": "TA46 B_Shot"
+  },
+  {
+    "name": "Perforation",
+    "description": "Accurate and continuous attack that perforates opponents.",
+    "level": 50,
+    "stamina": 48,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67371012,
+    "use": "Right",
+    "mana": [
+      28,
+      31,
+      34,
+      37,
+      40,
+      43,
+      46,
+      49,
+      52,
+      53
+    ],
+    "icon": "TA50 Perforation"
+  },
+  {
+    "name": "Recall Wolverine",
+    "description": "Summons Wolverine.",
+    "level": 60,
+    "stamina": 58,
+    "step": 2,
+    "weapons": [],
+    "code": 67633153,
+    "use": "Right",
+    "mana": [
+      52,
+      56,
+      60,
+      64,
+      68,
+      72,
+      76,
+      80,
+      84,
+      88
+    ],
+    "icon": "TA60 R_Wolverin"
+  },
+  {
+    "name": "Evasion Mastery",
+    "description": "It avoids an enemy attack effectively.",
+    "level": 63,
+    "stamina": 0,
+    "step": 0,
+    "weapons": [],
+    "code": 67633154,
+    "use": "None",
+    "mana": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "icon": "TA63 E_Mastery"
+  },
+  {
+    "name": "Phoenix Shot",
+    "description": "It gives wide ATK with Energy of Phoenix.",
+    "level": 66,
+    "stamina": 55,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67633155,
+    "use": "Right",
+    "mana": [
+      33,
+      35,
+      37,
+      40,
+      43,
+      46,
+      50,
+      54,
+      58,
+      62
+    ],
+    "icon": "TA66 P_Shot"
+  },
+  {
+    "name": "Force of Nature",
+    "description": "It improves your ability by natural assimilation perfectly.",
+    "level": 70,
+    "stamina": 56,
+    "step": 2,
+    "weapons": [
+      "WS1"
+    ],
+    "code": 67633156,
+    "use": "Right",
+    "mana": [
+      51,
+      54,
+      57,
+      60,
+      63,
+      66,
+      69,
+      72,
+      75,
+      78
+    ],
+    "icon": "TA70 F_O_Nature"
+  }
+]

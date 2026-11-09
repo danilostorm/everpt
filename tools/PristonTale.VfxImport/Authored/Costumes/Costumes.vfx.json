@@ -1,0 +1,56 @@
+[
+  {
+    "name": "vfx.costume.wing.white",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/NewEffect/Res/Object/Wing.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [0, -2.42, 0],
+        "color": [255, 255, 255, 230],
+        "modelFrames": 60,
+        "modelSpeed": 30,
+        "loop": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.costume.wing.blue",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/NewEffect/Res/Object/Wing_blue.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [0, -2.42, 0],
+        "color": [255, 255, 255, 230],
+        "modelFrames": 60,
+        "modelSpeed": 30,
+        "loop": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.costume.wing.red",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/NewEffect/Res/Object/Wing_red.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [0, -2.42, 0],
+        "color": [255, 255, 255, 230],
+        "modelFrames": 60,
+        "modelSpeed": 30,
+        "loop": true
+      }
+    ]
+  }
+]

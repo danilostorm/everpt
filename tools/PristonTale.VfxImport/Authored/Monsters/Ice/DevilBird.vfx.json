@@ -1,0 +1,157 @@
+[
+  {
+    "name": "vfx.monster.devilbird.attack",
+    "duration": 0.6286,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 handbone02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 wingbong03",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 wingbong04",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.devilbird.attack.kB",
+    "duration": 0.1
+  },
+  {
+    "name": "vfx.monster.devilbird.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.IceHIt1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.devilbird.skill",
+    "duration": 4.0,
+    "children": [
+      {
+        "effect": "script.DevilBirdSkill",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.devilbird.skill.hit",
+    "duration": 2.5,
+    "children": [
+      {
+        "effect": "particle.DevilBirdSkillHit",
+        "anchor": "Target",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.DevilBirdSkillHit",
+        "anchor": "Target",
+        "offset": [
+          0,
+          16.6,
+          0
+        ],
+        "turn": true,
+        "delay": 0.15
+      },
+      {
+        "effect": "particle.DevilBirdSkillHit",
+        "anchor": "Target",
+        "offset": [
+          0,
+          34.2,
+          0
+        ],
+        "turn": true,
+        "delay": 0.3
+      }
+    ]
+  }
+]

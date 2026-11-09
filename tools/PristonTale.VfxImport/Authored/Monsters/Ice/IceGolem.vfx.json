@@ -1,0 +1,39 @@
+[
+  {
+    "name": "vfx.monster.icegolem.skill.hit",
+    "duration": 1.5,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/IceGolem/m_IceGolem.smd",
+        "blend": "Alpha",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          30
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "modelFrames": 30,
+        "modelSpeed": 35.0,
+        "loop": true,
+        "fade": "Fall"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceGolemHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          5.86,
+          -90
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

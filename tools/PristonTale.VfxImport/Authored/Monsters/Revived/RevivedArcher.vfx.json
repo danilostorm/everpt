@@ -1,0 +1,157 @@
+[
+  {
+    "name": "vfx.monster.revived.fx.arrowhit",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "NormalHit1.ini",
+        "offset": [
+          0,
+          -2,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          -2,
+          0
+        ],
+        "color": [
+          0.1569,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/weapon/punch hit 1.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/weapon/punch hit 2.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/weapon/punch hit 3.wav",
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.windarrow.puff",
+    "duration": 1.0,
+    "parts": [
+      {
+        "texture": "Effect/ImageData/Particle/Dust.tga",
+        "count": 4,
+        "color": [
+          100,
+          100,
+          100,
+          150
+        ],
+        "size": [
+          6,
+          6
+        ],
+        "growth": -4,
+        "burst": [
+          27.3,
+          27.3
+        ],
+        "lifetime": [
+          0.5,
+          0.5
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.5
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedarcher.attack.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "weapons/arrow.smd",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          38,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 560.0,
+        "faceGoal": true,
+        "reach": 8,
+        "endEffect": "vfx.monster.revived.fx.arrowhit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedarcher.skill.hit.kO",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/WindArrow/WindArrow.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 630.0,
+        "faceGoal": true,
+        "end": "Hold",
+        "fadeOut": 0.1571,
+        "reach": 8,
+        "modelStart": 1,
+        "modelFrames": 3.75,
+        "loopFrom": 1,
+        "loop": true,
+        "modelSpeed": 17.5,
+        "every": 0.0143,
+        "everyEffect": "vfx.monster.revived.fx.windarrow.puff"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Wind_Arrow 01.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedarcher.skill.hit.kZ",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.phoenix",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

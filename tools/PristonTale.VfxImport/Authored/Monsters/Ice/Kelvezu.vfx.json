@@ -1,0 +1,862 @@
+[
+  {
+    "name": "vfx.monster.kelvezu.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          -58.6,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceKelvezuBossJin1",
+        "bone": "Bip01 Bae",
+        "follow": true
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceKelvezuBossMouseJin1",
+        "bone": "BIP01 Mouse",
+        "follow": true,
+        "boneWorld": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.attack",
+    "duration": 1.2,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Fin03",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Fin02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Fin01",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.attack.kP",
+    "duration": 1.2,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Rwing02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Rwing01",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Lwing02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Lwing01",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.attack.hit",
+    "duration": 2.5,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Ratoo/m_ratoo.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "offset": [
+          10,
+          0,
+          -250
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "modelFrames": 20,
+        "modelSpeed": 14.0,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 0.3643,
+        "fadeOut": 0.3643,
+        "delay": 0.0571
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceKelvezuNormal3",
+        "anchor": "Point",
+        "offset": [
+          10,
+          7.8,
+          -250
+        ],
+        "turn": true,
+        "delay": 0.0571
+      },
+      {
+        "effect": "particle.IceKelvezuHit",
+        "anchor": "Target",
+        "offset": [
+          0,
+          27.3,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.attack.hit.kP",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.IceKelvezuNormal1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.skill.kI",
+    "duration": 3.0571,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Rwing02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Rwing01",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Lwing02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Lwing01",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.skill",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Tale02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 Tale03",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ],
+        "fade": "Fall"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          508.0,
+          195.3
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          0.0,
+          0,
+          -260.0
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.0,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.kelvezu.firerain.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          508.0,
+          195.3
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          148.49,
+          0,
+          -148.49
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.1429,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.kelvezu.firerain.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          508.0,
+          195.3
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          160.0,
+          0,
+          -0.0
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.2857,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.kelvezu.firerain.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          508.0,
+          195.3
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          148.49,
+          0,
+          148.49
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.4286,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.kelvezu.firerain.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          508.0,
+          195.3
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          0.0,
+          0,
+          260.0
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.5714,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.kelvezu.firerain.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          508.0,
+          195.3
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          -148.49,
+          0,
+          148.49
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.7143,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.kelvezu.firerain.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          508.0,
+          195.3
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          -160.0,
+          0,
+          0.0
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 0.8571,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.kelvezu.firerain.hit"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          508.0,
+          195.3
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          -148.49,
+          0,
+          -148.49
+        ],
+        "speed": 560,
+        "reach": 8,
+        "delay": 1.0,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.kelvezu.firerain.hit"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 1.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.firerain.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7843,
+          0.3922
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 2.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireBigHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.skill.hit.kI",
+    "duration": 3.5,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          89.8,
+          -160
+        ],
+        "velocityMin": [
+          -303.11,
+          -273,
+          -175.0
+        ],
+        "velocityMax": [
+          -303.11,
+          -273,
+          -175.0
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          89.8,
+          -160
+        ],
+        "velocityMin": [
+          -175.0,
+          -273,
+          -303.11
+        ],
+        "velocityMax": [
+          -175.0,
+          -273,
+          -303.11
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          89.8,
+          -160
+        ],
+        "velocityMin": [
+          -119.71,
+          -273,
+          -328.89
+        ],
+        "velocityMax": [
+          -119.71,
+          -273,
+          -328.89
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          89.8,
+          -160
+        ],
+        "velocityMin": [
+          0.0,
+          -273,
+          -350.0
+        ],
+        "velocityMax": [
+          0.0,
+          -273,
+          -350.0
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          89.8,
+          -160
+        ],
+        "velocityMin": [
+          175.0,
+          -273,
+          -303.11
+        ],
+        "velocityMax": [
+          175.0,
+          -273,
+          -303.11
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          89.8,
+          -160
+        ],
+        "velocityMin": [
+          119.71,
+          -273,
+          -328.89
+        ],
+        "velocityMax": [
+          119.71,
+          -273,
+          -328.89
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          89.8,
+          -160
+        ],
+        "velocityMin": [
+          303.11,
+          -273,
+          -175.0
+        ],
+        "velocityMax": [
+          303.11,
+          -273,
+          -175.0
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceKelvezuNormal2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.kelvezu.skill.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.IceKelvezuNormal2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          3.9,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

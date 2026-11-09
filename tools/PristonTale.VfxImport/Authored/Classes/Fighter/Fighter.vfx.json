@@ -1,0 +1,1278 @@
+[
+  {
+    "name": "vfx.trail.rage",
+    "duration": 1.1,
+    "children": [
+      {
+        "effect": "vfx.trail.red",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.tripleimpact.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.common.tripleimpact",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.brutalswing.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.common.tripleimpact",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.roar.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Roar/Roar.smd",
+        "blend": "Additive",
+        "count": 5,
+        "delay": 0.6429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 10,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.7843,
+          0.5882,
+          0.3137
+        ],
+        "power": 150,
+        "decay": 2
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7843,
+          0.3922
+        ],
+        "power": 200,
+        "decay": 3,
+        "delay": 0.6429
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill2FighterRoar1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          11.72,
+          0
+        ],
+        "turn": true,
+        "delay": 0.5
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.zecram.cast",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "jitterMin": [
+          0,
+          0,
+          0
+        ],
+        "jitterMax": [
+          1.9141,
+          1.9141,
+          1.9141
+        ],
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "jitterMin": [
+          0,
+          0,
+          0
+        ],
+        "jitterMax": [
+          1.9141,
+          1.9141,
+          1.9141
+        ],
+        "sized": false
+      },
+      {
+        "animation": "SkillRageofZecram1.ini",
+        "count": 4,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.zecram.burst",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "SkillZecram1.ini",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "FireParticle1.ini",
+        "size": [
+          25,
+          25
+        ],
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "radial": [
+          23.2422,
+          23.2422
+        ],
+        "rise": [
+          19.1406,
+          19.1406
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.2143,
+          0.2714
+        ],
+        "sized": true
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/BrutalSwing/Brutal1.smd",
+        "blend": "Additive",
+        "count": 2,
+        "delay": 0.6,
+        "delayStep": 0.0143,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 30,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/BrutalSwing/Brutal2.smd",
+        "blend": "Additive",
+        "count": 2,
+        "delay": 0.6,
+        "delayStep": 0.0714,
+        "offset": [
+          0,
+          -7.8,
+          0
+        ],
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/BrutalSwing/Brutal2.smd",
+        "blend": "Additive",
+        "delay": 0.6,
+        "offset": [
+          0,
+          -7.8,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      },
+      {
+        "animation": "SkillTripleImpactHit.ini",
+        "size": [
+          100,
+          100
+        ],
+        "delay": 0.6714,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "SkillTripleImpactParticle.ini",
+        "shape": "Streak",
+        "count": 30,
+        "delayStep": 0.0071,
+        "burst": [
+          218.75,
+          218.75
+        ],
+        "width": [
+          0.3906,
+          1.168
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false,
+        "delay": 0.6
+      },
+      {
+        "count": 10,
+        "delay": 0.7429,
+        "offset": [
+          0,
+          16.2,
+          0
+        ],
+        "ring": [
+          0.01,
+          0.01
+        ],
+        "ringStep": 36,
+        "radial": [
+          232.4,
+          232.4
+        ],
+        "lifetime": [
+          0.29,
+          0.29
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.fighter.zecram.fire"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.1961,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 3,
+        "delay": 0.6
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 500,
+        "decay": 10,
+        "delay": 0.6
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/RoZ 02.wav",
+        "delay": 0.6
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.concentration.cast",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          255,
+          150,
+          50,
+          80
+        ],
+        "count": 20,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "shell": [
+          76,
+          76,
+          76
+        ],
+        "burst": [
+          -109.375,
+          -109.375
+        ],
+        "width": [
+          0.78,
+          0.78
+        ],
+        "lineSeconds": 0.2857,
+        "lifetime": [
+          0.6949,
+          0.6949
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.15
+      },
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "count": 40,
+        "delay": 0.2143,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "shell": [
+          23.4,
+          23.4,
+          23.4
+        ],
+        "burst": [
+          41.02,
+          41.02
+        ],
+        "width": [
+          0.975,
+          0.975
+        ],
+        "lineSeconds": 1.1433,
+        "lifetime": [
+          0.6,
+          0.8
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.3
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 150,
+        "decay": 1,
+        "delay": 0.5714
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.concentration.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill3FighterConcentration1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.avengingcrash.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 190,
+        "decay": 3
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.swiftaxe.cast",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          50,
+          80,
+          255,
+          80
+        ],
+        "count": 20,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "shell": [
+          76,
+          76,
+          76
+        ],
+        "burst": [
+          -109.375,
+          -109.375
+        ],
+        "width": [
+          0.78,
+          0.78
+        ],
+        "lineSeconds": 0.2857,
+        "lifetime": [
+          0.6949,
+          0.6949
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.15
+      },
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          50,
+          80,
+          255,
+          200
+        ],
+        "count": 40,
+        "delay": 0.2143,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "shell": [
+          23.4,
+          23.4,
+          23.4
+        ],
+        "burst": [
+          41.02,
+          41.02
+        ],
+        "width": [
+          0.975,
+          0.975
+        ],
+        "lineSeconds": 1.1433,
+        "lifetime": [
+          0.6,
+          0.8
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.3
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.3922,
+          1.0
+        ],
+        "power": 140,
+        "decay": 1,
+        "delay": 0.5714
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.swiftaxe.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill3FighterSwiftAxe1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.bonecrash.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 3
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit6",
+        "anchor": "Point",
+        "offset": [
+          0,
+          35.72,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.Skill3FighterBoneSmash1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          7.8,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.destroyer.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 100,
+        "decay": 3
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "children": [
+      {
+        "effect": "script.SkillWarriorDestroyerHit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          27.9,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.berserker.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "script.SkillWarriorBetserker",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill4Betserker",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.cyclone.cast",
+    "duration": 3.2,
+    "children": [
+      {
+        "effect": "vfx.trail.bone.long",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.cyclone.hit",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "NormalHit1.ini",
+        "offset": [
+          0,
+          16,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          16,
+          0
+        ],
+        "color": [
+          0.1569,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.zecram.fire",
+    "duration": 1.0,
+    "parts": [
+      {
+        "texture": "Effect/ImageData/Particle/Fire.tga",
+        "color": [
+          255,
+          255,
+          255,
+          100
+        ],
+        "size": [
+          8,
+          8
+        ],
+        "growth": -8.3333,
+        "burst": [
+          10.9375,
+          10.9375
+        ],
+        "lifetime": [
+          0.6,
+          0.6
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.6
+      }
+    ]
+  },
+  {
+    "name": "vfx.trail.downhit",
+    "duration": 1.2,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/Skill3Texture/ft5_DownHit.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.trail.mortalblow",
+    "duration": 3.2,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/Skill3Texture/ft5_DownHit.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          3.0,
+          3.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.downhit.hit",
+    "duration": 1.2,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.3137
+        ],
+        "power": 120,
+        "decay": 3
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.trail.downhit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "follow": true,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill5_Fighter_DownHit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.downhit.final",
+    "duration": 1.2,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.3137
+        ],
+        "power": 120,
+        "decay": 3
+      }
+    ],
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.trail.downhit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "follow": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.powerdash.cast",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "particle.Skill3PriestessExtinction2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.powerdash.hit",
+    "duration": 1.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/PowerDash/PowerDash.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "modelFrames": 20,
+        "modelSpeed": 30,
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.17
+      },
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/PowerDash2/PowerDash2.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "lifetime": [
+          0.6667,
+          0.6667
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.17
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.mortalblow.cast",
+    "duration": 3.2,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Skill_Swing 01.wav",
+        "delay": 1.6
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.3137
+        ],
+        "power": 120,
+        "decay": 3,
+        "delay": 1.6
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.trail.mortalblow",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "follow": true
+      },
+      {
+        "effect": "vfx.fighter.tripleimpact.hit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip weapon01",
+        "delay": 1.6,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.mortalblow.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.fighter.tripleimpact.hit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip weapon01",
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.bloodyberserker.burst",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Roar/Roar.smd",
+        "blend": "Additive",
+        "count": 5,
+        "delay": 0.6429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 10,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.0392,
+          0.0392
+        ],
+        "power": 150,
+        "decay": 2
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.0392,
+          0.0392
+        ],
+        "power": 200,
+        "decay": 3,
+        "delay": 0.6429
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill2FighterRoar1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          11.72,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.fighter.bloodyberserker.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "script.Skill5_Fighter_BloodyBerserker",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill5_Fighter_BloodyBerserker",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  }
+]

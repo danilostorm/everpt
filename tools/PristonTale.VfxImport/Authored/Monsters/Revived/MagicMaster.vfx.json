@@ -1,0 +1,171 @@
+[
+  {
+    "name": "vfx.monster.magicmaster.skill",
+    "duration": 2.3,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.castcircle",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.magicmaster.skill.hit.kR",
+    "duration": 5.1429,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/Mg3_EnergyS20.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          25.39,
+          0
+        ],
+        "modelStart": 0,
+        "modelFrames": 20,
+        "modelSpeed": 8.75,
+        "loop": true,
+        "lifetime": [
+          7.1429,
+          7.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 1.4286,
+        "fadeOut": 2.0
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnergyShield 1.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3MagicianEngrgyShield",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          1.95,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.magicmaster.skill.hit.kE",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.multispark",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.magicmaster.skill.hit.kU",
+    "duration": 1.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.deathray",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.magicmaster.skill.hit.kI",
+    "duration": 4.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/FireBall 1.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/FireBall 2.wav",
+        "pick": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.fireshot",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.magicmaster.skill.hit.kH",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.glacialspike",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.magicmaster.skill.hit.kG",
+    "duration": 4.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.meteor",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.magicmaster.attack.hit",
+    "duration": 4.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.impshot",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "vfx.monster.niken.attack.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          19.5312,
+          5
+        ],
+        "goal": "Target",
+        "speed": 280,
+        "lift": 120,
+        "gravity": [
+          -400,
+          -400
+        ],
+        "reach": 4,
+        "lifetime": [
+          3,
+          3
+        ],
+        "carryEffect": "particle.Snail"
+      }
+    ]
+  }
+]

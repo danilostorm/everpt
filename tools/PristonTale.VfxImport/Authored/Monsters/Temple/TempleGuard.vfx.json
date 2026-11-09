@@ -1,0 +1,125 @@
+[
+  {
+    "name": "vfx.monster.templeguard.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.IronMonsterMorgon",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          -30
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.templeguard.attack.hit.kI",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          32,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.templeguard.skill.hit",
+    "duration": 8.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Missile/Mis.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "offset": [
+          0,
+          43.9062,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          9,
+          0
+        ],
+        "speed": 504,
+        "lift": 160,
+        "gravity": [
+          -400,
+          -400
+        ],
+        "faceGoal": true,
+        "reach": 15,
+        "lifetime": [
+          6,
+          6
+        ],
+        "carryEffect": "particle.DMachineParticle1",
+        "endEffect": "vfx.monster.templeguard.missile.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.templeguard.missile.hit",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 2
+      }
+    ],
+    "parts": [
+      {
+        "count": 3,
+        "velocityMin": [
+          -328.1,
+          35.5,
+          -328.1
+        ],
+        "velocityMax": [
+          328.1,
+          308.6,
+          328.1
+        ],
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "turn": false,
+        "carryEffect": "particle.Skill3ArcherBombShotHit2"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3ArcherBombShotHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

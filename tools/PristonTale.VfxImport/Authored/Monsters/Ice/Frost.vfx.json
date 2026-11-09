@@ -1,0 +1,113 @@
+[
+  {
+    "name": "vfx.monster.frost.attack.hit.kU",
+    "duration": 1.5,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/Piercing/Piercing.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60.5,
+          -96
+        ],
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Fall",
+        "velocityMin": [
+          0,
+          0,
+          -224
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -224
+        ],
+        "carryEffect": "particle.Piercing1"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.0,
+          0.5882,
+          1.0
+        ],
+        "power": 130,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.frost.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/Monster_Diastrophism.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "offset": [
+          24,
+          7.8,
+          -48
+        ],
+        "lifetime": [
+          1.0286,
+          1.0286
+        ],
+        "modelFrames": 24,
+        "modelSpeed": 23.3333,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 0.2623,
+        "fadeOut": 0.2623,
+        "angles": [
+          0,
+          180,
+          0
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          24,
+          7.8,
+          -48
+        ],
+        "color": [
+          -0.5882,
+          -0.5882,
+          -1.0
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceAceintSkill2",
+        "anchor": "Point",
+        "offset": [
+          24,
+          7.8,
+          -48
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

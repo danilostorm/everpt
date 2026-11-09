@@ -1,0 +1,50 @@
+[
+  {
+    "name": "vfx.monster.revivedmagician.skill.hit.kO",
+    "duration": 1.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.deathray",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedmagician.skill.hit.kQ",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.flamewave",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedmagician.skill.hit.kZ",
+    "duration": 4.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.meteor",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

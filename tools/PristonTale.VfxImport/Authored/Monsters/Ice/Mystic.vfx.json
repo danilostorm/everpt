@@ -1,0 +1,93 @@
+[
+  {
+    "name": "vfx.monster.mystic.skill.hit",
+    "duration": 10.5,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Target",
+        "offset": [
+          0,
+          50,
+          0
+        ],
+        "lifetime": [
+          10.0,
+          10.0
+        ],
+        "carryEffect": "particle.SerqbusState1",
+        "follow": true
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 1
+      },
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          50,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          1.0
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusMagic2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.5,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.SerqbusMagicAttack1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          50,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mystic.death",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.IceMisticSpinelSkill1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          29.3,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

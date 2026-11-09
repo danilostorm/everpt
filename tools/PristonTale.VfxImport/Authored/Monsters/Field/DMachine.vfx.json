@@ -1,0 +1,189 @@
+[
+  {
+    "name": "vfx.monster.dmachine.explosion",
+    "duration": 3.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "count": 3,
+        "velocityMin": [
+          -328,
+          63,
+          -328
+        ],
+        "velocityMax": [
+          328,
+          336,
+          328
+        ],
+        "lifetime": [
+          1.2,
+          1.2
+        ],
+        "carryEffect": "particle.IronMonsterBombHit2"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IronMonsterBombHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.dmachine.bombhit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "count": 3,
+        "velocityMin": [
+          -328,
+          36,
+          -328
+        ],
+        "velocityMax": [
+          328,
+          309,
+          328
+        ],
+        "lifetime": [
+          1.2,
+          1.2
+        ],
+        "carryEffect": "particle.Skill3ArcherBombShotHit2"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3ArcherBombShotHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.dmachine.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Missile/Mis.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 900,
+        "reach": 10,
+        "faceGoal": true,
+        "carryEffect": "particle.DMachineParticle1",
+        "endEffect": "vfx.monster.dmachine.explosion"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.dmachine.skill.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Missile/Mis.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          43.9,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          9,
+          0
+        ],
+        "speed": 630,
+        "lift": 420,
+        "gravity": [
+          -2400,
+          -2400
+        ],
+        "reach": 15,
+        "faceGoal": true,
+        "carryEffect": "particle.DMachineParticle1",
+        "endEffect": "vfx.monster.dmachine.bombhit"
+      }
+    ]
+  }
+]

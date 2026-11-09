@@ -1,0 +1,44 @@
+<Project>
+  <!--
+    The native MonoGame runtime (mgruntime: Vulkan, SDL2, FAudio) of the fork in monogame/runtime, which the framework of
+    monogame/framework loads with DllImport("mgruntime"). Imported by every executable that creates a graphics device
+    (the client and the regression runner). The library is built on this machine and never committed:
+    monogame/runtime/build-windows.ps1 on Windows, monogame/runtime/build.sh on Linux and macOS (README.md, Build).
+    The build stops when it is missing and copies it next to the executable otherwise.
+  -->
+  <PropertyGroup>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('Linux')) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">linux-x64</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('Linux')) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">linux-arm64</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('Windows'))">win-x64</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="'$(RuntimeIdentifier)' != ''">$(RuntimeIdentifier)</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$(RuntimeIdentifier.StartsWith('osx'))">osx</EtervaleRuntimeRid>
+    <EtervaleRuntimeDir>$(MSBuildThisFileDirectory)../monogame/runtime/bin/$(EtervaleRuntimeRid)/</EtervaleRuntimeDir>
+    <!-- An agent worktree (<main>/.claude/worktrees/<name>/Client/) uses its own build, or the main checkout's. -->
+    <EtervaleRuntimeDir Condition="!Exists('$(EtervaleRuntimeDir)') And $(MSBuildThisFileDirectory.Contains('.claude'))">$(MSBuildThisFileDirectory)../../../../monogame/runtime/bin/$(EtervaleRuntimeRid)/</EtervaleRuntimeDir>
+  </PropertyGroup>
+
+  <Target Name="EtervaleRuntimeRequired" BeforeTargets="Build" Condition="'$(EtervaleRuntimeRid)' != '' And !Exists('$(EtervaleRuntimeDir)')">
+    <PropertyGroup>
+      <EtervaleRuntimeHelp>Build it once: 'powershell -ExecutionPolicy Bypass -File monogame/runtime/build-windows.ps1' on Windows</EtervaleRuntimeHelp>
+      <EtervaleRuntimeHelp>$(EtervaleRuntimeHelp), 'monogame/runtime/build.sh' on Linux and macOS. See README.md, Build.</EtervaleRuntimeHelp>
+    </PropertyGroup>
+    <Error Text="The MonoGame Vulkan runtime is not built for $(EtervaleRuntimeRid) (monogame/runtime/bin/$(EtervaleRuntimeRid)/ is missing). $(EtervaleRuntimeHelp)" />
+  </Target>
+
+  <!-- Retries: the client may be running from this output folder and hold the library for a moment. -->
+  <Target Name="EtervaleRuntimeCopy" AfterTargets="Build" Condition="'$(EtervaleRuntimeRid)' != ''">
+    <ItemGroup>
+      <EtervaleRuntimeFile Include="$(EtervaleRuntimeDir)*mgruntime*" />
+    </ItemGroup>
+    <Error Condition="'@(EtervaleRuntimeFile)' == ''" Text="$(EtervaleRuntimeDir) holds no mgruntime library; rebuild it (README.md, Build)." />
+    <Copy SourceFiles="@(EtervaleRuntimeFile)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" Retries="15" RetryDelayMilliseconds="2000" />
+  </Target>
+
+  <Target Name="EtervaleRuntimePublish" AfterTargets="Publish" Condition="'$(EtervaleRuntimeRid)' != ''">
+    <ItemGroup>
+      <EtervaleRuntimePublishFile Include="$(EtervaleRuntimeDir)*mgruntime*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(EtervaleRuntimePublishFile)" DestinationFolder="$(PublishDir)" />
+  </Target>
+</Project>

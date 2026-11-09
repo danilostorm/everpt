@@ -1,0 +1,18 @@
+[
+  {
+    "name": "vfx.monster.vampiricbee.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

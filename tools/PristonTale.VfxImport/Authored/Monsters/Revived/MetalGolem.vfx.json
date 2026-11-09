@@ -1,0 +1,34 @@
+[
+  {
+    "name": "vfx.monster.metalgolem.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.hulkhit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          48,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.metalgolem.skill.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.hulkhit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          48,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

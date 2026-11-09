@@ -1,0 +1,48 @@
+[
+  {
+    "name": "vfx.monster.wolverlin.attack.hit",
+    "duration": 1.0,
+    "children": [
+      {
+        "effect": "vfx.monster.figon.fireparticle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          18,
+          -50
+        ],
+        "turn": true
+      },
+      {
+        "effect": "vfx.monster.figon.fireparticle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          18,
+          -50
+        ],
+        "turn": true
+      },
+      {
+        "effect": "vfx.monster.figon.fireparticle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          18,
+          -50
+        ],
+        "turn": true
+      },
+      {
+        "effect": "vfx.monster.figon.fireparticle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          18,
+          -50
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

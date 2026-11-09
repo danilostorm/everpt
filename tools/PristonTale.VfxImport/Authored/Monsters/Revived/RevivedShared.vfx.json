@@ -1,0 +1,1231 @@
+[
+  {
+    "name": "vfx.monster.revived.fx.critflash",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Point",
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.normalhit",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "NormalHit1.ini",
+        "anchor": "Point",
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.tripleimpact",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.common.tripleimpact",
+        "anchor": "Point",
+        "offset": [
+          0,
+          -24,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.roundimpact",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.common.roundimpact",
+        "anchor": "Point",
+        "offset": [
+          0,
+          -24,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.chainlance",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          11.72,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.1961,
+          0.0
+        ],
+        "power": 250,
+        "decay": 5
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          11.72,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.destroyer",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 100,
+        "decay": 3
+      }
+    ],
+    "children": [
+      {
+        "effect": "script.SkillWarriorDestroyerHit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          3.91,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.spark.cluster",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "SkillSpark2.ini",
+        "sized": false
+      },
+      {
+        "animation": "SkillSpark1.ini",
+        "count": 3,
+        "jitterMin": [
+          -6,
+          -6,
+          -6
+        ],
+        "jitterMax": [
+          6,
+          6,
+          6
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.spark.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillSpark3.ini",
+        "count": 2,
+        "delayStep": 0.0571,
+        "sized": false
+      },
+      {
+        "animation": "SkillSpark1.ini",
+        "shape": "Streak",
+        "count": 45,
+        "delayStep": 0.0071,
+        "burst": [
+          136.7188,
+          245.8203
+        ],
+        "width": [
+          3.125,
+          3.7
+        ],
+        "lifetime": [
+          0.25,
+          0.35
+        ],
+        "fade": "Fall",
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.1961,
+          1.0
+        ],
+        "power": 300,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Spark 03.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.spark.ball",
+    "duration": 10.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 437.5,
+        "reach": 3.9,
+        "delay": 0.0571,
+        "every": 0.0429,
+        "everyEffect": "vfx.monster.revived.fx.spark.cluster",
+        "endEffect": "vfx.monster.revived.fx.spark.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.phoenix",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/PhoenixShot/Ac_4-3.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 630.0,
+        "faceGoal": true,
+        "end": "LastFrame",
+        "fadeOut": 0.3714,
+        "carryEffect": "particle.Skill4PhoenixShot"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/PhoenixShot 01.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.castcircle",
+    "duration": 2.3,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/StartMagic/MAAM2.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.86,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2914,
+        "fadeOut": 0.2914
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/StartMagic/P/maam2.tga",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.86,
+          0
+        ],
+        "size": [
+          56.25,
+          56.25
+        ],
+        "lifetime": [
+          2.2857,
+          2.2857
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/StartMagic/P/star05Q_03.bmp",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.86,
+          0
+        ],
+        "size": [
+          72.66,
+          72.66
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          120
+        ],
+        "lifetime": [
+          2.2857,
+          2.2857
+        ],
+        "fade": "Rise"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Casting_M.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.deathray",
+    "duration": 1.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/DeadLay/Ray01.bmp",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "beamTo": [
+          0,
+          8,
+          -586
+        ],
+        "width": [
+          4.7,
+          4.7
+        ],
+        "color": [
+          200,
+          200,
+          200,
+          255
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.8571
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/DeathRay 1.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.DeadLayStart1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.DeadLayHit1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          32,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.flamewave",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.06,
+          -30
+        ],
+        "radial": [
+          350,
+          350
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot",
+        "count": 3,
+        "ringStart": 240,
+        "ringStep": 30
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.06,
+          -30
+        ],
+        "radial": [
+          350,
+          350
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot",
+        "count": 2,
+        "ringStart": 250,
+        "ringStep": 40
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/FlameWave 01.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/FlameWave 02.wav",
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.meteor.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7843,
+          0.3922
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 2.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireBigHIt1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.meteor",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Target",
+        "turn": false,
+        "offset": [
+          0,
+          507.8,
+          -234.36
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          0,
+          -39.06
+        ],
+        "speed": 560.0,
+        "delay": 0.0,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.revived.fx.meteor.hit"
+      },
+      {
+        "anchor": "Target",
+        "turn": false,
+        "offset": [
+          0,
+          507.8,
+          -156.24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          0,
+          39.06
+        ],
+        "speed": 560.0,
+        "delay": 0.4286,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.revived.fx.meteor.hit"
+      },
+      {
+        "anchor": "Target",
+        "turn": false,
+        "offset": [
+          39.06,
+          507.8,
+          -195.3
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          39.06,
+          0,
+          0
+        ],
+        "speed": 560.0,
+        "delay": 0.8571,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.revived.fx.meteor.hit"
+      },
+      {
+        "anchor": "Target",
+        "turn": false,
+        "offset": [
+          -39.06,
+          507.8,
+          -195.3
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          -39.06,
+          0,
+          0
+        ],
+        "speed": 560.0,
+        "delay": 1.2857,
+        "carryEffect": "particle.TerrainFire",
+        "endEffect": "vfx.monster.revived.fx.meteor.hit"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Meteo 01.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.multispark.trail",
+    "duration": 0.3,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "size": [
+          5.86,
+          11.7
+        ],
+        "growth": -40,
+        "color": [
+          255,
+          255,
+          255,
+          80
+        ],
+        "burst": [
+          17.5,
+          17.5
+        ],
+        "lifetime": [
+          0.1429,
+          0.1714
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.multispark.hit",
+    "duration": 1.5,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "shape": "Streak",
+        "count": 30,
+        "burst": [
+          180,
+          320
+        ],
+        "width": [
+          1.5,
+          2.5
+        ],
+        "lifetime": [
+          0.3,
+          0.45
+        ],
+        "fade": "Fall"
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "count": 35,
+        "size": [
+          3.9,
+          3.9
+        ],
+        "burst": [
+          60,
+          160
+        ],
+        "gravity": [
+          -120,
+          -60
+        ],
+        "lifetime": [
+          0.4,
+          0.6
+        ],
+        "fade": "Fall"
+      },
+      {
+        "animation": "Light1.ini",
+        "size": [
+          50.8,
+          50.8
+        ],
+        "sized": true
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.702,
+          1.0,
+          0.898
+        ],
+        "power": 180,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.multispark",
+    "duration": 2.0,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "size": [
+          11.72,
+          11.72
+        ],
+        "anchor": "Caster",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          27.34,
+          0
+        ],
+        "speed": 240.0,
+        "every": 0.0143,
+        "everyEffect": "vfx.monster.revived.fx.multispark.trail",
+        "offset": [
+          -11,
+          27.34,
+          0
+        ],
+        "endEffect": "vfx.monster.revived.fx.multispark.hit"
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "size": [
+          11.72,
+          11.72
+        ],
+        "anchor": "Caster",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          27.34,
+          0
+        ],
+        "speed": 240.0,
+        "every": 0.0143,
+        "everyEffect": "vfx.monster.revived.fx.multispark.trail",
+        "offset": [
+          23,
+          27.34,
+          0
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "size": [
+          11.72,
+          11.72
+        ],
+        "anchor": "Caster",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          27.34,
+          0
+        ],
+        "speed": 240.0,
+        "every": 0.0143,
+        "everyEffect": "vfx.monster.revived.fx.multispark.trail",
+        "offset": [
+          -35,
+          27.34,
+          0
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "size": [
+          11.72,
+          11.72
+        ],
+        "anchor": "Caster",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          27.34,
+          0
+        ],
+        "speed": 240.0,
+        "every": 0.0143,
+        "everyEffect": "vfx.monster.revived.fx.multispark.trail",
+        "offset": [
+          47,
+          27.34,
+          0
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "size": [
+          11.72,
+          11.72
+        ],
+        "anchor": "Caster",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          27.34,
+          0
+        ],
+        "speed": 240.0,
+        "every": 0.0143,
+        "everyEffect": "vfx.monster.revived.fx.multispark.trail",
+        "offset": [
+          0,
+          27.34,
+          0
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 140,
+        "decay": 1
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/MultiSpark 1.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.glacialspike",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -64
+        ],
+        "color": [
+          0.0,
+          0.0,
+          0.3922
+        ],
+        "power": 700,
+        "decay": 10
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/GlacialSpike 01.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/GlacialSpike 02.wav",
+        "pick": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "script.SkillCelestialGlacialSpike",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.fireshot.trail",
+    "duration": 10.0,
+    "emitters": [
+      {
+        "texture": "Effect/ImageData/Particle/bubble.tga",
+        "anchor": "Point",
+        "rate": 700,
+        "maxParticles": 128,
+        "lifetime": [
+          0.1,
+          0.1
+        ],
+        "speed": [
+          200,
+          200
+        ],
+        "spread": 180,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              6
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.5
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              1.0,
+              0.1274,
+              0.0319,
+              0.784
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              1.0,
+              0.0319,
+              0.0319,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.firehit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "ParticleMeteo1.ini",
+        "shape": "Line",
+        "count": 20,
+        "radial": [
+          41.0,
+          82.0
+        ],
+        "rise": [
+          65.6,
+          134.0
+        ],
+        "gravity": [
+          -191.4,
+          -114.8
+        ],
+        "width": [
+          2.5,
+          2.5
+        ],
+        "lineSeconds": 0.12,
+        "lifetime": [
+          0.786,
+          1.057
+        ],
+        "sized": false
+      },
+      {
+        "animation": "ParticleMeteo2.ini",
+        "shape": "Streak",
+        "count": 20,
+        "delayRandom": 0.27,
+        "burst": [
+          140,
+          200
+        ],
+        "width": [
+          3,
+          3
+        ],
+        "lifetime": [
+          0.6,
+          0.9
+        ],
+        "fade": "Fall",
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.1961,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/monster/Figon/impact 1.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.impshot.trail",
+    "duration": 10.0,
+    "emitters": [
+      {
+        "texture": "Effect/ImageData/Particle/Red.tga",
+        "anchor": "Point",
+        "rate": 700,
+        "maxParticles": 64,
+        "lifetime": [
+          0.05,
+          0.05
+        ],
+        "speed": [
+          100,
+          100
+        ],
+        "spread": 180,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              2
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.25
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              0.7913,
+              0.956,
+              0.956,
+              0.784
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.imphit",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "Power1.ini",
+        "sized": false
+      },
+      {
+        "animation": "MonsterImp1.ini",
+        "count": 3,
+        "size": [
+          20,
+          20
+        ],
+        "radial": [
+          23.24,
+          23.24
+        ],
+        "rise": [
+          19.14,
+          19.14
+        ],
+        "gravity": [
+          38.28,
+          76.56
+        ],
+        "lifetime": [
+          0.1429,
+          0.2
+        ],
+        "spin": 150,
+        "sized": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.fireshot",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          20,
+          0
+        ],
+        "speed": 410.1562,
+        "reach": 3.1,
+        "carryEffect": "vfx.monster.revived.fx.fireshot.trail",
+        "endEffect": "vfx.monster.revived.fx.firehit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.impshot",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -25
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 355.4688,
+        "reach": 3.1,
+        "carryEffect": "vfx.monster.revived.fx.impshot.trail",
+        "endEffect": "vfx.monster.revived.fx.imphit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.embers",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "FireParticle1.ini",
+        "loop": true,
+        "count": 4,
+        "size": [
+          25,
+          25
+        ],
+        "radial": [
+          23.24,
+          23.24
+        ],
+        "rise": [
+          19.14,
+          19.14
+        ],
+        "gravity": [
+          38.28,
+          76.56
+        ],
+        "lifetime": [
+          0.2143,
+          0.2714
+        ],
+        "spin": 150,
+        "sized": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.hulkhit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          1.0,
+          0.3922
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      }
+    ]
+  }
+]

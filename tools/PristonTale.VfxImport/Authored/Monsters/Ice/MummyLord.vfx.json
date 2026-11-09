@@ -1,0 +1,179 @@
+[
+  {
+    "name": "vfx.monster.mummylord.attack.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          20.1,
+          0
+        ],
+        "speed": 840,
+        "reach": 10,
+        "carryEffect": "particle.ParkMummy",
+        "endEffect": "vfx.monster.mummylord.attack.hit.impact"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mummylord.attack.hit.impact",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.7843,
+          0.1725,
+          0.0824
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.ParkMummyHit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mummylord.lightning",
+    "duration": 2.5,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Skill3Texture/spark04_01.bmp",
+        "anchor": "Target",
+        "offset": [
+          0,
+          390.6,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          19.5,
+          0
+        ],
+        "speed": 1050,
+        "reach": 10,
+        "width": [
+          15.6,
+          15.6
+        ],
+        "trailPoints": 12,
+        "trailFade": 20,
+        "end": "Hold",
+        "fadeOut": 0.3,
+        "endEffect": "vfx.monster.mummylord.lightning.spark"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mummylord.lightning.spark",
+    "duration": 1.5,
+    "parts": [
+      {
+        "texture": "Effect/AssaEffect/Skill3Texture/spark04_01.bmp",
+        "count": 5,
+        "delayRandom": 0.2857,
+        "anchor": "Point",
+        "size": [
+          40,
+          60
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "lifetime": [
+          0.3,
+          0.3
+        ],
+        "fade": "Fall"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 100,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.DivineLightning",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mummylord.skill.hit",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "vfx.monster.mummylord.lightning",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mummylord.impact",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "vfx.monster.mummylord.lightning",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+# External dependencies of the runtime fork, pinned by the commits of MonoGame v3.8.6's submodules.
+# vendored: the files the build needs are committed under src/external/<name> (with the licence);
+# fetched:  build.sh clones the repository at the commit into src/external/<path> (git-ignored), applies
+#           ../patches/<name>/*.patch (the fork's fixes, one issue document each) and builds it.
+# name           mode      path                    commit                                     licence      url
+volk             vendored  external/volk           3a8068a57417940cf2bf9d837a7bb60d015ca2f1   MIT          https://github.com/zeux/volk.git
+vma              vendored  external/vma            0e89587db3ebee4d463f191bd296374c5fafc8ea   MIT          https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+vulkan-headers   vendored  external/vulkan-headers eaa319dade959cb61ed2229c8ea42e307cc8f8b3   Apache-2.0/MIT https://github.com/KhronosGroup/Vulkan-Headers.git
+stb              vendored  external/stb            f58f558c120e9b32c217290b80bad1a0729fbb2c   MIT/public-domain https://github.com/nothings/stb.git
+sdl2             fetched   external/sdl2/sdl       5d249570393f7a37e037abf22cd6012a4cc56a71   Zlib         https://github.com/libsdl-org/SDL.git
+faudio           fetched   external/faudio         8a87fdc9242a7b507cf5c96c539334a1760c1ec7   Zlib         https://github.com/FNA-XNA/FAudio.git

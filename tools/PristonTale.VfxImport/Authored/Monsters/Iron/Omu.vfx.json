@@ -1,0 +1,18 @@
+[
+  {
+    "name": "vfx.monster.omu.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.IronMonsterOmuHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          27.3438,
+          -30
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

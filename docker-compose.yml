@@ -1,0 +1,25 @@
+# Local development PostgreSQL for the PristonTale server (accounts, characters, config data).
+# Hot world state stays in server memory; this DB is for persistence + config (see docs/persistence.md).
+#   docker compose up -d        # start
+#   docker compose down         # stop (keeps the named volume / data)
+#   docker compose down -v      # stop and wipe the data volume
+services:
+  postgres:
+    image: postgres:17
+    container_name: pristontale-postgres
+    environment:
+      POSTGRES_DB: pristontale
+      POSTGRES_USER: pristontale
+      POSTGRES_PASSWORD: pristontale
+    ports:
+      - "5433:5432"   # host 5433 (host 5432 is often already taken by another project's Postgres)
+    volumes:
+      - pristontale-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pristontale -d pristontale"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pristontale-pgdata:

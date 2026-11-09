@@ -1,0 +1,44 @@
+[
+  {
+    "name": "vfx.monster.evilmaple.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/EvilMaple/m_evilmaple.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "angles": [
+          -90,
+          0,
+          0
+        ],
+        "modelStart": 1.0,
+        "modelFrames": 30,
+        "modelSpeed": 23.3333,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ],
+        "fade": "Rise"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.EvilMaple",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          -25
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

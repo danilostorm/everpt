@@ -1,0 +1,161 @@
+[
+  {
+    "name": "vfx.monster.seto.attack.hit",
+    "duration": 5.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          20,
+          0
+        ],
+        "speed": 410.1562,
+        "reach": 3.9,
+        "lifetime": [
+          3,
+          3
+        ],
+        "carryEffect": "vfx.monster.darkmage.fireball.trail",
+        "endEffect": "vfx.monster.darkmage.fireball.hit"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/FireBall 1.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/FireBall 2.wav",
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.seto.skill.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          -174.8413,
+          0,
+          -303.2005
+        ],
+        "velocityMax": [
+          -174.8413,
+          0,
+          -303.2005
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          -119.42,
+          0,
+          -328.9968
+        ],
+        "velocityMax": [
+          -119.42,
+          0,
+          -328.9968
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          0.0,
+          0,
+          -350.0
+        ],
+        "velocityMax": [
+          0.0,
+          0,
+          -350.0
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          174.8413,
+          0,
+          -303.2005
+        ],
+        "velocityMax": [
+          174.8413,
+          0,
+          -303.2005
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          39.0625,
+          -30
+        ],
+        "velocityMin": [
+          119.42,
+          0,
+          -328.9968
+        ],
+        "velocityMax": [
+          119.42,
+          0,
+          -328.9968
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot"
+      }
+    ]
+  }
+]

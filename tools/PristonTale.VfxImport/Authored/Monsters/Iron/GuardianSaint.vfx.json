@@ -1,0 +1,296 @@
+[
+  {
+    "name": "vfx.monster.guardiansaint.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/Guardian/light_G00.bmp",
+        "frames": 3,
+        "frameTime": 0.0429,
+        "loop": true,
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 S01",
+        "follow": true,
+        "width": [
+          11.7,
+          11.7
+        ],
+        "beamTo": [
+          -37.4,
+          -6.2,
+          -46.7
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.ClanMonster1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 Center",
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.ClanMonster2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 Center01",
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.ClanMonster2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 Center02",
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.guardiansaint.attack.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "carryEffect": "particle.DoomGuard",
+        "bone": "Bip01 S01",
+        "follow": true
+      },
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 S01",
+        "boneWorld": true,
+        "bladeLength": 60,
+        "trailPoints": 16,
+        "trailFade": 15.9375,
+        "lifetime": [
+          0.3571,
+          0.3571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.guardiansaint.skill.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Guardian/light_G003.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          195.3125,
+          0
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          0,
+          19.5312,
+          -78.125
+        ],
+        "speed": 700,
+        "reach": 10,
+        "width": [
+          15.6,
+          15.6
+        ],
+        "trailPoints": 30,
+        "trailFade": 8.5,
+        "endEffect": "vfx.monster.guardiansaint.spark"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Guardian/light_G003.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          195.3125,
+          0
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          0,
+          19.5312,
+          78.125
+        ],
+        "speed": 700,
+        "reach": 10,
+        "width": [
+          15.6,
+          15.6
+        ],
+        "trailPoints": 30,
+        "trailFade": 8.5,
+        "endEffect": "vfx.monster.guardiansaint.spark"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Guardian/light_G003.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          195.3125,
+          0
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          78.125,
+          19.5312,
+          0
+        ],
+        "speed": 700,
+        "reach": 10,
+        "width": [
+          15.6,
+          15.6
+        ],
+        "trailPoints": 30,
+        "trailFade": 8.5,
+        "endEffect": "vfx.monster.guardiansaint.spark"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Guardian/light_G003.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          195.3125,
+          0
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          -78.125,
+          19.5312,
+          0
+        ],
+        "speed": 700,
+        "reach": 10,
+        "width": [
+          15.6,
+          15.6
+        ],
+        "trailPoints": 30,
+        "trailFade": 8.5,
+        "endEffect": "vfx.monster.guardiansaint.spark"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.guardiansaint.spark",
+    "duration": 1.5,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/DeadLay/spark01_01.bmp",
+        "blend": "Additive",
+        "count": 4,
+        "delayRandom": 0.2143,
+        "radial": [
+          700,
+          1260
+        ],
+        "rise": [
+          420,
+          560
+        ],
+        "gravity": [
+          -3600,
+          -3000
+        ],
+        "width": [
+          7.8,
+          7.8
+        ],
+        "trailPoints": 12,
+        "trailFade": 20,
+        "lifetime": [
+          0.35,
+          0.45
+        ],
+        "fade": "Fall",
+        "jitterMin": [
+          -5,
+          0,
+          -5
+        ],
+        "jitterMax": [
+          5,
+          0,
+          5
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          -5.8594,
+          0
+        ],
+        "color": [
+          0.7843,
+          1.0,
+          1.0
+        ],
+        "power": 100,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.ClanMonster4",
+        "anchor": "Point",
+        "offset": [
+          0,
+          -5.8594,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

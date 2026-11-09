@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- MonoGame Native platform (Vulkan) from the fork in monogame/ (monogame/README.md). -->
+        <ProjectReference Include="../../monogame/framework/MonoGame.Framework/MonoGame.Framework.Native.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\PristonTale.Engine3D\PristonTale.Engine3D.csproj" />
+        <!-- Particle/effects middleware (MonoGame-only). The screen layer is its first consumer:
+             CharacterSelectScreen drives the green altar flame/beam through an EffectsEngine. -->
+        <ProjectReference Include="..\PristonTale.Effects\PristonTale.Effects.csproj" />
+        <ProjectReference Include="..\..\Shared\PristonTale.Simulation\PristonTale.Simulation.csproj" />
+        <!-- The screen layer uses GameServerConnection for TCP sessions. -->
+        <ProjectReference Include="..\PristonTale.Client.Net\PristonTale.Client.Net.csproj" />
+    </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="PristonTale.Tests" />
+  </ItemGroup>
+</Project>

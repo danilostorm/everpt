@@ -1,0 +1,79 @@
+[
+  {
+    "name": "vfx.monster.xetan.attack.hit.kG",
+    "duration": 5.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          40,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          20.0938,
+          0
+        ],
+        "speed": 630,
+        "reach": 10,
+        "lifetime": [
+          4,
+          4
+        ],
+        "carryEffect": "particle.SerqbusShot2",
+        "endEffect": "vfx.monster.xetan.shot.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.xetan.shot.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.1961,
+          0.1961
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.xetan.skill.hit.kJ",
+    "duration": 12.0,
+    "children": [
+      {
+        "effect": "vfx.monster.fireworm.meteor",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

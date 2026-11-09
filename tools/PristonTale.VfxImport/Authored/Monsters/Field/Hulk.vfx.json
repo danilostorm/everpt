@@ -1,0 +1,74 @@
+[
+  {
+    "name": "vfx.monster.hulk.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          1.0,
+          0.3922
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.hulk.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.hulk.hit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          48,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

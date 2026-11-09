@@ -1,0 +1,177 @@
+[
+  {
+    "name": "vfx.monster.fireworm.meteor",
+    "duration": 12.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 1.wav"
+      }
+    ],
+    "parts": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          507.8125,
+          -199.2188
+        ],
+        "turn": false,
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          0,
+          -3.9062
+        ],
+        "speed": 560,
+        "reach": 4,
+        "lifetime": [
+          10,
+          10
+        ],
+        "endEffect": "vfx.monster.fireworm.meteor.hit",
+        "carryEffect": "particle.TerrainFire"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.fireworm.meteor.hit",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7843,
+          0.3922
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 2.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireBigHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.fireworm.meteor.small",
+    "duration": 12.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 1.wav"
+      }
+    ],
+    "parts": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          507.8125,
+          -199.2188
+        ],
+        "turn": false,
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          0,
+          -3.9062
+        ],
+        "speed": 560,
+        "reach": 4,
+        "lifetime": [
+          10,
+          10
+        ],
+        "endEffect": "vfx.monster.fireworm.meteor.small.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.fireworm.meteor.small.hit",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7843,
+          0.3922
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Menu/Event/meteo 2.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IronMonsterBombHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.fireworm.attack.hit",
+    "duration": 12.0,
+    "children": [
+      {
+        "effect": "vfx.monster.fireworm.meteor.small",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.fireworm.skill.hit",
+    "duration": 12.0,
+    "children": [
+      {
+        "effect": "vfx.monster.fireworm.meteor",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

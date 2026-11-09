@@ -1,0 +1,181 @@
+[
+  {
+    "name": "vfx.monster.chimera.attack",
+    "duration": 1.1,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          200,
+          100,
+          200,
+          100
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 asw",
+        "boneWorld": true,
+        "bladeLength": 13,
+        "trailPoints": 14,
+        "trailFade": 18.2143,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.chimera.attack.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "color": [
+          0.3922,
+          1.0,
+          0.3922
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.chimera.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Target",
+        "offset": [
+          0,
+          27.34,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "SkillExtremeShieldBig.ini",
+        "count": 2,
+        "delayStep": 0.0286,
+        "anchor": "Target",
+        "offset": [
+          0,
+          27.34,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "ReturnParticle1.ini",
+        "count": 15,
+        "delay": 0.0286,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "anchor": "Target",
+        "offset": [
+          0,
+          11.71,
+          0
+        ],
+        "radial": [
+          60.1562,
+          60.1562
+        ],
+        "rise": [
+          54.6875,
+          54.6875
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "sized": true
+      },
+      {
+        "animation": "SkillExtremeShieldSmall.ini",
+        "delay": 0.2143,
+        "anchor": "Target",
+        "offset": [
+          0,
+          27.34,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          27.34,
+          0
+        ],
+        "color": [
+          0.902,
+          0.5882,
+          0.5882
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  }
+]

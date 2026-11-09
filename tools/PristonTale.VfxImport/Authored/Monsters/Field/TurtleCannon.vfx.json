@@ -1,0 +1,46 @@
+[
+  {
+    "name": "vfx.monster.turtlecannon.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Missile/Mis.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          49.5,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          9,
+          0
+        ],
+        "speed": 900,
+        "reach": 10,
+        "faceGoal": true,
+        "carryEffect": "particle.DMachineParticle1",
+        "endEffect": "vfx.monster.dmachine.explosion"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.turtlecannon.skill.hit",
+    "duration": 10.0,
+    "children": [
+      {
+        "effect": "vfx.monster.dmachine.skill.hit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,130 @@
+[
+  {
+    "name": "vfx.monster.darkphalanx.attack.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "color": [
+          0.3922,
+          1.0,
+          0.3922
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.darkphalanx.skill.hit",
+    "duration": 1.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.0,
+          0.5882,
+          1.0
+        ],
+        "power": 130,
+        "decay": 1
+      }
+    ],
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/Piercing/Piercing.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          12,
+          36.5469,
+          0
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -475.3438
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -475.3438
+        ],
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Fall"
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          12,
+          36.5469,
+          0
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -475.3438
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -475.3438
+        ],
+        "lifetime": [
+          0.2714,
+          0.2714
+        ],
+        "carryEffect": "particle.IceValentoPiercing"
+      }
+    ]
+  }
+]

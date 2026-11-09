@@ -1,0 +1,1845 @@
+[
+  {
+    "name": "vfx.knight.swordblast.projectile",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/SinImage/Effect/SkillEffect/SwordBlast/SwordBlast.smd",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          105
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          33.5625,
+          0
+        ],
+        "speed": 350,
+        "reach": 6,
+        "faceGoal": true,
+        "end": "LastFrame",
+        "fadeOut": 0.2857,
+        "every": 0.0143,
+        "everyEffect": "vfx.knight.swordblast.spark"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/SwordBlast 2.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.swordblast.spark",
+    "duration": 0.5,
+    "parts": [
+      {
+        "texture": "image/SinImage/Effect/SkillEffect/Farina/farina08.tga",
+        "count": 15,
+        "size": [
+          2.7344,
+          4.6875
+        ],
+        "growth": -13.6719,
+        "lifetime": [
+          0.0714,
+          0.2
+        ],
+        "shell": [
+          2.0,
+          2.0,
+          2.0
+        ],
+        "burst": [
+          140.0,
+          140.0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.swordblast.blade",
+    "duration": 1.8,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          190,
+          190,
+          190,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 40,
+        "trailPoints": 18,
+        "trailFade": 14.1667,
+        "lifetime": [
+          1.6,
+          1.6
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.holybody.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/SinImage/Effect/SkillEffect/HolyBody/h_bodyteg.smd",
+        "blend": "Additive",
+        "delay": 0.4286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "angles": [
+          0,
+          90,
+          0
+        ],
+        "tumble": [
+          0,
+          -61.5234,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 100,
+        "modelSpeed": 14,
+        "lifetime": [
+          0.9429,
+          0.9429
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      },
+      {
+        "shape": "Model",
+        "model": "image/SinImage/Effect/SkillEffect/HolyBody/h_bodyteg.smd",
+        "blend": "Additive",
+        "delay": 0.4286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "angles": [
+          0,
+          90,
+          0
+        ],
+        "tumble": [
+          0,
+          61.5234,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 100,
+        "modelSpeed": 14,
+        "lifetime": [
+          0.9429,
+          0.9429
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      },
+      {
+        "texture": "image/SinImage/Effect/PublicEffect/Light/Light0.tga",
+        "frames": 5,
+        "frameTime": 0.1786,
+        "delay": 0.7143,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "size": [
+          117.1875,
+          117.1875
+        ],
+        "growth": 27.3438,
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      },
+      {
+        "texture": "image/SinImage/Effect/SkillEffect/VigorSpear/v_spear00.tga",
+        "count": 200,
+        "delayRandom": 0.7,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "size": [
+          0.7812,
+          4.6875
+        ],
+        "lifetime": [
+          0.3571,
+          0.4857
+        ],
+        "orbitRadius": 18.0,
+        "orbitSpeed": 307.6172,
+        "orbitGrowth": 4.375,
+        "orbitPhaseStep": 137.5,
+        "turn": false,
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.holybody.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "vfx.buff.absorb",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": false,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.doublecrash.blade",
+    "duration": 2.2,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          190,
+          190,
+          190,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 40,
+        "trailPoints": 18,
+        "trailFade": 14.1667,
+        "lifetime": [
+          2.0,
+          2.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.doublecrash.hit",
+    "duration": 1.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3137,
+          0.0,
+          0.0
+        ],
+        "power": 300,
+        "decay": 10
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.common.normalhit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.holyvalor.cast",
+    "duration": 3.5,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          100,
+          180,
+          230,
+          255
+        ],
+        "count": 20,
+        "delay": 0.0,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "shell": [
+          44.9219,
+          44.9219,
+          44.9219
+        ],
+        "burst": [
+          -109.375,
+          -109.375
+        ],
+        "width": [
+          0.78125,
+          0.78125
+        ],
+        "lineSeconds": 0.2857,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          100,
+          180,
+          230,
+          255
+        ],
+        "count": 40,
+        "delay": 0.2143,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "shell": [
+          23.4375,
+          23.4375,
+          23.4375
+        ],
+        "burst": [
+          41.0156,
+          41.0156
+        ],
+        "width": [
+          0.97655,
+          0.97655
+        ],
+        "lineSeconds": 1.1429,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Rise"
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.holyvalor.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.HolyValor",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          3.9062,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.drastic.cast",
+    "duration": 3.5,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          130,
+          100,
+          220,
+          255
+        ],
+        "count": 20,
+        "delay": 0.0,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "shell": [
+          44.9219,
+          44.9219,
+          44.9219
+        ],
+        "burst": [
+          -109.375,
+          -109.375
+        ],
+        "width": [
+          0.78125,
+          0.78125
+        ],
+        "lineSeconds": 0.2857,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          140,
+          100,
+          220,
+          255
+        ],
+        "count": 40,
+        "delay": 0.2143,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "shell": [
+          23.4375,
+          23.4375,
+          23.4375
+        ],
+        "burst": [
+          41.0156,
+          41.0156
+        ],
+        "width": [
+          0.97655,
+          0.97655
+        ],
+        "lineSeconds": 1.1429,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Rise"
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.drastic.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.DrasticSpirit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          3.9062,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.godbless.cast",
+    "duration": 3.5,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          100,
+          180,
+          230,
+          255
+        ],
+        "count": 20,
+        "delay": 0.0,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "shell": [
+          44.9219,
+          44.9219,
+          44.9219
+        ],
+        "burst": [
+          -109.375,
+          -109.375
+        ],
+        "width": [
+          0.78125,
+          0.78125
+        ],
+        "lineSeconds": 0.2857,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          100,
+          180,
+          230,
+          255
+        ],
+        "count": 40,
+        "delay": 0.2143,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "shell": [
+          23.4375,
+          23.4375,
+          23.4375
+        ],
+        "burst": [
+          41.0156,
+          41.0156
+        ],
+        "width": [
+          0.97655,
+          0.97655
+        ],
+        "lineSeconds": 1.1429,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Rise"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.GodlyShield",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "delay": 0.3
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.godbless.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "script.SkillSaintNightGodsBless",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          17.5781,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.brandish.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/brandish/Brabdish.smd",
+        "blend": "Additive",
+        "count": 2,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -48.0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 35,
+        "lifetime": [
+          0.5714,
+          0.5714
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1429,
+        "fadeOut": 0.1429
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          255,
+          150,
+          0,
+          255
+        ],
+        "count": 6,
+        "delayStep": 0.0714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -48.0
+        ],
+        "size": [
+          39.0625,
+          78.125
+        ],
+        "height": [
+          1.9531,
+          4.6875
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "spin": 18.457,
+        "lifetime": [
+          0.3643,
+          0.3643
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1821
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          255,
+          200,
+          50,
+          255
+        ],
+        "count": 6,
+        "delayStep": 0.0714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -48.0
+        ],
+        "size": [
+          58.5938,
+          97.6562
+        ],
+        "height": [
+          1.9531,
+          4.6875
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "spin": 18.457,
+        "lifetime": [
+          0.3643,
+          0.3643
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1821
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/water2.tga",
+        "color": [
+          255,
+          150,
+          0,
+          255
+        ],
+        "count": 2,
+        "delayStep": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.8594,
+          -48.0
+        ],
+        "size": [
+          39.0664,
+          78.125
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "growth": 41.0156,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/Particle/P/Light01.tga",
+        "color": [
+          255,
+          200,
+          50,
+          255
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.8594,
+          -48.0
+        ],
+        "size": [
+          39.0664,
+          78.125
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "growth": 13.6719,
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "Rise"
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          255,
+          150,
+          0,
+          255
+        ],
+        "count": 30,
+        "delayRandom": 0.2857,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -48.0
+        ],
+        "size": [
+          1.9531,
+          5.0781
+        ],
+        "burst": [
+          70.0,
+          140.0
+        ],
+        "rise": [
+          13.6719,
+          13.6719
+        ],
+        "gravity": [
+          -38.2812,
+          -38.2812
+        ],
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3643
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          255,
+          200,
+          50,
+          255
+        ],
+        "count": 30,
+        "delayRandom": 0.2857,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -48.0
+        ],
+        "size": [
+          1.9531,
+          5.0781
+        ],
+        "burst": [
+          70.0,
+          140.0
+        ],
+        "rise": [
+          13.6719,
+          13.6719
+        ],
+        "gravity": [
+          -38.2812,
+          -38.2812
+        ],
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3643
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -48.0
+        ],
+        "color": [
+          1.0,
+          0.4706,
+          0.0
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.brandish.blade",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          190,
+          190,
+          190,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 40,
+        "trailPoints": 18,
+        "trailFade": 14.1667,
+        "lifetime": [
+          1.8,
+          1.8
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.piercing.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          100,
+          150,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          23.4375,
+          0
+        ],
+        "size": [
+          39.0625,
+          39.0625
+        ],
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Rise"
+      },
+      {
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "follow": true,
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "every": 0.0429,
+        "everyEffect": "vfx.knight.piercing.sparkle"
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Piercing/P/star05B_03.bmp",
+        "count": 6,
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "follow": true,
+        "size": [
+          15.625,
+          15.625
+        ],
+        "orbitRadius": 2.0,
+        "orbitSpeed": 615.2344,
+        "orbitTilt": 35,
+        "orbitPhaseStep": 60,
+        "turn": false,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          190,
+          190,
+          190,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 40,
+        "trailPoints": 18,
+        "trailFade": 14.1667,
+        "lifetime": [
+          1.6,
+          1.6
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.0,
+          0.5882,
+          1.0
+        ],
+        "power": 130,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.piercing.sparkle",
+    "duration": 1.5,
+    "parts": [
+      {
+        "texture": "image/Sinimage/AssaEffect/Piercing/P/star05B_02.bmp",
+        "size": [
+          1.1719,
+          2.7344
+        ],
+        "ring": [
+          0,
+          5.0
+        ],
+        "ringRandom": true,
+        "rise": [
+          5.4688,
+          35.2734
+        ],
+        "lifetime": [
+          0.3643,
+          0.51
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1821
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          0,
+          255,
+          255,
+          255
+        ],
+        "count": 3,
+        "size": [
+          23.4375,
+          27.3438
+        ],
+        "height": [
+          1.1719,
+          1.9531
+        ],
+        "rotation": [
+          60,
+          180
+        ],
+        "lifetime": [
+          0.0714,
+          0.0714
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.0357
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.piercing.thrust",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/Piercing/Piercing.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "offset": [
+          0,
+          0,
+          -12
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -448.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -448.0
+        ],
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Fall",
+        "carryEffect": "vfx.knight.piercing.wake"
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.piercing.wake",
+    "duration": 1.5,
+    "parts": [
+      {
+        "texture": "image/Sinimage/AssaEffect/Piercing/P/star05B_03.bmp",
+        "count": 19,
+        "delayStep": 0.0143,
+        "size": [
+          15.625,
+          15.625
+        ],
+        "growth": 164.0625,
+        "rotation": [
+          0,
+          360
+        ],
+        "lifetime": [
+          0.1857,
+          0.4429
+        ],
+        "fade": "Rise"
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Piercing/P/twist.bmp",
+        "count": 19,
+        "delayStep": 0.0143,
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "growth": 164.0625,
+        "rotation": [
+          0,
+          360
+        ],
+        "lifetime": [
+          0.1857,
+          0.4429
+        ],
+        "fade": "Rise"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Piercing1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.divineinhalation.cast",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          100,
+          255,
+          255,
+          255
+        ],
+        "count": 30,
+        "delay": 0.8297,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "shell": [
+          23.4375,
+          23.4375,
+          23.4375
+        ],
+        "burst": [
+          41.0156,
+          41.0156
+        ],
+        "width": [
+          0.97655,
+          0.97655
+        ],
+        "lineSeconds": 1.1429,
+        "lifetime": [
+          1.8571,
+          2.2714
+        ],
+        "fade": "Rise",
+        "bone": "Bip01 L Hand"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.3922,
+          1.0
+        ],
+        "power": 250,
+        "decay": 2,
+        "delay": 0.8297
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3KnightDivineInhalation1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 L Hand",
+        "delay": 0.8297
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.godlyshield.cast",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          100,
+          255,
+          255,
+          255
+        ],
+        "count": 30,
+        "delay": 0.726,
+        "delayStep": 0.0071,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "shell": [
+          23.4375,
+          23.4375,
+          23.4375
+        ],
+        "burst": [
+          41.0156,
+          41.0156
+        ],
+        "width": [
+          0.97655,
+          0.97655
+        ],
+        "lineSeconds": 1.1429,
+        "lifetime": [
+          1.8571,
+          2.2714
+        ],
+        "fade": "Rise",
+        "bone": "Bip01 L Hand"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.3922,
+          1.0
+        ],
+        "power": 250,
+        "decay": 2,
+        "delay": 0.726
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3KnightDivineInhalation1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 L Hand",
+        "delay": 0.726
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.shield.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill3KnightDivineInhalation2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 L Hand",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.incantation.cast",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.Skill3KnightHolyIncantationHand1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 L Hand",
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3KnightHolyIncantationHand2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 L Hand",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.incantation.hit",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.Skill3KnightHolyIncantation1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.incantation.charm",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill3KnightHolyIncantation2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 Head",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.grandcross.blade",
+    "duration": 2.2,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          190,
+          190,
+          190,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 40,
+        "trailPoints": 18,
+        "trailFade": 14.1667,
+        "lifetime": [
+          2.0,
+          2.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.grandcross.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.3922,
+          1.0
+        ],
+        "power": 200,
+        "decay": 4
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit4",
+        "anchor": "Point",
+        "offset": [
+          0,
+          35.7188,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.grandcross.hit2",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/Nt3_GrandCross20.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "offset": [
+          0,
+          43.5312,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 23.3333,
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2143,
+        "fadeOut": 0.2143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.1961,
+          0.3922,
+          1.0
+        ],
+        "power": 200,
+        "decay": 4
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit5",
+        "anchor": "Point",
+        "offset": [
+          0,
+          39.625,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.justice.blade",
+    "duration": 2.5,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          190,
+          190,
+          190,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 40,
+        "trailPoints": 18,
+        "trailFade": 14.1667,
+        "lifetime": [
+          2.3,
+          2.3
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.justice.hit",
+    "duration": 4.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          1.0
+        ],
+        "power": 230,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "script.SkillSaintNightSwordOfustice",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.divinepiercing.blade",
+    "duration": 3.2,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          190,
+          190,
+          190,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 40,
+        "trailPoints": 18,
+        "trailFade": 14.1667,
+        "lifetime": [
+          3.0,
+          3.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.divinepiercing.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          -30
+        ],
+        "color": [
+          0.3922,
+          0.1961,
+          0.0
+        ],
+        "power": 250,
+        "decay": 5
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit3",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          31.25,
+          -30
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.soulbreaker.cast",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav",
+        "delay": 0.75
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.knight.piercing.thrust",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "delay": 0.75,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.crescentmoon.cast",
+    "duration": 3.57,
+    "children": [
+      {
+        "effect": "particle.Skill5_Knight_CrescentMoon1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip weapon01",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.crescentmoon.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/CresentMoon/CresentMoon.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "modelFrames": 20,
+        "modelSpeed": 30,
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.17
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill5_Knight_CrescentMoon2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.saintblade.hit",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/ChainLance 02.wav",
+        "delay": 0.33
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill5_Knight_SaintBlade1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "delay": 0.33,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill5_Knight_SaintBlade2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "delay": 0.33,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.holybenedic.cast",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.Skill5KnightHolyBenedicHand1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 L Hand",
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill5KnightHolyBenedicHand2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 L Hand",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.holybenedic.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill5_Knight_HolyBenedic2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill5_Knight_HolyBenedic",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.knight.divineinhalation.defense",
+    "duration": 1.0,
+    "children": [
+      {
+        "effect": "vfx.defense.absorb",
+        "anchor": "Caster",
+        "bone": "Bip01 L Hand",
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+]

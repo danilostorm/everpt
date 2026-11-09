@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Dumps the shared WorldCatalog (fields + gates + warps + centers + start points) to world.json so
+    external tools can drive PT-style field streaming data-driven. NOT in the sln.
+    Run via dotnet run (project tools/PristonTale.WorldJson); writes world.json to the given path or cwd.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>PristonTale.WorldJson</RootNamespace>
+    <AssemblyName>ptworldjson</AssemblyName>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\PristonTale.Simulation\PristonTale.Simulation.csproj" />
+  </ItemGroup>
+
+</Project>

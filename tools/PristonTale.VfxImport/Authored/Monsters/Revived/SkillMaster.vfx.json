@@ -1,0 +1,401 @@
+[
+  {
+    "name": "vfx.monster.skillmaster.skill.kB",
+    "duration": 1.1429,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "boneWorld": true,
+        "bladeLength": 34.45,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.kN",
+    "duration": 1.1429,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "boneWorld": true,
+        "bladeLength": 34.45,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.kY",
+    "duration": 1.1429,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "boneWorld": true,
+        "bladeLength": 34.45,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.kL",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "script.SkillLancelotChargingStrike1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.53,
+          -30
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kA",
+    "duration": 10.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Spark 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.spark.ball",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kB",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 300,
+        "decay": 10
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.tripleimpact",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kN",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.chainlance",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kM",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.phoenix",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kY.e1",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.destroyer",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kY.e2",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.destroyer",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kY",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Expansion 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.destroyer",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kL.e1",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/ChainLance 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.tripleimpact",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kL.e2",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.tripleimpact",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.skill.hit.kL",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/ChargingStrike 03.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.tripleimpact",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.skillmaster.attack.hit",
+    "duration": 1.5,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.1569,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.critflash",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  }
+]

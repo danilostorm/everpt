@@ -1,0 +1,444 @@
+[
+  {
+    "name": "vfx.monster.witch.shothit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          1.0
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.witch.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          20,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          20.1,
+          0
+        ],
+        "speed": 900,
+        "reach": 10,
+        "carryEffect": "particle.SerqbusShot1",
+        "endEffect": "vfx.monster.witch.shothit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.witch.skill.hit",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          1.0
+        ],
+        "power": 200,
+        "decay": 1
+      },
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          46,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          1.0
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusMagic1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.53,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.SerqbusMagicAttack1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          46,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.succubus.shothit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.1961,
+          0.1961
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.succubus.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          20,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          20.1,
+          0
+        ],
+        "speed": 900,
+        "reach": 10,
+        "carryEffect": "particle.SerqbusShot2",
+        "endEffect": "vfx.monster.succubus.shothit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.succubus.skill.hit",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 1
+      },
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          46,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusMagic2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.53,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.SerqbusMagicAttack2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          46,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.incubus.shothit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.4235,
+          0.0314,
+          0.5333
+        ],
+        "power": 200,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusHit3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.incubus.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          20,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          20.1,
+          0
+        ],
+        "speed": 900,
+        "reach": 10,
+        "carryEffect": "particle.SerqbusShot3",
+        "endEffect": "vfx.monster.incubus.shothit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.incubus.skill.hit",
+    "duration": 3.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.4235,
+          0.0314,
+          0.5333
+        ],
+        "power": 250,
+        "decay": 1
+      },
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          46,
+          0
+        ],
+        "color": [
+          0.4235,
+          0.0314,
+          0.5333
+        ],
+        "power": 250,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusMagic3",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.53,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.SerqbusMagicAttack3",
+        "anchor": "Target",
+        "offset": [
+          0,
+          46,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.incubussummoner.attack.hit",
+    "duration": 10.0,
+    "children": [
+      {
+        "effect": "vfx.monster.incubus.attack.hit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.incubussummoner.skill.hit",
+    "duration": 5.0,
+    "children": [
+      {
+        "effect": "script.Incu_summSkill",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.06,
+          -30
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.status.cursedefence",
+    "duration": 600.0,
+    "children": [
+      {
+        "effect": "particle.SerqbusState1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.status.curseattack",
+    "duration": 600.0,
+    "children": [
+      {
+        "effect": "particle.SerqbusState3",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  }
+]

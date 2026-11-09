@@ -1,0 +1,39 @@
+[
+  {
+    "name": "vfx.monster.stingray.skill.hit",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.ParkStingRay",
+        "anchor": "Point",
+        "offset": [
+          0,
+          31.25,
+          -45
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.status.poison",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.ParkPosion",
+        "follow": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,413 @@
+[
+  {
+    "name": "vfx.monster.deathknight.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceValentoLEye",
+        "bone": "BIP01fire07",
+        "follow": true,
+        "boneWorld": true
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceValentoREye",
+        "bone": "BIP01fire08",
+        "follow": true,
+        "boneWorld": true
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceValentoBody",
+        "bone": "BIP01fire01",
+        "follow": true,
+        "boneWorld": true
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceValentoJoint",
+        "bone": "BIP01fire03",
+        "follow": true,
+        "boneWorld": true
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceValentoJoint",
+        "bone": "BIP01fire04",
+        "follow": true,
+        "boneWorld": true
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceValentoJoint",
+        "bone": "BIP01fire05",
+        "follow": true,
+        "boneWorld": true
+      },
+      {
+        "shape": "Billboard",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          0,
+          0
+        ],
+        "carryEffect": "particle.IceValentoJoint",
+        "bone": "BIP01fire06",
+        "follow": true,
+        "boneWorld": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.deathknight.attack",
+    "duration": 1.2,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01gho02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.deathknight.attack.kL",
+    "duration": 0.1
+  },
+  {
+    "name": "vfx.monster.deathknight.skill",
+    "duration": 1.2,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01gho02",
+        "follow": true,
+        "width": [
+          6,
+          6
+        ],
+        "trailPoints": 16,
+        "trailFade": 15,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.deathknight.brandish",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Ratoo/m_ratoo.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          -100
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "modelFrames": 20,
+        "modelSpeed": 14.0,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 0.3643,
+        "fadeOut": 0.3643,
+        "delay": 0.0571
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IceValentoBrandish",
+        "anchor": "Point",
+        "offset": [
+          0,
+          7.8,
+          -100
+        ],
+        "turn": true,
+        "delay": 0.0571
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.deathknight.attack.hit.kP.e1",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.deathknight.brandish",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.deathknight.attack.hit.kP.e2",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/DeathKnight/Nt_4-4.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -96
+        ],
+        "lifetime": [
+          0.4571,
+          0.4571
+        ],
+        "modelFrames": 16,
+        "modelSpeed": 35.0,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 0.1166,
+        "fadeOut": 0.1166
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/DeathKnight/Nt_4-41.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -96
+        ],
+        "lifetime": [
+          0.7714,
+          0.7714
+        ],
+        "modelFrames": 18,
+        "modelSpeed": 23.3333,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 0.1967,
+        "fadeOut": 0.1967
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/DeathKnight/Nt_4-42.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -96
+        ],
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "modelFrames": 20,
+        "modelSpeed": 17.5,
+        "loop": true,
+        "fade": "InOut",
+        "fadeIn": 0.2914,
+        "fadeOut": 0.2914
+      }
+    ],
+    "children": [
+      {
+        "effect": "script.ValentoJustice",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.deathknight.attack.hit.kL.e1",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "script.ValentoPowerUp",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.deathknight.attack.hit.kL.e2",
+    "duration": 1.5,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/Piercing/Piercing.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          48,
+          60.5,
+          -96
+        ],
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Fall",
+        "velocityMin": [
+          0,
+          0,
+          -475
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -475
+        ],
+        "carryEffect": "particle.IceValentoPiercing"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.0,
+          0.5882,
+          1.0
+        ],
+        "power": 130,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.deathknight.skill.hit.kN",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.monster.deathknight.brandish",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

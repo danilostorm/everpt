@@ -1,0 +1,131 @@
+[
+  {
+    "name": "vfx.monster.revivedpikeman.skill.kZ",
+    "duration": 1.1429,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "boneWorld": true,
+        "bladeLength": -4.4,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedpikeman.skill.hit.kG",
+    "duration": 1.5,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Jumping_Crash 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.critflash",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedpikeman.skill.hit.kZ.e1",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/ChainLance 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.chainlance",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedpikeman.skill.hit.kZ.e2",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/ChainLance 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.chainlance",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedpikeman.skill.hit.kZ.e3",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/ChainLance 03.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.chainlance",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  }
+]

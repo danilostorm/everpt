@@ -1,0 +1,884 @@
+[
+  {
+    "name": "vfx.trail.blue",
+    "duration": 1.1,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          90,
+          90,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 14,
+        "trailFade": 18.2143,
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.trail.green",
+    "duration": 1.1,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          60,
+          255,
+          190,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 14,
+        "trailFade": 18.2143,
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.trail.red",
+    "duration": 1.1,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          255,
+          60,
+          60,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 14,
+        "trailFade": 18.2143,
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.trail.bone",
+    "duration": 1.1,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/Skill3Texture/ft3_boneCrash.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.debuff.stun",
+    "duration": 600,
+    "parts": [
+      {
+        "texture": "image/Sinimage/AssaEffect/Stune/Star.tga",
+        "count": 3,
+        "size": [
+          3.9,
+          3.9
+        ],
+        "anchor": "Target",
+        "offset": [
+          0,
+          50,
+          0
+        ],
+        "follow": true,
+        "orbitRadius": 8,
+        "orbitSpeed": 295.3125,
+        "orbitPhase": 0,
+        "orbitPhaseStep": 120,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Stune/Star.tga",
+        "count": 3,
+        "size": [
+          5.62,
+          5.62
+        ],
+        "anchor": "Target",
+        "offset": [
+          0,
+          50,
+          0
+        ],
+        "follow": true,
+        "orbitRadius": 8,
+        "orbitSpeed": 295.3125,
+        "orbitPhase": 30,
+        "orbitPhaseStep": 120,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Stune/Star.tga",
+        "count": 3,
+        "size": [
+          7.34,
+          7.34
+        ],
+        "anchor": "Target",
+        "offset": [
+          0,
+          50,
+          0
+        ],
+        "follow": true,
+        "orbitRadius": 8,
+        "orbitSpeed": 295.3125,
+        "orbitPhase": 60,
+        "orbitPhaseStep": 120,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Stune/Star.tga",
+        "count": 3,
+        "size": [
+          9.06,
+          9.06
+        ],
+        "anchor": "Target",
+        "offset": [
+          0,
+          50,
+          0
+        ],
+        "follow": true,
+        "orbitRadius": 8,
+        "orbitSpeed": 295.3125,
+        "orbitPhase": 90,
+        "orbitPhaseStep": 120,
+        "turn": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.impact.critical",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ]
+  },
+  {
+    "name": "vfx.trail.golden",
+    "duration": 1.1,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          255,
+          255,
+          60,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 14,
+        "trailFade": 18.2143,
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.trail.violet",
+    "duration": 1.1,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "image/MotionMask.bmp",
+        "blend": "AddColor",
+        "color": [
+          255,
+          60,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 14,
+        "trailFade": 18.2143,
+        "lifetime": [
+          0.9,
+          0.9
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.impact.arrow",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.cast.holy",
+    "duration": 1.2,
+    "emitters": [
+      {
+        "texture": "Effect/Particle/maam2.tga",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          2,
+          0
+        ],
+        "local": true,
+        "burst": 1,
+        "maxParticles": 1,
+        "lifetime": [
+          1.2,
+          1.2
+        ],
+        "align": "Ground",
+        "softness": 0,
+        "spin": [
+          60,
+          60
+        ],
+        "intensity": 2,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              10
+            ]
+          },
+          {
+            "t": 0.3,
+            "v": [
+              40
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              44
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              1,
+              0.9,
+              0.6,
+              0
+            ]
+          },
+          {
+            "t": 0.3,
+            "v": [
+              1,
+              0.9,
+              0.6,
+              0.9
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              1,
+              0.8,
+              0.4,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "texture": "builtin:glow",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          4,
+          0
+        ],
+        "local": true,
+        "rate": 30,
+        "emitTime": 0.9,
+        "maxParticles": 40,
+        "lifetime": [
+          0.6,
+          1
+        ],
+        "speed": [
+          30,
+          60
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ],
+        "shape": "Ring",
+        "radius": [
+          30,
+          38
+        ],
+        "intensity": 2.5,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              2
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              1
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              1,
+              0.95,
+              0.7,
+              1
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              1,
+              0.8,
+              0.4,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.common.critflash",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.common.normalhit",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "NormalHit1.ini",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.1569,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ]
+  },
+  {
+    "name": "vfx.common.roundimpact",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillRoundImpactHit.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "SkillRoundImpactParticle.ini",
+        "shape": "Streak",
+        "count": 20,
+        "delayStep": 0.0143,
+        "burst": [
+          218.75,
+          218.75
+        ],
+        "width": [
+          0.3906,
+          1.168
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 15,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "radial": [
+          54.6875,
+          54.6875
+        ],
+        "rise": [
+          27.3438,
+          27.3438
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3529,
+          0.3529,
+          0.9804
+        ],
+        "power": 200,
+        "decay": 3
+      }
+    ]
+  },
+  {
+    "name": "vfx.common.tripleimpact",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillTripleImpactHit.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "SkillTripleImpactParticle.ini",
+        "shape": "Streak",
+        "count": 20,
+        "delayStep": 0.0143,
+        "burst": [
+          218.75,
+          218.75
+        ],
+        "width": [
+          0.3906,
+          1.168
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "ReturnParticle1.ini",
+        "count": 15,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "radial": [
+          54.6875,
+          54.6875
+        ],
+        "rise": [
+          27.3438,
+          27.3438
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.3922
+        ],
+        "power": 200,
+        "decay": 3
+      }
+    ]
+  },
+  {
+    "name": "vfx.trail.bone.long",
+    "duration": 3.2,
+    "parts": [
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/Skill3Texture/ft3_boneCrash.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "bladeLength": 42,
+        "trailPoints": 32,
+        "trailFade": 7.9688,
+        "lifetime": [
+          3.0,
+          3.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.08,
+        "fadeOut": 0.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.hit.critical",
+    "duration": 1.5,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.common.critflash",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.hit.bare",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "NormalHit1.ini",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.hit.blood",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "Blood1.ini",
+        "offset": [
+          0,
+          16,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          16,
+          0
+        ],
+        "color": [
+          0.6275,
+          0.0,
+          0.0
+        ],
+        "power": 180,
+        "decay": 10
+      }
+    ]
+  },
+  {
+    "name": "vfx.defense.absorb",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "SkillPhysicalAbsorb1.ini",
+        "count": 4,
+        "delayStep": 0.0286,
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 50,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.defense.absorb.body",
+    "duration": 1.0,
+    "children": [
+      {
+        "effect": "vfx.defense.absorb",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ]
+      }
+    ]
+  }
+]

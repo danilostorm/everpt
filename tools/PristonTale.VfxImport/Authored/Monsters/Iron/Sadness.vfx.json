@@ -1,0 +1,105 @@
+[
+  {
+    "name": "vfx.monster.sadness.attack.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          -21.21,
+          39.0625,
+          -21.21
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterBombHit2",
+        "velocityMin": [
+          0,
+          0,
+          -140.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -140.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          21.21,
+          39.0625,
+          -21.21
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterBombHit2",
+        "velocityMin": [
+          0,
+          0,
+          -140.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -140.0
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.MonsterIron1",
+        "anchor": "Caster",
+        "offset": [
+          -21.21,
+          39.0625,
+          -21.21
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.MonsterIron1",
+        "anchor": "Caster",
+        "offset": [
+          21.21,
+          39.0625,
+          -21.21
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.sadness.skill.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterSadnessShot",
+        "velocityMin": [
+          0,
+          0,
+          -262.5
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -262.5
+        ]
+      }
+    ]
+  }
+]

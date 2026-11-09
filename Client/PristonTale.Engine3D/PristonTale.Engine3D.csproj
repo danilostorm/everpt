@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="StbImageSharp" Version="2.30.16" />
+        <!-- MonoGame Native platform (Vulkan) from the fork in monogame/ (monogame/README.md). -->
+        <ProjectReference Include="../../monogame/framework/MonoGame.Framework/MonoGame.Framework.Native.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="../../Shared/PristonTale.Geometry/PristonTale.Geometry.csproj" />
+        <ProjectReference Include="..\..\Shared\PristonTale.Assets\PristonTale.Assets.csproj" />
+        <ProjectReference Include="..\..\Shared\PristonTale.Contracts\PristonTale.Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- SMAA's precomputed area and search tables (Rendering/Post/Smaa/CREDITS.md). -->
+        <EmbeddedResource Include="Rendering/Post/Smaa/*.gz" LogicalName="PristonTale.Engine3D.Smaa.%(Filename)%(Extension)" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="PristonTale.Tests" />
+        <InternalsVisibleTo Include="ptdump" />
+        <InternalsVisibleTo Include="ptgltf" />
+    </ItemGroup>
+</Project>

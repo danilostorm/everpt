@@ -1,0 +1,58 @@
+[
+  {
+    "name": "vfx.monster.igolation.attack.hit.kH",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          22,
+          -68
+        ],
+        "color": [
+          0.3922,
+          1.0,
+          0.3922
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          22,
+          -68
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          22,
+          -68
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          22,
+          -68
+        ],
+        "turn": true,
+        "pick": 1
+      }
+    ]
+  }
+]

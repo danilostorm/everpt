@@ -1,0 +1,85 @@
+[
+  {
+    "name": "vfx.monster.towergolem.attack.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/StoneGolem/m_StoneGolem.smd",
+        "blend": "Alpha",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          50
+        ],
+        "angles": [
+          0,
+          0,
+          0
+        ],
+        "modelStart": 1.0,
+        "modelFrames": 30,
+        "modelSpeed": 35.0,
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "Fall"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.StoneGolemHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          5.8594,
+          -70
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.towergolem.skill.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          11.7188,
+          -30
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterBombHit2",
+        "velocityMin": [
+          0,
+          0,
+          -262.5
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -262.5
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.MonsterIron1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          11.7188,
+          -30
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

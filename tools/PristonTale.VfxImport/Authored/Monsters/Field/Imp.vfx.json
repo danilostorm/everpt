@@ -1,0 +1,302 @@
+[
+  {
+    "name": "vfx.monster.imp.trail",
+    "duration": 30.0,
+    "emitters": [
+      {
+        "texture": "Effect/ImageData/Particle/Red.tga",
+        "blend": "Additive",
+        "anchor": "Point",
+        "rate": 700,
+        "maxParticles": 256,
+        "lifetime": [
+          0.08399999999999999,
+          0.12
+        ],
+        "speed": [
+          0,
+          12
+        ],
+        "spread": 180,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              2.0
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.25
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              0.902,
+              0.9804,
+              0.9804,
+              0.7843
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mephit.trail",
+    "duration": 30.0,
+    "emitters": [
+      {
+        "texture": "Effect/ImageData/Particle/blue.tga",
+        "blend": "Additive",
+        "anchor": "Point",
+        "rate": 700,
+        "maxParticles": 256,
+        "lifetime": [
+          0.08399999999999999,
+          0.12
+        ],
+        "speed": [
+          0,
+          12
+        ],
+        "spread": 180,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              2.0
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.25
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              0.902,
+              0.9804,
+              0.9804,
+              0.7843
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.imp.shothit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "Power1.ini",
+        "anchor": "Point",
+        "sized": false
+      },
+      {
+        "animation": "MonsterImp1.ini",
+        "count": 3,
+        "delayStep": 0.0143,
+        "loop": true,
+        "size": [
+          20,
+          20
+        ],
+        "sized": true,
+        "radial": [
+          23.2422,
+          23.2422
+        ],
+        "rise": [
+          19.1406,
+          19.1406
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.1429,
+          0.2
+        ]
+      },
+      {
+        "animation": "ParticleMeteo1_blue.ini",
+        "shape": "Line",
+        "count": 10,
+        "delayStep": 0.0036,
+        "loop": true,
+        "radial": [
+          41.0156,
+          54.4141
+        ],
+        "rise": [
+          27.3438,
+          95.4297
+        ],
+        "gravity": [
+          -172.2656,
+          -95.7031
+        ],
+        "lifetime": [
+          0.4286,
+          0.7
+        ],
+        "lineSeconds": 0.1143,
+        "width": [
+          0.54,
+          0.54
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mephit.shothit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "MonsterMephit2.ini",
+        "shape": "Streak",
+        "count": 10,
+        "delayStep": 0.0286,
+        "shell": [
+          0,
+          0,
+          0
+        ],
+        "burst": [
+          54.6875,
+          54.6875
+        ],
+        "width": [
+          0.2734,
+          0.4648
+        ],
+        "sized": false
+      },
+      {
+        "animation": "MonsterMephit1.ini",
+        "count": 4,
+        "delayStep": 0.0143,
+        "loop": true,
+        "size": [
+          20,
+          20
+        ],
+        "sized": true,
+        "radial": [
+          23.2422,
+          23.2422
+        ],
+        "rise": [
+          19.1406,
+          19.1406
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.1429,
+          0.2
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.imp.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          8,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 355.4688,
+        "reach": 4,
+        "carryEffect": "vfx.monster.imp.trail",
+        "endEffect": "vfx.monster.imp.shothit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mephit.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          8,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 355.4688,
+        "reach": 4,
+        "carryEffect": "vfx.monster.mephit.trail",
+        "endEffect": "vfx.monster.mephit.shothit"
+      }
+    ]
+  }
+]

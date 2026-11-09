@@ -1,0 +1,132 @@
+[
+  {
+    "name": "vfx.monster.sprin.web",
+    "duration": 6.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/MonsterWeb/Web.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "offset": [
+          0,
+          12,
+          -32
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 280,
+        "faceGoal": true,
+        "modelFrames": 20,
+        "modelSpeed": 8.75,
+        "loop": true,
+        "reach": 10,
+        "lifetime": [
+          5,
+          5
+        ],
+        "endEffect": "vfx.monster.sprin.web.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.sprin.web.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.7843,
+          0.7843,
+          0.7843
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ],
+    "parts": [
+      {
+        "animation": "MonsterWebHit1.ini",
+        "shape": "Streak",
+        "count": 10,
+        "delayRandom": 0.0571,
+        "shell": [
+          28.2,
+          16.5,
+          28.2
+        ],
+        "burst": [
+          100,
+          100
+        ],
+        "width": [
+          0.7812,
+          0.9766
+        ],
+        "lifetime": [
+          0.3,
+          0.4
+        ],
+        "fade": "Fall",
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.sprin.attack.hit.kG",
+    "duration": 6.0,
+    "children": [
+      {
+        "effect": "vfx.monster.sprin.web",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.sprin.attack.hit.kH",
+    "duration": 6.0,
+    "children": [
+      {
+        "effect": "vfx.monster.sprin.web",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.sprin.skill.hit.kJ",
+    "duration": 4.0,
+    "children": [
+      {
+        "effect": "vfx.monster.hellhound.breath",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

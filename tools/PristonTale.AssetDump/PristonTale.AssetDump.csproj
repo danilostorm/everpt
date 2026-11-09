@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Headless asset inspector. NOT part of PristonTale.sln (kept out so it never
+    affects the main build). Reuses Engine3D parsers and the shared field catalog.
+    It never creates a GraphicsDevice, so it
+    runs headlessly on Linux with a plain `dotnet run` (no MGFXC_WINE_PATH needed).
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>PristonTale.AssetDump</RootNamespace>
+    <AssemblyName>ptdump</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Client\PristonTale.Engine3D\PristonTale.Engine3D.csproj" />
+    <ProjectReference Include="../../Shared/PristonTale.Simulation/PristonTale.Simulation.csproj" />
+    <Compile Include="../PristonTale.GltfExport/PngWriter.cs" Link="Export/PngWriter.cs" />
+  </ItemGroup>
+
+</Project>

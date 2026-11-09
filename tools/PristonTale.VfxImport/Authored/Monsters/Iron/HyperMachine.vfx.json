@@ -1,0 +1,133 @@
+[
+  {
+    "name": "vfx.monster.hypermachine.attack.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46.875,
+          -50
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          20,
+          0
+        ],
+        "speed": 900,
+        "reach": 8.0,
+        "carryEffect": "particle.DMachineParticle1",
+        "endEffect": "vfx.monster.hypermachine.explosion",
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Missile/Mis.smd",
+        "faceGoal": true,
+        "blend": "Alpha"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.hypermachine.skill.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46.875,
+          -50
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          0,
+          0
+        ],
+        "speed": 900,
+        "reach": 8.0,
+        "carryEffect": "particle.DMachineParticle1",
+        "endEffect": "vfx.monster.hypermachine.explosion",
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Missile/Mis.smd",
+        "faceGoal": true,
+        "blend": "Alpha"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.hypermachine.explosion",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.IronMonsterBombHit2",
+        "count": 3,
+        "velocityMin": [
+          -328.125,
+          62.888,
+          -328.125
+        ],
+        "velocityMax": [
+          328.125,
+          335.783,
+          328.125
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 250,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IronMonsterBombHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.hypermachine.death",
+    "duration": 4.0,
+    "children": [
+      {
+        "effect": "particle.IronMonsterHyperDead",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

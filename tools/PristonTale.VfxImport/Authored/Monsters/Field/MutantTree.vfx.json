@@ -1,0 +1,229 @@
+[
+  {
+    "name": "vfx.monster.mutanttree.smoketrail",
+    "duration": 1.0,
+    "parts": [
+      {
+        "texture": "Image/SinImage/Effect/MonsterEffect/Particle/MonParticle01.tga",
+        "blend": "Shadow",
+        "size": [
+          11.7,
+          11.7
+        ],
+        "growth": -5.5,
+        "lifetime": [
+          0.3571,
+          0.5
+        ],
+        "shell": [
+          1,
+          1,
+          1
+        ],
+        "burst": [
+          17.5,
+          17.5
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mutanttree.smoke",
+    "duration": 2.0,
+    "parts": [
+      {
+        "texture": "Image/SinImage/Effect/MonsterEffect/Particle/MonParticle01.tga",
+        "blend": "Shadow",
+        "size": [
+          11.7,
+          11.7
+        ],
+        "growth": -13.7,
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "shell": [
+          1,
+          1,
+          1
+        ],
+        "burst": [
+          13.6719,
+          13.6719
+        ],
+        "rise": [
+          6.8359,
+          13.3984
+        ],
+        "fade": "Fall",
+        "every": 0.0429,
+        "everyEffect": "vfx.monster.mutanttree.smoketrail"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mutanttree.aura",
+    "duration": 600.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 L Hand",
+        "offset": [
+          0,
+          5,
+          0
+        ],
+        "follow": true,
+        "every": 0.2286,
+        "everyEffect": "vfx.monster.mutanttree.smoke"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mutanttree.spark",
+    "duration": 0.5,
+    "parts": [
+      {
+        "texture": "Image/SinImage/Effect/MonsterEffect/Particle/MonParticle04.tga",
+        "count": 2,
+        "size": [
+          11.7,
+          11.7
+        ],
+        "growth": -68,
+        "lifetime": [
+          0.0714,
+          0.1
+        ],
+        "shell": [
+          1.75,
+          1.75,
+          1.75
+        ],
+        "burst": [
+          122.5,
+          122.5
+        ],
+        "rise": [
+          27.3438,
+          54.4141
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mutanttree.ember",
+    "duration": 1.0,
+    "parts": [
+      {
+        "texture": "Image/SinImage/Effect/MonsterEffect/Particle/MonParticle04.tga",
+        "size": [
+          19.5,
+          19.5
+        ],
+        "growth": -27,
+        "lifetime": [
+          0.2857,
+          0.3857
+        ],
+        "shell": [
+          2,
+          2,
+          2
+        ],
+        "burst": [
+          35.0,
+          35.0
+        ],
+        "fade": "Fall"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mutanttree.fire",
+    "duration": 2.0,
+    "parts": [
+      {
+        "texture": "Image/SinImage/Effect/MonsterEffect/Particle/MonParticle04.tga",
+        "count": 4,
+        "size": [
+          19.5,
+          19.5
+        ],
+        "growth": -34,
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "shell": [
+          2,
+          2,
+          2
+        ],
+        "burst": [
+          13.6719,
+          13.6719
+        ],
+        "rise": [
+          6.8359,
+          13.3984
+        ],
+        "fade": "Fall",
+        "every": 0.0286,
+        "everyEffect": "vfx.monster.mutanttree.ember"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.mutanttree.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          23.4,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          0,
+          0
+        ],
+        "speed": 300,
+        "lift": 200,
+        "gravity": [
+          -1400,
+          -1400
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.monster.mutanttree.spark",
+        "endEffect": "vfx.monster.mutanttree.fire"
+      }
+    ]
+  }
+]

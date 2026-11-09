@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\PristonTale.Application\PristonTale.Application.csproj" />
+    <ProjectReference Include="..\..\Shared\PristonTale.Protocol\PristonTale.Protocol.csproj" />
+    <ProjectReference Include="..\..\Shared\PristonTale.Simulation\PristonTale.Simulation.csproj" />
+    <ProjectReference Include="..\..\Shared\PristonTale.Assets\PristonTale.Assets.csproj" />
+    <ProjectReference Include="..\..\Persistence\PristonTale.Persistence.Postgres\PristonTale.Persistence.Postgres.csproj" />
+    <ProjectReference Include="..\..\Persistence\PristonTale.Persistence.Sqlite\PristonTale.Persistence.Sqlite.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="PristonTale.Tests" />
+  </ItemGroup>
+
+</Project>

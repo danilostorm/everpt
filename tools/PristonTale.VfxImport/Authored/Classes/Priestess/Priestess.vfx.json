@@ -1,0 +1,2645 @@
+[
+  {
+    "name": "vfx.priestess.castcircle",
+    "duration": 2.4,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/StartMagic/MAAM1.smd",
+        "blend": "Additive",
+        "offset": [
+          0,
+          5.8594,
+          0
+        ],
+        "turn": false,
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2857,
+        "fadeOut": 0.2857
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/StartMagic/P/mama.tga",
+        "size": [
+          62.1094,
+          62.1094
+        ],
+        "offset": [
+          0,
+          5.8594,
+          0
+        ],
+        "turn": false,
+        "lifetime": [
+          2.2857,
+          2.2857
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/StartMagic/P/star05C_03.bmp",
+        "size": [
+          72.6562,
+          72.6562
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          120
+        ],
+        "offset": [
+          0,
+          5.8594,
+          0
+        ],
+        "turn": false,
+        "lifetime": [
+          2.2857,
+          2.2857
+        ],
+        "fade": "Rise"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.healing.impact",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/Effect/SkillEffect/Healing/HIALTEST.smd",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          105
+        ],
+        "modelStart": 1,
+        "modelFrames": 30,
+        "modelSpeed": 70,
+        "loop": true,
+        "tumble": [
+          0,
+          153.8086,
+          0
+        ],
+        "lifetime": [
+          3.5714,
+          3.5714
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1571,
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          28.125,
+          0
+        ],
+        "orbitRadius": 16.0,
+        "orbitSpeed": -153.8086,
+        "orbitGrowth": 4.375,
+        "orbitRise": 5.4688,
+        "orbitPhase": 22.5,
+        "turn": false
+      },
+      {
+        "lifetime": [
+          3.1429,
+          3.1429
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.priestess.healing.sparkle",
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          28.125,
+          0
+        ],
+        "orbitRadius": 16.0,
+        "orbitSpeed": -153.8086,
+        "orbitGrowth": 4.375,
+        "orbitRise": 5.4688,
+        "orbitPhase": 22.5,
+        "turn": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.healing.sparkle",
+    "duration": 1.2,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/HolyMind/H_MIND00.tga",
+        "count": 2,
+        "color": [
+          114,
+          137,
+          134,
+          255
+        ],
+        "size": [
+          0.7812,
+          2.7305
+        ],
+        "offset": [
+          0,
+          -3.9062,
+          0
+        ],
+        "jitterMin": [
+          -1.9531,
+          -1.9531,
+          -1.9531
+        ],
+        "jitterMax": [
+          1.9531,
+          1.9531,
+          1.9531
+        ],
+        "turn": false,
+        "ringRandom": true,
+        "radial": [
+          8.75,
+          8.75
+        ],
+        "rise": [
+          4.1016,
+          9.2969
+        ],
+        "gravity": [
+          -95.7031,
+          -95.7031
+        ],
+        "lifetime": [
+          0.7143,
+          0.9857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.holybolt.projectile",
+    "duration": 10,
+    "parts": [
+      {
+        "anchor": "Point",
+        "follow": true,
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.priestess.holybolt.puff"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.holybolt.puff",
+    "duration": 0.5,
+    "parts": [
+      {
+        "texture": "Effect/ImageData/Particle/blue.tga",
+        "count": 10,
+        "color": [
+          230,
+          250,
+          250,
+          200
+        ],
+        "size": [
+          6,
+          6
+        ],
+        "growth": -55,
+        "jitterMin": [
+          -2.5,
+          -2.5,
+          -2.5
+        ],
+        "jitterMax": [
+          2.5,
+          2.5,
+          2.5
+        ],
+        "burst": [
+          27.3438,
+          27.3438
+        ],
+        "lifetime": [
+          0.1,
+          0.1
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.holybolt.impact",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "MonsterMephit2.ini",
+        "loop": true,
+        "shape": "Line",
+        "count": 10,
+        "delayRandom": 0.0571,
+        "offset": [
+          0,
+          20,
+          0
+        ],
+        "burst": [
+          54.6875,
+          54.6875
+        ],
+        "lineSeconds": 0.0857,
+        "width": [
+          0.2734,
+          0.4648
+        ],
+        "lifetime": [
+          0.6,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1429
+      },
+      {
+        "animation": "MonsterMephit1.ini",
+        "loop": true,
+        "count": 4,
+        "delayStep": 0.0143,
+        "size": [
+          40,
+          40
+        ],
+        "sized": true,
+        "offset": [
+          0,
+          20,
+          0
+        ],
+        "ringRandom": true,
+        "radial": [
+          46.4844,
+          46.4844
+        ],
+        "rise": [
+          38.2812,
+          38.2812
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "swirl": [
+          210,
+          210
+        ],
+        "lifetime": [
+          0.5714,
+          0.6286
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.multispark.projectile",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          -11,
+          27.3438,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          15,
+          0
+        ],
+        "speed": 450,
+        "every": 0.0143,
+        "everyEffect": "vfx.priestess.multispark.trail"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          23,
+          27.3438,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          15,
+          0
+        ],
+        "speed": 450,
+        "every": 0.0143,
+        "everyEffect": "vfx.priestess.multispark.trail"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          -35,
+          27.3438,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          15,
+          0
+        ],
+        "speed": 450,
+        "every": 0.0143,
+        "everyEffect": "vfx.priestess.multispark.trail"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          47,
+          27.3438,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          15,
+          0
+        ],
+        "speed": 450,
+        "every": 0.0143,
+        "everyEffect": "vfx.priestess.multispark.trail"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          15,
+          0
+        ],
+        "speed": 450,
+        "every": 0.0143,
+        "everyEffect": "vfx.priestess.multispark.trail"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 140,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.multispark.trail",
+    "duration": 0.3,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "color": [
+          255,
+          255,
+          255,
+          80
+        ],
+        "size": [
+          5.8594,
+          11.7148
+        ],
+        "growth": -41.0156,
+        "jitterMin": [
+          -0.25,
+          -0.25,
+          -0.25
+        ],
+        "jitterMax": [
+          0.25,
+          0.25,
+          0.25
+        ],
+        "lifetime": [
+          0.1429,
+          0.1714
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.multispark.impact",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "count": 30,
+        "offset": [
+          0,
+          15,
+          0
+        ],
+        "shell": [
+          10,
+          10,
+          10
+        ],
+        "burst": [
+          35.0,
+          35.0
+        ],
+        "lineSeconds": 0.5714,
+        "width": [
+          1,
+          1
+        ],
+        "lifetime": [
+          0.7143,
+          0.9857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1429
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/MultiSpark/m_spark06.tga",
+        "count": 35,
+        "offset": [
+          0,
+          15,
+          0
+        ],
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "delayRandom": 0.1286,
+        "ringRandom": true,
+        "radial": [
+          35.0,
+          35.0
+        ],
+        "rise": [
+          13.6719,
+          40.7422
+        ],
+        "gravity": [
+          -76.5625,
+          -76.5625
+        ],
+        "lifetime": [
+          0.7143,
+          0.9857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      },
+      {
+        "texture": "image/Sinimage/Effect/PublicEffect/Light/Light0.tga",
+        "frames": 5,
+        "frameTime": 0.1429,
+        "offset": [
+          0,
+          15,
+          0
+        ],
+        "size": [
+          101.5625,
+          101.5625
+        ],
+        "growth": 27.3438,
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          15,
+          0
+        ],
+        "color": [
+          0.702,
+          1.0,
+          0.898
+        ],
+        "power": 180,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.holymind.impact",
+    "duration": 2.5,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.4235,
+          0.0314,
+          0.5333
+        ],
+        "power": 250,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusMagic3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.holymind.mark",
+    "duration": 600,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "bone": "Bip01 Head",
+        "follow": true,
+        "offset": [
+          0,
+          8,
+          0
+        ],
+        "turn": false,
+        "carryEffect": "particle.SerqbusState3"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.divinelightning.strike",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/DeadLay/spark01_01.bmp",
+        "anchor": "Point",
+        "offset": [
+          0,
+          390.625,
+          0
+        ],
+        "ring": [
+          80,
+          80
+        ],
+        "ringStart": 20,
+        "velocityMin": [
+          0,
+          -900,
+          0
+        ],
+        "velocityMax": [
+          0,
+          -900,
+          0
+        ],
+        "moveTime": [
+          0.4123,
+          0.4123
+        ],
+        "width": [
+          15.625,
+          15.625
+        ],
+        "trailPoints": 50,
+        "lifetime": [
+          1.1266,
+          1.1266
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3,
+        "delay": 0.0
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "ring": [
+          80,
+          80
+        ],
+        "ringStart": 20,
+        "delay": 0.0,
+        "lifetime": [
+          0.4123,
+          0.4123
+        ],
+        "endEffect": "vfx.priestess.divinelightning.spark"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/DeadLay/spark01_01.bmp",
+        "anchor": "Point",
+        "offset": [
+          0,
+          390.625,
+          0
+        ],
+        "ring": [
+          80,
+          80
+        ],
+        "ringStart": 140,
+        "velocityMin": [
+          0,
+          -900,
+          0
+        ],
+        "velocityMax": [
+          0,
+          -900,
+          0
+        ],
+        "moveTime": [
+          0.4123,
+          0.4123
+        ],
+        "width": [
+          15.625,
+          15.625
+        ],
+        "trailPoints": 50,
+        "lifetime": [
+          1.1266,
+          1.1266
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3,
+        "delay": 0.05
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "ring": [
+          80,
+          80
+        ],
+        "ringStart": 140,
+        "delay": 0.05,
+        "lifetime": [
+          0.4123,
+          0.4123
+        ],
+        "endEffect": "vfx.priestess.divinelightning.spark"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/DeadLay/spark01_01.bmp",
+        "anchor": "Point",
+        "offset": [
+          0,
+          390.625,
+          0
+        ],
+        "ring": [
+          80,
+          80
+        ],
+        "ringStart": 260,
+        "velocityMin": [
+          0,
+          -900,
+          0
+        ],
+        "velocityMax": [
+          0,
+          -900,
+          0
+        ],
+        "moveTime": [
+          0.4123,
+          0.4123
+        ],
+        "width": [
+          15.625,
+          15.625
+        ],
+        "trailPoints": 50,
+        "lifetime": [
+          1.1266,
+          1.1266
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3,
+        "delay": 0.1
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "ring": [
+          80,
+          80
+        ],
+        "ringStart": 260,
+        "delay": 0.1,
+        "lifetime": [
+          0.4123,
+          0.4123
+        ],
+        "endEffect": "vfx.priestess.divinelightning.spark"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.divinelightning.spark",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/DeadLay/spark01_01.bmp",
+        "count": 5,
+        "width": [
+          7.8125,
+          7.8125
+        ],
+        "trailPoints": 50,
+        "velocityMin": [
+          -1260,
+          140,
+          -1260
+        ],
+        "velocityMax": [
+          1260,
+          280,
+          1260
+        ],
+        "moveTime": [
+          0.07,
+          0.07
+        ],
+        "lifetime": [
+          0.9286,
+          1.0714
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 100,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.DivineLightning",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.reflection.cast",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "follow": true,
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.priestess.reflection.sparkle"
+      },
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/HolyR/b_2HolyReflection.smd",
+        "blend": "Additive",
+        "count": 2,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          54.6875,
+          10.0
+        ],
+        "modelFrames": 30,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4286,
+        "fadeOut": 0.4286
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/HolyR/P/star05M_02.bmp",
+        "count": 20,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          48.8281,
+          0
+        ],
+        "size": [
+          1.1719,
+          1.9531
+        ],
+        "burst": [
+          5.4688,
+          10.9375
+        ],
+        "delay": 1.2857,
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "Rise"
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/flare.tga",
+        "color": [
+          255,
+          150,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          48.8281,
+          0
+        ],
+        "size": [
+          19.7188,
+          27.5312
+        ],
+        "height": [
+          0.7812,
+          1.9531
+        ],
+        "rotation": [
+          60,
+          60
+        ],
+        "delay": 1.2857,
+        "lifetime": [
+          0.5143,
+          0.5143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2571
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/flare.tga",
+        "color": [
+          255,
+          150,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          48.8281,
+          0
+        ],
+        "size": [
+          19.7188,
+          27.5312
+        ],
+        "height": [
+          0.7812,
+          1.9531
+        ],
+        "rotation": [
+          120,
+          120
+        ],
+        "delay": 1.2857,
+        "lifetime": [
+          0.5143,
+          0.5143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2571
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/flare.tga",
+        "color": [
+          255,
+          150,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          48.8281,
+          0
+        ],
+        "size": [
+          19.7188,
+          27.5312
+        ],
+        "height": [
+          0.7812,
+          1.9531
+        ],
+        "rotation": [
+          180,
+          180
+        ],
+        "delay": 1.2857,
+        "lifetime": [
+          0.5143,
+          0.5143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2571
+      },
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/HolyR/flw.smd",
+        "blend": "Additive",
+        "count": 12,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46.875,
+          0
+        ],
+        "ring": [
+          4,
+          5
+        ],
+        "ringRandom": true,
+        "radial": [
+          0.5,
+          2
+        ],
+        "rise": [
+          8.2031,
+          13.6719
+        ],
+        "gravity": [
+          -38.2812,
+          -38.2812
+        ],
+        "swirl": [
+          154,
+          154
+        ],
+        "angles": [
+          30,
+          0,
+          60
+        ],
+        "tumble": [
+          61.5234,
+          61.5234,
+          61.5234
+        ],
+        "delay": 1.2857,
+        "delayRandom": 0.7143,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4286,
+        "fadeOut": 0.4286
+      },
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/HolyR/flw.smd",
+        "blend": "Additive",
+        "count": 12,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46.875,
+          0
+        ],
+        "ring": [
+          4,
+          5
+        ],
+        "ringRandom": true,
+        "radial": [
+          0.5,
+          2
+        ],
+        "rise": [
+          8.2031,
+          13.6719
+        ],
+        "gravity": [
+          -38.2812,
+          -38.2812
+        ],
+        "swirl": [
+          -154,
+          -154
+        ],
+        "angles": [
+          120,
+          90,
+          10
+        ],
+        "tumble": [
+          61.5234,
+          61.5234,
+          61.5234
+        ],
+        "delay": 1.2857,
+        "delayRandom": 0.7143,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4286,
+        "fadeOut": 0.4286
+      },
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/HolyR/flw.smd",
+        "blend": "Additive",
+        "count": 12,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46.875,
+          0
+        ],
+        "ring": [
+          4,
+          5
+        ],
+        "ringRandom": true,
+        "radial": [
+          0.5,
+          2
+        ],
+        "rise": [
+          8.2031,
+          13.6719
+        ],
+        "gravity": [
+          -38.2812,
+          -38.2812
+        ],
+        "swirl": [
+          130,
+          130
+        ],
+        "angles": [
+          200,
+          45,
+          150
+        ],
+        "tumble": [
+          61.5234,
+          61.5234,
+          61.5234
+        ],
+        "delay": 1.2857,
+        "delayRandom": 0.7143,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4286,
+        "fadeOut": 0.4286
+      },
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/HolyR/flw.smd",
+        "blend": "Additive",
+        "count": 12,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46.875,
+          0
+        ],
+        "ring": [
+          4,
+          5
+        ],
+        "ringRandom": true,
+        "radial": [
+          0.5,
+          2
+        ],
+        "rise": [
+          8.2031,
+          13.6719
+        ],
+        "gravity": [
+          -38.2812,
+          -38.2812
+        ],
+        "swirl": [
+          -130,
+          -130
+        ],
+        "angles": [
+          300,
+          270,
+          240
+        ],
+        "tumble": [
+          61.5234,
+          61.5234,
+          61.5234
+        ],
+        "delay": 1.2857,
+        "delayRandom": 0.7143,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4286,
+        "fadeOut": 0.4286
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.1961,
+          0.3922
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Casting_P.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.priestess.castcircle",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.reflection.sparkle",
+    "duration": 1.6,
+    "parts": [
+      {
+        "texture": "image/Sinimage/AssaEffect/HolyR/P/star01M_04.bmp",
+        "size": [
+          1.9531,
+          3.9062
+        ],
+        "ring": [
+          0,
+          2.5
+        ],
+        "ringRandom": true,
+        "rise": [
+          0,
+          13.3984
+        ],
+        "lifetime": [
+          1.1429,
+          1.4286
+        ],
+        "fade": "Rise"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.reflection.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/HolyR/mn.smd",
+        "blend": "Additive",
+        "count": 2,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "tumble": [
+          0,
+          61.5234,
+          0
+        ],
+        "delay": 0.3,
+        "fade": "InOut",
+        "fadeIn": 3.6429,
+        "turn": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.reflection.defense",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/HolyR/HolyReflection-gu.smd",
+        "blend": "Additive",
+        "anchor": "Target",
+        "follow": true,
+        "lifetime": [
+          0.5714,
+          0.5714
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1429,
+        "fadeOut": 0.1429
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/HolyR/P/star01M_04.bmp",
+        "count": 7,
+        "anchor": "Target",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "shell": [
+          23.0469,
+          23.0469,
+          23.0469
+        ],
+        "size": [
+          2.7344,
+          3.9062
+        ],
+        "velocityMin": [
+          0,
+          -2.7344,
+          0
+        ],
+        "velocityMax": [
+          0,
+          2.7344,
+          0
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "Rise"
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.1961,
+          0.3922
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.grandhealing.cast",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/GreatH/b_GH.smd",
+        "blend": "Additive",
+        "count": 2,
+        "delayStep": 0.4286,
+        "anchor": "Caster",
+        "follow": true,
+        "modelFrames": 30,
+        "modelSpeed": 17.5,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4286,
+        "fadeOut": 0.4286
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/GreatH/P/star04Y_0.bmp",
+        "frames": 6,
+        "frameTime": 0.5286,
+        "pingPong": true,
+        "loop": true,
+        "count": 20,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          27.3438,
+          0
+        ],
+        "shell": [
+          24,
+          24,
+          24
+        ],
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "velocityMin": [
+          0,
+          -2.7344,
+          0
+        ],
+        "velocityMax": [
+          0,
+          2.7344,
+          0
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/GreatH/P/star06Y_04.bmp",
+        "count": 5,
+        "anchor": "Caster",
+        "follow": true,
+        "orbitRadius": 8,
+        "orbitSpeed": 307.6172,
+        "orbitRise": 82.0312,
+        "orbitPhaseStep": 72,
+        "orbitPhase": 0,
+        "width": [
+          1.9531,
+          1.9531
+        ],
+        "trailPoints": 30,
+        "delayStep": 0.1286,
+        "delayRandom": 0.0571,
+        "lifetime": [
+          0.8857,
+          0.8857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4429,
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/GreatH/P/star06Y_04.bmp",
+        "count": 5,
+        "anchor": "Caster",
+        "follow": true,
+        "orbitRadius": 8,
+        "orbitSpeed": -307.6172,
+        "orbitRise": 82.0312,
+        "orbitPhaseStep": 72,
+        "orbitPhase": 36,
+        "width": [
+          1.9531,
+          1.9531
+        ],
+        "trailPoints": 30,
+        "delayStep": 0.1286,
+        "delayRandom": 0.0571,
+        "lifetime": [
+          0.8857,
+          0.8857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4429,
+        "turn": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.3922
+        ],
+        "power": 180,
+        "decay": 1
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Casting_P.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.priestess.castcircle",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.grandhealing.member",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/fire01_02.bmp",
+        "count": 2,
+        "anchor": "Target",
+        "follow": true,
+        "orbitRadius": 6,
+        "orbitSpeed": 615.2344,
+        "orbitRise": 82.0312,
+        "orbitPhaseStep": 137,
+        "width": [
+          1.1719,
+          1.1719
+        ],
+        "trailPoints": 30,
+        "delayRandom": 0.2143,
+        "lifetime": [
+          0.8857,
+          0.8857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4429,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star01Y_01.bmp",
+        "count": 2,
+        "anchor": "Target",
+        "follow": true,
+        "orbitRadius": 8,
+        "orbitSpeed": 307.6172,
+        "orbitRise": 54.6875,
+        "orbitPhaseStep": 151,
+        "size": [
+          7.8125,
+          7.8125
+        ],
+        "delayRandom": 0.2143,
+        "lifetime": [
+          0.8857,
+          0.8857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4429,
+        "turn": false
+      },
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/GreatH/b_GreatHealing.smd",
+        "blend": "Additive",
+        "count": 2,
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          15.625,
+          0
+        ],
+        "orbitRadius": 8,
+        "orbitSpeed": 307.6172,
+        "orbitRise": 54.6875,
+        "orbitPhaseStep": 163,
+        "tumble": [
+          0,
+          -307.6172,
+          0
+        ],
+        "modelFrames": 32,
+        "modelSpeed": 17.5,
+        "delayRandom": 0.2143,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2429,
+        "fadeOut": 0.2429,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/GreatH/P/star06Y_04.bmp",
+        "count": 2,
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          29.2969,
+          0
+        ],
+        "orbitRadius": 7,
+        "orbitSpeed": 307.6172,
+        "orbitPhaseStep": 173,
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "height": [
+          58.5938,
+          58.5938
+        ],
+        "delayRandom": 0.2143,
+        "lifetime": [
+          0.8857,
+          0.8857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4429,
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/fire01_02.bmp",
+        "count": 2,
+        "anchor": "Target",
+        "follow": true,
+        "orbitRadius": 6,
+        "orbitSpeed": -615.2344,
+        "orbitRise": 82.0312,
+        "orbitPhaseStep": 137,
+        "width": [
+          1.1719,
+          1.1719
+        ],
+        "trailPoints": 30,
+        "delayRandom": 0.2143,
+        "lifetime": [
+          0.8857,
+          0.8857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4429,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star01Y_01.bmp",
+        "count": 2,
+        "anchor": "Target",
+        "follow": true,
+        "orbitRadius": 8,
+        "orbitSpeed": -307.6172,
+        "orbitRise": 54.6875,
+        "orbitPhaseStep": 151,
+        "size": [
+          7.8125,
+          7.8125
+        ],
+        "delayRandom": 0.2143,
+        "lifetime": [
+          0.8857,
+          0.8857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4429,
+        "turn": false
+      },
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/GreatH/b_GreatHealing.smd",
+        "blend": "Additive",
+        "count": 2,
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          15.625,
+          0
+        ],
+        "orbitRadius": 8,
+        "orbitSpeed": -307.6172,
+        "orbitRise": 54.6875,
+        "orbitPhaseStep": 163,
+        "tumble": [
+          0,
+          307.6172,
+          0
+        ],
+        "modelFrames": 32,
+        "modelSpeed": 17.5,
+        "delayRandom": 0.2143,
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2429,
+        "fadeOut": 0.2429,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/GreatH/P/star06Y_04.bmp",
+        "count": 2,
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          29.2969,
+          0
+        ],
+        "orbitRadius": 7,
+        "orbitSpeed": -307.6172,
+        "orbitPhaseStep": 173,
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "height": [
+          58.5938,
+          58.5938
+        ],
+        "delayRandom": 0.2143,
+        "lifetime": [
+          0.8857,
+          0.8857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4429,
+        "turn": false
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/GreatH/P/ground_ring.bmp",
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          3.5156,
+          0
+        ],
+        "size": [
+          23.4375,
+          23.4375
+        ],
+        "spin": 184.5703,
+        "lifetime": [
+          2.0,
+          2.0
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/AssaEffect/GreatH/P/ground_ring.bmp",
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          2.3438,
+          0
+        ],
+        "size": [
+          35.1562,
+          35.1562
+        ],
+        "spin": 184.5703,
+        "lifetime": [
+          2.0,
+          2.0
+        ],
+        "fade": "Rise",
+        "turn": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.3922
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.vigorball.projectile",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          -14,
+          19.5312,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          25,
+          0
+        ],
+        "speed": 420,
+        "delay": 0.0,
+        "carryEffect": "particle.Skill3PriestessVigorBall1"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          -14,
+          19.5312,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          25,
+          0
+        ],
+        "speed": 420,
+        "delay": 0.0,
+        "carryEffect": "particle.Skill3PriestessVigorBall2"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          14,
+          19.5312,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          25,
+          0
+        ],
+        "speed": 420,
+        "delay": 0.44,
+        "carryEffect": "particle.Skill3PriestessVigorBall1"
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          14,
+          19.5312,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          25,
+          0
+        ],
+        "speed": 420,
+        "delay": 0.44,
+        "carryEffect": "particle.Skill3PriestessVigorBall2"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.vigorball.impact",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.Skill3PriestessVigorBallHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          25,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.resurrection.shot",
+    "duration": 5.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/b_Pt3_Resurrection60.smd",
+        "blend": "Additive",
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          33.2031,
+          0
+        ],
+        "delay": 0.9286,
+        "modelFrames": 90,
+        "modelSpeed": 26.25,
+        "lifetime": [
+          3.4286,
+          3.4286
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.0714,
+        "fadeOut": 0.4286
+      },
+      {
+        "anchor": "Target",
+        "follow": true,
+        "offset": [
+          0,
+          51.2031,
+          0
+        ],
+        "delay": 0.9286,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.Skill3PriestessResurrection2"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3PriestessResurrection1",
+        "anchor": "Target",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.resurrection.rise",
+    "duration": 11.0,
+    "parts": [
+      {
+        "anchor": "Target",
+        "bone": "Bip01 Head",
+        "follow": true,
+        "offset": [
+          0,
+          38,
+          0
+        ],
+        "turn": false,
+        "lifetime": [
+          10,
+          10
+        ],
+        "carryEffect": "particle.Skill3PriestessResurrection3"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.extinction.burst",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.Skill3PriestessExtinction2",
+        "anchor": "Point",
+        "offset": [
+          60,
+          5.8594,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.Skill3PriestessExtinction2",
+        "anchor": "Point",
+        "offset": [
+          -40,
+          5.8594,
+          70
+        ],
+        "turn": true,
+        "delay": 0.05
+      },
+      {
+        "effect": "particle.Skill3PriestessExtinction2",
+        "anchor": "Point",
+        "offset": [
+          -30,
+          5.8594,
+          -80
+        ],
+        "turn": true,
+        "delay": 0.1
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.virtuallife.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/Pt3_VirtualLife20.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          3.9062,
+          0
+        ],
+        "delay": 0.8571,
+        "modelFrames": 20,
+        "modelSpeed": 11.6667,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.4286,
+        "fadeOut": 0.4286,
+        "turn": false
+      },
+      {
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          3.9062,
+          0
+        ],
+        "turn": false,
+        "carryEffect": "particle.Skill3PriestessVirtualLifeMember"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.glacialspike.spikes",
+    "duration": 4.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          -64
+        ],
+        "color": [
+          0.0,
+          0.0,
+          0.3922
+        ],
+        "power": 700,
+        "decay": 10
+      }
+    ],
+    "children": [
+      {
+        "effect": "script.SkillCelestialGlacialSpike",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.regenfield.cast",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/NewEffect/Res/Object/PT_4-2-40.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          15.625,
+          0
+        ],
+        "delay": 1.32,
+        "modelFrames": 40,
+        "modelSpeed": 30,
+        "loop": true,
+        "lifetime": [
+          1.32,
+          1.32
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.2
+      },
+      {
+        "anchor": "Caster",
+        "follow": true,
+        "delay": 1.32,
+        "lifetime": [
+          1.32,
+          1.32
+        ],
+        "turn": false,
+        "carryEffect": "particle.Skill4RegenerationField"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.priestess.castcircle",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.chainlightning.cast",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/DeadLay/spark01_01.bmp",
+        "anchor": "Target",
+        "offset": [
+          0,
+          390.625,
+          0
+        ],
+        "delay": 0.4127,
+        "velocityMin": [
+          0,
+          -900,
+          0
+        ],
+        "velocityMax": [
+          0,
+          -900,
+          0
+        ],
+        "moveTime": [
+          0.4123,
+          0.4123
+        ],
+        "width": [
+          15.625,
+          15.625
+        ],
+        "trailPoints": 50,
+        "lifetime": [
+          1.1266,
+          1.1266
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.priestess.castcircle",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "vfx.priestess.divinelightning.spark",
+        "anchor": "Target",
+        "offset": [
+          0,
+          19.5312,
+          0
+        ],
+        "turn": true,
+        "delay": 0.825
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.chainlightning.link",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/NewEffect/Res/TextureHit/B_e20.bmp",
+        "frames": 3,
+        "frameTime": 0.02,
+        "loop": true,
+        "anchor": "Point",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          30,
+          0
+        ],
+        "width": [
+          15,
+          15
+        ],
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.4
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill4CelestialChainLightingLight",
+        "anchor": "Point",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.Skill4CelestialChainLightingLight",
+        "anchor": "Target",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.muspell.cast",
+    "duration": 3.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Muspell 02.wav",
+        "delay": 1.65
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.priestess.castcircle",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.muspell.spirit",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/NewEffect/Res/Object/muspel.smd",
+        "blend": "Alpha",
+        "color": [
+          255,
+          255,
+          255,
+          80
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "modelStart": 10,
+        "modelFrames": 160,
+        "loopFrom": 80,
+        "loop": true,
+        "modelSpeed": 30
+      },
+      {
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          59.0625,
+          0
+        ],
+        "carryEffect": "particle.MusPell"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.MuspellStart",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.muspell.strike",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 180,
+        "decay": 3
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.MuspellHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          25,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.MuspellHand",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          70.3125,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.spiritimpact.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillSpiritImpact1.ini",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ]
+      },
+      {
+        "animation": "SkillSpiritImpact2.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.piercingice.shot",
+    "duration": 4.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/VenomSpear 02.wav",
+        "delay": 0.1
+      }
+    ],
+    "parts": [
+      {
+        "shape": "Billboard",
+        "size": [
+          1,
+          1
+        ],
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 900.0,
+        "reach": 8,
+        "end": "Vanish",
+        "carryEffect": "vfx.priestess.piercingice.spear",
+        "endEffect": "particle.Skill5PriestessPiercingIceHit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.piercingice.spear",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "particle.Skill5PriestessPiercingIce1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill5PriestessPiercingIce2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.ramiel.spirit",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Ramiel/b_Ramiel.smd",
+        "skeleton": "Effect/AssaEffect/Ramiel/b_Ramiel.smb",
+        "blend": "Alpha",
+        "color": [
+          255,
+          255,
+          255,
+          160
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "modelFrames": 420,
+        "loop": true,
+        "modelSpeed": 30
+      },
+      {
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          59.0625,
+          0
+        ],
+        "carryEffect": "particle.Skill5PriestessRamiel"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill5PriestessRamielStart",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.ramiel.strike",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.6,
+          0.7,
+          1.0
+        ],
+        "power": 180,
+        "decay": 3
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill5PriestessRamielHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          25,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.Skill5PriestessRamielHand",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          70.3125,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.krishna.burst",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "particle.S5_Pr_BlessingKrishna_Effect",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.priestess.krishna.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.S5_Pr_BlessingKrishna",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  }
+]

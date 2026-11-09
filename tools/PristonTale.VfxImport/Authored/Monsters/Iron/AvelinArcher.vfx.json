@@ -1,0 +1,59 @@
+[
+  {
+    "name": "vfx.monster.avelinarcher.attack.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 900,
+        "reach": 10,
+        "carryEffect": "particle.SerqbusShot1",
+        "endEffect": "vfx.monster.avelinarcher.impact"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.avelinarcher.impact",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.3922,
+          1.0
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

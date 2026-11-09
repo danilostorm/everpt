@@ -1,0 +1,107 @@
+[
+  {
+    "name": "vfx.monster.revivedfighter.skill.hit.kG",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.1961
+        ],
+        "power": 190,
+        "decay": 3
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedfighter.skill.hit.kZ.e1",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.destroyer",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedfighter.skill.hit.kZ.e2",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AvengingCrash 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.destroyer",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedfighter.skill.hit.kZ.e3",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Expansion 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.destroyer",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  }
+]

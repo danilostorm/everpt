@@ -1,0 +1,85 @@
+[
+  {
+    "name": "vfx.monster.darkguard.attack.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "weapons/arrow.smd",
+        "blend": "Alpha",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          38,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 560,
+        "faceGoal": true,
+        "reach": 8,
+        "lifetime": [
+          1.7143,
+          1.7143
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.darkguard.skill.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/arrow.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          30,
+          0
+        ],
+        "speed": 492.1875,
+        "faceGoal": true,
+        "tumble": [
+          0,
+          0,
+          615.2344
+        ],
+        "reach": 5,
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "carryEffect": "particle.twistJavelin1",
+        "endEffect": "vfx.monster.darkguard.skill.impact"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.darkguard.skill.impact",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.TwistJavelin2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

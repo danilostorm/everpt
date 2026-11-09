@@ -1,0 +1,55 @@
+[
+  {
+    "name": "vfx.monster.thorncrawler.skill.hit",
+    "duration": 1.5,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/ThornCrawler/m_thorncrowler.smd",
+        "blend": "Alpha",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          35.1562,
+          0
+        ],
+        "angles": [
+          0,
+          0,
+          0
+        ],
+        "modelFrames": 20,
+        "modelSpeed": 35,
+        "lifetime": [
+          0.31,
+          0.31
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.06
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          35.1562,
+          0
+        ],
+        "lifetime": [
+          0.31,
+          0.31
+        ],
+        "carryEffect": "particle.ThornCrawler",
+        "velocityMin": [
+          0,
+          0,
+          -180
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -180
+        ]
+      }
+    ]
+  }
+]

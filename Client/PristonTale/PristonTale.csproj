@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <RollForward>Major</RollForward>
+        <TieredCompilation>true</TieredCompilation>
+        <TieredPGO>true</TieredPGO>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <!-- Formatting and parsing stay culture-invariant whatever the system's culture; the client text resources are
+             looked up by the BCP 47 name of client-settings.json's language, which needs cultures created by name. -->
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <PredefinedCulturesOnly>false</PredefinedCulturesOnly>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <MonoGamePlatform>DesktopVK</MonoGamePlatform>
+    </PropertyGroup>
+    <PropertyGroup>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <ApplicationIcon>Icon.ico</ApplicationIcon>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Remove="Icon.ico"/>
+        <None Remove="Icon.bmp"/>
+    </ItemGroup>
+    <ItemGroup>
+        <!-- Translations of the data's texts, read beside the executable (HudTextFiles). -->
+        <None Update="Texts\**\*" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Icon.ico">
+            <LogicalName>Icon.ico</LogicalName>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Icon.bmp">
+            <LogicalName>Icon.bmp</LogicalName>
+        </EmbeddedResource>
+    </ItemGroup>
+    <ItemGroup>
+        <!-- MonoGame Native platform (Vulkan) from the fork in monogame/ (monogame/README.md); its native runtime is
+             copied next to the executable by MonoGameRuntime.targets. -->
+        <ProjectReference Include="../../monogame/framework/MonoGame.Framework/MonoGame.Framework.Native.csproj"/>
+        <!-- The fork's effect processor (SpirvEffectProcessor), which Content/Content.mgcb loads with /reference: built
+             before the content, not referenced. -->
+        <ProjectReference Include="../../monogame/pipeline/MonoGame.Effect.Processor/MonoGame.Effect.Processor.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true"/>
+        <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.6"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\PristonTale.Gameplay\PristonTale.Gameplay.csproj"/>
+    </ItemGroup>
+    <Import Project="../MonoGameRuntime.targets"/>
+</Project>

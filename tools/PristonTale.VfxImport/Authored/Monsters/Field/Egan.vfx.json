@@ -1,0 +1,36 @@
+[
+  {
+    "name": "vfx.monster.egan.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          8,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 355.4688,
+        "reach": 4,
+        "carryEffect": "vfx.monster.imp.trail",
+        "endEffect": "vfx.monster.imp.shothit"
+      }
+    ]
+  }
+]

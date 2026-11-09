@@ -1,0 +1,45 @@
+[
+  {
+    "name": "vfx.monster.revivedmechanician.skill.hit.kO",
+    "duration": 10.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Spark 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.spark.ball",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedmechanician.skill.hit.kZ",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Skill_Swing 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.revived.fx.roundimpact",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  }
+]

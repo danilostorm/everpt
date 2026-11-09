@@ -1,0 +1,59 @@
+[
+  {
+    "name": "vfx.monster.avelinqueen.attack.hit",
+    "duration": 4.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 900,
+        "reach": 10,
+        "carryEffect": "particle.SerqbusShot2",
+        "endEffect": "vfx.monster.avelinqueen.impact"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.avelinqueen.impact",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.1961,
+          0.1961
+        ],
+        "power": 150,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.SerqbusHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

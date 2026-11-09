@@ -1,0 +1,1340 @@
+[
+  {
+    "name": "vfx.monster.babel.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.IronMonsterRunicGuardianBossWeapon2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 Effect",
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.IronMonsterRunicGuardianBossJin2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 Pelvis",
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.babel.attack.hit.e1",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          -30,
+          58.5938,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 500,
+        "reach": 15,
+        "carryEffect": "particle.IronMonsterRunicGuardianBossWeapon1",
+        "endEffect": "vfx.monster.babel.orbhit",
+        "lifetime": [
+          1.4286,
+          1.4286
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          -30,
+          58.5938,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 500,
+        "reach": 15,
+        "carryEffect": "particle.IronMonsterRunicGuardianBossWeapon2",
+        "lifetime": [
+          1.4286,
+          1.4286
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.babel.attack.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          30,
+          58.5938,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 500,
+        "reach": 15,
+        "carryEffect": "particle.IronMonsterRunicGuardianBossWeapon1",
+        "endEffect": "vfx.monster.babel.orbhit",
+        "lifetime": [
+          1.4286,
+          1.4286
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          30,
+          58.5938,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 500,
+        "reach": 15,
+        "carryEffect": "particle.IronMonsterRunicGuardianBossWeapon2",
+        "lifetime": [
+          1.4286,
+          1.4286
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.babel.orbhit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.IronMonsterRunicGuardianBossHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.babel.skill.hit",
+    "duration": 5.0,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "color": [
+          255,
+          150,
+          50,
+          255
+        ],
+        "count": 100,
+        "delayStep": 0.0143,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          101.5625,
+          0
+        ],
+        "shell": [
+          77,
+          77,
+          77
+        ],
+        "burst": [
+          -164.066,
+          -164.066
+        ],
+        "width": [
+          1.1719,
+          2.1484
+        ],
+        "lineSeconds": 0.3333,
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1,
+        "fadeOut": 0.2
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0,
+          0,
+          0
+        ],
+        "endEffect": "vfx.monster.babel.skillhit"
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0,
+          0,
+          0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -40.0,
+          0,
+          0.0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -40.0,
+          0,
+          0.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -40.0,
+          0,
+          0.0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -0.0,
+          0,
+          -40.0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -0.0,
+          0,
+          -40.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -0.0,
+          0,
+          -40.0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          40.0,
+          0,
+          -0.0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          40.0,
+          0,
+          -0.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          40.0,
+          0,
+          -0.0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0.0,
+          0,
+          40.0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/Texture/flare.bmp",
+        "blend": "InvShadow",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0.0,
+          0,
+          40.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 1.7143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0.0,
+          0,
+          40.0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0,
+          0,
+          0
+        ],
+        "endEffect": "vfx.monster.babel.skillhit"
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0,
+          0,
+          0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -40.0,
+          0,
+          0.0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -40.0,
+          0,
+          0.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -40.0,
+          0,
+          0.0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -0.0,
+          0,
+          -40.0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -0.0,
+          0,
+          -40.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          -0.0,
+          0,
+          -40.0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          40.0,
+          0,
+          -0.0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          40.0,
+          0,
+          -0.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          40.0,
+          0,
+          -0.0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          9.7656,
+          9.7656
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0.0,
+          0,
+          40.0
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "width": [
+          25.3906,
+          25.3906
+        ],
+        "trailPoints": 17,
+        "trailFade": 12,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "goal": "Point",
+        "speed": 60,
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0.0,
+          0,
+          40.0
+        ]
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "delay": 2.0143,
+        "goal": "Point",
+        "speed": 60,
+        "lift": 840,
+        "gravity": [
+          -2200,
+          -2200
+        ],
+        "reach": 50,
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "goalOffset": [
+          0.0,
+          0,
+          40.0
+        ],
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IronMonsterRunicGuardianBossSkill1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          117.1875,
+          0
+        ],
+        "turn": true,
+        "follow": true,
+        "delay": 0.2
+      },
+      {
+        "effect": "particle.IronMonsterRunicGuardianBossJin1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          15.625,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.babel.skillhit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          -0.5882,
+          -0.5882,
+          -1.0
+        ],
+        "power": 300,
+        "decay": 4
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.IronMonsterRunicGuardianSkillHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

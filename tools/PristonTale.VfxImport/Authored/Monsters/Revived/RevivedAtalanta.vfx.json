@@ -1,0 +1,267 @@
+[
+  {
+    "name": "vfx.monster.revivedatalanta.skill.hit.kO",
+    "duration": 2.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "offset": [
+          0,
+          -3.91,
+          -30
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 420.0,
+        "end": "LastFrame",
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_StormJ.smd",
+        "blend": "Additive",
+        "faceGoal": true,
+        "color": [
+          255,
+          255,
+          255,
+          205
+        ],
+        "carryEffect": "particle.twistJavelin1"
+      },
+      {
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "offset": [
+          0,
+          -3.91,
+          -30
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 420.0,
+        "end": "LastFrame",
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/Skill3Texture/light1_0.bmp",
+        "frames": 6,
+        "frameTime": 0.0286,
+        "color": [
+          200,
+          200,
+          255,
+          255
+        ],
+        "width": [
+          19.5,
+          19.5
+        ],
+        "lineSeconds": 0.1395
+      },
+      {
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "offset": [
+          0,
+          -3.91,
+          -30
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 420.0,
+        "end": "LastFrame",
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/Skill3Texture/At3_StormJ2.bmp",
+        "color": [
+          200,
+          200,
+          255,
+          255
+        ],
+        "width": [
+          19.5,
+          19.5
+        ],
+        "lineSeconds": 0.1581
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/StormJavelin 1.wav",
+        "pick": 1
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/StormJavelin 2.wav",
+        "pick": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.TwistJavelin2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          7.81,
+          0
+        ],
+        "delay": 0.5,
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revived.fx.vengeance.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "script.SkillValhallaHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedatalanta.skill.hit.kZ.e1",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "carryEffect": "script.SkillValhallaXRage",
+        "endEffect": "vfx.monster.revived.fx.vengeance.hit"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/ImageData/Shield/Shield1.tga",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "width": [
+          2.5,
+          2.5
+        ],
+        "trailPoints": 16,
+        "trailFade": 16,
+        "end": "Hold",
+        "fadeOut": 0.2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Vengeance 01.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedatalanta.skill.hit.kZ.e2",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "carryEffect": "script.SkillValhallaXRage",
+        "endEffect": "vfx.monster.revived.fx.vengeance.hit"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/ImageData/Shield/Shield1.tga",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "width": [
+          2.5,
+          2.5
+        ],
+        "trailPoints": 16,
+        "trailFade": 16,
+        "end": "Hold",
+        "fadeOut": 0.2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Vengeance 02.wav"
+      }
+    ]
+  }
+]

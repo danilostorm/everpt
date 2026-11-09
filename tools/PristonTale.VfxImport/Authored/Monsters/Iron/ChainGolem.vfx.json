@@ -1,0 +1,48 @@
+[
+  {
+    "name": "vfx.monster.chaingolem.attack.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          32,
+          -54
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.chaingolem.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.IronMonsterChainGolem1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 FX",
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.IronMonsterChainGolem2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip01 chain26",
+        "turn": true,
+        "follow": true
+      }
+    ]
+  }
+]

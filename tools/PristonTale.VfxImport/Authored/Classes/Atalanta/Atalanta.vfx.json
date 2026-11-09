@@ -1,0 +1,2816 @@
+[
+  {
+    "name": "vfx.atalanta.shieldstrike.cast",
+    "duration": 2.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "bone": "Bip-shield",
+        "follow": true,
+        "lifetime": [
+          1.58,
+          1.58
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.atalanta.shieldstrike.disc"
+      },
+      {
+        "anchor": "Caster",
+        "bone": "Bip-shield",
+        "follow": true,
+        "lifetime": [
+          0.2143,
+          0.2143
+        ],
+        "every": 0.0143,
+        "everyEffect": "vfx.atalanta.shieldstrike.flash"
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.shieldstrike.disc",
+    "duration": 0.2,
+    "parts": [
+      {
+        "shape": "Ground",
+        "texture": "image/Sinimage/Effect/SkillEffect/ShieldStrike/sd3.tga",
+        "size": [
+          39.0624,
+          39.0624
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          90
+        ],
+        "lifetime": [
+          0.0429,
+          0.0429
+        ],
+        "turn": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.shieldstrike.flash",
+    "duration": 1.0,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/ShieldStrike/sd1.tga",
+        "count": 5,
+        "size": [
+          3.9062,
+          7.8125
+        ],
+        "jitterMin": [
+          -2.5,
+          -2.5,
+          -2.5
+        ],
+        "jitterMax": [
+          2.5,
+          2.5,
+          2.5
+        ],
+        "growth": -82.0312,
+        "color": [
+          255,
+          255,
+          255,
+          150
+        ],
+        "lifetime": [
+          0.0857,
+          0.0857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.0429
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/ShieldStrike/sd2.tga",
+        "count": 12,
+        "delayStep": 0.00715,
+        "size": [
+          1.1719,
+          2.3438
+        ],
+        "jitterMin": [
+          -2.5,
+          -2.5,
+          -2.5
+        ],
+        "jitterMax": [
+          2.5,
+          2.5,
+          2.5
+        ],
+        "burst": [
+          17.5,
+          17.5
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          150
+        ],
+        "lifetime": [
+          0.2857,
+          0.4286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.farina.shot",
+    "duration": 10,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Farina/farina06.tga",
+        "count": 200,
+        "delayStep": 0.00286,
+        "size": [
+          1.9531,
+          3.9062
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          26,
+          0
+        ],
+        "burst": [
+          17.5,
+          17.5
+        ],
+        "lifetime": [
+          0.4286,
+          0.5714
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3571
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.farina.hit",
+    "duration": 1.5,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "image/Sinimage/Effect/SkillEffect/Farina/farina06.tga",
+        "count": 30,
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "burst": [
+          70.0,
+          70.0
+        ],
+        "width": [
+          2.0,
+          2.0
+        ],
+        "lineSeconds": 0.2857,
+        "lifetime": [
+          0.7143,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1429
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/Farina/farina06.tga",
+        "count": 30,
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "delayRandom": 0.1286,
+        "radial": [
+          35.0,
+          35.0
+        ],
+        "rise": [
+          13.6719,
+          41.0156
+        ],
+        "gravity": [
+          -76.5625,
+          -76.5625
+        ],
+        "lifetime": [
+          0.7143,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      },
+      {
+        "texture": "image/Sinimage/Effect/PublicEffect/Light/Light0.tga",
+        "frames": 5,
+        "frameTime": 0.1429,
+        "size": [
+          78.125,
+          78.125
+        ],
+        "growth": 27.3438,
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3725,
+          0.9922
+        ],
+        "power": 230,
+        "decay": 1
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "color": [
+          0.3922,
+          0.0,
+          0.0
+        ],
+        "power": 400,
+        "decay": 10
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.biggerspear.shot",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/Effect/SkillEffect/VigorSpear/v_spear.smd",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          105
+        ],
+        "anchor": "Point",
+        "follow": true,
+        "offset": [
+          0,
+          30,
+          0
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/VigorSpear/v_spear00.tga",
+        "count": 200,
+        "delayStep": 0.00286,
+        "size": [
+          1.9531,
+          3.9062
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "burst": [
+          17.5,
+          17.5
+        ],
+        "lifetime": [
+          0.2857,
+          0.4286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2857
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.biggerspear.hit",
+    "duration": 1.5,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "image/Sinimage/Effect/SkillEffect/VigorSpear/v_spear00.tga",
+        "count": 40,
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "burst": [
+          70.0,
+          70.0
+        ],
+        "width": [
+          2.0,
+          2.0
+        ],
+        "lineSeconds": 0.2857,
+        "lifetime": [
+          0.7143,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1429
+      },
+      {
+        "texture": "image/Sinimage/Effect/SkillEffect/VigorSpear/v_spear00.tga",
+        "count": 30,
+        "size": [
+          3.9062,
+          3.9062
+        ],
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "delayRandom": 0.1286,
+        "radial": [
+          35.0,
+          35.0
+        ],
+        "rise": [
+          13.6719,
+          41.0156
+        ],
+        "gravity": [
+          -76.5625,
+          -76.5625
+        ],
+        "lifetime": [
+          0.7143,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      },
+      {
+        "texture": "image/Sinimage/Effect/PublicEffect/Light/Light0.tga",
+        "frames": 5,
+        "frameTime": 0.1429,
+        "size": [
+          101.5625,
+          101.5625
+        ],
+        "growth": 27.3438,
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "color": [
+          0.4902,
+          0.8314,
+          0.9804
+        ],
+        "power": 230,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.windy.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "color": [
+          255,
+          180,
+          120,
+          150
+        ],
+        "size": [
+          39.0625,
+          39.0625
+        ],
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          23.4375,
+          0
+        ],
+        "lifetime": [
+          2.8571,
+          2.8571
+        ],
+        "fade": "InOut",
+        "fadeOut": 2.1429
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/EnergyS/P/fire11_02.bmp",
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 120,
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 180,
+        "end": "Hold",
+        "fadeOut": 0.4,
+        "width": [
+          2.9297,
+          2.9297
+        ],
+        "trailPoints": 10,
+        "trailFade": 20,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star01Y_04.bmp",
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 120,
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 180,
+        "end": "Hold",
+        "size": [
+          15.625,
+          15.625
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/EnergyS/P/star05G_02.bmp",
+        "count": 10,
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 120,
+        "jitterMin": [
+          -7.8,
+          0,
+          -7.8
+        ],
+        "jitterMax": [
+          7.8,
+          0,
+          7.8
+        ],
+        "size": [
+          1.9531,
+          3.5156
+        ],
+        "rise": [
+          10.9375,
+          41.0156
+        ],
+        "lifetime": [
+          0.3571,
+          0.5
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2571,
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/EnergyS/P/fire11_02.bmp",
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 240,
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 180,
+        "end": "Hold",
+        "fadeOut": 0.4,
+        "width": [
+          2.9297,
+          2.9297
+        ],
+        "trailPoints": 10,
+        "trailFade": 20,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star01Y_04.bmp",
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 240,
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 180,
+        "end": "Hold",
+        "size": [
+          15.625,
+          15.625
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/EnergyS/P/star05G_02.bmp",
+        "count": 10,
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 240,
+        "jitterMin": [
+          -7.8,
+          0,
+          -7.8
+        ],
+        "jitterMax": [
+          7.8,
+          0,
+          7.8
+        ],
+        "size": [
+          1.9531,
+          3.5156
+        ],
+        "rise": [
+          10.9375,
+          41.0156
+        ],
+        "lifetime": [
+          0.3571,
+          0.5
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2571,
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/EnergyS/P/fire11_02.bmp",
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 360,
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 180,
+        "end": "Hold",
+        "fadeOut": 0.4,
+        "width": [
+          2.9297,
+          2.9297
+        ],
+        "trailPoints": 10,
+        "trailFade": 20,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star01Y_04.bmp",
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 360,
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 180,
+        "end": "Hold",
+        "size": [
+          15.625,
+          15.625
+        ],
+        "lifetime": [
+          1.4286,
+          1.4286
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/EnergyS/P/star05G_02.bmp",
+        "count": 10,
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          40,
+          0
+        ],
+        "ring": [
+          64.0,
+          64.0
+        ],
+        "ringStart": 360,
+        "jitterMin": [
+          -7.8,
+          0,
+          -7.8
+        ],
+        "jitterMax": [
+          7.8,
+          0,
+          7.8
+        ],
+        "size": [
+          1.9531,
+          3.5156
+        ],
+        "rise": [
+          10.9375,
+          41.0156
+        ],
+        "lifetime": [
+          0.3571,
+          0.5
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2571,
+        "turn": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7059,
+          0.3922
+        ],
+        "power": 180,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.atalanta.windy.glow",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "delay": 0.5286,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.windy.glow",
+    "duration": 2.0,
+    "parts": [
+      {
+        "texture": "image/Sinimage/AssaEffect/Windy/star05Y_03.bmp",
+        "count": 4,
+        "delayStep": 0.0429,
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          4,
+          0
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          50
+        ],
+        "size": [
+          6.6406,
+          6.6406
+        ],
+        "growth": -1.3672,
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Windy/star05Y_03.bmp",
+        "count": 4,
+        "delayStep": 0.0429,
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          11,
+          0
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          50
+        ],
+        "size": [
+          6.6406,
+          6.6406
+        ],
+        "growth": -1.3672,
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Windy/star05Y_03.bmp",
+        "count": 4,
+        "delayStep": 0.0429,
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          18,
+          0
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          50
+        ],
+        "size": [
+          6.6406,
+          6.6406
+        ],
+        "growth": -1.3672,
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Windy/star05Y_03.bmp",
+        "count": 4,
+        "delayStep": 0.0429,
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          25,
+          0
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          50
+        ],
+        "size": [
+          6.6406,
+          6.6406
+        ],
+        "growth": -1.3672,
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Windy/star05Y_03.bmp",
+        "count": 4,
+        "delayStep": 0.0429,
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "boneWorld": true,
+        "offset": [
+          0,
+          32,
+          0
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          50
+        ],
+        "size": [
+          6.6406,
+          6.6406
+        ],
+        "growth": -1.3672,
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.windy.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "follow": true,
+        "delay": 2.0,
+        "every": 2.0,
+        "everyEffect": "vfx.atalanta.windy.glow"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.windy1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip weapon01",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.twist.shot",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/TwistJavelin/TwistJavelin2.smd",
+        "blend": "Additive",
+        "anchor": "Point",
+        "follow": true,
+        "offset": [
+          0,
+          28,
+          0
+        ],
+        "tumble": [
+          0,
+          0,
+          1230.47
+        ],
+        "carryEffect": "particle.twistJavelin1"
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.twist.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/TwistJavelin/TwistJavelin2.smd",
+        "blend": "Additive",
+        "offset": [
+          0,
+          28,
+          0
+        ],
+        "tumble": [
+          0,
+          0,
+          1230.47
+        ],
+        "lifetime": [
+          0.2857,
+          0.2857
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2857
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.TwistJavelin2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          28,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.firejavelin.shot",
+    "duration": 10,
+    "parts": [
+      {
+        "anchor": "Point",
+        "follow": true,
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "carryEffect": "particle.FireJavelinFire"
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.firejavelin.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          28,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7843,
+          0.3922
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireHIt1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          28,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.soulsucker.drain",
+    "duration": 3.0,
+    "parts": [
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/etc01_0.bmp",
+        "frames": 4,
+        "frameTime": 0.2143,
+        "loop": true,
+        "delay": 0.1429,
+        "anchor": "Target",
+        "offset": [
+          0,
+          43.9062,
+          0
+        ],
+        "size": [
+          19.5312,
+          19.5312
+        ],
+        "height": [
+          39.0625,
+          39.0625
+        ],
+        "rise": [
+          27.3438,
+          27.3438
+        ],
+        "lifetime": [
+          2.1429,
+          2.1429
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/fire01_02.bmp",
+        "delay": 0.1429,
+        "anchor": "Target",
+        "offset": [
+          0,
+          36.2344,
+          0
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          30.2344,
+          0
+        ],
+        "speed": 220,
+        "end": "Hold",
+        "fadeOut": 0.4,
+        "width": [
+          3.90625,
+          3.90625
+        ],
+        "trailPoints": 10,
+        "trailFade": 20,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star02Y_03.bmp",
+        "delay": 0.1429,
+        "anchor": "Target",
+        "offset": [
+          0,
+          36.2344,
+          0
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          30.2344,
+          0
+        ],
+        "speed": 220,
+        "end": "Hold",
+        "fadeOut": 0.3,
+        "size": [
+          39.0625,
+          39.0625
+        ],
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/fire01_02.bmp",
+        "delay": 0.1429,
+        "anchor": "Target",
+        "offset": [
+          5,
+          30.2344,
+          5
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          30.2344,
+          0
+        ],
+        "speed": 220,
+        "end": "Hold",
+        "fadeOut": 0.4,
+        "width": [
+          3.90625,
+          3.90625
+        ],
+        "trailPoints": 10,
+        "trailFade": 20,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star02Y_03.bmp",
+        "delay": 0.1429,
+        "anchor": "Target",
+        "offset": [
+          5,
+          30.2344,
+          5
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          30.2344,
+          0
+        ],
+        "speed": 220,
+        "end": "Hold",
+        "fadeOut": 0.3,
+        "size": [
+          39.0625,
+          39.0625
+        ],
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/fire01_02.bmp",
+        "delay": 0.1429,
+        "anchor": "Target",
+        "offset": [
+          -5,
+          30.2344,
+          -5
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          30.2344,
+          0
+        ],
+        "speed": 220,
+        "end": "Hold",
+        "fadeOut": 0.4,
+        "width": [
+          3.90625,
+          3.90625
+        ],
+        "trailPoints": 10,
+        "trailFade": 20,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star02Y_03.bmp",
+        "delay": 0.1429,
+        "anchor": "Target",
+        "offset": [
+          -5,
+          30.2344,
+          -5
+        ],
+        "goal": "Caster",
+        "goalOffset": [
+          0,
+          30.2344,
+          0
+        ],
+        "speed": 220,
+        "end": "Hold",
+        "fadeOut": 0.3,
+        "size": [
+          39.0625,
+          39.0625
+        ],
+        "lifetime": [
+          1.1429,
+          1.1429
+        ],
+        "fade": "Rise",
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/fire01_02.bmp",
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          30.2344,
+          0
+        ],
+        "orbitRadius": 8,
+        "orbitSpeed": -307.62,
+        "orbitPhase": 105.46875,
+        "orbitRise": -82.0312,
+        "width": [
+          1.9531,
+          1.9531
+        ],
+        "trailPoints": 30,
+        "trailFade": 8,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star01Y_0.bmp",
+        "frames": 4,
+        "frameTime": 0.1714,
+        "loop": true,
+        "count": 3,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          30.2344,
+          0
+        ],
+        "orbitRadius": 8,
+        "orbitSpeed": 307.62,
+        "orbitPhase": 0,
+        "orbitPhaseStep": 40,
+        "orbitRise": -54.6875,
+        "size": [
+          7.8125,
+          7.8125
+        ],
+        "lifetime": [
+          0.2143,
+          0.2143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1143,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Windy/star06Y_04.bmp",
+        "count": 3,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          31.25005,
+          0
+        ],
+        "orbitRadius": 7,
+        "orbitSpeed": -307.62,
+        "orbitPhase": 60,
+        "orbitPhaseStep": 40,
+        "orbitRise": -54.6875,
+        "size": [
+          3.125,
+          3.125
+        ],
+        "height": [
+          39.0625,
+          39.0625
+        ],
+        "lifetime": [
+          0.3571,
+          0.3571
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1714,
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/fire01_02.bmp",
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          30.2344,
+          0
+        ],
+        "orbitRadius": 8,
+        "orbitSpeed": 307.62,
+        "orbitPhase": 210.9375,
+        "orbitRise": -82.0312,
+        "width": [
+          1.9531,
+          1.9531
+        ],
+        "trailPoints": 30,
+        "trailFade": 8,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star01Y_0.bmp",
+        "frames": 4,
+        "frameTime": 0.1714,
+        "loop": true,
+        "count": 3,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          30.2344,
+          0
+        ],
+        "orbitRadius": 8,
+        "orbitSpeed": -307.62,
+        "orbitPhase": 120,
+        "orbitPhaseStep": 40,
+        "orbitRise": -54.6875,
+        "size": [
+          7.8125,
+          7.8125
+        ],
+        "lifetime": [
+          0.2143,
+          0.2143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1143,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Windy/star06Y_04.bmp",
+        "count": 3,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          31.25005,
+          0
+        ],
+        "orbitRadius": 7,
+        "orbitSpeed": 307.62,
+        "orbitPhase": 180,
+        "orbitPhaseStep": 40,
+        "orbitRise": -54.6875,
+        "size": [
+          3.125,
+          3.125
+        ],
+        "height": [
+          39.0625,
+          39.0625
+        ],
+        "lifetime": [
+          0.3571,
+          0.3571
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1714,
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/fire01_02.bmp",
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          30.2344,
+          0
+        ],
+        "orbitRadius": 8,
+        "orbitSpeed": -307.62,
+        "orbitPhase": 316.40625,
+        "orbitRise": -82.0312,
+        "width": [
+          1.9531,
+          1.9531
+        ],
+        "trailPoints": 30,
+        "trailFade": 8,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Soul/Particle/star01Y_0.bmp",
+        "frames": 4,
+        "frameTime": 0.1714,
+        "loop": true,
+        "count": 3,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          30.2344,
+          0
+        ],
+        "orbitRadius": 8,
+        "orbitSpeed": 307.62,
+        "orbitPhase": 240,
+        "orbitPhaseStep": 40,
+        "orbitRise": -54.6875,
+        "size": [
+          7.8125,
+          7.8125
+        ],
+        "lifetime": [
+          0.2143,
+          0.2143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1143,
+        "turn": false
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Windy/star06Y_04.bmp",
+        "count": 3,
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          31.25005,
+          0
+        ],
+        "orbitRadius": 7,
+        "orbitSpeed": -307.62,
+        "orbitPhase": 300,
+        "orbitPhaseStep": 40,
+        "orbitRise": -54.6875,
+        "size": [
+          3.125,
+          3.125
+        ],
+        "height": [
+          39.0625,
+          39.0625
+        ],
+        "lifetime": [
+          0.3571,
+          0.3571
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.1714,
+        "turn": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Target",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7059,
+          0.3922
+        ],
+        "power": 130,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.atalanta.soulsucker.burst",
+        "anchor": "Target",
+        "offset": [
+          0,
+          28.2812,
+          0
+        ],
+        "turn": true,
+        "delay": 0.1429
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.soulsucker.burst",
+    "duration": 2.0,
+    "parts": [
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "count": 4,
+        "delayStep": 0.0714,
+        "size": [
+          27.3438,
+          39.0625
+        ],
+        "height": [
+          1.9531,
+          4.6875
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "spin": 18.46,
+        "color": [
+          255,
+          150,
+          0,
+          255
+        ],
+        "lifetime": [
+          0.6571,
+          0.6571
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3286
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "count": 4,
+        "delayStep": 0.0714,
+        "size": [
+          39.0625,
+          58.5938
+        ],
+        "height": [
+          1.9531,
+          4.6875
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "spin": 18.46,
+        "color": [
+          255,
+          200,
+          50,
+          255
+        ],
+        "lifetime": [
+          0.6571,
+          0.6571
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3286
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/water2.tga",
+        "count": 2,
+        "delayStep": 0.1429,
+        "size": [
+          11.7188,
+          11.7188
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "growth": 41.0156,
+        "color": [
+          255,
+          150,
+          0,
+          255
+        ],
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "Rise"
+      },
+      {
+        "texture": "image/Sinimage/AssaEffect/Particle/P/Light01.tga",
+        "size": [
+          39.0625,
+          39.0625
+        ],
+        "rotation": [
+          0,
+          360
+        ],
+        "growth": 13.6719,
+        "color": [
+          255,
+          200,
+          50,
+          255
+        ],
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "Rise"
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "count": 15,
+        "delayRandom": 0.2857,
+        "size": [
+          1.9531,
+          5.0781
+        ],
+        "color": [
+          255,
+          150,
+          0,
+          255
+        ],
+        "burst": [
+          35.0,
+          70.0
+        ],
+        "rise": [
+          13.6719,
+          13.6719
+        ],
+        "gravity": [
+          -38.2812,
+          -38.2812
+        ],
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      },
+      {
+        "texture": "Effect/AssaEffect/flare.tga",
+        "count": 15,
+        "delayRandom": 0.2857,
+        "size": [
+          1.9531,
+          5.0781
+        ],
+        "color": [
+          255,
+          200,
+          50,
+          255
+        ],
+        "burst": [
+          35.0,
+          70.0
+        ],
+        "rise": [
+          13.6719,
+          13.6719
+        ],
+        "gravity": [
+          -38.2812,
+          -38.2812
+        ],
+        "lifetime": [
+          0.7286,
+          0.7286
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.3714
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.split.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_SplitJavelin40.smd",
+        "blend": "Additive",
+        "delay": 0.0,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          37,
+          -12
+        ],
+        "lifetime": [
+          0.5714,
+          0.5714
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1286
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_SplitJavelin40.smd",
+        "blend": "Additive",
+        "delay": 0.5714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          37,
+          -12
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 700.0,
+        "reach": 12,
+        "faceGoal": true,
+        "endEffect": "vfx.atalanta.split.hit"
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_SplitJavelin40.smd",
+        "blend": "Additive",
+        "delay": 0.1429,
+        "anchor": "Caster",
+        "offset": [
+          -4.33,
+          29.5,
+          -12
+        ],
+        "lifetime": [
+          0.5714,
+          0.5714
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1286
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_SplitJavelin40.smd",
+        "blend": "Additive",
+        "delay": 0.7143,
+        "anchor": "Caster",
+        "offset": [
+          -4.33,
+          29.5,
+          -12
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 700.0,
+        "reach": 12,
+        "faceGoal": true,
+        "endEffect": "vfx.atalanta.split.hit"
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_SplitJavelin40.smd",
+        "blend": "Additive",
+        "delay": 0.2857,
+        "anchor": "Caster",
+        "offset": [
+          4.33,
+          29.5,
+          -12
+        ],
+        "lifetime": [
+          0.5714,
+          0.5714
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.1286
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_SplitJavelin40.smd",
+        "blend": "Additive",
+        "delay": 0.8571,
+        "anchor": "Caster",
+        "offset": [
+          4.33,
+          29.5,
+          -12
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 700.0,
+        "reach": 12,
+        "faceGoal": true,
+        "endEffect": "vfx.atalanta.split.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.split.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.Skill3AtalantaSplitJavelin1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.triumph.shot",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          30,
+          0
+        ],
+        "speed": 350,
+        "lift": 200,
+        "gravity": [
+          -1800,
+          -1800
+        ],
+        "reach": 10,
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "width": [
+          3.90625,
+          3.90625
+        ],
+        "trailPoints": 20,
+        "trailFade": 10,
+        "carryEffect": "particle.Skill3AtalantaTriumphOfValhalla",
+        "turn": false
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          30,
+          0
+        ],
+        "speed": 350,
+        "lift": 200,
+        "gravity": [
+          -1800,
+          -1800
+        ],
+        "reach": 10,
+        "color": [
+          255,
+          150,
+          50,
+          200
+        ],
+        "width": [
+          15.625,
+          15.625
+        ],
+        "trailPoints": 20,
+        "trailFade": 10,
+        "turn": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.triumph.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill3AtalantaTriumphOfValhalla",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 R Hand",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.hall.cast",
+    "duration": 3.0,
+    "children": [
+      {
+        "effect": "script.SkillValhallaHallofVahalla",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "turn": false,
+        "delay": 0.66
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.hall.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill3AtalantaTriumphOfValhalla",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 R Hand",
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3AtalantaTriumphOfValhalla",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip01 R Hand",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.lightning.shot",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/Skill3Texture/light3_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0143,
+        "loop": true,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          22.0938,
+          -12
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          32,
+          0
+        ],
+        "speed": 490.0,
+        "reach": 15,
+        "color": [
+          255,
+          255,
+          255,
+          230
+        ],
+        "width": [
+          7.8125,
+          7.8125
+        ],
+        "lineSeconds": 0.1196,
+        "endEffect": "vfx.atalanta.lightning.spark"
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.lightning.spark",
+    "duration": 2.5,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_01.bmp",
+        "count": 5,
+        "delayRandom": 0.2857,
+        "burst": [
+          150,
+          250
+        ],
+        "rise": [
+          150,
+          150
+        ],
+        "gravity": [
+          -1200,
+          -1200
+        ],
+        "width": [
+          3,
+          3
+        ],
+        "trailPoints": 10,
+        "trailFade": 22,
+        "lifetime": [
+          0.3,
+          0.45
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 100,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_add_L 1.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.DivineLightning",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.storm.javelin",
+    "duration": 2.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          22.0938,
+          -30.0
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -420.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -420.0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/Skill3Texture/light1_0.bmp",
+        "frames": 6,
+        "frameTime": 0.0286,
+        "loop": true,
+        "color": [
+          150,
+          150,
+          205,
+          205
+        ],
+        "width": [
+          19.53125,
+          19.53125
+        ],
+        "lineSeconds": 0.1395
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          22.0938,
+          -30.0
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -420.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -420.0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "shape": "Line",
+        "texture": "Effect/AssaEffect/Skill3Texture/At3_StormJ2.bmp",
+        "color": [
+          205,
+          205,
+          205,
+          205
+        ],
+        "width": [
+          29.2969,
+          29.2969
+        ],
+        "lineSeconds": 0.1581
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          22.0938,
+          -30.0
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -420.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -420.0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_StormJ.smd",
+        "blend": "Additive",
+        "color": [
+          205,
+          205,
+          205,
+          205
+        ],
+        "tumble": [
+          0,
+          0,
+          738.28
+        ]
+      },
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          22.0938,
+          -30.0
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -420.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -420.0
+        ],
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.2143,
+        "carryEffect": "particle.twistJavelin1"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.TwistJavelin2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          7.8125,
+          0
+        ],
+        "turn": true,
+        "delay": 0.5,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.xrage.cast",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/TextureHit/Shield1.tga",
+        "delay": 0.924,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.125,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "color": [
+          100,
+          100,
+          100,
+          100
+        ],
+        "width": [
+          5.0,
+          5.0
+        ],
+        "trailPoints": 20,
+        "trailFade": 5,
+        "carryEffect": "script.SkillValhallaXRage",
+        "endEffect": "vfx.atalanta.xrage.hit"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/TextureHit/Shield1.tga",
+        "delay": 1.254,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.125,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "color": [
+          100,
+          100,
+          100,
+          100
+        ],
+        "width": [
+          5.0,
+          5.0
+        ],
+        "trailPoints": 20,
+        "trailFade": 5,
+        "carryEffect": "script.SkillValhallaXRage",
+        "endEffect": "vfx.atalanta.xrage.hit"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/TextureHit/Shield1.tga",
+        "delay": 1.584,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.125,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "color": [
+          100,
+          100,
+          100,
+          100
+        ],
+        "width": [
+          5.0,
+          5.0
+        ],
+        "trailPoints": 20,
+        "trailFade": 5,
+        "carryEffect": "script.SkillValhallaXRage",
+        "endEffect": "vfx.atalanta.xrage.hit"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/eXtremeRage 02.wav",
+        "delay": 1.254,
+        "variants": [
+          "wav/Effects/Skill/Morion/eXtremeRage 01.wav",
+          "wav/Effects/Skill/Morion/eXtremeRage 03.wav"
+        ]
+      },
+      {
+        "path": "wav/Effects/Skill/Morion/eXtremeRage 03.wav",
+        "delay": 1.584,
+        "variants": [
+          "wav/Effects/Skill/Morion/eXtremeRage 01.wav",
+          "wav/Effects/Skill/Morion/eXtremeRage 02.wav"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.xrage.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "particle.Skill3FighterBoneSmash1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.vengeance.cast",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/TextureHit/Shield1.tga",
+        "delay": 0.462,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "color": [
+          100,
+          100,
+          100,
+          100
+        ],
+        "width": [
+          5.0,
+          5.0
+        ],
+        "trailPoints": 20,
+        "trailFade": 5,
+        "carryEffect": "script.SkillValhallaXRage",
+        "endEffect": "vfx.atalanta.vengeance.hit"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/TextureHit/Shield1.tga",
+        "delay": 0.99,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "color": [
+          100,
+          100,
+          100,
+          100
+        ],
+        "width": [
+          5.0,
+          5.0
+        ],
+        "trailPoints": 20,
+        "trailFade": 5,
+        "carryEffect": "script.SkillValhallaXRage",
+        "endEffect": "vfx.atalanta.vengeance.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.vengeance.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "script.SkillValhallaHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.frost.cast",
+    "duration": 4.0,
+    "children": [
+      {
+        "effect": "vfx.atalanta.windy.cast",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "delay": 0.66,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.frost.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill4FrostJavelin",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          22,
+          0
+        ],
+        "turn": true,
+        "bone": "Bip weapon01",
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.talaria.cast",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "particle.Skill5_Atalanta_Talaria_StartEffect",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.talaria.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "particle.Skill5_Atalanta_Talaria_EndEffect",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill5_Atalanta_Talaria_KeepEffect",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.galaxycoup.cast",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/AofR 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill5_Atalanta_Galaxy_CoupEffect",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill5AtalantaGalaxyCoup",
+        "anchor": "Target",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.arcuda.cast",
+    "duration": 0.5,
+    "children": [
+      {
+        "effect": "particle.Skill5_Atalanta_SummonArcuda_Effect",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.snippyfear.shot",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "size": [
+          1,
+          1
+        ],
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          40,
+          0
+        ],
+        "speed": 900.0,
+        "reach": 8,
+        "end": "Vanish",
+        "carryEffect": "particle.Skill5AtalantaSnippyFearShot"
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.frost.shot",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/TextureHit/Shield1.tga",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 10,
+        "color": [
+          100,
+          100,
+          100,
+          100
+        ],
+        "width": [
+          5.0,
+          5.0
+        ],
+        "trailPoints": 20,
+        "trailFade": 5,
+        "carryEffect": "script.SkillFrostJavelin",
+        "endEffect": "vfx.atalanta.frost.hit"
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_add_C 1.wav",
+        "variants": [
+          "wav/Effects/Skill/Morion/EnchantWpn_add_C 2.wav"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.atalanta.frost.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "script.SkillValhallaFrostJavellin1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

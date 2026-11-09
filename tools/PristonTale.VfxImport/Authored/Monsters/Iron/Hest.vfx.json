@@ -1,0 +1,68 @@
+[
+  {
+    "name": "vfx.monster.hest.skill.hit",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/CaveMummy/b_m_CaveMummy.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          39.0625,
+          0
+        ],
+        "angles": [
+          0,
+          0,
+          0
+        ],
+        "modelStart": 1.0,
+        "modelFrames": 30,
+        "modelSpeed": 70.0,
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Rise"
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/CaveMummy/b_m_CaveMummy1.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          46.875,
+          0
+        ],
+        "angles": [
+          0,
+          0,
+          0
+        ],
+        "modelStart": 1.0,
+        "modelFrames": 30,
+        "modelSpeed": 35.0,
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "Rise"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.CaveMummy",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          19.0625,
+          -50
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

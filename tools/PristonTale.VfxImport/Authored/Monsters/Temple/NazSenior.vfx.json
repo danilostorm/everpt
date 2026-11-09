@@ -1,0 +1,209 @@
+[
+  {
+    "name": "vfx.monster.nazsenior.smash",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "SkillRoundImpactHit.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "SkillRoundImpactParticle.ini",
+        "shape": "Streak",
+        "count": 20,
+        "delayStep": 0.0143,
+        "burst": [
+          218.75,
+          218.75
+        ],
+        "width": [
+          0.3906,
+          1.168
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "PhysicalAbsorbParticle2.ini",
+        "count": 15,
+        "size": [
+          9,
+          9
+        ],
+        "loop": true,
+        "radial": [
+          54.6875,
+          54.6875
+        ],
+        "rise": [
+          27.3438,
+          27.3438
+        ],
+        "gravity": [
+          -95.7031,
+          0
+        ],
+        "lifetime": [
+          0.5714,
+          0.8429
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          0.9804,
+          0.0,
+          0.0
+        ],
+        "power": 200,
+        "decay": 3
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.nazsenior.skill.hit.kk",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/ImageData/SkillTornado/ttLine1.tga",
+        "delay": 0.0,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0.0,
+          0
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          0,
+          0,
+          -100
+        ],
+        "orbitRadius": 50,
+        "orbitSpeed": 840.0,
+        "width": [
+          13.28,
+          13.28
+        ],
+        "trailPoints": 15,
+        "trailFade": 10.4167,
+        "lifetime": [
+          0.5286,
+          0.5286
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          250
+        ]
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/ImageData/SkillTornado/ttLine1.tga",
+        "delay": 0.0286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          1.9531,
+          0
+        ],
+        "goal": "Point",
+        "goalOffset": [
+          0,
+          0,
+          -100
+        ],
+        "orbitRadius": 50,
+        "orbitSpeed": 840.0,
+        "width": [
+          13.28,
+          13.28
+        ],
+        "trailPoints": 15,
+        "trailFade": 10.4167,
+        "lifetime": [
+          0.5286,
+          0.5286
+        ],
+        "color": [
+          255,
+          255,
+          255,
+          250
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.3922,
+          0.3922
+        ],
+        "power": 200,
+        "decay": 3
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.monster.nazsenior.smash",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          -100
+        ],
+        "turn": true,
+        "delay": 0.5286
+      },
+      {
+        "effect": "vfx.monster.nazsenior.smash",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          -100
+        ],
+        "turn": true,
+        "delay": 0.5571
+      }
+    ]
+  }
+]

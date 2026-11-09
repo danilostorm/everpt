@@ -1,0 +1,246 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+using PristonTale.Engine3D.Diagnostics;
+using PristonTale.Engine3D.Rendering.Post;
+
+namespace PristonTale.Engine3D.Rendering.Atmosphere;
+
+// What the physical sky draws this frame (PristonRenderer.Atmosphere.cs fills it): the lights in the scene's
+// pre-exposed radiance units, the night's sights as display-referred levels (already divided by the display scale),
+// the clouds' coverage and density, and the display scale the sky targets decode with.
+public readonly record struct PristonSkyInputs(
+    Vector3 TowardSun,
+    float SunLight,
+    Vector3 TowardMoon,
+    float MoonLight,
+    Vector3 MoonFace,
+    float MoonDisc,
+    float Stars,
+    float SkyTurn,
+    float Airglow,
+    float Aurora,
+    float Rainbow,
+    float Cirrus,
+    float Seconds,
+    float DisplayScale,
+    float Coverage,
+    float Density,
+    float Overcast,
+    Vector2 CloudOffset,
+    Vector3 TowardFlash,
+    float FlashLight,
+    CloudQuality Quality,
+    float Haze = 0f);
+
+// The physical sky (Shaders/Passes/Atmosphere.fx): the transmittance and multiple-scattering tables built once, then
+// each frame (Update, before the scene's targets are bound) the sky view, the clouds' hemisphere and their shadow on
+// the ground; Draw paints the sky into the bound sky target, for any view (the scene, the fog's capture, the
+// environment's faces). The clouds' hemisphere (azimuth by elevation, most texels near the horizon) marches one texel
+// of each 2x2 block in turn each frame and blends it into a history that moves with the clouds (CloudHistory), so
+// moving and changing clouds leave neither blocks of older texels nor a trailing edge.
+public sealed class PristonPhysicalSky : IDisposable
+{
+    public const string AssetName = "Effects/Atmosphere";
+    public const int TransmittanceWidth = 256;
+    public const int TransmittanceHeight = 64;
+    public const int MultipleSize = 32;
+    public const int SkyViewWidth = 256;
+    public const int SkyViewHeight = 128;
+    public const int CloudShadowSize = 256;
+    // Kilometres of ground around the camera the clouds' shadow covers, and world units per km (a character, about 50
+    // units, stands about 2 m tall).
+    public const float CloudShadowExtent = 6f;
+    public const float WorldUnitsPerKilometre = 25000f;
+    // The sine of the sun's elevation above which the clouds cast shadows (Atmosphere.fx CloudShadow marches toward
+    // it).
+    public const float SunCastsCloudShadows = 0.05f;
+    // A texel marches once every four frames (one of each 2x2 block in turn) and keeps this share of its history: the
+    // march's jitter averages over about forty frames, so the edges stay still. The history is moved with the clouds
+    // each frame (CloudMotion), so a long one leaves no trailing edge; their sharpness comes from the Catmull-Rom read.
+    private const float CloudHistory = 0.9f;
+    // The cloud offset wraps at this tile (km, the coverage pattern's); a motion beyond LargestCloudMotion in a frame
+    // is a jump.
+    public const float CloudOffsetTile = 60f;
+    private const float LargestCloudMotion = 2f;
+
+    private readonly GraphicsDevice _device;
+    private readonly PristonFullscreenTriangle _triangle;
+    private readonly Effect _effect;
+    private readonly RenderTarget2D _transmittance;
+    private readonly RenderTarget2D _multiple;
+    private readonly RenderTarget2D _skyView;
+    private readonly RenderTarget2D _cloudShadow;
+    private readonly Texture3D _noise;
+    private RenderTarget2D _clouds;
+    private RenderTarget2D _cloudsHistory;
+    private RenderTarget2D _cloudsUpdate;
+    private bool _tablesBuilt;
+    private Vector2 _lastCloudOffset;
+    private float _overcast;
+    private bool _cloudsValid;
+    private int _frame;
+
+    internal PristonPhysicalSky(GraphicsDevice device, ContentManager content, PristonFullscreenTriangle triangle, IClientLog log)
+    {
+        _device = device;
+        _triangle = triangle;
+        _effect = PristonShaderLibrary.LoadRequired(content, AssetName, log ?? ConsoleClientLog.Instance);
+        _transmittance = Target(TransmittanceWidth, TransmittanceHeight);
+        _multiple = Target(MultipleSize, MultipleSize);
+        _skyView = Target(SkyViewWidth, SkyViewHeight);
+        _cloudShadow = new RenderTarget2D(device, CloudShadowSize, CloudShadowSize, false, SurfaceFormat.Color, DepthFormat.None, 0,
+            RenderTargetUsage.PreserveContents);
+        _noise = new Texture3D(device, PristonCloudNoise.Size, PristonCloudNoise.Size, PristonCloudNoise.Size, false, SurfaceFormat.HalfVector4);
+        _noise.SetData(PristonCloudNoise.Generate());
+    }
+
+    // The clouds' transmittance toward the sun over CloudShadowExtent km around the camera, and how surfaces read it
+    // (CloudShadowParams: x one over the extent in world units, yz the centre, w the strength; 0 without clouds).
+    public Texture2D CloudShadow => _cloudShadow;
+    public Vector4 CloudShadowParams { get; private set; }
+
+    public bool CloudsDrawn { get; private set; }
+
+    // Builds the frame's tables and clouds; binds its own targets, so the caller binds its own again after it.
+    public void Update(in PristonSkyInputs inputs, Vector3 camera, float shadowStrength)
+    {
+        _frame++;
+        Constants(inputs);
+        _device.BlendState = BlendState.Opaque;
+        _device.DepthStencilState = DepthStencilState.None;
+        _device.RasterizerState = RasterizerState.CullNone;
+        if (!_tablesBuilt)
+        {
+            Pass(_transmittance, "Transmittance");
+            Set("TransmittanceLut", _transmittance);
+            Pass(_multiple, "Multiple");
+            _tablesBuilt = true;
+        }
+
+        Set("TransmittanceLut", _transmittance);
+        Set("MultipleLut", _multiple);
+        Pass(_skyView, "SkyView");
+        Set("SkyViewLut", _skyView);
+        Set("CloudNoise", _noise);
+
+        // The hemisphere's texels around the horizon (four times as many up to the zenith's share of the height).
+        var size = inputs.Quality switch
+        {
+            CloudQuality.Low => 768,
+            CloudQuality.Medium => 1024,
+            CloudQuality.High => 1536,
+            _ => 0
+        };
+        CloudsDrawn = size > 0 && inputs.Coverage > 0f;
+        CloudShadowParams = Vector4.Zero;
+        if (!CloudsDrawn)
+        {
+            _cloudsValid = false;
+            return;
+        }
+
+        if (_clouds?.Width != size)
+        {
+            _clouds?.Dispose();
+            _cloudsHistory?.Dispose();
+            _cloudsUpdate?.Dispose();
+            _clouds = Target(size, size / 4);
+            _cloudsHistory = Target(size, size / 4);
+            _cloudsUpdate = Target(size / 2, size / 8);
+            _cloudsValid = false;
+        }
+
+        // The field's motion since the last frame (the offset wraps at the coverage tile); a jump (a warp, a new field)
+        // starts the clouds over.
+        var motion = inputs.CloudOffset - _lastCloudOffset;
+        motion = new Vector2(Unwrap(motion.X), Unwrap(motion.Y));
+        _lastCloudOffset = inputs.CloudOffset;
+        if (motion.Length() > LargestCloudMotion)
+        {
+            _cloudsValid = false;
+            motion = Vector2.Zero;
+        }
+
+        Set("CloudMotion", new Vector4(motion, 0f, 0f));
+        // A new sky marches all four texels of each block at once; afterwards one a frame, in turn.
+        var phases = _cloudsValid ? 1 : 4;
+        for (var phase = 0; phase < phases; phase++)
+        {
+            var turn = _cloudsValid ? _frame % 4 : phase;
+            (_clouds, _cloudsHistory) = (_cloudsHistory, _clouds);
+            Set("Clouds", new Vector4(inputs.Coverage, inputs.Density, _cloudsValid ? 1f - CloudHistory : 1f, _frame % 4096));
+            Set("CloudMapSize", new Vector4(_clouds.Width, _clouds.Height, turn & 1, turn >> 1));
+            Pass(_cloudsUpdate, "Clouds");
+            Set("CloudUpdate", _cloudsUpdate);
+            Set("CloudMap", _cloudsHistory);
+            Pass(_clouds, "CloudMerge");
+        }
+
+        _cloudsValid = true;
+
+        Pass(_cloudShadow, "CloudShadow");
+        var extent = CloudShadowExtent * WorldUnitsPerKilometre;
+        CloudShadowParams = new Vector4(1f / extent, camera.X, camera.Z, MathHelper.Clamp(shadowStrength, 0f, 1f));
+    }
+
+    // Paints the sky of a view (its translation ignored) into the bound target's viewport.
+    public void Draw(Matrix view, Matrix projection)
+    {
+        view.Translation = Vector3.Zero;
+        Set("InverseViewProjection", Matrix.Invert(view * projection));
+        Set("CloudMap", CloudsDrawn ? _clouds : null);
+        Set("CloudMapSize", CloudsDrawn ? new Vector4(_clouds.Width, _clouds.Height, 0f, 0f) : Vector4.One);
+        Set("CloudShadowArea", new Vector4(CloudShadowExtent, _overcast, 0f, CloudsDrawn ? 1f : 0f));
+        _effect.CurrentTechnique = _effect.Techniques["Sky"];
+        _device.BlendState = BlendState.Opaque;
+        _triangle.Draw(_effect, DepthStencilState.None);
+    }
+
+    private void Constants(in PristonSkyInputs inputs)
+    {
+        Set("ToSun", new Vector4(inputs.TowardSun, inputs.SunLight));
+        Set("ToMoon", new Vector4(inputs.TowardMoon, inputs.MoonLight));
+        Set("MoonFace", new Vector4(inputs.MoonFace, inputs.MoonDisc));
+        Set("Night", new Vector4(inputs.Stars, inputs.SkyTurn, inputs.Airglow, inputs.Aurora));
+        Set("Effects", new Vector4(inputs.Rainbow, inputs.Seconds, inputs.Cirrus, inputs.DisplayScale));
+        Set("CloudOffset", new Vector4(inputs.CloudOffset, inputs.Haze, 0f));
+        Set("Flash", new Vector4(inputs.TowardFlash, inputs.FlashLight));
+        Set("CloudShadowArea", new Vector4(CloudShadowExtent, 0f, 0f, 0f));
+        // Without drawn clouds the overcast fallback greys the sky.
+        _overcast = inputs.Quality == CloudQuality.Off ? inputs.Overcast : 0f;
+    }
+
+    private static float Unwrap(float kilometres) =>
+        kilometres > CloudOffsetTile / 2f ? kilometres - CloudOffsetTile : kilometres < -CloudOffsetTile / 2f ? kilometres + CloudOffsetTile : kilometres;
+
+    // A parameter the compiled techniques may have left out.
+    private void Set(string name, Vector4 value) => _effect.Parameters[name]?.SetValue(value);
+
+    private void Set(string name, Matrix value) => _effect.Parameters[name]?.SetValue(value);
+
+    private void Set(string name, Texture value) => _effect.Parameters[name]?.SetValue(value);
+
+    private void Pass(RenderTarget2D target, string technique)
+    {
+        _device.SetRenderTarget(target);
+        _effect.CurrentTechnique = _effect.Techniques[technique];
+        _triangle.Draw(_effect, DepthStencilState.None);
+    }
+
+    private RenderTarget2D Target(int width, int height) =>
+        new(_device, width, height, false, SurfaceFormat.HalfVector4, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+
+    public void Dispose()
+    {
+        _effect.Dispose();
+        _transmittance.Dispose();
+        _multiple.Dispose();
+        _skyView.Dispose();
+        _cloudShadow.Dispose();
+        _noise.Dispose();
+        _clouds?.Dispose();
+        _cloudsHistory?.Dispose();
+        _cloudsUpdate?.Dispose();
+    }
+}

@@ -1,0 +1,208 @@
+[
+  {
+    "name": "vfx.monster.darkmage.fireball.trail",
+    "duration": 600.0,
+    "emitters": [
+      {
+        "texture": "Effect/ImageData/Particle/bubble.tga",
+        "blend": "Additive",
+        "anchor": "Point",
+        "rate": 700,
+        "maxParticles": 128,
+        "lifetime": [
+          0.1,
+          0.1
+        ],
+        "speed": [
+          0.78,
+          0.78
+        ],
+        "spread": 180,
+        "size": [
+          {
+            "t": 0,
+            "v": [
+              12
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              1
+            ]
+          }
+        ],
+        "color": [
+          {
+            "t": 0,
+            "v": [
+              1,
+              0.1274,
+              0.0319,
+              0.7843
+            ]
+          },
+          {
+            "t": 1,
+            "v": [
+              1,
+              0.0319,
+              0.0319,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.darkmage.fireball.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "ParticleMeteo1.ini",
+        "shape": "Line",
+        "count": 20,
+        "delayStep": 0.0036,
+        "radial": [
+          41.0156,
+          82.0312
+        ],
+        "rise": [
+          65.625,
+          133.9844
+        ],
+        "gravity": [
+          -191.4062,
+          -114.8438
+        ],
+        "lifetime": [
+          0.7857,
+          1.0571
+        ],
+        "lineSeconds": 0.1143,
+        "width": [
+          0.54,
+          0.54
+        ],
+        "sized": false
+      },
+      {
+        "animation": "ParticleMeteo2.ini",
+        "shape": "Streak",
+        "count": 20,
+        "delayRandom": 0.2714,
+        "shell": [
+          25,
+          1,
+          25
+        ],
+        "burst": [
+          163.8,
+          163.8
+        ],
+        "rise": [
+          55.8,
+          55.8
+        ],
+        "width": [
+          0.3906,
+          1.5586
+        ],
+        "lifetime": [
+          0.3,
+          0.4
+        ],
+        "fade": "Fall",
+        "sized": false
+      },
+      {
+        "animation": "Meteo1.ini",
+        "count": 3,
+        "delayRandom": 0.0857,
+        "offset": [
+          0,
+          15.625,
+          0
+        ],
+        "jitterMin": [
+          0,
+          0,
+          0
+        ],
+        "jitterMax": [
+          21.9,
+          0,
+          21.9
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          1.0,
+          0.1961,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 1
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/monster/Figon/impact 1.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.darkmage.attack.hit",
+    "duration": 5.0,
+    "parts": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          30,
+          -20
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 410.1562,
+        "reach": 3.9,
+        "lifetime": [
+          3,
+          3
+        ],
+        "carryEffect": "vfx.monster.darkmage.fireball.trail",
+        "endEffect": "vfx.monster.darkmage.fireball.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.darkmage.skill.hit",
+    "duration": 12.0,
+    "children": [
+      {
+        "effect": "vfx.monster.fireworm.meteor",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  }
+]

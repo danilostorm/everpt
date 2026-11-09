@@ -1,0 +1,129 @@
+[
+  {
+    "name": "vfx.monster.doomlord.attack",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          2.0,
+          2.0
+        ],
+        "carryEffect": "particle.DoomGuardBig",
+        "bone": "Bip-skill01",
+        "follow": true
+      },
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip-skill01",
+        "boneWorld": true,
+        "bladeLength": 57,
+        "trailPoints": 16,
+        "trailFade": 15.9375,
+        "lifetime": [
+          0.7143,
+          0.7143
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.DoomGuardBigHit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          -50
+        ],
+        "turn": true,
+        "delay": 0.5
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.doomlord.skill",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          2.2857,
+          2.2857
+        ],
+        "carryEffect": "particle.DoomGuardBig",
+        "bone": "Bip-skill01",
+        "follow": true
+      },
+      {
+        "shape": "Blade",
+        "texture": "Effect/AssaEffect/m_DoomG-01.bmp",
+        "blend": "Additive",
+        "color": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "anchor": "Caster",
+        "bone": "Bip-skill01",
+        "boneWorld": true,
+        "bladeLength": 57,
+        "trailPoints": 16,
+        "trailFade": 15.9375,
+        "lifetime": [
+          2.1429,
+          2.1429
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.05,
+        "fadeOut": 0.15
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.DoomGuardBigHit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          20,
+          -70
+        ],
+        "turn": true,
+        "delay": 0.3
+      },
+      {
+        "effect": "particle.DoomGuardBigHit",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          20,
+          -70
+        ],
+        "turn": true,
+        "delay": 1.0
+      }
+    ]
+  }
+]

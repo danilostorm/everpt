@@ -1,0 +1,2498 @@
+[
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh-b01.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh-b02.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh-b03.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh-b04.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh-b05.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh-b06.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh-b07.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh-b08.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh-b09.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh-b10.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh-b11.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh-b12.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 0,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh-b13.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh-b01a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh-b02a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh-b03a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh-b04a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh-b05a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh-b06a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh-b07a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh-b08a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh-b09a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh-b10a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh-b11a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh-b12a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 1,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh-b13a.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh_b01b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh_b02b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh_b03b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh_b04b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh_b05b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh_b06b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh_b07b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh_b08b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh_b09b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh_b10b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh_b11b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh_b12b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 2,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh_b13b.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh-b01c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh-b02c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh-b03c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh-b04c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh-b05c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh-b06c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh-b07c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh-b08c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh-b09c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh-b10c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh-b11c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh-b12c.inx"
+  },
+  {
+    "Class": "Fighter",
+    "Tier": 3,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh-b13c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh-a01.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh-a02.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh-a03.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh-a04.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh-a05.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh-a06.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh-a07.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh-a08.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh-a09.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh-a10.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh-a11.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh-a12.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 0,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh-a13.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh-a01a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh-a02a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh-a03a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh-a04a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh-a05a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh-a06a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh-a07a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh-a08a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh-a09a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh-a10a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh-a11a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh-a12a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 1,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh-a13a.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh_a01b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh_a02b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh_a03b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh_a04b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh_a05b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh_a06b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh_a07b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh_a08b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh_a09b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh_a10b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh_a11b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh_a12b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 2,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh_a13b.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh-a01c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh-a02c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh-a03c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh-a04c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh-a05c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh-a06c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh-a07c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh-a08c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh-a09c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh-a10c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh-a11c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh-a12c.inx"
+  },
+  {
+    "Class": "Mechanician",
+    "Tier": 3,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh-a13c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 0,
+    "Path": "char/tmABCD/tfh-D01.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 1,
+    "Path": "char/tmABCD/tfh-d02.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 2,
+    "Path": "char/tmABCD/tfh-d03.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 3,
+    "Path": "char/tmABCD/tfh-d04.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 4,
+    "Path": "char/tmABCD/tfh-d05.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 5,
+    "Path": "char/tmABCD/tfh-d06.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 6,
+    "Path": "char/tmABCD/tfh-d07.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 7,
+    "Path": "char/tmABCD/tfh-d08.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 8,
+    "Path": "char/tmABCD/tfh-d09.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 9,
+    "Path": "char/tmABCD/tfh-d10.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 10,
+    "Path": "char/tmABCD/tfh-d11.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 11,
+    "Path": "char/tmABCD/tfh-d12.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 0,
+    "Hair": 12,
+    "Path": "char/tmABCD/tfh-d13.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 0,
+    "Path": "char/tmABCD/tfh-D01a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 1,
+    "Path": "char/tmABCD/tfh-d02a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 2,
+    "Path": "char/tmABCD/tfh-d03a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 3,
+    "Path": "char/tmABCD/tfh-d04a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 4,
+    "Path": "char/tmABCD/tfh-d05a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 5,
+    "Path": "char/tmABCD/tfh-d06a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 6,
+    "Path": "char/tmABCD/tfh-d07a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 7,
+    "Path": "char/tmABCD/tfh-d08a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 8,
+    "Path": "char/tmABCD/tfh-d09a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 9,
+    "Path": "char/tmABCD/tfh-d10a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 10,
+    "Path": "char/tmABCD/tfh-d11a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 11,
+    "Path": "char/tmABCD/tfh-d12a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 1,
+    "Hair": 12,
+    "Path": "char/tmABCD/tfh-d13a.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 0,
+    "Path": "char/tmABCD/tfh_D01b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 1,
+    "Path": "char/tmABCD/tfh_d02b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 2,
+    "Path": "char/tmABCD/tfh_d03b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 3,
+    "Path": "char/tmABCD/tfh_d04b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 4,
+    "Path": "char/tmABCD/tfh_d05b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 5,
+    "Path": "char/tmABCD/tfh_d06b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 6,
+    "Path": "char/tmABCD/tfh_d07b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 7,
+    "Path": "char/tmABCD/tfh_d08b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 8,
+    "Path": "char/tmABCD/tfh_d09b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 9,
+    "Path": "char/tmABCD/tfh_d10b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 10,
+    "Path": "char/tmABCD/tfh_d11b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 11,
+    "Path": "char/tmABCD/tfh_d12b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 2,
+    "Hair": 12,
+    "Path": "char/tmABCD/tfh_d13b.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 0,
+    "Path": "char/tmABCD/tfh-D01c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 1,
+    "Path": "char/tmABCD/tfh-d02c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 2,
+    "Path": "char/tmABCD/tfh-d03c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 3,
+    "Path": "char/tmABCD/tfh-d04c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 4,
+    "Path": "char/tmABCD/tfh-d05c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 5,
+    "Path": "char/tmABCD/tfh-d06c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 6,
+    "Path": "char/tmABCD/tfh-d07c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 7,
+    "Path": "char/tmABCD/tfh-d08c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 8,
+    "Path": "char/tmABCD/tfh-d09c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 9,
+    "Path": "char/tmABCD/tfh-d10c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 10,
+    "Path": "char/tmABCD/tfh-d11c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 11,
+    "Path": "char/tmABCD/tfh-d12c.inx"
+  },
+  {
+    "Class": "Archer",
+    "Tier": 3,
+    "Hair": 12,
+    "Path": "char/tmABCD/tfh-d13c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh-c01.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh-c02.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh-c03.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh-c04.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh-c05.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh-c06.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh-c07.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh-c08.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh-c09.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh-c10.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh-c11.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh-c12.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 0,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh-c13.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh-c01a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh-c02a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh-c03a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh-c04a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh-c05a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh-c06a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh-c07a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh-c08a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh-c09a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh-c10a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh-c11a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh-c12a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 1,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh-c13a.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmh_c01b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmh_c02b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmh_c03b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmh_c04b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmh_c05b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmh_c06b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmh_c07b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmh_c08b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmh_c09b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmh_c10b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmh_c11b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmh_c12b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 2,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmh_c13b.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 0,
+    "Path": "char/tmABCD/tmhC-01c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 1,
+    "Path": "char/tmABCD/tmhC-02c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 2,
+    "Path": "char/tmABCD/tmhC-03c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 3,
+    "Path": "char/tmABCD/tmhC-04c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 4,
+    "Path": "char/tmABCD/tmhC-05c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 5,
+    "Path": "char/tmABCD/tmhC-06c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 6,
+    "Path": "char/tmABCD/tmhC-07c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 7,
+    "Path": "char/tmABCD/tmhC-08c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 8,
+    "Path": "char/tmABCD/tmhC-09c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 9,
+    "Path": "char/tmABCD/tmhC-10c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 10,
+    "Path": "char/tmABCD/tmhC-11c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 11,
+    "Path": "char/tmABCD/tmhC-12c.inx"
+  },
+  {
+    "Class": "Pikeman",
+    "Tier": 3,
+    "Hair": 12,
+    "Path": "char/tmABCD/tmhC-13c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mmh-A01.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mmh-A02.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mmh-A03.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mmh-A04.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mmh-A05.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mmh-A06.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mmh-A07.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mmh-A08.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mmh-A09.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mmh-A10.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mmh-A11.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mmh-A12.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 0,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mmh-A13.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mmh-A01a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mmh-A02a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mmh-A03a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mmh-A04a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mmh-A05a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mmh-A06a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mmh-A07a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mmh-A08a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mmh-A09a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mmh-A10a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mmh-A11a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mmh-A12a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 1,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mmh-A13a.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mmh_A01b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mmh_A02b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mmh_A03b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mmh_A04b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mmh_A05b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mmh_A06b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mmh_A07b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mmh_A08b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mmh_A09b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mmh_A10b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mmh_A11b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mmh_A12b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 2,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mmh_A13b.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mmh-A01c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mmh-A02c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mmh-A03c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mmh-A04c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mmh-A05c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mmh-A06c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mmh-A07c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mmh-A08c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mmh-A09c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mmh-A10c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mmh-A11c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mmh-A12c.inx"
+  },
+  {
+    "Class": "Knight",
+    "Tier": 3,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mmh-A13c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mfh-B01.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mfh-B02.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mfh-B03.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mfh-B04.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mfh-B05.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mfh-B06.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mfh-B07.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mfh-B08.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mfh-B09.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mfh-B10.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mfh-B11.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mfh-B12.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 0,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mfh-B13.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mfh-B01a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mfh-B02a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mfh-B03a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mfh-B04a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mfh-B05a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mfh-B06a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mfh-B07a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mfh-B08a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mfh-B09a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mfh-B10a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mfh-B11a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mfh-B12a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 1,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mfh-B13a.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mfh_B01b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mfh_B02b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mfh_B03b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mfh_B04b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mfh_B05b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mfh_B06b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mfh_B07b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mfh_B08b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mfh_B09b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mfh_B10b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mfh_B11b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mfh_B12b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 2,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mfh_B13b.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mfh-B01c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mfh-B02c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mfh-B03c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mfh-B04c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mfh-B05c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mfh-B06c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mfh-B07c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mfh-B08c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mfh-B09c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mfh-B10c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mfh-B11c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mfh-B12c.inx"
+  },
+  {
+    "Class": "Atalanta",
+    "Tier": 3,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mfh-B13c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mfh-C01.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mfh-C02.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mfh-C03.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mfh-C04.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mfh-C05.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mfh-C06.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mfh-C07.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mfh-C08.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mfh-C09.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mfh-C10.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mfh-C11.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mfh-C12.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 0,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mfh-C13.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mfh-C01a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mfh-C02a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mfh-C03a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mfh-C04a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mfh-C05a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mfh-C06a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mfh-C07a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mfh-C08a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mfh-C09a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mfh-C10a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mfh-C11a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mfh-C12a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 1,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mfh-C13a.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mfh_C01b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mfh_C02b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mfh_C03b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mfh_C04b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mfh_C05b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mfh_C06b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mfh_C07b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mfh_C08b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mfh_C09b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mfh_C10b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mfh_C11b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mfh_C12b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 2,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mfh_C13b.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mfh-C01c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mfh-C02c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mfh-C03c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mfh-C04c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mfh-C05c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mfh-C06c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mfh-C07c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mfh-C08c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mfh-C09c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mfh-C10c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mfh-C11c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mfh-C12c.inx"
+  },
+  {
+    "Class": "Priestess",
+    "Tier": 3,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mfh-C13c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mmh-D01.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mmh-D02.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mmh-D03.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mmh-D04.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mmh-D05.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mmh-D06.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mmh-D07.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mmh-D08.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mmh-D09.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mmh-D10.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mmh-D11.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mmh-D12.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 0,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mmh-D13.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mmh-D01a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mmh-D02a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mmh-D03a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mmh-D04a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mmh-D05a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mmh-D06a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mmh-D07a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mmh-D08a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mmh-D09a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mmh-D10a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mmh-D11a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mmh-D12a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 1,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mmh-D13a.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mmh_D01b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mmh_D02b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mmh_D03b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mmh_D04b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mmh_D05b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mmh_D06b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mmh_D07b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mmh_D08b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mmh_D09b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mmh_D10b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mmh_D11b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mmh_D12b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 2,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mmh_D13b.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 0,
+    "Path": "char/tmABCD/Mmh-D01c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 1,
+    "Path": "char/tmABCD/Mmh-D02c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 2,
+    "Path": "char/tmABCD/Mmh-D03c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 3,
+    "Path": "char/tmABCD/Mmh-D04c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 4,
+    "Path": "char/tmABCD/Mmh-D05c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 5,
+    "Path": "char/tmABCD/Mmh-D06c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 6,
+    "Path": "char/tmABCD/Mmh-D07c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 7,
+    "Path": "char/tmABCD/Mmh-D08c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 8,
+    "Path": "char/tmABCD/Mmh-D09c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 9,
+    "Path": "char/tmABCD/Mmh-D10c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 10,
+    "Path": "char/tmABCD/Mmh-D11c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 11,
+    "Path": "char/tmABCD/Mmh-D12c.inx"
+  },
+  {
+    "Class": "Magician",
+    "Tier": 3,
+    "Hair": 12,
+    "Path": "char/tmABCD/Mmh-D13c.inx"
+  }
+]

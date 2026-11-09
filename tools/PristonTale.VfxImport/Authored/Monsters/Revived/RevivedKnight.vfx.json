@@ -1,0 +1,149 @@
+[
+  {
+    "name": "vfx.monster.revivedknight.skill.kH",
+    "duration": 0.5,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/Piercing 2.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedknight.skill.hit.kH",
+    "duration": 1.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "image/Sinimage/AssaEffect/Piercing/Piercing.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "modelStart": 1,
+        "modelFrames": 1,
+        "velocityMin": [
+          0,
+          0,
+          -448
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -448
+        ],
+        "lifetime": [
+          0.4286,
+          0.4286
+        ],
+        "fade": "Fall",
+        "carryEffect": "particle.Piercing1"
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedknight.skill.hit.kZ.e1",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.1961,
+          0.3922,
+          1.0
+        ],
+        "power": 200,
+        "decay": 4
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Skill_Swing 02.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit4",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          11.72,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.revivedknight.skill.hit.kZ.e2",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/Nt3_GrandCross20.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "bone": "Bip01 R Hand",
+        "offset": [
+          0,
+          19.53,
+          0
+        ],
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 23.3333,
+        "lifetime": [
+          0.8571,
+          0.8571
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.2186,
+        "fadeOut": 0.2186
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          26,
+          -8
+        ],
+        "color": [
+          0.1961,
+          0.3922,
+          1.0
+        ],
+        "power": 200,
+        "decay": 4
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/GrandCross 2.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3Hit5",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          15.63,
+          0
+        ],
+        "bone": "Bip01 R Hand",
+        "turn": true
+      }
+    ]
+  }
+]

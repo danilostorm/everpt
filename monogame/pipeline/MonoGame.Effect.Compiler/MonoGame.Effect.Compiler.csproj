@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    MonoGame v3.8.6's effect compiler (Tools/MonoGame.Effect.Compiler/Effect, which upstream compiles into
+    MonoGame.Framework.Content.Pipeline and mgfxc) for the Vulkan profile, with the fork's changes: compute passes, storage
+    resources, SM 6.5 profiles, MGFX 12 (monogame/pipeline/README.md). CppNet, the C preprocessor, from ../ThirdParty as
+    upstream links it. The framework (monogame/framework) gives the XNA types (sampler and render states, vertex usages);
+    in MGCB the tool's own MonoGame.Framework assembly takes its place, so it is not copied.
+  -->
+  <PropertyGroup>
+    <AssemblyName>MonoGame.Effect.Compiler</AssemblyName>
+    <RootNamespace>MonoGame.Effect</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="../ThirdParty/CppNet/**/*.cs" LinkBase="Utilities/CppNet" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../framework/MonoGame.Framework/MonoGame.Framework.Native.csproj" Private="false" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

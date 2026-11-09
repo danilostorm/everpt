@@ -1,0 +1,1538 @@
+[
+  {
+    "name": "vfx.projectile.aim",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/WindArrow/WindArrow.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 630.0,
+        "faceGoal": true,
+        "end": "Hold",
+        "fadeOut": 0.1571,
+        "reach": 8,
+        "modelStart": 1,
+        "modelFrames": 3.75,
+        "loopFrom": 1,
+        "loop": true,
+        "modelSpeed": 17.5,
+        "delay": 0.0714,
+        "every": 0.0143,
+        "everyEffect": "vfx.archer.bowpuff"
+      },
+      {
+        "animation": "SkillPerfectAim1.ini",
+        "shape": "Line",
+        "delay": 0.0714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 1260.0,
+        "lineSeconds": 0.0714,
+        "width": [
+          1.55,
+          1.55
+        ],
+        "loop": true,
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.projectile.wind",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/WindArrow/WindArrow.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 630.0,
+        "faceGoal": true,
+        "end": "Hold",
+        "fadeOut": 0.1571,
+        "reach": 8,
+        "modelStart": 1,
+        "modelFrames": 3.75,
+        "loopFrom": 1,
+        "loop": true,
+        "modelSpeed": 17.5,
+        "every": 0.0143,
+        "everyEffect": "vfx.archer.bowpuff"
+      }
+    ]
+  },
+  {
+    "name": "vfx.buff.hawk",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/ScoutHawk/Hawk-ani.smd",
+        "skeleton": "Effect/ObjAnimationData/ScoutHawk/Hawk-ani.smb",
+        "delay": 0.0714,
+        "anchor": "Caster",
+        "follow": true,
+        "turn": false,
+        "modelStart": 1,
+        "modelFrames": 90,
+        "loopFrom": 30,
+        "loop": true,
+        "modelSpeed": 26.25
+      }
+    ]
+  },
+  {
+    "name": "vfx.cast.hawk",
+    "duration": 2.0,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "ScoutHawkLight.ini",
+        "count": 2,
+        "delayStep": 0.0143,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "ScoutHawkGate.ini",
+        "delay": 0.0714,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          60,
+          0
+        ],
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.falcon.cast",
+    "duration": 2.5,
+    "parts": [
+      {
+        "animation": "ReturnParticle1.ini",
+        "count": 20,
+        "size": [
+          7,
+          7
+        ],
+        "delayStep": 0.0286,
+        "loop": true,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.79,
+          0
+        ],
+        "jitterMin": [
+          -8,
+          0,
+          -8
+        ],
+        "jitterMax": [
+          8,
+          0,
+          8
+        ],
+        "rise": [
+          20,
+          40
+        ],
+        "lifetime": [
+          0.5714,
+          0.8571
+        ],
+        "sized": true
+      },
+      {
+        "animation": "Return1.ini",
+        "shape": "Streak",
+        "count": 10,
+        "delay": 0.1429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.79,
+          0
+        ],
+        "ring": [
+          6.25,
+          6.25
+        ],
+        "ringStep": 36,
+        "rise": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          1.56,
+          1.56
+        ],
+        "lifetime": [
+          0.6105,
+          0.6105
+        ],
+        "turn": false,
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "color": [
+          0.7059,
+          0.7059,
+          0.7059
+        ],
+        "power": 200,
+        "decay": 1
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "color": [
+          0.9804,
+          0.9804,
+          0.9804
+        ],
+        "power": 100,
+        "decay": 1,
+        "delay": 0.1429
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.falcon.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Falcon/FalconAni.smd",
+        "skeleton": "Effect/ObjAnimationData/Falcon/FalconAni.smb",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 100,
+        "loopFrom": 70,
+        "loop": true,
+        "modelSpeed": 26.25,
+        "fade": "InOut",
+        "fadeIn": 0.6
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.falcon.strike",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Falcon/FalconAni.smd",
+        "skeleton": "Effect/ObjAnimationData/Falcon/FalconAni.smb",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          19.53,
+          0
+        ],
+        "speed": 560.0,
+        "faceGoal": true,
+        "modelStart": 100,
+        "modelFrames": 130,
+        "modelSpeed": 26.25,
+        "endEffect": "vfx.archer.falcon.hit",
+        "end": "Hold",
+        "fadeOut": 0.2
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.rage.arrow",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/ArrowRage/Arrow.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          31.25,
+          234.38,
+          0
+        ],
+        "speed": 560.0,
+        "faceGoal": true,
+        "end": "Vanish",
+        "fadeOut": 0.1571,
+        "reach": 8,
+        "endEffect": "vfx.archer.rage.apex"
+      },
+      {
+        "animation": "Blur1.ini",
+        "shape": "Ribbon",
+        "loop": true,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          31.25,
+          234.38,
+          0
+        ],
+        "speed": 560.0,
+        "width": [
+          3,
+          3
+        ],
+        "trailPoints": 15,
+        "trailFade": 16.6667,
+        "sized": false
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Scout_Hawk 01.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.rage.rain",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/ArrowRage/Arrow.smd",
+        "count": 12,
+        "delayRandom": 0.3,
+        "offset": [
+          0,
+          234.38,
+          0
+        ],
+        "ring": [
+          15.63,
+          25.38
+        ],
+        "ringRandom": true,
+        "velocityMin": [
+          0,
+          -1260.0,
+          0
+        ],
+        "velocityMax": [
+          0,
+          -1260.0,
+          0
+        ],
+        "faceGoal": true,
+        "lifetime": [
+          0.186,
+          0.186
+        ],
+        "endEffect": "vfx.archer.rage.hit"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.avalanche.arrow",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/WindArrow/WindArrow.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 840.0,
+        "faceGoal": true,
+        "end": "Hold",
+        "fadeOut": 0.1571,
+        "reach": 8,
+        "modelStart": 1,
+        "modelFrames": 3.75,
+        "loopFrom": 1,
+        "loop": true,
+        "modelSpeed": 17.5,
+        "every": 0.0143,
+        "everyEffect": "vfx.archer.avalanche.ghost"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.elemental.arrow",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/WindArrow/WindArrow.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 490.0,
+        "faceGoal": true,
+        "end": "Hold",
+        "fadeOut": 0.1571,
+        "reach": 8,
+        "modelStart": 1,
+        "modelFrames": 3.75,
+        "loopFrom": 1,
+        "loop": true,
+        "modelSpeed": 17.5,
+        "carryEffect": "particle.FireJavelinFire"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.elemental.fire",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.7843,
+          0.3922
+        ],
+        "power": 120,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_add_F 1.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.FireHIt1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.elemental.lightning",
+    "duration": 2.0,
+    "parts": [
+      {
+        "shape": "Beam",
+        "texture": "Effect/AssaEffect/Skill3Texture/light3_0.bmp",
+        "frames": 4,
+        "frameTime": 0.0429,
+        "loop": true,
+        "anchor": "Point",
+        "offset": [
+          0,
+          70.88,
+          0
+        ],
+        "beamTo": [
+          0,
+          -46.88,
+          0
+        ],
+        "width": [
+          6.835,
+          6.835
+        ],
+        "lifetime": [
+          0.3,
+          0.3
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.15
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/NewEffect/Res/TextureHit/spark01_01.bmp",
+        "count": 5,
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "burst": [
+          140.0,
+          140.0
+        ],
+        "width": [
+          2,
+          2
+        ],
+        "trailPoints": 8,
+        "trailFade": 30,
+        "lifetime": [
+          0.3,
+          0.3
+        ],
+        "gravity": [
+          -200,
+          -200
+        ]
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "power": 100,
+        "decay": 2
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/EnchantWpn_add_L 1.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.DivineLightning",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.goldenfalcon.cast",
+    "duration": 2.5,
+    "parts": [
+      {
+        "animation": "ReturnParticle1.ini",
+        "count": 20,
+        "size": [
+          7,
+          7
+        ],
+        "delayStep": 0.0286,
+        "loop": true,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.79,
+          0
+        ],
+        "jitterMin": [
+          -8,
+          0,
+          -8
+        ],
+        "jitterMax": [
+          8,
+          0,
+          8
+        ],
+        "rise": [
+          20,
+          40
+        ],
+        "lifetime": [
+          0.5714,
+          0.8571
+        ],
+        "sized": true
+      },
+      {
+        "animation": "Return1.ini",
+        "shape": "Streak",
+        "count": 10,
+        "delay": 0.1429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.79,
+          0
+        ],
+        "ring": [
+          6.25,
+          6.25
+        ],
+        "ringStep": 36,
+        "rise": [
+          163.8,
+          163.8
+        ],
+        "width": [
+          1.56,
+          1.56
+        ],
+        "lifetime": [
+          0.6105,
+          0.6105
+        ],
+        "turn": false,
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "color": [
+          0.7059,
+          0.7059,
+          0.7059
+        ],
+        "power": 200,
+        "decay": 1
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "color": [
+          0.9804,
+          0.9804,
+          0.9804
+        ],
+        "power": 100,
+        "decay": 1,
+        "delay": 0.1429
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.goldenfalcon.aura",
+    "duration": 600,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/GoldenFalcon/g-falcon01.smd",
+        "skeleton": "Effect/ObjAnimationData/GoldenFalcon/g-falcon01.smb",
+        "anchor": "Caster",
+        "follow": true,
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 100,
+        "loopFrom": 70,
+        "loop": true,
+        "modelSpeed": 26.25,
+        "fade": "InOut",
+        "fadeIn": 0.6
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3ArcherGoldenFalcon1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill3ArcherGoldenFalcon2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.goldenfalcon.strike",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/GoldenFalcon/g-falcon01.smd",
+        "skeleton": "Effect/ObjAnimationData/GoldenFalcon/g-falcon01.smb",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          78.13,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          19.53,
+          0
+        ],
+        "speed": 560.0,
+        "faceGoal": true,
+        "modelStart": 100,
+        "modelFrames": 130,
+        "modelSpeed": 26.25,
+        "endEffect": "vfx.archer.falcon.hit",
+        "end": "Hold",
+        "fadeOut": 0.2
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.bombshot.arrow",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/Skill3Mesh/At3_SplitJavelin40.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -40
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 420.0,
+        "faceGoal": true,
+        "end": "Hold",
+        "fadeOut": 0.1571,
+        "reach": 8,
+        "carryEffect": "particle.Skill3ArcherBombShot1"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.bombshot.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.5882,
+          0.1961
+        ],
+        "power": 200,
+        "decay": 2
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill3ArcherBombShotHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.Skill3ArcherBombShotHit2",
+        "anchor": "Point",
+        "offset": [
+          12,
+          30,
+          0
+        ],
+        "turn": true
+      },
+      {
+        "effect": "particle.Skill3ArcherBombShotHit2",
+        "anchor": "Point",
+        "offset": [
+          -10,
+          34,
+          8
+        ],
+        "turn": true,
+        "delay": 0.0429
+      },
+      {
+        "effect": "particle.Skill3ArcherBombShotHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          28,
+          -12
+        ],
+        "turn": true,
+        "delay": 0.0857
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.perforation.shot",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -700.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -700.0
+        ],
+        "lifetime": [
+          0.45,
+          0.45
+        ],
+        "carryEffect": "particle.twistJavelin1"
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -700.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -700.0
+        ],
+        "lifetime": [
+          0.45,
+          0.45
+        ],
+        "width": [
+          3.905,
+          3.905
+        ],
+        "trailPoints": 15,
+        "trailFade": 16.6667
+      },
+      {
+        "shape": "Ribbon",
+        "texture": "Effect/AssaEffect/Shield1.bmp",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -10
+        ],
+        "velocityMin": [
+          0,
+          0,
+          -700.0
+        ],
+        "velocityMax": [
+          0,
+          0,
+          -700.0
+        ],
+        "lifetime": [
+          0.45,
+          0.45
+        ],
+        "width": [
+          15.625,
+          15.625
+        ],
+        "trailPoints": 15,
+        "trailFade": 16.6667,
+        "color": [
+          255,
+          255,
+          255,
+          120
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.perforation.hit",
+    "duration": 1.5,
+    "children": [
+      {
+        "effect": "particle.TwistJavelin2",
+        "anchor": "Target",
+        "offset": [
+          0,
+          7.81,
+          0
+        ],
+        "turn": true,
+        "delay": 0.5,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.wolverine.cast",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "FireParticle1.ini",
+        "count": 4,
+        "size": [
+          25,
+          25
+        ],
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "radial": [
+          23.2422,
+          23.2422
+        ],
+        "rise": [
+          19.1406,
+          19.1406
+        ],
+        "gravity": [
+          38.2812,
+          76.5625
+        ],
+        "lifetime": [
+          0.2143,
+          0.2714
+        ],
+        "sized": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.phoenix.shot",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/PhoenixShot/Ac_4-3.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          -24
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 630.0,
+        "faceGoal": true,
+        "end": "LastFrame",
+        "fadeOut": 0.3714,
+        "carryEffect": "particle.Skill4PhoenixShot"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.nature.aura",
+    "duration": 600,
+    "children": [
+      {
+        "effect": "script.SkillSagittarionForceofNature",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true,
+        "follow": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.bowpuff",
+    "duration": 1.0,
+    "parts": [
+      {
+        "texture": "Effect/ImageData/Particle/Dust.tga",
+        "count": 4,
+        "color": [
+          100,
+          100,
+          100,
+          150
+        ],
+        "size": [
+          6,
+          6
+        ],
+        "growth": -4,
+        "burst": [
+          27.3,
+          27.3
+        ],
+        "lifetime": [
+          0.5,
+          0.5
+        ],
+        "fade": "InOut",
+        "fadeOut": 0.5
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.aim.hit",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "sized": false
+      },
+      {
+        "animation": "Light1.ini",
+        "size": [
+          120,
+          120
+        ],
+        "anchor": "Point",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "sized": true
+      },
+      {
+        "animation": "CriticalHit1.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          30,
+          0
+        ],
+        "sized": false
+      }
+    ],
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/bow_skill_hit 02.wav"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.rage.apex",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "SkillArrowOfRage1.ini",
+        "sized": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.rage.hit",
+    "duration": 1.0,
+    "parts": [
+      {
+        "animation": "SkillMechanicBombDust1.ini",
+        "count": 5,
+        "jitterMin": [
+          -6,
+          0,
+          -6
+        ],
+        "jitterMax": [
+          6,
+          4,
+          6
+        ],
+        "sized": false
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          4,
+          0
+        ],
+        "color": [
+          1.0,
+          0.1961,
+          0.1961
+        ],
+        "power": 80,
+        "decay": 2
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.avalanche.ghost",
+    "duration": 1.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Avalanche/Avalanche.smd",
+        "blend": "Additive",
+        "modelFrames": 10,
+        "modelSpeed": 35,
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.avalanche.hit",
+    "duration": 2.0,
+    "children": [
+      {
+        "effect": "vfx.common.tripleimpact",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.falcon.hit",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Falcon Attack 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.common.tripleimpact",
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "turn": true
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.evadeshot.cast",
+    "duration": 3.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Morion/eXtremeRage 01.wav",
+        "delay": 0.56
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill5_Acher_EvadeShot2",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip weapon01",
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill5_Acher_EvadeShot3",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "bone": "Bip weapon01",
+        "follow": true
+      },
+      {
+        "effect": "particle.Skill5_Acher_Evade_ShotEffect",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          11.72,
+          -25
+        ],
+        "turn": true,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill5_Acher_EvadeShot4",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      },
+      {
+        "effect": "particle.Skill3Hit3",
+        "anchor": "Target",
+        "offset": [
+          0,
+          10,
+          0
+        ],
+        "turn": true,
+        "delay": 0.56,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.thunderroop.cast",
+    "duration": 1.5,
+    "parts": [
+      {
+        "animation": "ThunderRoop2.ini",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.thunderroop.bolt",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "size": [
+          1,
+          1
+        ],
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          28,
+          0
+        ],
+        "speed": 900.0,
+        "reach": 8,
+        "end": "Vanish",
+        "carryEffect": "particle.Skill5ArcherThubderRoopShot2"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.thunderroop.shot",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Perfect Aim 01.wav"
+      }
+    ],
+    "children": [
+      {
+        "effect": "vfx.archer.thunderroop.bolt",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.naturesplash.cast",
+    "duration": 4.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/AssaEffect/EvilMaple/NatureSplash.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "delay": 1.1,
+        "offset": [
+          0,
+          31.25,
+          0
+        ],
+        "lifetime": [
+          1.0,
+          1.0
+        ],
+        "fade": "InOut",
+        "fadeIn": 0.25,
+        "fadeOut": 0.25
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.EvilMaple",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          -25
+        ],
+        "turn": true,
+        "delay": 1.1,
+        "stopWithParent": false
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.circletrap.shot",
+    "duration": 10,
+    "parts": [
+      {
+        "shape": "Billboard",
+        "size": [
+          1,
+          1
+        ],
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "anchor": "Caster",
+        "bone": "Bip weapon01",
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 900.0,
+        "reach": 8,
+        "end": "Vanish",
+        "carryEffect": "particle.Skill5ArcherCircleTrap1"
+      }
+    ]
+  },
+  {
+    "name": "vfx.archer.circletrap.hit",
+    "duration": 2.0,
+    "sounds": [
+      {
+        "path": "wav/Effects/Skill/Tempskron/Perfect Aim 01.wav"
+      }
+    ],
+    "parts": [
+      {
+        "animation": "CircleTrap.ini",
+        "anchor": "Point",
+        "offset": [
+          0,
+          11.72,
+          0
+        ]
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill5ArcherCircleTrapHit",
+        "anchor": "Point",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "turn": true,
+        "stopWithParent": false
+      }
+    ]
+  }
+]

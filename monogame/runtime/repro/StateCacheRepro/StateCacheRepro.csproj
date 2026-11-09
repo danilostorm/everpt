@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Repro of the runtime's defects (monogame/runtime/README.md, changes 6 to 11). Draws into a small render target and
+    checks the pixels against values computed on the CPU (the blend equation, the colour of each band, the last draw's
+    colour). Program.cs lists the tests. Not part of the solution.
+
+      dotnet run -c Release (project monogame/runtime/repro/StateCacheRepro)                  the fork
+      the same with the property EtervaleFork=false                                           official MonoGame
+      VK_INSTANCE_LAYERS=VK_LAYER_KHRONOS_validation in the environment                      with validation
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RollForward>Major</RollForward>
+    <EtervaleFork Condition="'$(EtervaleFork)' == ''">true</EtervaleFork>
+    <!-- Content/Content.mgcb: the effect of test 5, built with DXC like the game's Vulkan shaders. -->
+    <MonoGamePlatform>DesktopVK</MonoGamePlatform>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Content.Builder.Task" />
+  </ItemGroup>
+  <!-- The fork: its framework from source (monogame/framework) and its runtime from monogame/runtime/bin. -->
+  <ItemGroup Condition="'$(EtervaleFork)' == 'true'">
+    <ProjectReference Include="../../../framework/MonoGame.Framework/MonoGame.Framework.Native.csproj" />
+  </ItemGroup>
+  <!-- The stock MonoGame for comparison: the official framework and Linux runtime packages. -->
+  <ItemGroup Condition="'$(EtervaleFork)' != 'true'">
+    <PackageReference Include="MonoGame.Framework.Native" />
+    <PackageReference Include="MonoGame.Runtime.Linux.Vulkan" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('Linux')) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">linux-x64</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('Windows'))">win-x64</EtervaleRuntimeRid>
+    <EtervaleRuntimeDir>$(MSBuildThisFileDirectory)../../bin/$(EtervaleRuntimeRid)/</EtervaleRuntimeDir>
+  </PropertyGroup>
+  <!-- The fork's library next to the executable (the package's, in runtimes/, is only there with EtervaleFork=false). -->
+  <Target Name="EtervaleForkedRuntime" AfterTargets="Build" Condition="'$(EtervaleRuntimeRid)' != '' And '$(EtervaleFork)' == 'true'">
+    <Error Condition="!Exists('$(EtervaleRuntimeDir)')" Text="Build the runtime fork first: monogame/runtime/build.sh." />
+    <ItemGroup>
+      <EtervaleRuntimeFile Include="$(EtervaleRuntimeDir)*mgruntime*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(EtervaleRuntimeFile)" DestinationFolder="$(OutDir)" />
+  </Target>
+  <!-- A fork copy left by an earlier build would shadow the package's library: removed in the comparison mode. -->
+  <Target Name="EtervaleOfficialRuntime" AfterTargets="Build" Condition="'$(EtervaleFork)' != 'true'">
+    <Delete Files="$(OutDir)libmgruntime.so;$(OutDir)mgruntime.dll;$(OutDir)libmgruntime.dylib" />
+  </Target>
+</Project>

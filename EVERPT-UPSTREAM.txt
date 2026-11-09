@@ -1,0 +1,2 @@
+Upstream: https://github.com/bencz-games/Etervale
+Commit: 90b42027c22ab36b9f3ed7cb1e6d6e5826b3577d

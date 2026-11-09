@@ -1,0 +1,320 @@
+[
+  {
+    "name": "vfx.monster.bloodyknight.attack.hit",
+    "duration": 2.0,
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "color": [
+          0.3922,
+          1.0,
+          0.3922
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.HulkHit1",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit2",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      },
+      {
+        "effect": "particle.HulkHit3",
+        "anchor": "Point",
+        "offset": [
+          0,
+          42,
+          -70
+        ],
+        "turn": true,
+        "pick": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.bloodyknight.skill.hit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/Roar/Roar.smd",
+        "blend": "Additive",
+        "count": 6,
+        "delay": 0.6429,
+        "delayStep": 0.0286,
+        "anchor": "Caster",
+        "turn": false,
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 11,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.0392,
+          0.0392
+        ],
+        "power": 150,
+        "decay": 2
+      },
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          24,
+          0
+        ],
+        "color": [
+          1.0,
+          0.0392,
+          0.0392
+        ],
+        "power": 200,
+        "decay": 3,
+        "delay": 0.6429
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.Skill2FighterRoar1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          11.7188,
+          0
+        ],
+        "turn": true,
+        "delay": 0.5
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.status.bloodyknightstun",
+    "duration": 2.0,
+    "parts": [
+      {
+        "texture": "image/Sinimage/Effect/stun/Star.tga",
+        "blend": "Additive",
+        "size": [
+          1.0,
+          1.0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.7812,
+          0
+        ],
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 7.27,
+        "orbitSpeed": 787.5,
+        "orbitPhase": 0.0,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/stun/Star.tga",
+        "blend": "Additive",
+        "size": [
+          1.5,
+          1.5
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.7812,
+          0
+        ],
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 7.27,
+        "orbitSpeed": 787.5,
+        "orbitPhase": 11.25,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/stun/Star.tga",
+        "blend": "Additive",
+        "size": [
+          2.0,
+          2.0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.7812,
+          0
+        ],
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 7.27,
+        "orbitSpeed": 787.5,
+        "orbitPhase": 22.5,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/stun/Star.tga",
+        "blend": "Additive",
+        "size": [
+          2.5,
+          2.5
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.7812,
+          0
+        ],
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 7.27,
+        "orbitSpeed": 787.5,
+        "orbitPhase": 33.75,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/stun/Star.tga",
+        "blend": "Additive",
+        "size": [
+          3.0,
+          3.0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.7812,
+          0
+        ],
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 7.27,
+        "orbitSpeed": 787.5,
+        "orbitPhase": 45.0,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/stun/Star.tga",
+        "blend": "Additive",
+        "size": [
+          3.5,
+          3.5
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.7812,
+          0
+        ],
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 7.27,
+        "orbitSpeed": 787.5,
+        "orbitPhase": 56.25,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/stun/Star.tga",
+        "blend": "Additive",
+        "size": [
+          4.0,
+          4.0
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.7812,
+          0
+        ],
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 7.27,
+        "orbitSpeed": 787.5,
+        "orbitPhase": 67.5,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      },
+      {
+        "texture": "image/Sinimage/Effect/stun/Star.tga",
+        "blend": "Additive",
+        "size": [
+          4.5,
+          4.5
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          50.7812,
+          0
+        ],
+        "follow": true,
+        "turn": false,
+        "orbitRadius": 7.27,
+        "orbitSpeed": 787.5,
+        "orbitPhase": 78.75,
+        "lifetime": [
+          1.2857,
+          1.2857
+        ]
+      }
+    ]
+  }
+]

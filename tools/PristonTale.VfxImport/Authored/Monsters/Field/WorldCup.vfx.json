@@ -1,0 +1,36 @@
+[
+  {
+    "name": "vfx.monster.worldcup.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "color": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1,
+          1
+        ],
+        "anchor": "Caster",
+        "offset": [
+          0,
+          11.7,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          30,
+          0
+        ],
+        "speed": 492.1875,
+        "reach": 5,
+        "carryEffect": "particle.TwistJavelin1",
+        "endEffect": "particle.TwistJavelin2"
+      }
+    ]
+  }
+]

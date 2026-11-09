@@ -1,0 +1,92 @@
+[
+  {
+    "name": "vfx.monster.web.webhit",
+    "duration": 3.0,
+    "parts": [
+      {
+        "animation": "MonsterWebHit1.ini",
+        "shape": "Streak",
+        "count": 10,
+        "delayRandom": 0.2857,
+        "shell": [
+          28,
+          16.5,
+          28
+        ],
+        "burst": [
+          82.0312,
+          82.0312
+        ],
+        "width": [
+          0.7812,
+          0.9727
+        ],
+        "sized": false
+      },
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/MonsterWeb/Hit.smd",
+        "blend": "Additive",
+        "angles": [
+          0,
+          180,
+          0
+        ],
+        "modelStart": 1,
+        "modelFrames": 20,
+        "modelSpeed": 35,
+        "fade": "InOut",
+        "fadeOut": 0.2143
+      }
+    ],
+    "lights": [
+      {
+        "anchor": "Point",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "color": [
+          0.7843,
+          0.7843,
+          0.7843
+        ],
+        "power": 100,
+        "decay": 1
+      }
+    ]
+  },
+  {
+    "name": "vfx.monster.web.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "Effect/ObjAnimationData/MonsterWeb/Web.smd",
+        "blend": "Additive",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          12,
+          -32
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 280.0,
+        "reach": 39,
+        "faceGoal": true,
+        "modelStart": 1,
+        "modelFrames": 15,
+        "modelSpeed": 8.75,
+        "loop": true,
+        "loopFrom": 1,
+        "endEffect": "vfx.monster.web.webhit"
+      }
+    ]
+  }
+]

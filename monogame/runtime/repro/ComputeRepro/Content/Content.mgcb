@@ -1,0 +1,30 @@
+
+#----------------------------- Global Properties ----------------------------#
+# ComputeRepro's effects, compiled by the effect processor of Etervale's MonoGame fork (monogame/pipeline: compute
+# passes, storage resources, SM 6.5, MGFX 12) with the DXC of the dotnet-mgcb tool.
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopVK
+/config:
+/profile:HiDef
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+# Built before the content by the project reference in ComputeRepro.csproj.
+/reference:../../../../pipeline/bin/MonoGame.Effect.Processor.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Compute.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Compute.fx
+
+#begin RayQuery.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:RayQuery.fx

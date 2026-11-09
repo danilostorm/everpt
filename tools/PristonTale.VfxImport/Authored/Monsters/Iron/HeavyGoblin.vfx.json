@@ -1,0 +1,36 @@
+[
+  {
+    "name": "vfx.monster.heavygoblin.skill",
+    "duration": 3.0,
+    "parts": [
+      {
+        "anchor": "Caster",
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "lifetime": [
+          1.8571,
+          1.8571
+        ],
+        "carryEffect": "particle.HeavyGoblin",
+        "bone": "Bip-hammer",
+        "follow": true
+      }
+    ],
+    "children": [
+      {
+        "effect": "particle.HeavyGoblinHit1",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          10,
+          -50
+        ],
+        "turn": true,
+        "delay": 1.2
+      }
+    ]
+  }
+]

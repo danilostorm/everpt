@@ -1,0 +1,30 @@
+[
+  {
+    "name": "vfx.monster.skeletonranger.attack.hit",
+    "duration": 10.0,
+    "parts": [
+      {
+        "shape": "Model",
+        "model": "weapons/arrow.smd",
+        "blend": "Alpha",
+        "anchor": "Caster",
+        "offset": [
+          0,
+          28,
+          0
+        ],
+        "goal": "Target",
+        "goalOffset": [
+          0,
+          24,
+          0
+        ],
+        "speed": 560.0,
+        "reach": 8,
+        "faceGoal": true,
+        "end": "Hold",
+        "fadeOut": 0.1143
+      }
+    ]
+  }
+]

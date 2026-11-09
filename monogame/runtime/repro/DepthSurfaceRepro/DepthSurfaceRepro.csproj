@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Verification program of issue 016 of the fork (monogame/issues/016-depth-surface-targets.md): a depth surface
+    is drawn into without colour and sampled as a float texture. Program.cs lists the checks; the exit code is
+    the number that failed. Not part of the solution; needs the runtime fork built (monogame/runtime/build.sh).
+
+      dotnet run -c Release (project monogame/runtime/repro/DepthSurfaceRepro)
+      MG_HIDDEN_WINDOW=1 in the environment                       no window on the desktop
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RollForward>Major</RollForward>
+    <MonoGamePlatform>DesktopVK</MonoGamePlatform>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Content.Builder.Task" />
+    <ProjectReference Include="../../../framework/MonoGame.Framework/MonoGame.Framework.Native.csproj" />
+    <!-- The fork's effect processor, which Content/Content.mgcb loads: built first, not referenced. -->
+    <ProjectReference Include="../../../pipeline/MonoGame.Effect.Processor/MonoGame.Effect.Processor.csproj" ReferenceOutputAssembly="false" SkipGetTargetFrameworkProperties="true" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('Linux')) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">linux-x64</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('Linux')) And '$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'Arm64'">linux-arm64</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('OSX'))">osx</EtervaleRuntimeRid>
+    <EtervaleRuntimeRid Condition="$([MSBuild]::IsOSPlatform('Windows'))">win-x64</EtervaleRuntimeRid>
+    <EtervaleRuntimeDir>$(MSBuildThisFileDirectory)../../bin/$(EtervaleRuntimeRid)/</EtervaleRuntimeDir>
+  </PropertyGroup>
+  <!-- The fork's native library next to the executable. -->
+  <Target Name="EtervaleForkedRuntime" AfterTargets="Build" Condition="'$(EtervaleRuntimeRid)' != ''">
+    <Error Condition="!Exists('$(EtervaleRuntimeDir)')" Text="Build the runtime fork first: monogame/runtime/build.sh." />
+    <ItemGroup>
+      <EtervaleRuntimeFile Include="$(EtervaleRuntimeDir)*mgruntime*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(EtervaleRuntimeFile)" DestinationFolder="$(OutDir)" />
+  </Target>
+</Project>

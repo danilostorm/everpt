@@ -1,0 +1,128 @@
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopVK
+/config:
+/profile:HiDef
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+# The SM 6 effect processor of the MonoGame fork (monogame/pipeline, SpirvEffectProcessor: DXC to SPIR-V for Vulkan),
+# built before the content by the client's project reference into a fixed folder.
+/reference:../../../monogame/pipeline/bin/MonoGame.Effect.Processor.dll
+
+
+#---------------------------------- Content ---------------------------------#
+
+# The SM 6.0 shader library (Shaders/, see docs/shaders.md), compiled for Vulkan (vs_6_0/ps_6_0). Surface.fx is built for
+# the static and the skinned vertex factories (SKINNED); each effect selects its pass by technique.
+#begin Shaders/Passes/Surface.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/Surface.fx;Effects/StaticSurface.fx
+
+#begin Shaders/Passes/Surface.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/processorParam:Defines=SKINNED
+/build:Shaders/Passes/Surface.fx;Effects/SkinnedSurface.fx
+
+#begin Shaders/Passes/Unlit.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/Unlit.fx;Effects/Unlit.fx
+
+#begin Shaders/Passes/Vfx.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/Vfx.fx;Effects/Vfx.fx
+
+#begin Shaders/Passes/Atmosphere.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/Atmosphere.fx;Effects/Atmosphere.fx
+
+#begin Shaders/Passes/Rain.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/Rain.fx;Effects/Rain.fx
+
+#begin Shaders/Passes/SkyComposite.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/SkyComposite.fx;Effects/SkyComposite.fx
+
+#begin Shaders/Passes/AmbientOcclusion.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/AmbientOcclusion.fx;Effects/AmbientOcclusion.fx
+
+#begin Shaders/Passes/LightCull.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/LightCull.fx;Effects/LightCull.fx
+
+#begin Shaders/Passes/Environment.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/Environment.fx;Effects/Environment.fx
+
+#begin Shaders/Passes/Reflections.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/Reflections.fx;Effects/Reflections.fx
+
+#begin Shaders/Passes/Volumetric.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/Volumetric.fx;Effects/Volumetric.fx
+
+#begin Shaders/Passes/PostTemporal.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/PostTemporal.fx;Effects/PostTemporal.fx
+
+#begin Shaders/Passes/PostExposure.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/PostExposure.fx;Effects/PostExposure.fx
+
+#begin Shaders/Passes/PostBloom.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/PostBloom.fx;Effects/PostBloom.fx
+
+#begin Shaders/Passes/PostFinal.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/PostFinal.fx;Effects/PostFinal.fx
+
+#begin Shaders/Passes/PostSmaa.fx
+/importer:EffectImporter
+/processor:SpirvEffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Passes/PostSmaa.fx;Effects/PostSmaa.fx
+
+#begin Fonts/UI.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Color
+/build:Fonts/UI.spritefont

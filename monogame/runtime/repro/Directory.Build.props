@@ -1,0 +1,14 @@
+<Project>
+  <!--
+    The repro programs are Etervale's own test code (not MonoGame's): net10.0, nullable, warnings as errors.
+    monogame/runtime/Directory.Build.props keeps these settings away from the C++ project premake generates one folder up;
+    Directory.Packages.props pins the packages.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+</Project>

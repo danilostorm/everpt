@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    The MGCB plugin of Etervale's MonoGame fork: SpirvEffectProcessor (MonoGame's EffectProcessor over the fork's effect
+    compiler). Client/PristonTale/Content/Content.mgcb loads it with /reference from the fixed folder monogame/pipeline/bin
+    (git-ignored), which therefore holds this assembly and MonoGame.Effect.Compiler.dll only: the content pipeline and
+    framework assemblies are referenced from the dotnet-mgcb tool itself (not copied), so the plugin binds to exactly
+    what MGCB has loaded.
+  -->
+  <PropertyGroup>
+    <AssemblyName>MonoGame.Effect.Processor</AssemblyName>
+    <RootNamespace>MonoGame.Effect.Processor</RootNamespace>
+    <OutputPath>$(MSBuildThisFileDirectory)../bin/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../MonoGame.Effect.Compiler/MonoGame.Effect.Compiler.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework.Content.Pipeline" Aliases="ContentPipeline">
+      <HintPath>$(EtervaleMgcbTool)MonoGame.Framework.Content.Pipeline.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(EtervaleMgcbTool)MonoGame.Framework.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- The tool comes from 'dotnet tool restore' (the Game build and CI run it; a first build of this project alone too). -->
+  <Target Name="EtervaleRestoreMgcbTool" BeforeTargets="ResolveAssemblyReferences" Condition="!Exists('$(EtervaleMgcbTool)MonoGame.Framework.Content.Pipeline.dll')">
+    <Exec Command="dotnet tool restore" WorkingDirectory="$(MSBuildThisFileDirectory)../../.." />
+    <Error Condition="!Exists('$(EtervaleMgcbTool)MonoGame.Framework.Content.Pipeline.dll')" Text="The dotnet-mgcb $(EtervaleMgcbVersion) tool is not at $(EtervaleMgcbTool) after 'dotnet tool restore'." />
+  </Target>
+</Project>
