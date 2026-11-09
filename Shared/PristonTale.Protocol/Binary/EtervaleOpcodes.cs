@@ -116,4 +116,5 @@ public static class EtervaleOpcodes
     public const uint CharacterCommand = 0x45540F04;
     public const uint CharacterResult = 0x45540F05;
     public const uint Heartbeat = 0x45540F06;
+    public const uint LanguageChange = 0x45540F07;
 }
