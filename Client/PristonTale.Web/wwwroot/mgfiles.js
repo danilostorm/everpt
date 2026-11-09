@@ -6,13 +6,42 @@
 const PreloadConcurrency = 8;
 const BackgroundConcurrency = 3;
 
-const stats = { files: 0, loaded: 0, loadedBytes: 0, loadMs: 0, slowest: 0, onDemand: 0 };
+const stats = { files: 0, loaded: 0, loadedBytes: 0, loadMs: 0, slowest: 0, onDemand: 0, cacheHits: 0 };
 const files = new Map();
 const prefetched = new Map();
+const readCache = new Map();
+const MaxReadCacheBytes = 384 * 1024 * 1024;
+let readCacheBytes = 0;
 export const loadLog = [];
 
+// The opening scene reopens many assets. Re-fetching them synchronously on
+// the game thread can stall the public browser for minutes. Retain a bounded
+// in-memory LRU to reuse bytes across file handles and repeated reads.
+function cachedFile(path) {
+    const bytes = readCache.get(path);
+    if (!bytes) return null;
+    readCache.delete(path);
+    readCache.set(path, bytes);
+    return bytes;
+}
+function keepFile(path, bytes) {
+    if (bytes.byteLength > MaxReadCacheBytes) return;
+    const old = readCache.get(path);
+    if (old) {
+        readCacheBytes -= old.byteLength;
+        readCache.delete(path);
+    }
+    readCache.set(path, bytes);
+    readCacheBytes += bytes.byteLength;
+    while (readCacheBytes > MaxReadCacheBytes) {
+        const [oldest, oldestBytes] = readCache.entries().next().value;
+        readCache.delete(oldest);
+        readCacheBytes -= oldestBytes.byteLength;
+    }
+}
+
 export function fileStats() {
-    return { ...stats };
+    return { ...stats, readCacheBytes };
 }
 
 function download(url) {
@@ -40,9 +69,16 @@ function mountFile(FS, path, folder, name, size) {
             contents = prefetched.get(path) || null;
             if (contents) {
                 prefetched.delete(path);
+                keepFile(path, contents);
             } else {
-                contents = download(files.get(path).url);
-                stats.onDemand++;
+                contents = cachedFile(path);
+                if (contents) {
+                    stats.cacheHits++;
+                } else {
+                    contents = download(files.get(path).url);
+                    stats.onDemand++;
+                    keepFile(path, contents);
+                }
             }
             const elapsed = performance.now() - started;
             stats.loaded++;
@@ -59,6 +95,7 @@ function mountFile(FS, path, folder, name, size) {
         operations[key] = node.stream_ops[key];
     }
     operations.read = (stream, buffer, offset, length, position) => {
+        if (position >= size) return 0;
         const bytes = load();
         if (position >= bytes.length) {
             return 0;
