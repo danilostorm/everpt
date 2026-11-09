@@ -60,6 +60,7 @@ try
     return command switch
     {
         "create-account" => await CreateAccount(argv),
+        "set-password" => await SetPassword(argv),
         "create-bots" => await CreateBots(argv),
         "add-char" => await AddCharacter(argv),
         "list" => await ListCharacters(argv),
@@ -88,6 +89,22 @@ async Task<int> CreateAccount(List<string> a)
     }
     var account = await accounts.CreateAsync(user, PasswordHasher.Hash(password));
     Console.WriteLine($"created account #{account.Id} '{account.UserId}'");
+    return 0;
+}
+
+async Task<int> SetPassword(List<string> a)
+{
+    if (a.Count != 2)
+        return Usage("usage: set-password <user>  (reads the new password from standard input)");
+    if (await accounts.FindByUserIdAsync(a[1]) is null)
+        return Usage($"no account '{a[1]}'");
+    var password = Console.ReadLine();
+    if (string.IsNullOrWhiteSpace(password))
+        return Usage("a nonempty password is required on standard input");
+    var hash = PasswordHasher.Hash(password);
+    if (!await accounts.UpdatePasswordHashAsync(a[1], hash))
+        return Usage("password update failed");
+    Console.WriteLine($"password updated for account '{a[1]}'");
     return 0;
 }
 
@@ -254,6 +271,7 @@ static void PrintUsage()
 
         Commands:
           create-account <user> <password>            create a login account (hashed)
+          set-password <user>                         rotate password using standard input (never logs it)
           create-bots <prefix> <count> <password>     create load-test accounts <prefix>0001..<prefix>NNNN
               [--class C --field F --at x,z]            ... each with a character Lt<prefix>NNNN placed in field F around (x, z)
               [--spacing S] [--level N]                 grid spacing (0: a 500-unit crowd) and level
