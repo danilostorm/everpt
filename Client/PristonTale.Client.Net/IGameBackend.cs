@@ -14,6 +14,9 @@ public interface IGameBackend : IAsyncDisposable
 
     Task<LoginOutcome> LoginAsync(string account, string password, string language, CancellationToken ct = default);
 
+    // Additive protocol capability; local/offline test backends can ignore it.
+    void SetLanguage(string language) { }
+
     Task<IReadOnlyList<CharacterSummary>> ListCharactersAsync(CancellationToken ct = default);
 
     Task<CreateCharacterOutcome> CreateCharacterAsync(string name, PlayerClass playerClass, int faceIndex, CancellationToken ct = default);
