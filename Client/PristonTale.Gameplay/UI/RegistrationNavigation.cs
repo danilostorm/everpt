@@ -7,7 +7,7 @@ namespace PristonTale.Gameplay.UI;
 // opens that page in the user's regular browser.
 public static class RegistrationNavigation
 {
-    public static Action? BrowserRequest { get; set; }
+    public static Action BrowserRequest { get; set; }
 
     public static void Open()
     {
