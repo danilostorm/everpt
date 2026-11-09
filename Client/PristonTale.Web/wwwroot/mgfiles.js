@@ -113,7 +113,18 @@ export async function readManifest() {
     }
     try {
         const response = await fetch('preload.json');
-        return response.ok ? await response.json() : { startup: [], world: [] };
+        if (!response.ok) return { startup: [], world: [] };
+        const lists = await response.json();
+        // Do not block the login screen on hundreds of world effects and music files.
+        // The remaining files are prefetched after the first rendered frame, while
+        // any needed earlier are still available on demand from the manifest.
+        const critical = path => path.startsWith('/Content/')
+            || path.startsWith('/assets/Hud/')
+            || path.startsWith('/assets/image/Sinimage/Cursor/');
+        return {
+            startup: lists.startup.filter(critical),
+            world: [...new Set([...lists.startup.filter(path => !critical(path)), ...lists.world])],
+        };
     } catch {
         return { startup: [], world: [] };
     }
