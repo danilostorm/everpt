@@ -88,17 +88,43 @@ app.Map("/ws.ashx", async context =>
 app.UseDefaultFiles(new DefaultFilesOptions { FileProvider = new PhysicalFileProvider(siteRoot) });
 app.UseStaticFiles(new StaticFileOptions { FileProvider = new PhysicalFileProvider(siteRoot) });
 
-// Game assets are served only if explicitly enabled. Public distribution requires rights to those assets.
+// Assets from the third-party game archive must be explicitly enabled, and only
+// files listed in the public manifest may be served. The same archive also contains
+// GameServer and save data, which must never become web-accessible.
 var assetsRoot = Environment.GetEnvironmentVariable("EVERPT_WEB_ASSETS_ROOT");
 if (!string.IsNullOrWhiteSpace(assetsRoot) && Directory.Exists(assetsRoot))
 {
-    app.UseStaticFiles(new StaticFileOptions
+    var manifestPath = Path.Combine(siteRoot, "files.json");
+    if (!File.Exists(manifestPath))
+        throw new FileNotFoundException("Public assets require a generated files.json manifest", manifestPath);
+
+    using var manifest = System.Text.Json.JsonDocument.Parse(File.ReadAllText(manifestPath));
+    var publicFiles = new HashSet<string>(StringComparer.Ordinal);
+    foreach (var tree in manifest.RootElement.GetProperty("trees").EnumerateArray())
     {
-        FileProvider = new PhysicalFileProvider(Path.GetFullPath(assetsRoot)),
-        RequestPath = "/assets",
-        ServeUnknownFileTypes = true,
-        DefaultContentType = "application/octet-stream"
+        if (tree[0].GetString() != "/assets")
+            continue;
+        foreach (var file in tree[2].EnumerateArray())
+            if (file[0].GetString() is { } relative)
+                publicFiles.Add(relative);
+    }
+
+    var physicalRoot = Path.GetFullPath(assetsRoot);
+    app.MapGet("/assets/{**assetPath}", (string assetPath) =>
+    {
+        var path = assetPath.Replace('\\', '/');
+        if (!publicFiles.Contains(path) ||
+            path.Split('/').Any(part => part is "" or "." or ".."))
+            return Results.NotFound();
+
+        var fullPath = Path.GetFullPath(Path.Combine(physicalRoot, path));
+        if (!fullPath.StartsWith(physicalRoot + Path.DirectorySeparatorChar, StringComparison.Ordinal) ||
+            !File.Exists(fullPath))
+            return Results.NotFound();
+
+        return Results.File(fullPath, "application/octet-stream", enableRangeProcessing: true);
     });
+    app.Logger.LogInformation("EverPT public manifest allows {Count} game asset files", publicFiles.Count);
 }
 
 await app.RunAsync();
