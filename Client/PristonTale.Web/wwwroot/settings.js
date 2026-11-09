@@ -123,7 +123,7 @@ export function restoreSettings(fileSystem) {
     // preferred Portuguese. Prefer navigator.languages for those old defaults,
     // but preserve explicit language choices and existing pt-BR settings.
     const language = useLanguage(startingLanguage(saved));
-    FS.writeFile(SETTINGS_FILE, JSON.stringify({ ...(saved || { version: 1 }), language }));
+    FS.writeFile(SETTINGS_FILE, JSON.stringify({ ...(saved || { version: 1 }), language, languageAutomatic: false }));
     site = { ...siteDefaults, ...readStored(STORE_SITE) };
     applySound();
 }
@@ -180,6 +180,7 @@ function changed(row, value) {
     game[row.key] = value;
     if (row.key === 'language') {
         game.language = chooseLanguage(value);
+        game.languageAutomatic = false;
         sendGame();
         return;
     }
@@ -324,7 +325,7 @@ function buildPanel() {
                 const imported = JSON.parse(await picker.files[0].text());
                 site = { ...siteDefaults, ...imported.site };
                 game = { ...game, ...imported.game, serverAddress: game.serverAddress };
-                if (imported.game?.language) game.language = chooseLanguage(imported.game.language);
+                if (imported.game?.language) { game.language = chooseLanguage(imported.game.language); game.languageAutomatic = false; }
                 saveSite();
                 applySound();
                 sendGame();
@@ -339,7 +340,7 @@ function buildPanel() {
         if (window.confirm(t('Put every setting back to its default?'))) {
             site = { ...siteDefaults };
             const language = resetLanguageChoice();
-            game = { version: game.version, serverAddress: game.serverAddress, language };
+            game = { version: game.version, serverAddress: game.serverAddress, language, languageAutomatic: false };
             saveSite();
             applySound();
             sendGame();
