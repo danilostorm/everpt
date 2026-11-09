@@ -4,10 +4,26 @@ using System.Net.Sockets;
 using System.Net.WebSockets;
 using System.Security.Authentication;
 using System.Security.Cryptography;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddPolicy("everpt-registration", http =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            RegistrationEndpoints.RegistrationRateKey(http),
+            _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 6,
+                Window = TimeSpan.FromMinutes(15),
+                QueueLimit = 0,
+                AutoReplenishment = true
+            }));
+});
 builder.WebHost.UseUrls(Environment.GetEnvironmentVariable("EVERPT_WEB_BIND") ?? "http://127.0.0.1:8088");
 var app = builder.Build();
 
@@ -39,6 +55,7 @@ app.Use(async (context, next) =>
         context.Response.Headers["Cache-Control"] = "private, no-store, max-age=0";
     await next();
 });
+app.UseRateLimiter();
 app.UseWebSockets(new WebSocketOptions { KeepAliveInterval = TimeSpan.FromSeconds(30) });
 
 app.MapGet("/healthz", () => Results.Json(new
@@ -46,6 +63,7 @@ app.MapGet("/healthz", () => Results.Json(new
     app = "EverPT Web",
     webAssemblyReady = Directory.Exists(Path.Combine(siteRoot, "_framework"))
 }));
+app.MapRegistration(siteRoot);
 
 app.Map("/ws.ashx", async context =>
 {
