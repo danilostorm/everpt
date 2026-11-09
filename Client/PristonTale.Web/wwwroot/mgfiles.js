@@ -165,34 +165,15 @@ async function preloadCompactBundle(list, onProgress) {
         const metadata = await metadataResponse.json();
         if (metadata.format !== 'EVPT1-gzip' || metadata.count !== list.length
             || !Number.isSafeInteger(metadata.compressedBytes)
+            || !Number.isSafeInteger(metadata.uncompressedBytes)
             || metadata.compressedBytes <= 0
+            || metadata.compressedBytes > 512 * 1024 * 1024
+            || metadata.uncompressedBytes <= 0
+            || metadata.uncompressedBytes > 1024 * 1024 * 1024
             || !/^startup-[a-f0-9]{16}\.pack$/.test(metadata.url)) {
             throw new Error('Incompatible startup pack manifest');
         }
-        const response = await fetch(metadata.url);
-        if (!response.ok || !response.body) throw new Error('Startup pack unavailable');
-        const reader = response.body.getReader();
-        const chunks = [];
-        let received = 0;
-        while (true) {
-            const {done, value} = await reader.read();
-            if (done) break;
-            chunks.push(value);
-            received += value.byteLength;
-            if (received > metadata.compressedBytes)
-                throw new Error('Oversized startup pack');
-            const fraction = received / metadata.compressedBytes;
-            onProgress(Math.floor(fraction * metadata.uncompressedBytes),
-                metadata.uncompressedBytes, Math.floor(fraction * list.length), list.length);
-        }
-        if (received !== metadata.compressedBytes)
-            throw new Error('Truncated startup pack');
-        const compressed = new Uint8Array(received);
-        let copied = 0;
-        for (const chunk of chunks) {
-            compressed.set(chunk, copied);
-            copied += chunk.byteLength;
-        }
+        const compressed = await downloadCompressedPack(metadata, onProgress, list.length);
         const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', compressed)))
             .map(b => b.toString(16).padStart(2, '0')).join('');
         if (hash !== metadata.sha256)
@@ -231,4 +212,103 @@ async function preloadCompactBundle(list, onProgress) {
         console.warn('[Web] Startup pack unavailable, using original asset downloads: ' + error.message);
         return fallback();
     }
+}
+
+// Large WebPT bundles arrive much faster over several independent CDN byte
+// ranges. A strict Content-Range check prevents concatenating mismatched data.
+// Always verify the final SHA-256 before attempting to decompress it.
+async function downloadCompressedPack(meta, onProgress, count) {
+    try {
+        return await downloadParallelRanges(meta, onProgress, count);
+    } catch (error) {
+        console.info('[Web] Parallel pack unavailable; using a single request: ' + error.message);
+        return downloadSinglePack(meta, onProgress, count);
+    }
+}
+
+async function downloadParallelRanges(meta, onProgress, count) {
+    const size = meta.compressedBytes;
+    if (size < 4 * 1024 * 1024) throw new Error('Pack too small for byte ranges');
+    const probe = await fetch(meta.url, { headers: { Range: 'bytes=0-0' } });
+    if (probe.status !== 206 || probe.headers.get('content-range') !== `bytes 0-0/${size}`) {
+        await probe.body?.cancel();
+        throw new Error('Server does not support precise byte ranges');
+    }
+    if ((await probe.arrayBuffer()).byteLength !== 1)
+        throw new Error('Invalid range probe');
+
+    const step = 8 * 1024 * 1024;
+    const segments = [];
+    for (let start = 0; start < size; start += step)
+        segments.push({ start, end: Math.min(size - 1, start + step - 1) });
+    const packed = new Uint8Array(size);
+    const cancel = new AbortController();
+    let next = 0, complete = 0;
+
+    const worker = async () => {
+        while (next < segments.length) {
+            const { start, end } = segments[next++];
+            let done = false;
+            for (let retry = 0; retry < 2 && !done; retry++) {
+                try {
+                    const response = await fetch(meta.url, {
+                        headers: { Range: `bytes=${start}-${end}` },
+                        signal: cancel.signal,
+                    });
+                    if (response.status !== 206 ||
+                        response.headers.get('content-range') !== `bytes ${start}-${end}/${size}`) {
+                        await response.body?.cancel();
+                        throw new Error('Unexpected Content-Range for ' + start);
+                    }
+                    const bytes = new Uint8Array(await response.arrayBuffer());
+                    if (bytes.byteLength !== end - start + 1)
+                        throw new Error('Truncated range at ' + start);
+                    packed.set(bytes, start);
+                    complete += bytes.byteLength;
+                    const fraction = complete / size;
+                    onProgress(Math.floor(fraction * meta.uncompressedBytes),
+                        meta.uncompressedBytes, Math.floor(fraction * count), count);
+                    done = true;
+                } catch (error) {
+                    if (retry === 1 || cancel.signal.aborted) throw error;
+                }
+            }
+        }
+    };
+
+    try {
+        await Promise.all(Array.from({ length: Math.min(4, segments.length) }, () => worker()));
+    } catch (error) {
+        cancel.abort();
+        throw error;
+    }
+    if (complete !== size) throw new Error('Parallel bundle is incomplete');
+    console.info('[Web] Startup pack fetched in ' + segments.length + ' parallel ranges');
+    return packed;
+}
+
+async function downloadSinglePack(meta, onProgress, count) {
+    const response = await fetch(meta.url);
+    if (!response.ok || !response.body) throw new Error('Startup pack unavailable');
+    const reader = response.body.getReader();
+    const chunks = [];
+    let received = 0;
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        received += value.byteLength;
+        if (received > meta.compressedBytes) throw new Error('Oversized startup pack');
+        const fraction = received / meta.compressedBytes;
+        onProgress(Math.floor(fraction * meta.uncompressedBytes),
+            meta.uncompressedBytes, Math.floor(fraction * count), count);
+    }
+    if (received !== meta.compressedBytes) throw new Error('Truncated startup pack');
+    const packed = new Uint8Array(received);
+    let offset = 0;
+    for (const chunk of chunks) {
+        packed.set(chunk, offset);
+        offset += chunk.byteLength;
+    }
+    return packed;
 }
