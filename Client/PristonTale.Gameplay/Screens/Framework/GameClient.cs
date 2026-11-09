@@ -32,7 +32,7 @@ public sealed class GameClient : IDisposable
     private PristonTale.Gameplay.Effects.EffectLibrary _effects;
     private PristonAudioLibrary _audio;
     private readonly PresentationSettings _presentation;
-    private string? _lastSentLanguage;
+    private string _lastSentLanguage;
     private DisplayConfirmation _displayConfirmation;
 
     public GameClient(GraphicsDevice graphicsDevice, ContentManager content, string assetRoot, string serverAddress, PresentationSettings presentation = null)
