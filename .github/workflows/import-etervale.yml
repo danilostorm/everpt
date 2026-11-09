@@ -1,0 +1,42 @@
+name: Import Etervale into EverPT
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-etervale.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out EverPT
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Obtain upstream source without assets
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch main https://github.com/bencz-games/Etervale.git /tmp/etervale-upstream
+          printf "Upstream commit: "
+          git -C /tmp/etervale-upstream rev-parse HEAD
+          rsync -a --exclude='.git' --exclude='.github' /tmp/etervale-upstream/ ./
+          test -f LICENSE
+          test -f PristonTale.sln
+          printf 'Upstream: https://github.com/bencz-games/Etervale\nCommit: %s\n' "$(git -C /tmp/etervale-upstream rev-parse HEAD)" > EVERPT-UPSTREAM.txt
+      - name: Commit source tree
+        run: |
+          set -euo pipefail
+          git config user.name "everpt-source-sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to import"
+          else
+            git commit -m "Import original Etervale source (GPL-3.0-only) [skip ci]"
+            git push origin HEAD:main
+          fi
