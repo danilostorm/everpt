@@ -107,6 +107,15 @@ internal static class BinaryProtocolTests
         System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(outdated, outdated.Length);
         var read3 = LoginPacket.Read(outdated);
         Assert.True(read3.Language == "" && read3.Password == "sênha✓", "a login without the language did not read");
+        var switchLanguage = new LanguageChangePacket("pt-BR");
+        var switchSize = switchLanguage.Write(buffer);
+        Assert.True(LanguageChangePacket.Read(buffer.AsSpan(0, switchSize)) == switchLanguage,
+            "live Portuguese language change did not round-trip");
+        var malformedSwitch = buffer.AsSpan(0, switchSize + 1).ToArray();
+        System.Buffers.Binary.BinaryPrimitives.WriteInt32LittleEndian(malformedSwitch, malformedSwitch.Length);
+        Assert.Throws<InvalidDataException>(() => LanguageChangePacket.Read(malformedSwitch),
+            "language change accepted trailing bytes");
+
         Assert.True(LoginResultPacket.Read(buffer.AsSpan(0, new LoginResultPacket(Contracts.Sessions.LoginFailure.Busy).Write(buffer))).Status == Contracts.Sessions.LoginFailure.Busy,
             "login result lost its status");
 

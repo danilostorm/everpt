@@ -71,7 +71,7 @@ internal sealed class HudSettingsPanel
                 16 => current with { WeatherEnabled = !current.WeatherEnabled },
                 17 => current with { RealisticSky = !current.RealisticSky },
                 18 => current with { Quality = GraphicsQuality.Custom, CloudQuality = (CloudQuality)(((int)current.CloudQuality + direction + CloudQualities) % CloudQualities) },
-                19 => current with { Language = NextLanguage(current.Language, direction) },
+                19 => current with { Language = NextLanguage(current.Language, direction), LanguageAutomatic = false },
                 _ => current
             };
             return;

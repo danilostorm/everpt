@@ -9,8 +9,9 @@ public readonly record struct LoginLayout(float Scale, Rectangle Panel)
     public Rectangle Account => At(78, 367, 324, 42);
     public Rectangle Password => At(78, 439, 324, 42);
     public Rectangle Login => At(78, 501, 324, 44);
-    public Rectangle Status => At(78, 558, 324, 24);
-    public Rectangle Hint => At(78, 586, 324, 18);
+    public Rectangle Register => At(78, 552, 324, 32);
+    public Rectangle Status => At(78, 592, 324, 24);
+    public Rectangle Hint => At(78, 626, 324, 18);
 
     public static LoginLayout Create(int width, int height)
     {

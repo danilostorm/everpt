@@ -18,6 +18,8 @@
     float3 GroundAmbient;   /* ambient radiance of downward-facing surfaces */ \
     float BlinkPulse;       /* the global [0.35, 1] pulse of blinking materials */ \
     float EmissionScale;    /* radiance of emissive albedo 1: at least 1 / Exposure, brighter at night */ \
-    float3 FrameReserved;
+    float FrameReserved0;   /* three floats, not a float3: WGSL's uniform layout has no float3 at this offset */ \
+    float FrameReserved1; \
+    float FrameReserved2;
 
 #endif

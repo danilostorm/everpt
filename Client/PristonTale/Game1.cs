@@ -28,6 +28,8 @@ public class Game1 : Game
     private PresentationController _presentationController;
     private Task _shutdown;
 
+    protected PresentationSettings Presentation => _presentation;
+
     public Game1(string settingsPath = null)
     {
         _settingsStore = new ClientSettingsStore(settingsPath ?? ClientSettingsStore.DefaultPath, ConsoleClientLog.Instance);

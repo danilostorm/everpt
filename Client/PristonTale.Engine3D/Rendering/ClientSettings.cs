@@ -38,7 +38,32 @@ public sealed record ClientSettings
     public int Version { get; init; } = CurrentVersion;
     // The game server: host, host:port or tcp://host:port, optionally with ?cert=<sha-256 hex> (TlsTransport.ParseAddress).
     public string ServerAddress { get; init; } = "localhost";
+    // True means the player's OS/browser preference decides the initial language.
+    // Old settings omitted this flag, so previously implicit English defaults
+    // automatically migrate to the local language. Explicit changes disable it.
+    public bool LanguageAutomatic { get; init; } = true;
     public string Language { get; init; } = EnglishLanguage;
+
+    public static string DetectSystemLanguage()
+    {
+        var locale = System.Globalization.CultureInfo.CurrentUICulture.Name;
+        // The desktop executable opts into invariant globalization for parsing.
+        // On Windows, the user locale API still returns the actual regional
+        // preference, even when .NET's CurrentUICulture is invariant.
+        if (OperatingSystem.IsWindows())
+        {
+            var buffer = new System.Text.StringBuilder(85);
+            if (GetUserDefaultLocaleName(buffer, buffer.Capacity) > 0)
+                locale = buffer.ToString();
+        }
+
+        return locale.StartsWith("pt", StringComparison.OrdinalIgnoreCase)
+            ? BrazilianPortugueseLanguage
+            : EnglishLanguage;
+    }
+
+    [System.Runtime.InteropServices.DllImport("kernel32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
+    private static extern int GetUserDefaultLocaleName(System.Text.StringBuilder localeName, int length);
     public int Monitor { get; init; } = -1;
     public int WindowWidth { get; init; } = 1280;
     public int WindowHeight { get; init; } = 720;
@@ -117,7 +142,7 @@ public sealed record ClientSettings
         var valid = this with
         {
             ServerAddress = string.IsNullOrWhiteSpace(ServerAddress) ? defaults.ServerAddress : ServerAddress,
-            Language = NormalizeLanguage(Language),
+            Language = LanguageAutomatic ? DetectSystemLanguage() : NormalizeLanguage(Language),
             Monitor = Monitor >= -1 ? Monitor : defaults.Monitor,
             WindowWidth = WindowWidth is >= 800 and <= 16384 ? WindowWidth : defaults.WindowWidth,
             WindowHeight = WindowHeight is >= 600 and <= 16384 ? WindowHeight : defaults.WindowHeight,

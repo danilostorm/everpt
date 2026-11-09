@@ -32,6 +32,7 @@ public static class HostingExtensions
         builder.Services.AddSingleton<ISessionRegistry, SessionRegistry>();
         builder.Services.AddSingleton<CharacterClassRegistry>();
 
+        builder.Services.AddSingleton(new AccountPolicy(builder.Configuration.GetValue("Accounts:CreateOnLogin", false), builder.Configuration.GetValue("Accounts:DefaultGameMasterLevel", 0)));
         builder.Services.AddSingleton<AuthAppService>();
         builder.Services.AddSingleton<CharacterAppService>();
         // A factory prevents DI from selecting the collection constructor with an empty field set.

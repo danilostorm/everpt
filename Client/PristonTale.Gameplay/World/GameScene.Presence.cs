@@ -70,6 +70,7 @@ public sealed partial class GameScene
         _remote.PlayerMotionStarted += OnRemotePlayerMotionStarted;
         _renderer.RequirePreparedTextures();
         _playChannel = channel;
+        PristonTale.Gameplay.Screens.Framework.GameConsole.Attach(line => SendChatAsync(line, false), () => _playChannel?.GameMasterLevel ?? 0);
         _reports.SetField(entered.FieldCode);
         _presenceCts = new CancellationTokenSource();
         _presenceReader = Task.Run(() => ReadPresenceAsync(channel, _presenceCts.Token));
@@ -189,6 +190,7 @@ public sealed partial class GameScene
         Closing = ClosePresenceAsync(_playChannel, _presenceReader, _presenceCts);
         _remote?.Dispose();
         _remote = null;
+        PristonTale.Gameplay.Screens.Framework.GameConsole.Detach();
         _playChannel = null;
         _presenceReader = null;
         _presenceCts = null;

@@ -118,3 +118,6 @@ monogame/runtime/build/
 monogame/runtime/work/
 monogame/runtime/bin/
 monogame/pipeline/bin/
+
+# The browser build's generated interop declarations (monogame/web/README.md).
+monogame/web/Interop.g/

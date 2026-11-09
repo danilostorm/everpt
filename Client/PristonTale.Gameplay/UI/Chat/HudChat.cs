@@ -55,6 +55,7 @@ public sealed class HudChat
     public void Receive(ChatLineInfo line, double nowMs)
     {
         var text = line.Line.IsNone ? line.Text : ClientText.Format(line.Line);
+        PristonTale.Gameplay.Screens.Framework.GameConsole.Report(line);
         var (kind, _) = line.SpeakerId == 0 ? (EntityKind.None, 0u) : Lookup(line.SpeakerId);
         if (kind != EntityKind.None && line.Kind != ChatKind.Party)
         {
