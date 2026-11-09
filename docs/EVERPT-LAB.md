@@ -1,40 +1,65 @@
-# EverPT — plano e estado do laboratório
+# EverPT — ambiente LAB e validação
 
-## Destinos
+Este documento registra o estado **verificado** do laboratório EverPT baseado no código livre do [Etervale](https://github.com/bencz-games/Etervale).
 
-- **Repositório principal:** https://github.com/danilostorm/everpt
-- **Referência/upstream:** https://github.com/bencz-games/Etervale
-- **VM de teste:** `Etervale-Lab-20261108`, Unraid Ziel, Ubuntu Server 24.04.5, 4 vCPU, 8 GiB RAM, 100 GiB de disco.
-- **Cliente Windows (planejado):** `E:\Etervale-Lab` no Nexus/NEXUSLITE-PC.
-- **Isolamento:** rede NAT da VM e nada de mudanças na VM Games, no StormPT em produção ou no LAB StormPT anterior.
+## Ambientes
 
-## Dependências verificadas
+| Componente | Local | Estado |
+| --- | --- | --- |
+| Repositório principal | [danilostorm/everpt](https://github.com/danilostorm/everpt) | Código importado, com atribuição e GPL-3.0-only |
+| Upstream | [bencz-games/Etervale](https://github.com/bencz-games/Etervale) | Referência independente; revisão importada registrada em `EVERPT-UPSTREAM.txt` |
+| Servidor LAB | VM `Etervale-Lab-20261108` no Unraid Ziel | Ubuntu 24.04.5, 4 vCPU, 8 GiB RAM, disco virtual de 100 GiB; servidor funcionando |
+| Cliente LAB | `E:\Etervale-Lab\everpt` no Nexus (Windows 11) | Compilado e abertura gráfica testada |
+| Atalho | `EverPT (LAB).lnk` na área de trabalho do Nexus | Criado |
+| Produção | VM Games, StormPT e outras VMs | Não alterados |
 
-- Servidor: .NET 10 SDK, SQLite (padrão); PostgreSQL é opcional.
-- Assets: `assets.7z`, pacote citado no README original. Guardar localmente; **não incluir no repositório público**.
-- Cliente: Windows e GPU com Vulkan 1.1+; a RX550 do Nexus apresenta Vulkan 1.3.
-- Build do cliente: Visual Studio 2022/2026 com ferramentas de C++, Git, runtime MonoGame Native/Vulkan. O cliente não deve ser instalado no Nexus antes de validar a compilação e a conexão ao servidor.
+A VM usa rede NAT do libvirt, com acesso ao jogo através de encaminhamento TCP restrito à rede privada/Tailscale e ao Nexus. A VM tem **autostart desativado**; o `everpt-lab.service` dentro do Ubuntu está habilitado e ativo. O encaminhamento no host Unraid ainda é um processo de LAB, **não** um serviço de inicialização persistente após reiniciar o host.
 
-## Passos de validação
+## Dados e integridade
 
-1. Concluir e verificar o download do `assets.7z` (tamanho HTTP anunciado: 1.629.968.862 bytes), testar a integridade e extrair sem arquivos fora da pasta de destino.
-2. Validar `dotnet restore` e `dotnet build` do servidor com aviso tratado como erro.
-3. Importar `assets/GameServer` no banco SQLite descartável e executar `WorldImport verify`.
-4. Executar servidor em porta privada `10009/TCP` e cliente de smoke test, sem acesso público.
-5. Testar login, seleção/criação de personagem, mapas e operações básicas.
-6. Só depois preparar o cliente do Nexus, compilar `mgruntime.dll` com o script oficial e iniciar a conexão através de acesso privado.
-7. Documentar testes e resultados antes de qualquer atualização significativa.
+O arquivo de terceiros `assets.7z`, indicado no README original, foi baixado apenas para máquinas privadas, **não** para o GitHub.
+
+- Tamanho: **1.629.968.862 bytes**
+- SHA-256: `79432c45b5c3bf5062feab3a2baf46432e82259f407b7d040b0bc4c5dc124fbd`
+- Integridade 7z: **Everything is Ok**
+- Conteúdo extraído: **39.859 arquivos**, 6.219.165.749 bytes antes de considerar os metadados do filesystem
+- Locais: `/opt/etervale/assets` na VM e `E:\Etervale-Lab\everpt\assets` no Nexus
+- Os direitos dos assets são separados dos termos GPL do código e exigem avaliação antes de qualquer redistribuição.
+
+## Servidor e testes comprovados
+
+- SDK .NET 10 instalado; `Server`, `WorldImport`, `DevAccounts` e `SmokeClient` compilaram em Release sem avisos nem erros.
+- Importação SQLite: 1.678 itens de origem, 666 monstros, 171 NPCs, 55 campos, 904 itens de loja.
+- O importador registrou **160 avisos** sobre dados de origem e ícones ausentes; não foram detectadas referências órfãs de drops, itens de loja ou spawns.
+- Runtime carregou 1.630 itens, 669 monstros, 171 NPCs e 54 campos com spawns, e 54/54 mapas de colisão.
+- SmokeClient local: `SMOKE OK`, com autenticação, criação de personagem, entrada no mundo, NPCs, diário de quests, chat e verificação de comandos de habilidades. A correção em `tools/PristonTale.SmokeClient/Program.cs` adapta a checagem de chat às mensagens traduzíveis (`GameText`).
+- Teste simultâneo: **5 bots conectados, 0 falhas, 0 timeouts**, 83 correções de posição no cenário de caminhada de 25 segundos.
+- Comunicação Nexus → Ziel → VM: TLS 1.3 autenticado, certificado confirmado por SHA-256. **Login diretamente pela interface do Nexus ainda não validado**.
+- Logs do servidor: `/home/etervale/everpt-lab-logs/`.
+
+## Cliente Windows no Nexus
+
+Instalados para compilação: Git for Windows, .NET SDK 10, Visual Studio Build Tools 2022 com MSVC/CMake, 7-Zip.
+
+- Runtime MonoGame/Vulkan `mgruntime.dll` construído com sucesso; o script original foi adaptado para reconhecer Visual Studio **Build Tools**; patches `.patch` recebem LF no checkout.
+- Solução `PristonTale.sln` em Release: **0 avisos e 0 erros do .NET**. O compilador nativo C++ emitiu avisos não fatais.
+- Executável: `E:\Etervale-Lab\everpt\Client\PristonTale\bin\Release\net10.0\PristonTale.exe`.
+- `client-settings.json` ao lado do executável: idioma `pt-BR`, janela 1280 × 720, limite de 60 FPS, servidor privado e certificado fixado (sem credenciais).
+- Teste GUI interativo: janela intitulada **Etervale** abriu e permaneceu ativa; backend Vulkan reconheceu a Radeon RX550; nenhuma exceção registrada durante o teste; processo encerrado pelo próprio teste.
+- Sonda de renderização `--check-look charselect`: **aprovada** para seleção de personagens e rostos das 11 classes.
+- Log `client.log` contém **34 avisos de texturas referenciadas, mas ausentes**, que recebem fallback branco. A aparência final precisa de inspeção visual; não confundir inicialização de renderização com teste de uma sessão completa de jogo.
+- Logs locais de build, transferência, extração, sonda e teste gráfico: `E:\Etervale-Lab\logs`.
+- Script reproduzível: `tools/everpt-lab/build-windows-client.ps1`.
+
+## Limitações e verificações restantes
+
+1. Validar login, escolha de personagem, HUD, entrada no mapa e movimentação **usando o executável gráfico no Nexus**, não somente testes automatizados.
+2. Inspecionar visualmente as texturas ausentes (34 avisos no primeiro boot) e os 160 avisos do importador antes de concluir que toda a experiência é fiel ao jogo original.
+3. Investigar se as 83 correções de posição observadas no teste de bots são esperadas pelas colisões e regras de movimento.
+4. Testar FPS e desempenho em mapas reais na RX550, em vez de afirmar que o hardware atingirá 60 FPS.
+5. Se for necessário acesso contínuo após reinício do Unraid, configurar reinicialização controlada do proxy privado e da VM, sem afetar produção.
+6. Nunca publicar banco SQLite, certificados, senhas ou assets no repositório público.
 
 ## Licença
 
-O código do Etervale original é GPL-3.0-only; manter os textos de licença e atribuição. Os assets são arquivos separados e não são automaticamente cobertos pela licença do código.
-
-## Estado verificado em 2026-11-08 (horário local)
-
-- VM criada e Ubuntu 24.04.5 instalado, SSH funcional.
-- SDK .NET 10 instalado e compilação do servidor em preparação.
-- Repositório EverPT inicializado com importação do código público, sem assets.
-- Download dos assets iniciado no Ziel, **ainda não validado como completo** nesta verificação.
-- Cliente **não** instalado no Nexus; GPU e ferramentas verificadas, ferramentas de compilação C++ ausentes.
-
-Atualize este documento conforme cada etapa for realmente comprovada. Não marque etapas pendentes como concluídas.
+O código original Etervale usa **GPL-3.0-only**. Ao redistribuir código ou binários modificados, preservar licenças e disponibilizar o fonte correspondente conforme os termos da GPLv3. Assets e materiais de terceiros não estão automaticamente licenciados para redistribuição pelo autor do código.
