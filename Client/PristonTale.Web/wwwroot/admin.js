@@ -2,6 +2,7 @@
 // lines a game master could type: the server checks the level of each and records it in its audit trail, so this panel gives
 // nobody anything. It only appears for those who already have a level. The commands are those of docs/chat-and-gm.md.
 import { openPanel, panelIsOpen, tool } from './panels.js';
+import { t } from './i18n.js';
 
 const POLL_MS = 1000;
 const MAX_LOG_LINES = 300;
@@ -111,14 +112,14 @@ function buildAction(action) {
     const controls = [];
     for (const field of action.fields || []) {
         const wrap = document.createElement('label');
-        wrap.textContent = field.label;
+        wrap.textContent = t(field.label);
         const input = field.options ? document.createElement('select') : document.createElement('input');
         if (field.options) {
             for (const option of field.options) {
                 input.add(new Option(option, option));
             }
         } else {
-            input.placeholder = field.placeholder;
+            input.placeholder = t(field.placeholder);
             input.autocomplete = 'off';
             input.spellcheck = false;
         }
@@ -130,14 +131,14 @@ function buildAction(action) {
     const submit = document.createElement('button');
     submit.type = 'submit';
     submit.className = action.danger ? 'mg-button danger' : 'mg-button';
-    submit.textContent = action.label;
+    submit.textContent = t(action.label);
     form.appendChild(submit);
     form.addEventListener('submit', event => {
         event.preventDefault();
         for (const input of controls) {
             values[input.dataset.name] = input.value;
         }
-        if (action.danger && !window.confirm(compose(action.danger, values))) {
+        if (action.danger && !window.confirm(compose(t(action.danger), values))) {
             return;
         }
         send(compose(action.send, values));
@@ -147,6 +148,7 @@ function buildAction(action) {
 }
 
 function buildPanel() {
+    forms.length = 0;
     body = document.createElement('div');
     statusEl = document.createElement('p');
     statusEl.className = 'mg-note';
@@ -159,14 +161,14 @@ function buildPanel() {
     const line = document.createElement('form');
     line.className = 'mg-command line';
     inputEl = document.createElement('input');
-    inputEl.placeholder = 'Type any command, such as /localtime';
-    inputEl.setAttribute('aria-label', 'Command');
+    inputEl.placeholder = t('Type any command, such as /localtime');
+    inputEl.setAttribute('aria-label', t('Command'));
     inputEl.autocomplete = 'off';
     inputEl.spellcheck = false;
     const run = document.createElement('button');
     run.type = 'submit';
     run.className = 'mg-button';
-    run.textContent = 'Send';
+    run.textContent = t('Send');
     line.append(inputEl, run);
     line.addEventListener('submit', event => {
         event.preventDefault();
@@ -180,7 +182,7 @@ function buildPanel() {
     for (const [title, actions] of groups) {
         const details = document.createElement('details');
         const summary = document.createElement('summary');
-        summary.textContent = title;
+        summary.textContent = t(title);
         details.appendChild(summary);
         for (const action of actions) {
             details.appendChild(buildAction(action));
@@ -191,12 +193,12 @@ function buildPanel() {
 
 function refreshAvailability() {
     statusEl.textContent = inWorld
-        ? `Signed in as ${LEVELS[level] || level}. Every command is checked by the server and recorded in its audit trail.`
-        : 'Enter the world to use these commands.';
+        ? `${t('Signed in as')} ${t(LEVELS[level] || String(level))}. ${t('Every command is checked by the server and recorded in its audit trail.')}`
+        : t('Enter the world to use these commands.');
     for (const { submit, required, controls } of forms) {
         const allowed = inWorld && level >= required;
         submit.disabled = !allowed;
-        submit.title = level < required ? `Needs ${LEVELS[required]}` : '';
+        submit.title = level < required ? `${t('Needs')} ${t(LEVELS[required])}` : '';
         for (const input of controls) {
             input.disabled = !allowed;
         }
@@ -206,6 +208,16 @@ function refreshAvailability() {
 export function startAdmin(programExports) {
     exports_ = programExports;
     buildPanel();
+    document.addEventListener('everpt-language-changed', () => {
+        const wasOpen = panelIsOpen(body);
+        const priorLines = logEl
+            ? [...logEl.children].map(row => ({ text: row.textContent, className: row.className }))
+            : [];
+        buildPanel();
+        for (const row of priorLines) addLog(row.text, row.className);
+        refreshAvailability();
+        if (wasOpen) openPanel('Admin', body);
+    });
     button = tool('Admin', () => {
         refreshAvailability();
         openPanel('Admin', body);
