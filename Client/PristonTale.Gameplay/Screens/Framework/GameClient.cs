@@ -32,6 +32,7 @@ public sealed class GameClient : IDisposable
     private PristonTale.Gameplay.Effects.EffectLibrary _effects;
     private PristonAudioLibrary _audio;
     private readonly PresentationSettings _presentation;
+    private string? _lastSentLanguage;
     private DisplayConfirmation _displayConfirmation;
 
     public GameClient(GraphicsDevice graphicsDevice, ContentManager content, string assetRoot, string serverAddress, PresentationSettings presentation = null)
@@ -105,7 +106,13 @@ public sealed class GameClient : IDisposable
 
     public void Update(GameTime gameTime, bool isWindowActive = true)
     {
-        ClientText.Use(_presentation.Requested.Language);
+        var language = _presentation.Requested.Language;
+        ClientText.Use(language);
+        if (_backend?.SessionToken is not null && !string.Equals(language, _lastSentLanguage, StringComparison.OrdinalIgnoreCase))
+        {
+            _backend.SetLanguage(language);
+            _lastSentLanguage = language;
+        }
         _audio?.ApplySettings(_presentation.Requested);
         if (_context is not null)
         {
@@ -165,6 +172,7 @@ public sealed class GameClient : IDisposable
     {
         var previous = _backend;
         _backend = new GameServerConnection(_serverAddress);
+        _lastSentLanguage = null;
         _context.ReplaceBackend(_backend);
         _ = Task.Run(() => DisposeBackendAsync(previous));
     }
