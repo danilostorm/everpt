@@ -38,6 +38,9 @@ if (Test-Path $siteContent) { Remove-Item $siteContent -Recurse -Force }
 Copy-Item $contentWeb $siteContent -Recurse
 python (Join-Path $PSScriptRoot 'make_files_manifest.py') $Assets $siteContent (Join-Path $site 'files.json')
 if ($LASTEXITCODE) { throw 'manifest failed' }
+# Include opening resources measured in the LAB browser trace before packing.
+python (Join-Path $PSScriptRoot 'extend_preload.py') $site (Join-Path $PSScriptRoot 'startup-extras.json')
+if ($LASTEXITCODE) { throw 'startup preload extension failed' }
 # The startup data is also published as a versioned, integrity-checked gzip
 # archive; clients without browser gzip streaming still use individual files.
 python (Join-Path $PSScriptRoot 'pack_startup.py') $site $Assets
